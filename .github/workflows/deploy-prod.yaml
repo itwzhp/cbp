@@ -1,0 +1,32 @@
+name: CBP Prod deployment
+
+on:
+  push:
+    branches: [production]
+
+jobs:
+  build:
+    name: Build for prod
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: TODOs
+        run: |
+          echo TODO: zbudować front (npm?)
+          echo TODO: zbudować backend (laravel)
+          echo TODO: zbudować bicep
+          echo TODO: puścić testy
+          echo TODO: wystawić artefakt
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment: prod
+    steps:
+      - name: TODOs
+        run: |
+          echo TODO: ściągnąć artefakty
+          echo TODO: wgrać bicep
+          echo TODO: nanieść migracje
+          echo TODO: wgrać aplikację
+
