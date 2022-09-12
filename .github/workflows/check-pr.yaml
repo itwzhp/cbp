@@ -12,11 +12,6 @@ jobs:
       Subscription: 35e22786-93ea-47c8-902a-16e9d0f03e17
     steps:
       - uses: actions/checkout@v2
-      - name: TODOs
-        run: |
-          echo TODO: zbudować front (npm?)
-          echo TODO: zbudować backend (laravel)
-          echo TODO: puścić testy
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -28,4 +23,9 @@ jobs:
           resourceGroupName: ${{ env.Resource_Group }}
           template: ./infrastructure/cbp.bicep
           deploymentMode: Validate
+      - name: TODOs
+        run: |
+          echo 'TODO: zbudować front (npm?)'
+          echo 'TODO: zbudować backend (laravel)'
+          echo 'TODO: puścić testy'
 
