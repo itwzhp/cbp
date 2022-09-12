@@ -27,4 +27,5 @@ jobs:
           echo 'TODO: zbudować front (npm?)'
           echo 'TODO: zbudować backend (laravel)'
           echo 'TODO: puścić testy'
+          echo 'composer install ; ./vendor/bin/pint'
 

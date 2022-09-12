@@ -2,6 +2,7 @@ param environment string = 'prod'
 
 param location string = resourceGroup().location
 
+// TODO zabezpieczyć bloby przed przypadkowym usunięciem
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-08-01' = {
     name: 'zhpcbp${environment}store'
     location: location

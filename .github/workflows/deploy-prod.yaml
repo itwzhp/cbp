@@ -19,9 +19,9 @@ jobs:
 
       - name: TODOs
         run: |
-          echo 'TODO: zbudować front (npm?)'
-          echo 'TODO: zbudować backend (laravel)'
-          echo 'TODO: puścić testy'
+          echo 'TODO: zbudować front - npm run prod'
+          echo 'TODO: zbudować backend - composer install'
+          echo 'TODO: puścić testy - ./vendor/bin/phpunit'
           echo 'TODO: wystawić artefakt'
 
   deploy:
@@ -47,7 +47,7 @@ jobs:
 
       - name: TODOs
         run: |
-          echo 'TODO: ściągnąć artefakty'
-          echo 'TODO: nanieść migracje'
+          echo 'TODO: nanieść migracje - php artisan migrate --force'
           echo 'TODO: wgrać aplikację'
+          echo 'php artisan optimize'
 
