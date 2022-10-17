@@ -7,14 +7,12 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use JetBrains\PhpStorm\NoReturn;
 
 class UsersMigrationCommand extends Command
 {
     protected $signature = 'wp:users';
 
-    #[NoReturn]
-    public function __invoke()
+    public function __invoke(): void
     {
         $oldUsers = DB::connection('wp')
             ->table('wp_users')
@@ -25,6 +23,7 @@ class UsersMigrationCommand extends Command
         foreach ($oldUsers as $oldUser) {
             if ($this->shouldIgnore($oldUser)) {
                 $count++;
+
                 continue;
             }
 

@@ -15,6 +15,7 @@ class Post extends Model
     const STATUS_PUBLISH = 'publish';
 
     protected $connection = 'wp';
+
     protected $table = 'wp_posts';
 
     protected $dates = [

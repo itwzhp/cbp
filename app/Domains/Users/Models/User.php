@@ -20,7 +20,6 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string      password
  * @property Carbon      created_at
  * @property Carbon      updated_at
- *
  */
 class User extends Authenticatable
 {

@@ -1,8 +1,6 @@
 <?php
 namespace App\Domains\Users\Roles;
 
-use Spatie\Permission\Models\Role;
-
 class RoleHelper
 {
     const ADMIN = 'Admin';
