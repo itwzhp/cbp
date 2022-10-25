@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int    post_author
  * @property Carbon post_date_gmt
  * @property string guid
+ *
+ * @method static Builder published()
  */
 class Post extends Model
 {
@@ -18,6 +20,8 @@ class Post extends Model
     protected $connection = 'wp';
 
     protected $table = 'wp_posts';
+
+    protected $primaryKey = 'ID';
 
     protected $dates = [
         'post_date_gmt',
@@ -34,5 +38,11 @@ class Post extends Model
     {
         return $this->hasMany(Attachment::class, 'post_parent', 'ID')
             ->where('post_type', 'attachment');
+    }
+
+    public function zakres()
+    {
+        return $this->hasMany(Postmeta::class, 'post_id', 'ID')
+            ->where('meta_key', '=', 'wpcf-zakres');
     }
 }
