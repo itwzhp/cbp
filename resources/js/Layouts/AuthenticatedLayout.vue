@@ -12,27 +12,24 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+        <div class="min-h-screen bg-gradient-to-b from-white-300 via-white-200 to-white-100">
+            <nav class="border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
-                        <div class="hidden basis-1/3 md:flex sm:items-center sm:ml-6">
+                    <!-- Primary Navigation Menu -->
+                    <div class="flex items-center justify-between border-gray-100 py-6 md:justify-start md:space-x-10">
+                        <div class="hidden sm:flex justify-start lg:w-0 lg:flex-1">
                             <Link class="dark:text-gray-500">
                                 <font-awesome-icon icon="fa-solid fa-repeat" class="mr-1" />
                                 Zmień serwis
                             </Link>
                         </div>
-                        <div class="basis-1/3 sm:flex sm:items-center sm:ml-6">
-                            <!-- Logo -->
-                            <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <ApplicationLogo class="block h-16 w-auto" />
-                                </Link>
-                            </div>
+                        <div class="-my-2 -mr-2">
+                            <Link :href="route('materials')">
+                                <ApplicationLogo class="block h-14 w-auto" />
+                            </Link>
                         </div>
-                        <div class="hidden sm:flex sm:items-center sm:ml-6">
-                            <!-- Settings Dropdown -->
+                        <div class="hidden sm:flex items-center justify-end md:flex md:flex-1 lg:w-0">
                             <div class="ml-3 relative">
                                 <div class="flex space-x-4">
                                     <Link :href="route('login')" class="dark:text-gray-500">
@@ -42,7 +39,7 @@ const showingNavigationDropdown = ref(false);
                                     <Dropdown align="right" width="48" v-if="$page.props.auth.user">
                                         <template #trigger>
                                             <span class="inline-flex rounded-md">
-                                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                                     {{ $page.props.auth.user.name }}
                                                     <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -52,7 +49,7 @@ const showingNavigationDropdown = ref(false);
                                         </template>
                                         <template #content>
                                             <DropdownLink :href="route('logout')" method="post" as="button">
-                                                Log Out
+                                                Wyloguj
                                             </DropdownLink>
                                         </template>
                                     </Dropdown>
@@ -62,7 +59,6 @@ const showingNavigationDropdown = ref(false);
 
                             </div>
                         </div>
-
                         <!-- Hamburger -->
                         <div class="-mr-2 flex items-center sm:hidden">
                             <button @click="showingNavigationDropdown = ! showingNavigationDropdown" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -99,18 +95,18 @@ const showingNavigationDropdown = ref(false);
 
                         <div class="mt-3 space-y-1">
                             <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
+                                Wyloguj
                             </ResponsiveNavLink>
                         </div>
                     </div>
                 </div>
             </nav>
-            <nav class="bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
+            <nav>
+                <div class="max-w-7xl max-h-10 mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between h-12">
                         <div class="flex">
-                                                        <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <!-- Navigation Links -->
+                            <div class="max-h-10 hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('materials')" :active="route().current('materials')">
                                     Materiały
                                 </NavLink>
@@ -119,10 +115,6 @@ const showingNavigationDropdown = ref(false);
                                 </NavLink>
                             </div>
                         </div>
-
-                        
-
-                        
                     </div>
                 </div>
             </nav>

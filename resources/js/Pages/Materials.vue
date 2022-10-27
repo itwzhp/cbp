@@ -7,10 +7,10 @@ import { Head } from '@inertiajs/inertia-vue3';
     <Head title="Materials" />
 
     <AuthenticatedLayout>
-        <template #header>
+        <!-- <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Materiały
             </h2>
-        </template>
+        </template> -->
     </AuthenticatedLayout>
 </template>
