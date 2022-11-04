@@ -5,9 +5,15 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import SearchSlideOver from '@/Components/SearchSlideOver.vue';
+import { useSearchStore } from "../store/search.store";
 import { Link } from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
+const store = useSearchStore();
+const displayDialog = () => {
+  store.displayDialog();
+}
 </script>
 
 <template>
@@ -32,10 +38,10 @@ const showingNavigationDropdown = ref(false);
                         <div class="hidden sm:flex items-center justify-end md:flex md:flex-1 lg:w-0">
                             <div class="ml-3 relative">
                                 <div class="flex space-x-4">
-                                    <Link :href="route('login')" class="dark:text-gray-500">
+                                    <span @click="displayDialog()" class="dark:text-gray-500 cursor-pointer">
                                         <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
                                         Wyszukaj
-                                    </Link>
+                                    </span>
                                     <Dropdown align="right" width="48" v-if="$page.props.auth.user">
                                         <template #trigger>
                                             <span class="inline-flex rounded-md">
@@ -74,7 +80,7 @@ const showingNavigationDropdown = ref(false);
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink>
+                        <ResponsiveNavLink @click="displayDialog()">
                             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
                             Wyszukaj
                         </ResponsiveNavLink>
@@ -133,4 +139,5 @@ const showingNavigationDropdown = ref(false);
         </div>
         
     </div>
+    <SearchSlideOver />
 </template>

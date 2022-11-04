@@ -9,7 +9,11 @@
         "@fortawesome/free-brands-svg-icons": "^6.2.0",
         "@fortawesome/free-regular-svg-icons": "^6.2.0",
         "@fortawesome/free-solid-svg-icons": "^6.2.0",
-        "@fortawesome/vue-fontawesome": "^3.0.1"
+        "@fortawesome/vue-fontawesome": "^3.0.1",
+        "@headlessui/vue": "^1.7.3",
+        "@heroicons/vue": "^2.0.13",
+        "@vueuse/core": "^9.2.0",
+        "pinia": "^2.0.21"
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.11.0",
