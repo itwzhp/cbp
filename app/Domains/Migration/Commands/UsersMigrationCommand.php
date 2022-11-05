@@ -1,5 +1,5 @@
 <?php
-namespace App\Domains\Migration;
+namespace App\Domains\Migration\Commands;
 
 use App\Domains\Users\Models\User;
 use App\Domains\Users\Roles\RoleHelper;

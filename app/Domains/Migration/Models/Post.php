@@ -1,6 +1,7 @@
 <?php
-namespace App\Domains\Migration;
+namespace App\Domains\Migration\Models;
 
+use App\Domains\Migration\Models\Postmeta;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;

@@ -1,5 +1,5 @@
 <?php
-namespace App\Domains\Migration;
+namespace App\Domains\Migration\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
