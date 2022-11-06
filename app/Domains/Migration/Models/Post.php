@@ -69,7 +69,7 @@ class Post extends Model
             ->with('term');
     }
 
-    public function motifs(): Collection
+    public function motifs(): \Illuminate\Support\Collection
     {
         /** @var Postmeta $wpMotifs */
         $wpMotifs = $this->getPostmeta('wpcf-motyw-glowny')->first();
@@ -77,18 +77,24 @@ class Post extends Model
 
         /** @var Postmeta $customMotif */
         $customMotif = $this->getPostmeta('wpcf-uszczegolowienie')->first();
-
+        dump($customMotif->toArray());
         $motifs = collect([]);
 
         /** @var MotifsRepository $motifRepo */
         $motifRepo = app(MotifsRepository::class);
 
         foreach ($motifIds as $wpId) {
+            dump($wpId);
             if ($wpId > 6) {
                 $motifs->push($motifRepo->addCustom($customMotif->meta_value));
+
+                continue;
             }
-            $motifs->push($motifRepo->findByWpId($wpId));
+
+            $motifs->push($motifRepo->get($wpId));
         }
+
+        return $motifs;
     }
 
     protected function getPostmeta(string $key): Collection

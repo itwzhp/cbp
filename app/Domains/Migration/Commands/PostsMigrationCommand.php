@@ -1,10 +1,8 @@
 <?php
 namespace App\Domains\Migration\Commands;
 
-use App\Domains\Materials\Repositories\MotifsRepository;
 use App\Domains\Migration\Models\Post;
 use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
 
 class PostsMigrationCommand extends Command
 {
@@ -12,8 +10,10 @@ class PostsMigrationCommand extends Command
 
     public function __invoke()
     {
+        /** @var Post $posts */
         $posts = Post::find(10598);
 
-        dd(array_values(Arr::flatten($posts->motyw()->deserialize())));
+
+        dd($posts->motifs()->toArray());
     }
 }

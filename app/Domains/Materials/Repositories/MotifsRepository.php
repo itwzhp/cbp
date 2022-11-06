@@ -5,7 +5,7 @@ use App\Domains\Materials\Models\Tag;
 use App\Domains\Materials\Models\Taxonomy;
 use Database\Seeders\TagsSeeder;
 
-class MotifsRepository extends TagsRepository
+class MotifsRepository
 {
     protected Taxonomy $motifTaxonomy;
 
