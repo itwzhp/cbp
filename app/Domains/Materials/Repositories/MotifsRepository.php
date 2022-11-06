@@ -22,7 +22,7 @@ class MotifsRepository
             throw  new \InvalidArgumentException('Wrong default motif');
         }
 
-        return $this->motifTaxonomy->tags->sortBy('id')[$wpId-1];
+        return $this->motifTaxonomy->tags->sortBy('id')[$wpId - 1];
     }
 
     public function addCustom(string $name): Tag

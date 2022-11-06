@@ -1,8 +1,6 @@
 <?php
 namespace App\Domains\Migration\Models;
 
-use App\Domains\Migration\Models\Post;
-
 /**
  * @property-read string path
  */

@@ -28,6 +28,5 @@ class TagsSeeder extends Seeder
                 'name' => $theme,
             ]);
         }
-
     }
 }

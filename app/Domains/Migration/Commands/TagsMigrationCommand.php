@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Collection;
 class TagsMigrationCommand extends Command
 {
     protected $signature = 'wp:tags';
+
     protected TaxonomiesRepository $taxonomiesRepository;
+
     protected TagsRepository $tagsRepository;
 
     public function __construct(TaxonomiesRepository $taxonomiesRepository, TagsRepository $tagsRepository)

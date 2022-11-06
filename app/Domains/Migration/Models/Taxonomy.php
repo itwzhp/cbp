@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Taxonomy extends Model
 {
     protected $connection = 'wp';
+
     protected $table = 'wp_term_taxonomy';
+
     protected $primaryKey = 'term_taxonomy_id';
 
     public function term(): BelongsTo
@@ -19,7 +21,7 @@ class Taxonomy extends Model
     public function scopeExclude(Builder $builder): Builder
     {
         return $builder->whereNotIn('taxonomy', [
-            'nav_menu'
+            'nav_menu',
         ]);
     }
 }

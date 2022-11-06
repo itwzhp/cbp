@@ -1,10 +1,12 @@
 <?php
 namespace App\Domains\Materials\Models;
 
+use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\States\MaterialState;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\ModelStates\HasStates;
 
 /**
@@ -37,5 +39,15 @@ class Material extends Model
     {
         return $this->belongsToMany(Tag::class)
             ->with('taxonomy');
+    }
+
+    public function fields(): HasMany
+    {
+        return $this->hasMany(Field::class);
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(Attachment::class);
     }
 }

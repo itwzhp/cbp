@@ -8,23 +8,23 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('material_tag', function (Blueprint $table) {
+        Schema::create('fields', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('material_id');
             $table->foreign('material_id')
                 ->references('id')
                 ->on('materials')
                 ->cascadeOnDelete();
 
-            $table->unsignedBigInteger('tag_id');
-            $table->foreign('tag_id')
-                ->references('id')
-                ->on('tags')
-                ->cascadeOnDelete();
+            $table->string('type');
+            $table->string('value');
+
+            $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('material_tag');
+        Schema::dropIfExists('fields');
     }
 };

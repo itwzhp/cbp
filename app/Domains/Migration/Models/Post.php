@@ -2,7 +2,6 @@
 namespace App\Domains\Migration\Models;
 
 use App\Domains\Materials\Repositories\MotifsRepository;
-use App\Domains\Migration\Models\Postmeta;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -76,11 +75,16 @@ class Post extends Model
     public function motifs(): \Illuminate\Support\Collection
     {
         /** @var Postmeta $wpMotifs */
-        $wpMotifs = $this->getPostmeta('wpcf-motyw-glowny')->first();
+        $wpMotifs = $this->getPostmetas('wpcf-motyw-glowny')->first();
+
+        if ($wpMotifs === null) {
+            return collect([]);
+        }
+
         $motifIds = array_values(Arr::flatten($wpMotifs->deserialize()));
 
         /** @var Postmeta $customMotif */
-        $customMotif = $this->getPostmeta('wpcf-uszczegolowienie')->first();
+        $customMotif = $this->getPostmetas('wpcf-uszczegolowienie')->first();
         $motifs = collect([]);
 
         /** @var MotifsRepository $motifRepo */
@@ -99,7 +103,7 @@ class Post extends Model
         return $motifs;
     }
 
-    protected function getPostmeta(string $key): Collection
+    public function getPostmetas(string $key): Collection
     {
         return Postmeta::where('post_id', $this->ID)
             ->where('meta_key', $key)
@@ -109,15 +113,15 @@ class Post extends Model
     public function tagIds(): array
     {
         return Arr::pluck(DB::connection('wp')
-            ->select(DB::raw("select tax.term_id from wp_term_relationships r
+            ->select(DB::raw('select tax.term_id from wp_term_relationships r
             left join wp_term_taxonomy tax on r.term_taxonomy_id = tax.term_taxonomy_id
-            where r.object_id = ?"), [$this->ID]), 'term_id');
+            where r.object_id = ?'), [$this->ID]), 'term_id');
     }
 
     public function licence(): ?int
     {
         return $this
-            ->getPostmeta('wpcf-licencja')
+            ->getPostmetas('wpcf-licencja')
             ->first()
             ->meta_value ?? null;
     }

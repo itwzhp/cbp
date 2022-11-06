@@ -56,6 +56,14 @@ return [
             'throw'                   => false,
         ],
 
+        'wp_local' => [
+            'driver'     => 'local',
+            'root'       => storage_path('wp'),
+            'url'        => env('APP_URL') . '/wp',
+            'visibility' => 'public',
+            'throw'      => false,
+        ],
+
     ],
 
     /*

@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string                name
  * @property Carbon                created_at
  * @property Carbon                updated_at
- *
  * @property-read Collection|Tag[] tags
  */
 class Taxonomy extends Model
