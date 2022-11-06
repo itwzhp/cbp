@@ -8,7 +8,21 @@ Running PINT
 ./vendor/bin/pint
 ```
 
-### Local tests
+### Local development
+
+Build assets (vite watch)
+
+```shell
+npm run dev
+```
+
+Serve the project:
+
+```shell
+php artisan serve
+```
+
+### Import data
 
 1. Add new local database called `cbp_wp` and import mysql dump from Wordpress into it.
 2. Set local envs:
