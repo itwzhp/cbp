@@ -4,6 +4,7 @@ namespace App\Domains\Materials\Models;
 use App\Domains\Materials\States\MaterialState;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\ModelStates\HasStates;
 
 /**
@@ -30,4 +31,10 @@ class Material extends Model
     ];
 
     protected $guarded = [];
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class)
+            ->with('taxonomy');
+    }
 }

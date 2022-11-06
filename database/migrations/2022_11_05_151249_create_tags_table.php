@@ -15,6 +15,12 @@ return new class extends Migration {
                 ->on('taxonomies')
                 ->cascadeOnDelete();
 
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('tags')
+                ->cascadeOnDelete();
+
             $table->string('name');
 
             $table->unsignedInteger('wp_id')->nullable();

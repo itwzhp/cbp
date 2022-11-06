@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('materials', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->unsignedBigInteger('user_id')->constraint('users');
             $table->string('status', 24);
             $table->string('title');

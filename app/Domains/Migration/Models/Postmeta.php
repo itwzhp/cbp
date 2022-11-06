@@ -16,4 +16,9 @@ class Postmeta extends Model
     protected $table = 'wp_postmeta';
 
     protected $primaryKey = 'meta_id';
+
+    public function deserialize()
+    {
+        return unserialize($this->meta_value);
+    }
 }

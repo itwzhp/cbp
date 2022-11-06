@@ -22,6 +22,7 @@ class Taxonomy extends Model
 
     public function tags(): HasMany
     {
-        return $this->hasMany(Tag::class);
+        return $this
+            ->hasMany(Tag::class);
     }
 }
