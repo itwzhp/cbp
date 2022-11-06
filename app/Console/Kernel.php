@@ -2,6 +2,7 @@
 namespace App\Console;
 
 use App\Domains\Migration\Commands\PostsMigrationCommand;
+use App\Domains\Migration\Commands\RefreshCommand;
 use App\Domains\Migration\Commands\TagsMigrationCommand;
 use App\Domains\Migration\Commands\UsersMigrationCommand;
 use App\Domains\Migration\Commands\WpImportCommand;
@@ -15,6 +16,7 @@ class Kernel extends ConsoleKernel
         TagsMigrationCommand::class,
         PostsMigrationCommand::class,
         WpImportCommand::class,
+        RefreshCommand::class,
     ];
 
     protected function schedule(Schedule $schedule)

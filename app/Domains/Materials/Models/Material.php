@@ -14,6 +14,7 @@ use Spatie\ModelStates\HasStates;
  * @property string      slug
  * @property string|null description
  * @property int|null    wp_id
+ * @property string      state
  * @property Carbon      created_at
  * @property Carbon      updated_at
  * @property Carbon|null published_at

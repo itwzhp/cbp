@@ -10,10 +10,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property int    ID
  * @property int    post_author
+ * @property string post_title
+ * @property string post_content
+ * @property string post_name
  * @property Carbon post_date_gmt
  * @property string guid
  *
@@ -77,14 +81,12 @@ class Post extends Model
 
         /** @var Postmeta $customMotif */
         $customMotif = $this->getPostmeta('wpcf-uszczegolowienie')->first();
-        dump($customMotif->toArray());
         $motifs = collect([]);
 
         /** @var MotifsRepository $motifRepo */
         $motifRepo = app(MotifsRepository::class);
 
         foreach ($motifIds as $wpId) {
-            dump($wpId);
             if ($wpId > 6) {
                 $motifs->push($motifRepo->addCustom($customMotif->meta_value));
 
@@ -102,5 +104,21 @@ class Post extends Model
         return Postmeta::where('post_id', $this->ID)
             ->where('meta_key', $key)
             ->get();
+    }
+
+    public function tagIds(): array
+    {
+        return Arr::pluck(DB::connection('wp')
+            ->select(DB::raw("select tax.term_id from wp_term_relationships r
+            left join wp_term_taxonomy tax on r.term_taxonomy_id = tax.term_taxonomy_id
+            where r.object_id = ?"), [$this->ID]), 'term_id');
+    }
+
+    public function licence(): ?int
+    {
+        return $this
+            ->getPostmeta('wpcf-licencja')
+            ->first()
+            ->meta_value ?? null;
     }
 }

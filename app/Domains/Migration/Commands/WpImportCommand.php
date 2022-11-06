@@ -9,7 +9,6 @@ class WpImportCommand extends Command
 
     public function __invoke()
     {
-//        $this->call('db:seed');
         $this->call(UsersMigrationCommand::class);
         $this->call(TagsMigrationCommand::class);
     }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Domains\Materials\Repositories;
 
+use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Models\Tag;
 use App\Domains\Materials\Models\Taxonomy;
 
@@ -20,5 +21,14 @@ class TagsRepository
     public function findByWpId(int $wpId): ?Tag
     {
         return Tag::where('wp_id', $wpId)->first();
+    }
+
+    public function attachWpTag(Material $material, int $wpTag)
+    {
+        $tag = $this->findByWpId($wpTag);
+
+        if ($tag !== null) {
+            $material->tags()->attach($tag->id);
+        }
     }
 }
