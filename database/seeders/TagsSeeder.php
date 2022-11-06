@@ -16,7 +16,23 @@ class TagsSeeder extends Seeder
         'Specjalności',
     ];
 
+    public const TYPE_NAME = 'Typ';
+    public const TYPES = [
+        'programy'    => 'Program',
+        'poradniki'   => 'Poradnik',
+        'naukowe'     => 'Praca naukowa',
+        'ksztalcenie' => 'Konspekt kształceniowy',
+        'program'     => 'Konspekt programowy',
+        'propozycje'  => 'Propozycja programowa',
+    ];
+
     public function run()
+    {
+        $this->seedMotifs();
+        $this->seedTypes();
+    }
+
+    private function seedMotifs()
     {
         /** @var Taxonomy $taxonomy */
         $taxonomy = Taxonomy::firstOrCreate([
@@ -26,6 +42,20 @@ class TagsSeeder extends Seeder
         foreach (static::MOTIFS as $theme) {
             $taxonomy->tags()->firstOrCreate([
                 'name' => $theme,
+            ]);
+        }
+    }
+
+    private function seedTypes()
+    {
+        /** @var Taxonomy $taxonomy */
+        $taxonomy = Taxonomy::firstOrCreate([
+            'name' => static::TYPE_NAME,
+        ]);
+
+        foreach (static::TYPES as $key => $type) {
+            $taxonomy->tags()->firstOrCreate([
+                'name' => $type,
             ]);
         }
     }

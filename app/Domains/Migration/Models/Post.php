@@ -92,7 +92,9 @@ class Post extends Model
 
         foreach ($motifIds as $wpId) {
             if ($wpId > 6) {
-                $motifs->push($motifRepo->addCustom($customMotif->meta_value));
+                if ($customMotif !== null) {
+                    $motifs->push($motifRepo->addCustom($customMotif->meta_value));
+                }
 
                 continue;
             }

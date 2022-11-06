@@ -6,6 +6,7 @@ use App\Domains\Materials\Models\Licence;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Repositories\TagsRepository;
 use App\Domains\Materials\States\Published;
+use App\Domains\Migration\Helpers\TypesHelper;
 use App\Domains\Migration\Models\Post;
 use App\Domains\Migration\Models\Postmeta;
 use App\Domains\Users\Repositories\UsersRepository;
@@ -13,6 +14,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Throwable;
 
 class PostsMigrationCommand extends Command
 {
@@ -37,7 +39,13 @@ class PostsMigrationCommand extends Command
 
     public function __invoke()
     {
-        $this->importPostsOfType('poradniki');
+//        $this->importPostsOfType('poradniki');
+//        $this->importPostsOfType('programy');
+        $this->importPostsOfType('propozycje');
+
+//        $post = Post::where('ID', 9586)->first();
+//
+//        $this->importPost($post);
     }
 
     protected function importPostsOfType(string $type)
@@ -48,8 +56,8 @@ class PostsMigrationCommand extends Command
         foreach ($posts as $post) {
             try {
                 $this->info("Importing post: {$post->post_title}");
-                DB::transaction(function () use ($post) {
-                    $this->importPost($post);
+                DB::transaction(function () use ($post, $type) {
+                    $this->importPost($post, $type);
                 });
             } catch (\Exception $exception) {
                 $this->error("Post id: {$post->ID}");
@@ -58,7 +66,7 @@ class PostsMigrationCommand extends Command
         }
     }
 
-    protected function importPost(Post $post): Material
+    protected function importPost(Post $post, string $type = null): Material
     {
         $author = $this->usersRepository->findByWpId($post->post_author);
         if ($author === null) {
@@ -80,15 +88,7 @@ class PostsMigrationCommand extends Command
             'licence_id'   => $licence->id ?? null,
         ]);
 
-        $material->tags()->detach();
-
-        foreach ($post->motifs() as $motif) {
-            $material->tags()->attach($motif->id);
-        }
-
-        foreach ($post->tagIds() as $wpId) {
-            $this->tagsRepository->attachWpTag($material, $wpId);
-        }
+        $this->addTags($post, $material, $type);
 
         $material->fields()->delete();
         $this->mapFields($post, $material);
@@ -97,6 +97,21 @@ class PostsMigrationCommand extends Command
         $this->attachFiles($post, $material);
 
         return $material;
+    }
+
+    protected function addTags(Post $post, Material $material, ?string $type): void
+    {
+        $material->tags()->detach();
+
+        $this->attachType($material, $type);
+
+        foreach ($post->motifs() as $motif) {
+            $material->tags()->attach($motif->id);
+        }
+
+        foreach ($post->tagIds() as $wpId) {
+            $this->tagsRepository->attachWpTag($material, $wpId);
+        }
     }
 
     protected function mapFields(Post $post, Material $material)
@@ -117,7 +132,7 @@ class PostsMigrationCommand extends Command
                             'type'  => $fieldType,
                             'value' => trim($line),
                         ]);
-                    } catch (\Throwable $exception) {
+                    } catch (Throwable $exception) {
                         // DO nothing, we can ignore fields;
                     }
                 }
@@ -147,7 +162,7 @@ class PostsMigrationCommand extends Command
                         'type'  => $type,
                         'value' => trim($line),
                     ]);
-                } catch (\Throwable $exception){
+                } catch (Throwable $exception) {
                     // Do nothing, we can ignore fields;
                 }
             }
@@ -201,5 +216,16 @@ class PostsMigrationCommand extends Command
     protected function urlToPath(string $url): string
     {
         return Str::of(parse_url($url, PHP_URL_PATH))->after('/wp-content/uploads')->toString();
+    }
+
+    protected function attachType(Material $material, ?string $type)
+    {
+        $tag = TypesHelper::getTag($type);
+
+        if ($tag === null) {
+            return;
+        }
+
+        $material->tags()->attach($tag->id);
     }
 }
