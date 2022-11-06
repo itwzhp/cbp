@@ -39,13 +39,9 @@ class PostsMigrationCommand extends Command
 
     public function __invoke()
     {
-//        $this->importPostsOfType('poradniki');
-//        $this->importPostsOfType('programy');
+        $this->importPostsOfType('poradniki');
+        $this->importPostsOfType('programy');
         $this->importPostsOfType('propozycje');
-
-//        $post = Post::where('ID', 9586)->first();
-//
-//        $this->importPost($post);
     }
 
     protected function importPostsOfType(string $type)
