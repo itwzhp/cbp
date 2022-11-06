@@ -17,7 +17,7 @@ return new class extends Migration {
 
             $table->string('name');
             $table->string('path');
-            $table->string('mime', 24);
+            $table->string('mime');
 
             $table->unsignedInteger('wp_id')->nullable();
             $table->unsignedInteger('downloads')->default(0);

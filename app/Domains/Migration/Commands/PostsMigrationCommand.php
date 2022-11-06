@@ -10,8 +10,8 @@ use App\Domains\Migration\Models\Post;
 use App\Domains\Migration\Models\Postmeta;
 use App\Domains\Users\Repositories\UsersRepository;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
 class PostsMigrationCommand extends Command
@@ -37,10 +37,25 @@ class PostsMigrationCommand extends Command
 
     public function __invoke()
     {
-        /** @var Post $posts */
-        $posts = Post::find(11572);
+        $this->importPostsOfType('poradniki');
+    }
 
-        $this->importPost($posts);
+    protected function importPostsOfType(string $type)
+    {
+        $posts = Post::published()->where('post_type', $type)->get();
+
+        /** @var Post $post */
+        foreach ($posts as $post) {
+            try {
+                $this->info("Importing post: {$post->post_title}");
+                DB::transaction(function () use ($post) {
+                    $this->importPost($post);
+                });
+            } catch (\Exception $exception) {
+                $this->error("Post id: {$post->ID}");
+                $this->error($exception->getMessage());
+            }
+        }
     }
 
     protected function importPost(Post $post): Material
@@ -75,7 +90,10 @@ class PostsMigrationCommand extends Command
             $this->tagsRepository->attachWpTag($material, $wpId);
         }
 
+        $material->fields()->delete();
         $this->mapFields($post, $material);
+
+        $material->attachments()->delete();
         $this->attachFiles($post, $material);
 
         return $material;
@@ -92,10 +110,17 @@ class PostsMigrationCommand extends Command
                     continue;
                 }
 
-                $material->fields()->firstOrCreate([
-                    'type'  => $fieldType,
-                    'value' => $postMeta->meta_value,
-                ]);
+                $lines = $this->split($postMeta->meta_value);
+                foreach ($lines as $line) {
+                    try {
+                        $material->fields()->firstOrCreate([
+                            'type'  => $fieldType,
+                            'value' => trim($line),
+                        ]);
+                    } catch (\Throwable $exception) {
+                        // DO nothing, we can ignore fields;
+                    }
+                }
             }
         }
 
@@ -115,11 +140,32 @@ class PostsMigrationCommand extends Command
             $type = Field::TYPE_REDACTOR;
         }
         if (!empty($arField->meta_value)) {
-            $material->fields()->firstOrCreate([
-                'type'  => $type,
-                'value' => $arField->meta_value,
-            ]);
+            $lines = $this->split($arField->meta_value);
+            foreach ($lines as $line) {
+                try {
+                    $material->fields()->firstOrCreate([
+                        'type'  => $type,
+                        'value' => trim($line),
+                    ]);
+                } catch (\Throwable $exception){
+                    // Do nothing, we can ignore fields;
+                }
+            }
         }
+    }
+
+    protected function split(string $string): array
+    {
+        $lines = explode(PHP_EOL, $string);
+        if (count($lines) > 1) {
+            return $lines;
+        }
+
+        if (strlen($string) > 128) {
+            return explode(',', $string);
+        }
+
+        return [$string];
     }
 
     protected function attachFiles(Post $post, Material $material)
