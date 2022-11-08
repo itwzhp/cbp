@@ -24,7 +24,6 @@ use Spatie\ModelStates\HasStates;
  * @property Carbon                       created_at
  * @property Carbon                       updated_at
  * @property Carbon|null                  published_at
- *
  * @property-read Collection|Attachment[] $attachments
  * @property-read User                    owner
  * @property-read Collection|Tag[]        $tags

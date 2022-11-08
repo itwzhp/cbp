@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Storage;
  * @property int      downloads
  * @property Carbon   created_at
  * @property Carbon   updated_at
- *
  * @property Material material
  */
 class Attachment extends Model

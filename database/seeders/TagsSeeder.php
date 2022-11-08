@@ -15,7 +15,6 @@ class TagsSeeder extends Seeder
         'Zawody i profesje',
         'Specjalności',
     ];
-
     public const TYPE_NAME = 'Typ';
     public const TYPES = [
         'programy'    => 'Program',
