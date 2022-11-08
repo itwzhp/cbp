@@ -16,6 +16,10 @@ class MaterialIndexController extends Controller
         return Fractal::create()
             ->collection($materials->items())
             ->transformWith(new DefaultMaterialTransformer())
-            ->serializeWith(ArraySerializer::class);
+            ->serializeWith(ArraySerializer::class)
+            ->addMeta([
+                'current_page' => $materials->currentPage(),
+                'has_more'     => $materials->hasMorePages(),
+            ]);
     }
 }

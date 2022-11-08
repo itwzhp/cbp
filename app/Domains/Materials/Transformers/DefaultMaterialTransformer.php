@@ -12,10 +12,13 @@ class DefaultMaterialTransformer extends TransformerAbstract
 {
     protected array $availableIncludes = [
         'attachments',
+        'owner',
+        'taxonomies',
     ];
 
     protected array $defaultIncludes = [
-        'author',
+        'owner',
+        'taxonomies',
     ];
 
     public function transform(Material $material): array
@@ -34,8 +37,13 @@ class DefaultMaterialTransformer extends TransformerAbstract
             ->collection($material->attachments, new AttachmentTransformer());
     }
 
-    public function includeAuthor(Material $material): Item
+    public function includeOwner(Material $material): Item
     {
         return $this->item($material->owner, new OwnerTransformer());
+    }
+
+    public function includeTaxonomies(Material $material): Collection
+    {
+        return $this->collection($material->getTagsGrouped(), new TagGroupTransformer());
     }
 }

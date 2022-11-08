@@ -27,6 +27,7 @@ use Spatie\ModelStates\HasStates;
  *
  * @property-read Collection|Attachment[] $attachments
  * @property-read User                    owner
+ * @property-read Collection|Tag[]        $tags
  *
  * @method static Builder published()
  */
@@ -52,7 +53,8 @@ class Material extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class)
-            ->with('taxonomy');
+            ->with('taxonomy')
+            ->orderBy('name');
     }
 
     public function fields(): HasMany
@@ -68,5 +70,10 @@ class Material extends Model
     public function scopePublished(Builder $builder): Builder
     {
         return $this->where('published_at', '<', Carbon::now());
+    }
+
+    public function getTagsGrouped(): Collection
+    {
+        return $this->tags->groupBy('taxonomy_id');
     }
 }
