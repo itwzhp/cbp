@@ -6,5 +6,6 @@ class FullMaterialTransformer extends DefaultMaterialTransformer
     protected array $defaultIncludes = [
         'owner',
         'attachments',
+        'taxonomies',
     ];
 }
