@@ -3,23 +3,32 @@ namespace App\Domains\Materials\Models;
 
 use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\States\MaterialState;
+use App\Domains\Users\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\ModelStates\HasStates;
 
 /**
- * @property int         id
- * @property int         user_id
- * @property string      title
- * @property string      slug
- * @property string|null description
- * @property int|null    wp_id
- * @property string      state
- * @property Carbon      created_at
- * @property Carbon      updated_at
- * @property Carbon|null published_at
+ * @property int                          id
+ * @property int                          user_id
+ * @property string                       title
+ * @property string                       slug
+ * @property string|null                  description
+ * @property int|null                     wp_id
+ * @property string                       state
+ * @property Carbon                       created_at
+ * @property Carbon                       updated_at
+ * @property Carbon|null                  published_at
+ *
+ * @property-read Collection|Attachment[] $attachments
+ * @property-read User                    owner
+ *
+ * @method static Builder published()
  */
 class Material extends Model
 {
@@ -35,6 +44,11 @@ class Material extends Model
 
     protected $guarded = [];
 
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class)
@@ -49,5 +63,10 @@ class Material extends Model
     public function attachments(): HasMany
     {
         return $this->hasMany(Attachment::class);
+    }
+
+    public function scopePublished(Builder $builder): Builder
+    {
+        return $this->where('published_at', '<', Carbon::now());
     }
 }

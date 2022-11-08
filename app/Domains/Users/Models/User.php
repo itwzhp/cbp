@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return User::where('wp_id', $wpId)->first();
     }
+
+    public function getFullName(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 }

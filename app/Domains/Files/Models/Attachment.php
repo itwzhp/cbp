@@ -5,6 +5,7 @@ use App\Domains\Materials\Models\Material;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @property int      id
@@ -26,5 +27,10 @@ class Attachment extends Model
     public function material(): BelongsTo
     {
         return $this->belongsTo(Material::class);
+    }
+
+    public function url(): string
+    {
+        return Storage::url($this->path);
     }
 }
