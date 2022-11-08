@@ -7,5 +7,6 @@ class FullMaterialTransformer extends DefaultMaterialTransformer
         'owner',
         'attachments',
         'taxonomies',
+        'fields',
     ];
 }

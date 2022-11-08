@@ -14,6 +14,7 @@ class DefaultMaterialTransformer extends TransformerAbstract
         'attachments',
         'owner',
         'taxonomies',
+        'fields',
     ];
 
     protected array $defaultIncludes = [
@@ -45,5 +46,10 @@ class DefaultMaterialTransformer extends TransformerAbstract
     public function includeTaxonomies(Material $material): Collection
     {
         return $this->collection($material->getTagsGrouped(), new TagGroupTransformer());
+    }
+
+    public function includeFields(Material $material): Collection
+    {
+        return $this->collection($material->fields->groupBy('type'), new FieldGroupTransformer());
     }
 }

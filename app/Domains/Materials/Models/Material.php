@@ -28,6 +28,7 @@ use Spatie\ModelStates\HasStates;
  * @property-read Collection|Attachment[] $attachments
  * @property-read User                    owner
  * @property-read Collection|Tag[]        $tags
+ * @property-read Collection|Field[]      $fields
  *
  * @method static Builder published()
  */
