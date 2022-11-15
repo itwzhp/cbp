@@ -4,6 +4,8 @@ namespace App\Domains\Migration\Commands;
 use App\Domains\Materials\Models\Field;
 use App\Domains\Materials\Models\Licence;
 use App\Domains\Materials\Models\Material;
+use App\Domains\Materials\Models\Tag;
+use App\Domains\Materials\Models\Taxonomy;
 use App\Domains\Materials\Repositories\TagsRepository;
 use App\Domains\Materials\States\Published;
 use App\Domains\Migration\Helpers\TypesHelper;
@@ -11,7 +13,9 @@ use App\Domains\Migration\Models\Post;
 use App\Domains\Migration\Models\Postmeta;
 use App\Domains\Migration\Operators\Zalacznik;
 use App\Domains\Users\Repositories\UsersRepository;
+use Database\Seeders\TagsSeeder;
 use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -21,10 +25,14 @@ use Throwable;
 class PostsMigrationCommand extends Command
 {
     const FIELD_MAP = [
-        'wpcf-dane-recenzenta' => Field::TYPE_REVIEWER,
-        'wpcf-dane-autora'     => Field::TYPE_AUTHOR,
-        'wpcf-tresc'           => Field::TYPE_CONTENT,
-        'wpcf-zamierzenia'     => Field::TYPE_INTENT,
+        'wpcf-dane-recenzenta'       => Field::TYPE_REVIEWER,
+        'wpcf-dane-autora'           => Field::TYPE_AUTHOR,
+        'wpcf-tresc'                 => Field::TYPE_CONTENT,
+        'wpcf-zamierzenia'           => Field::TYPE_INTENT,
+        'wpcf-zamierzenia-kp'        => Field::TYPE_INTENT,
+        'wpcf-instrumenty-wymagania' => Field::TYPE_REQUIREMENT,
+        'wpcf-forma-uwagi'           => Field::TYPE_FORM_DESCRIPTION,
+        'wpcf-zakres'                => Field::TYPE_SCOPE,
     ];
 
     protected $signature = 'wp:posts';
@@ -47,6 +55,11 @@ class PostsMigrationCommand extends Command
         $this->importPostsOfType('programy');
         $this->importPostsOfType('propozycje');
         $this->importPostsOfType('ksztalcenie');
+        $this->importPostsOfType('ksztalcenie');
+        $this->importPostsOfType('program');
+
+//        $post = Post::published()->where('ID', 1112)->first();
+//        $this->importPost($post);
     }
 
     protected function importPostsOfType(string $type)
@@ -108,6 +121,7 @@ class PostsMigrationCommand extends Command
         $material->tags()->detach();
 
         $this->attachType($material, $type);
+        $this->attachFormType($post, $material);
 
         foreach ($post->motifs() as $motif) {
             $material->tags()->attach($motif->id);
@@ -151,8 +165,15 @@ class PostsMigrationCommand extends Command
         /** @var Postmeta $arData */
         $arData = $post->getPostmetas('wpcf-red-ar')->first();
 
+        if ($arData === null) {
+            return;
+        }
+
         /** @var Postmeta $arData */
         $arField = $post->getPostmetas('wpcf-red-wszystko')->first();
+        if ($arField === null) {
+            return;
+        }
 
         $type = Field::TYPE_AUTHOR;
         if ($arData->meta_value == 2) {
@@ -238,14 +259,16 @@ class PostsMigrationCommand extends Command
         $postmetas = $post->getPostmetas();
 
         $material->setups()->firstOrCreate([
-            'capacity_min'           => intval($postmetas->where('meta_key', 'wpcf-liczba-min')?->value('meta_value')),
-            'capacity_opt'           => intval($postmetas->where('meta_key',
+            'capacity_min'           => $this->parseInt($postmetas->where('meta_key',
+                'wpcf-liczba-min')?->value('meta_value')),
+            'capacity_opt'           => $this->parseInt($postmetas->where('meta_key',
                 'wpcf-liczba-optymalna')?->value('meta_value')),
-            'capacity_max'           => intval($postmetas->where('meta_key', 'wpcf-liczba-maks')?->value('meta_value')),
-            'duration'               => intval($postmetas->where('meta_key',
+            'capacity_max'           => $this->parseInt($postmetas->where('meta_key',
+                'wpcf-liczba-maks')?->value('meta_value')),
+            'duration'               => $this->parseInt($postmetas->where('meta_key',
                 'wpcf-czas-trwania')?->value('meta_value')),
             'time'                   => $postmetas->where('meta_key', 'wpcf-pora-dnia')?->value('meta_value'),
-            'instructor_count'       => intval($postmetas->where('meta_key',
+            'instructor_count'       => $this->parseInt($postmetas->where('meta_key',
                 'wpcf-liczba-prowadzacych')?->value('meta_value')),
             'instructor_competence'  => $postmetas
                 ->where('meta_key', 'wpcf-kompetencje-prowadzacy')?->value('meta_value'),
@@ -257,6 +280,11 @@ class PostsMigrationCommand extends Command
                 'wpcf-materialy-uczestnika')?->value('meta_value'),
             'participant_clothing'   => $postmetas->where('meta_key', 'wpcf-ubior-uczestnika')?->value('meta_value'),
         ]);
+    }
+
+    protected function parseInt($value): int
+    {
+        return min(65530, intval($value));
     }
 
     protected function attachSubposts(Post $post, Material $material)
@@ -302,5 +330,27 @@ class PostsMigrationCommand extends Command
             'materials'   => $subpost->getPostmetas('wpcf-materialy-i-zalaczniki')?->value('meta_value'),
             'wp_id'       => $subpost->ID,
         ]);
+    }
+
+    protected function attachFormType(Post $post, Material $material)
+    {
+        /** @var Taxonomy|null $taxonomy */
+        $taxonomy = Taxonomy::where('name', TagsSeeder::FORM_NAME)->first();
+        if ($taxonomy === null) {
+            return;
+        }
+
+        $wpFormId = $post->getPostmetas('wpcf-typ-mterialu')->value('meta_value');
+        if (empty($wpFormId)) {
+            return;
+        }
+
+        /** @var Tag $tag */
+        $tag = $taxonomy->tags()->where('name', Arr::get(TagsSeeder::FORMS, $wpFormId, 'unknown'))->first();
+        if ($tag === null) {
+            return;
+        }
+
+        $material->tags()->attach($tag->id);
     }
 }

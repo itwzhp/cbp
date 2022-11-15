@@ -21,6 +21,9 @@ class Field extends Model
     public const TYPE_REVIEWER = 'reviewer';
     public const TYPE_CONTENT = 'content';
     public const TYPE_INTENT = 'intent';
+    public const TYPE_REQUIREMENT = 'requirement';
+    public const TYPE_FORM_DESCRIPTION = 'form_description';
+    public const TYPE_SCOPE = 'scope';
 
     protected $guarded = [];
 

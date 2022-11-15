@@ -24,11 +24,28 @@ class TagsSeeder extends Seeder
         'program'     => 'Konspekt programowy',
         'propozycje'  => 'Propozycja programowa',
     ];
+    public const FORM_NAME = 'Typ materiału';
+    public const FORMS = [
+        1  => 'Program obozu',
+        2  => 'Program biwaku',
+        3  => 'Program innej imprezy',
+        4  => 'Poradnik',
+        5  => 'Propozycja programowa',
+        6  => 'Broszura/praca naukowa/tłumaczenie/materiał pokonferencyjny',
+        7  => 'Artykuł',
+        8  => 'Multimedia',
+        9  => 'Konspekt zbiórki w harcówce złożonej z różnorodnych form',
+        10 => 'Konspekt zbiórki w terenie złożonej z różnorodnych form',
+        11 => 'Konspekt zbiórki w harcówce w jednej formie',
+        12 => 'Konspekt zbiórki w terenie w jednej formie',
+        13 => 'Pojedynczy element programowy (np. piosenka, gra)',
+    ];
 
     public function run()
     {
         $this->seedMotifs();
         $this->seedTypes();
+        $this->seedForms();
     }
 
     private function seedMotifs()
@@ -52,7 +69,21 @@ class TagsSeeder extends Seeder
             'name' => static::TYPE_NAME,
         ]);
 
-        foreach (static::TYPES as $key => $type) {
+        foreach (static::TYPES as $type) {
+            $taxonomy->tags()->firstOrCreate([
+                'name' => $type,
+            ]);
+        }
+    }
+
+    private function seedForms()
+    {
+        /** @var Taxonomy $taxonomy */
+        $taxonomy = Taxonomy::firstOrCreate([
+            'name' => static::FORM_NAME,
+        ]);
+
+        foreach (static::FORMS as $type) {
             $taxonomy->tags()->firstOrCreate([
                 'name' => $type,
             ]);

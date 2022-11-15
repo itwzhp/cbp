@@ -14,9 +14,9 @@ enum ThicknessEnum: string
         }
 
         return match ($wpId) {
-            1 => self::NORMAL,
-            2 => self::THICK,
-            3 => self::VERY_THICK,
+            1       => self::NORMAL,
+            2       => self::THICK,
+            3       => self::VERY_THICK,
             default => null
         };
     }
