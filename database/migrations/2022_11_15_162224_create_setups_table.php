@@ -17,14 +17,14 @@ return new class extends Migration
                 ->on('materials')
                 ->cascadeOnDelete();
 
-            $table->tinyInteger('capacity_min')->unsigned()->nullable();
-            $table->tinyInteger('capacity_opt')->unsigned()->nullable();
-            $table->tinyInteger('capacity_max')->unsigned()->nullable();
+            $table->unsignedSmallInteger('capacity_min')->nullable();
+            $table->unsignedSmallInteger('capacity_opt')->nullable();
+            $table->unsignedSmallInteger('capacity_max')->nullable();
 
-            $table->unsignedTinyInteger('duration')->nullable();
+            $table->unsignedSmallInteger('duration')->nullable();
             $table->string('time')->nullable();
 
-            $table->unsignedTinyInteger('instructor_count')->nullable();
+            $table->unsignedSmallInteger('instructor_count')->nullable();
             $table->text('instructor_competence')->nullable();
 
             $table->text('remarks')->nullable();

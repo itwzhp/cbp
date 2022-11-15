@@ -15,6 +15,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use InvalidArgumentException;
 use Throwable;
 
 class PostsMigrationCommand extends Command
@@ -42,12 +43,10 @@ class PostsMigrationCommand extends Command
 
     public function __invoke()
     {
-        $post = Post::published()->where('ID', 8353)->first();
-        $this->importPost($post);
-
-//        $this->importPostsOfType('poradniki');
-//        $this->importPostsOfType('programy');
-//        $this->importPostsOfType('propozycje');
+        $this->importPostsOfType('poradniki');
+        $this->importPostsOfType('programy');
+        $this->importPostsOfType('propozycje');
+        $this->importPostsOfType('ksztalcenie');
     }
 
     protected function importPostsOfType(string $type)
@@ -72,7 +71,7 @@ class PostsMigrationCommand extends Command
     {
         $author = $this->usersRepository->findByWpId($post->post_author);
         if ($author === null) {
-            throw new \InvalidArgumentException('Missing author');
+            throw new InvalidArgumentException('Missing author');
         }
 
         $licence = Licence::where('wp_id', $post->licence())->first();
@@ -239,21 +238,24 @@ class PostsMigrationCommand extends Command
         $postmetas = $post->getPostmetas();
 
         $material->setups()->firstOrCreate([
-            'capacity_min'           => $postmetas->where('meta_key', 'wpcf-liczba-min')->value('meta_value'),
-            'capacity_opt'           => $postmetas->where('meta_key', 'wpcf-liczba-optymalna')->value('meta_value'),
-            'capacity_max'           => $postmetas->where('meta_key', 'wpcf-liczba-maks')->value('meta_value'),
-            'duration'               => $postmetas->where('meta_key', 'wpcf-czas-trwania')->value('meta_value'),
-            'time'                   => $postmetas->where('meta_key', 'wpcf-pora-dnia')->value('meta_value'),
-            'instructor_count'       => $postmetas->where('meta_key', 'wpcf-liczba-prowadzacych')->value('meta_value'),
+            'capacity_min'           => intval($postmetas->where('meta_key', 'wpcf-liczba-min')?->value('meta_value')),
+            'capacity_opt'           => intval($postmetas->where('meta_key',
+                'wpcf-liczba-optymalna')?->value('meta_value')),
+            'capacity_max'           => intval($postmetas->where('meta_key', 'wpcf-liczba-maks')?->value('meta_value')),
+            'duration'               => intval($postmetas->where('meta_key',
+                'wpcf-czas-trwania')?->value('meta_value')),
+            'time'                   => $postmetas->where('meta_key', 'wpcf-pora-dnia')?->value('meta_value'),
+            'instructor_count'       => intval($postmetas->where('meta_key',
+                'wpcf-liczba-prowadzacych')?->value('meta_value')),
             'instructor_competence'  => $postmetas
-                ->where('meta_key', 'wpcf-kompetencje-prowadzacy')
-                ->value('meta_value'),
-            'remarks'                => $postmetas->where('meta_key', 'wpcf-org-uwagi')->value('meta_value'),
-            'location'               => $postmetas->where('meta_key', 'wpcf-miejsce')->value('meta_value'),
-            'technical_requirements' => $postmetas->where('meta_key', 'wpcf-warunki-techniczne')->value('meta_value'),
-            'materials'              => $postmetas->where('meta_key', 'wpcf-materialy')->value('meta_value'),
-            'participant_materials'  => $postmetas->where('meta_key', 'wpcf-materialy-uczestnika')->value('meta_value'),
-            'participant_clothing'   => $postmetas->where('meta_key', 'wpcf-ubior-uczestnika')->value('meta_value'),
+                ->where('meta_key', 'wpcf-kompetencje-prowadzacy')?->value('meta_value'),
+            'remarks'                => $postmetas->where('meta_key', 'wpcf-org-uwagi')?->value('meta_value'),
+            'location'               => $postmetas->where('meta_key', 'wpcf-miejsce')?->value('meta_value'),
+            'technical_requirements' => $postmetas->where('meta_key', 'wpcf-warunki-techniczne')?->value('meta_value'),
+            'materials'              => $postmetas->where('meta_key', 'wpcf-materialy')?->value('meta_value'),
+            'participant_materials'  => $postmetas->where('meta_key',
+                'wpcf-materialy-uczestnika')?->value('meta_value'),
+            'participant_clothing'   => $postmetas->where('meta_key', 'wpcf-ubior-uczestnika')?->value('meta_value'),
         ]);
     }
 
@@ -273,7 +275,13 @@ class PostsMigrationCommand extends Command
 
     protected function attachZalacznik(Post $subpost, Material $material)
     {
-        $attachment = (new Zalacznik($subpost))->toAttachment();
+        try {
+            $attachment = (new Zalacznik($subpost))->toAttachment();
+        } catch (InvalidArgumentException $exception) {
+            dump($exception->getMessage(), $material->id);
+
+            return;
+        }
 
         if ($attachment->material_id) {
             $attachment->save();
@@ -284,6 +292,15 @@ class PostsMigrationCommand extends Command
 
     protected function attachPrzebieg(Post $subpost, Material $material)
     {
-        //
+        $material->scenarios()->firstOrCreate([
+            'title'       => $subpost->post_title,
+            'order'       => $subpost->getPostmetas('wpcf-kolejn')?->value('meta_value'),
+            'form'        => $subpost->getPostmetas('wpcf-forma')?->value('meta_value'),
+            'duration'    => $subpost->getPostmetas('wpcf-czas')?->value('meta_value'),
+            'responsible' => $subpost->getPostmetas('wpcf-odpowiedzialny')?->value('meta_value'),
+            'description' => $subpost->getPostmetas('wpcf-opis-czynnosci')?->value('meta_value'),
+            'materials'   => $subpost->getPostmetas('wpcf-materialy-i-zalaczniki')?->value('meta_value'),
+            'wp_id'       => $subpost->ID,
+        ]);
     }
 }

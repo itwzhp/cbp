@@ -29,6 +29,7 @@ use Spatie\ModelStates\HasStates;
  * @property-read Collection|Tag[]        $tags
  * @property-read Collection|Field[]      $fields
  * @property-read Collection|Setup[]      $setups
+ * @property-read Collection|Scenario[]   $scenarios
  *
  * @method static Builder published()
  */
@@ -71,6 +72,11 @@ class Material extends Model
     public function setups(): HasMany
     {
         return $this->hasMany(Setup::class);
+    }
+
+    public function scenarios(): HasMany
+    {
+        return $this->hasMany(Scenario::class);
     }
 
     public function scopePublished(Builder $builder): Builder
