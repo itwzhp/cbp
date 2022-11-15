@@ -19,6 +19,8 @@ class Field extends Model
     public const TYPE_AUTHOR = 'author';
     public const TYPE_REDACTOR = 'redactor';
     public const TYPE_REVIEWER = 'reviewer';
+    public const TYPE_CONTENT = 'content';
+    public const TYPE_INTENT = 'intent';
 
     protected $guarded = [];
 

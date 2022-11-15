@@ -105,11 +105,15 @@ class Post extends Model
         return $motifs;
     }
 
-    public function getPostmetas(string $key): Collection
+    public function getPostmetas(string $key = null): Collection
     {
-        return Postmeta::where('post_id', $this->ID)
-            ->where('meta_key', $key)
-            ->get();
+        $query = Postmeta::where('post_id', $this->ID);
+
+        if (!empty($key)) {
+            $query = $query->where('meta_key', $key);
+        }
+
+        return $query->get();
     }
 
     public function tagIds(): array

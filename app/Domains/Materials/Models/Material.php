@@ -28,6 +28,7 @@ use Spatie\ModelStates\HasStates;
  * @property-read User                    owner
  * @property-read Collection|Tag[]        $tags
  * @property-read Collection|Field[]      $fields
+ * @property-read Collection|Setup[]      $setups
  *
  * @method static Builder published()
  */
@@ -65,6 +66,11 @@ class Material extends Model
     public function attachments(): HasMany
     {
         return $this->hasMany(Attachment::class);
+    }
+
+    public function setups(): HasMany
+    {
+        return $this->hasMany(Setup::class);
     }
 
     public function scopePublished(Builder $builder): Builder
