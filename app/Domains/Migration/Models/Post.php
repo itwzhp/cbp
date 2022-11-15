@@ -32,6 +32,8 @@ class Post extends Model
 
     protected $primaryKey = 'ID';
 
+    protected ?Collection $postmetas = null;
+
     protected $dates = [
         'post_date_gmt',
     ];
@@ -107,13 +109,15 @@ class Post extends Model
 
     public function getPostmetas(string $key = null): Collection
     {
-        $query = Postmeta::where('post_id', $this->ID);
-
-        if (!empty($key)) {
-            $query = $query->where('meta_key', $key);
+        if ($this->postmetas === null) {
+            $this->postmetas = Postmeta::where('post_id', $this->ID)->get();
         }
 
-        return $query->get();
+        if (!empty($key)) {
+            return $this->postmetas->where('meta_key', $key);
+        }
+
+        return $this->postmetas;
     }
 
     public function tagIds(): array
@@ -130,5 +134,19 @@ class Post extends Model
             ->getPostmetas('wpcf-licencja')
             ->first()
             ->meta_value ?? null;
+    }
+
+    public function getSubpostsIds()
+    {
+        return Postmeta::where('meta_key', 'like', '_wpcf_belongs_%')
+            ->where('meta_value', $this->ID)
+            ->select('post_id')
+            ->get()
+            ->pluck('post_id');
+    }
+
+    public function subposts(): Collection
+    {
+        return Post::whereIn('ID', $this->getSubpostsIds())->get();
     }
 }

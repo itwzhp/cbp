@@ -23,7 +23,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null   participant_clothing
  * @property Carbon        created_at
  * @property Carbon        updated_at
- *
  * @property-read Material $material
  */
 class Setup extends Model

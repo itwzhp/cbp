@@ -9,6 +9,7 @@ use App\Domains\Materials\States\Published;
 use App\Domains\Migration\Helpers\TypesHelper;
 use App\Domains\Migration\Models\Post;
 use App\Domains\Migration\Models\Postmeta;
+use App\Domains\Migration\Operators\Zalacznik;
 use App\Domains\Users\Repositories\UsersRepository;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -98,6 +99,7 @@ class PostsMigrationCommand extends Command
         $this->attachFiles($post, $material);
 
         $this->attachSetup($post, $material);
+        $this->attachSubposts($post, $material);
 
         return $material;
     }
@@ -253,5 +255,35 @@ class PostsMigrationCommand extends Command
             'participant_materials'  => $postmetas->where('meta_key', 'wpcf-materialy-uczestnika')->value('meta_value'),
             'participant_clothing'   => $postmetas->where('meta_key', 'wpcf-ubior-uczestnika')->value('meta_value'),
         ]);
+    }
+
+    protected function attachSubposts(Post $post, Material $material)
+    {
+        /** @var Post $subpost */
+        foreach ($post->subposts() as $subpost) {
+            if ($subpost->post_type === 'przebieg') {
+                $this->attachPrzebieg($subpost, $material);
+            }
+
+            if ($subpost->post_type === 'zalacznik') {
+                $this->attachZalacznik($subpost, $material);
+            }
+        }
+    }
+
+    protected function attachZalacznik(Post $subpost, Material $material)
+    {
+        $attachment = (new Zalacznik($subpost))->toAttachment();
+
+        if ($attachment->material_id) {
+            $attachment->save();
+        } else {
+            $material->attachments()->save($attachment);
+        }
+    }
+
+    protected function attachPrzebieg(Post $subpost, Material $material)
+    {
+        //
     }
 }
