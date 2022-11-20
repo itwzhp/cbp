@@ -15,6 +15,8 @@ class DefaultMaterialTransformer extends TransformerAbstract
         'owner',
         'taxonomies',
         'fields',
+        'setups',
+        'scenarios',
     ];
 
     protected array $defaultIncludes = [
@@ -51,5 +53,15 @@ class DefaultMaterialTransformer extends TransformerAbstract
     public function includeFields(Material $material): Collection
     {
         return $this->collection($material->fields->groupBy('type'), new FieldGroupTransformer());
+    }
+
+    public function includeSetups(Material $material): Collection
+    {
+        return $this->collection($material->setups, new SetupTransformer());
+    }
+
+    public function includeScenarios(Material $material): Collection
+    {
+        return $this->collection($material->scenarios, new ScenarioTransformer());
     }
 }

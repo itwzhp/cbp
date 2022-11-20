@@ -11,7 +11,7 @@ enum SizeEnum: string
     case A6 = 'A6';
     case OTHER = 'OTHER';
 
-    public static function fromWp(int $wpId): self
+    public static function fromWp(?int $wpId): self
     {
         return match ($wpId) {
             1       => self::A4,

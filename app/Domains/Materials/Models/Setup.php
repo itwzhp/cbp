@@ -27,10 +27,40 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Setup extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'material_id',
+        'capacity_min',
+        'capacity_opt',
+        'capacity_max',
+        'duration',
+        'time',
+        'instructor_count',
+        'instructor_competence',
+        'remarks',
+        'location',
+        'technical_requirements',
+        'materials',
+        'participant_materials',
+        'participant_clothing',
+    ];
 
     public function material(): BelongsTo
     {
         return $this->belongsTo(Material::class);
+    }
+
+    public function isEmpty(): bool
+    {
+        foreach ($this->fillable as $field) {
+            if ($field === 'material_id') {
+                continue;
+            }
+
+            if (!empty($this->getAttribute($field))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

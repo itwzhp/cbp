@@ -8,5 +8,7 @@ class FullMaterialTransformer extends DefaultMaterialTransformer
         'attachments',
         'taxonomies',
         'fields',
+        'setups',
+        'scenarios',
     ];
 }

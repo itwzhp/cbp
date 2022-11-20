@@ -4,6 +4,7 @@ namespace App\Domains\Migration\Commands;
 use App\Domains\Materials\Models\Field;
 use App\Domains\Materials\Models\Licence;
 use App\Domains\Materials\Models\Material;
+use App\Domains\Materials\Models\Setup;
 use App\Domains\Materials\Models\Tag;
 use App\Domains\Materials\Models\Taxonomy;
 use App\Domains\Materials\Repositories\TagsRepository;
@@ -258,7 +259,8 @@ class PostsMigrationCommand extends Command
     {
         $postmetas = $post->getPostmetas();
 
-        $material->setups()->firstOrCreate([
+        /** @var Setup $setup */
+        $setup = $material->setups()->firstOrCreate([
             'capacity_min'           => $this->parseInt(
                 $postmetas->where('meta_key', 'wpcf-liczba-min')?->value('meta_value')
             ),
@@ -285,6 +287,10 @@ class PostsMigrationCommand extends Command
                 ?->value('meta_value'),
             'participant_clothing'   => $postmetas->where('meta_key', 'wpcf-ubior-uczestnika')?->value('meta_value'),
         ]);
+
+        if ($setup->isEmpty()) {
+            $setup->delete();
+        }
     }
 
     protected function parseInt($value): int

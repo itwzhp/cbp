@@ -11,15 +11,14 @@ class MaterialIndexController extends Controller
 {
     public function __invoke()
     {
-        $materials = Material::published()->paginate(15);
+        $materials = Material::published()
+            ->with('owner', 'tags')
+            ->orderBy('published_at', 'desc')
+            ->paginate(15);
 
         return Fractal::create()
             ->collection($materials->items())
             ->transformWith(new DefaultMaterialTransformer())
-            ->serializeWith(ArraySerializer::class)
-            ->addMeta([
-                'current_page' => $materials->currentPage(),
-                'has_more'     => $materials->hasMorePages(),
-            ]);
+            ->serializeWith(ArraySerializer::class);
     }
 }

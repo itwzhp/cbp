@@ -76,7 +76,9 @@ class Material extends Model
 
     public function scenarios(): HasMany
     {
-        return $this->hasMany(Scenario::class);
+        return $this
+            ->hasMany(Scenario::class)
+            ->orderBy('order');
     }
 
     public function scopePublished(Builder $builder): Builder
