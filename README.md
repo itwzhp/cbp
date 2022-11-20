@@ -39,3 +39,9 @@ FILESYSTEM_DISK=wp_local
 #### Files
 
 If you want to test files on local env, download all directories from `wp-content/uploads` into `storage/wp/` directory.
+
+## API
+
+Go to:
+
+[API docs](ENDPOINTS.md)
