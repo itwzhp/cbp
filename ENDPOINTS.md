@@ -4,13 +4,6 @@
 
 No authorization
 
-### [GET] /api/materials/{id}
-
-Full data for specified material.
-
-###### Parameters:
-
-None
 
 | Method | Path                  | Parameters                                                              | Description                                                                      |
 |--------|-----------------------|-------------------------------------------------------------------------|----------------------------------------------------------------------------------|
