@@ -37,7 +37,6 @@ use Spatie\ModelStates\HasStates;
 class Material extends Model
 {
     use HasStates;
-    use Searchable;
 
     protected $dates = [
         'published_at',
@@ -86,6 +85,33 @@ class Material extends Model
     public function scopePublished(Builder $builder): Builder
     {
         return $this->where('published_at', '<', Carbon::now());
+    }
+
+    public function scopeForTags(Builder $builder, ?array $tags)
+    {
+        if (empty($tags)) {
+            return;
+        }
+
+        $builder->where(function (Builder $builder) use ($tags) {
+            foreach ($tags as $tag) {
+                $builder->orWhereHas('tags', function (Builder $query) use ($tag) {
+                    $query->where('id', $tag);
+                });
+            }
+        });
+    }
+
+    public function scopeSearch(Builder $builder, ?string $search)
+    {
+        if (empty($search)) {
+            return;
+        }
+
+        $builder->where(function (Builder $builder) use ($search) {
+            $builder->where('title', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
+        });
     }
 
     public function getTagsGrouped(): Collection

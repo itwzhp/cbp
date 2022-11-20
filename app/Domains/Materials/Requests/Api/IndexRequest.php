@@ -10,11 +10,18 @@ class IndexRequest extends FormRequest
         return [
             'page'   => 'numeric|nullable',
             'search' => 'nullable|string|min:3',
+            'tags'   => 'nullable|array',
+            'tags.*' => 'numeric',
         ];
     }
 
     public function hasSearch(): bool
     {
         return !empty($this->input('search'));
+    }
+
+    public function wantsJson()
+    {
+        return true;
     }
 }

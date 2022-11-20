@@ -13,19 +13,14 @@ class MaterialIndexController extends Controller
 {
     public function __invoke(IndexRequest $request)
     {
-        $materialsQuery = Material::search($request->input('search'))
-            ->query(function (Builder $builder) {
-                $builder
-                    ->published()
-                    ->with('owner', 'tags')
-                    ->orderBy('published_at', 'desc');
-            });
+        $materials = Material::search($request->input('search'))
+            ->published()
+            ->forTags($request->input('tags'))
+            ->with('owner', 'tags')
+            ->orderBy('published_at', 'desc')
+            ->paginate(15);
 
-//        if ($request->hasSearch()) {
-//            $materialsQuery->search($request->input('search'));
-//        }
-
-        $materials = $materialsQuery->paginate(15);
+//        $materials = Material::forTags($request->input('tags'))->paginate(15); // ->toSql(); //->paginate(15);
 
         return Fractal::create()
             ->collection($materials->items())
