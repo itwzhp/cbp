@@ -1,4 +1,4 @@
-import { useStorage } from "@vueuse/core";
+import { useSessionStorage } from "@vueuse/core";
 import axios from "axios";
 import { defineStore } from "pinia";
 
@@ -17,7 +17,7 @@ const defaultValues: Search = {
 };
 
 export const useSearchStore = defineStore("search", {
-    state: () => useStorage("search", defaultValues),
+    state: () => useSessionStorage("search", defaultValues),
     getters: {
         getSearchInput: (state) => state.input,
         getShowDialog: (state) => state.showDialog,
@@ -31,32 +31,26 @@ export const useSearchStore = defineStore("search", {
         hideDialog() {
             this.showDialog = false;
         },
-        async getData(input: string) {
+        async getData(input: string, nextPage: boolean) {
             this.input = input;
             this.loading = true;
-            const request = await axios.get(`https://catfact.ninja/fact`);
+            if (!nextPage) {
+                this.data = [];
+            }
+            const params = new URLSearchParams();
+            if (input.length >= 3) {
+                params.append("search", input);
+            }
+            if (nextPage) {
+                params.append("nextPage", String(nextPage));
+            }
+            const request = await axios.get(`http://127.0.0.1:8000/api/materials`, { params });
             this.loading = false;
-            // this.data = [request.data];
-            this.data = [
-                {
-                    type: "Poradnik",
-                    title: "Zbiórka - prawo harcerskie",
-                    author: "sam. Julia Piersionek Hufiec",
-                    published: "28.12.2019",
-                },
-                {
-                    type: "Poradnik1",
-                    title: "Zbiórka - prawo harcerskie",
-                    author: "sam. Julia Piersionek Hufiec",
-                    published: "28.12.2019",
-                },
-                {
-                    type: "Poradnik2",
-                    title: "Zbiórka - prawo harcerskie",
-                    author: "sam. Julia Piersionek Hufiec",
-                    published: "28.12.2019",
-                },
-            ];
+            if (nextPage) {
+                this.data = [...this.data, ...request.data];
+            } else {
+                this.data = request.data;
+            }
         },
     },
 });

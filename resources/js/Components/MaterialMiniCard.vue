@@ -1,41 +1,43 @@
 <script setup>
-import { useSearchStore } from "../store/search.store";
 
 const props = defineProps({
-  type: { type: String, required: true },
-  title: { type: String, required: true },
-  author: { type: String, required: true },
-  published: { type: String, required: true }
+  item: { type: Object, required: true }
 })
+
+const truncateText = (text, length, suffix) => {
+  if (text.length > length) {
+      return text.substring(0, length) + suffix;
+  } else {
+      return text;
+  }
+};
 
 </script>
 <template>
-  <div class="flex justify-center p-3">
-    <div class="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg">
-      <div class="p-2 w-24 h-24 flex flex-col justify-start bg-neutral-500 rounded-sm">
-        <p class="text-xs w-3/4 text-center bg-gray-200 rounded">
-          {{props.type}}
+    <div class="flex flex-col sm:flex-row sm:max-w-xl rounded-lg bg-white shadow-lg">
+      <div class="p-2 md:w-100 w-36 h-auto flex flex-col justify-start bg-neutral-500 rounded-sm">
+        <p class="text-xs w-100 text-center bg-gray-200 rounded">
+          Poradnik
         </p>
       </div>
-      <div class="p-1 pl-3 pr-3 flex flex-col justify-start">
-        <div class="h-2/6">
+      <div class="p-1 pl-3 flex flex-col justify-start w-full">
+        <div class="h-3/6">
           <h5 class="text-blue-500 text-sm font-medium mb-2">
-            {{props.title}}
+            <span class="">{{ truncateText(props.item.title, 80, '...') }}</span>
           </h5>
         </div>
-        <div class="h-3/6">
+        <div class="h-2/6">
           <p class="text-gray-500 text-sm mb-2">
-            Autor: {{props.author}}
+            Autor: <span class="">{{ props.item.owner.name }}</span>
           </p>
         </div>
         <div class="h-1/6">
           <div>
             <p class="text-gray-600 text-xs">
-              Opublikowano: {{props.published}}
+              Opublikowano: {{  $filters.dateFormat(props.item.published_at)}}
             </p>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
