@@ -5,7 +5,7 @@ use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Requests\Api\IndexRequest;
 use App\Domains\Materials\Transformers\DefaultMaterialTransformer;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Spatie\Fractalistic\ArraySerializer;
 use Spatie\Fractalistic\Fractal;
 
@@ -13,6 +13,7 @@ class MaterialIndexController extends Controller
 {
     public function __invoke(IndexRequest $request)
     {
+        /** @var LengthAwarePaginator $materials */
         $materials = Material::search($request->input('search'))
             ->published()
             ->forTags($request->input('tags'))
@@ -22,9 +23,17 @@ class MaterialIndexController extends Controller
 
 //        $materials = Material::forTags($request->input('tags'))->paginate(15); // ->toSql(); //->paginate(15);
 
-        return Fractal::create()
-            ->collection($materials->items())
-            ->transformWith(new DefaultMaterialTransformer())
-            ->serializeWith(ArraySerializer::class);
+        return [
+            'content' => Fractal::create()
+                ->collection($materials->items())
+                ->transformWith(new DefaultMaterialTransformer())
+                ->serializeWith(ArraySerializer::class)
+                ->toArray(),
+            'meta'    => [
+                'page'        => $materials->currentPage(),
+                'size'        => 15,
+                'hasNextPage' => $materials->hasMorePages(),
+            ],
+        ];
     }
 }
