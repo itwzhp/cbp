@@ -27,9 +27,9 @@ const removeListener = () => {
 }
 
 const handleScroll = () => {
-  if (scrollContent.scrollTop + scrollContent.clientHeight == scrollContent.scrollHeight && !store.getLoading && store.getHasNextPage) {
+  if (scrollContent.scrollTop + scrollContent.clientHeight == scrollContent.scrollHeight) {
     console.log("[scroll event] load next page...");
-    store.getData(form.search, true);
+    store.getNextPage();
   }
 }
 

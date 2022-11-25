@@ -3,12 +3,12 @@ import axios from "axios";
 import { defineStore } from "pinia";
 
 interface Search {
-    input?: string | null;
+    input: string | null;
     showDialog: boolean;
-    data?: [] | null;
-    page?: number;
-    hasNextPage?: boolean;
-    loading?: boolean;
+    data: [] | null;
+    page: number;
+    hasNextPage: boolean;
+    loading: boolean;
 }
 
 const defaultValues: Search = {
@@ -19,6 +19,8 @@ const defaultValues: Search = {
     hasNextPage: false,
     loading: false,
 };
+
+const searchUrl = "http://127.0.0.1:8000/api/materials";
 
 export const useSearchStore = defineStore("search", {
     state: () => useSessionStorage("search", defaultValues),
@@ -36,33 +38,43 @@ export const useSearchStore = defineStore("search", {
         hideDialog() {
             this.showDialog = false;
         },
-        async getData(input: string, nextPage: boolean) {
-            this.input = input;
+        async getData(input: string) {
             this.loading = true;
+            this.input = input;
+            this.data = [];
+            this.page = null;
+            this.hasNextPage = false;
             const params = new URLSearchParams();
             if (input?.length >= 3) {
                 params.append("search", input);
             }
-            if (nextPage && this.hasNextPage) {
-                params.append("page", String(this.page + 1));
-            } else {
-                this.data = [];
-                this.page = null;
-                this.hasNextPage = false;
-            }
             try {
-                const request = await axios.get(`http://127.0.0.1:8000/api/materials`, { params });
+                const request = await axios.get(searchUrl, { params });
                 this.loading = false;
                 this.page = request.data.meta.page;
                 this.hasNextPage = request.data.meta.hasNextPage;
-                if (nextPage) {
-                    this.data = [...this.data, ...request.data.content];
-                } else {
-                    this.data = request.data.content;
-                }
+                this.data = request.data.content;
             } catch (error) {
                 this.loading = false;
             }
         },
+        async getNextPage() {
+            if (!this.loading && this.getHasNextPage) {
+                this.loading = true;
+                const params = new URLSearchParams([["page", String(this.page + 1)]]);
+                if (this.input?.length >= 3) {
+                    params.append("search", this.input);
+                }
+                try {
+                    const request = await axios.get(searchUrl, { params });
+                    this.loading = false;
+                    this.page = request.data.meta.page;
+                    this.hasNextPage = request.data.meta.hasNextPage;
+                    this.data = [...this.data, ...request.data.content];
+                } catch (error) {
+                    this.loading = false;
+                }
+            }
+        }
     },
 });
