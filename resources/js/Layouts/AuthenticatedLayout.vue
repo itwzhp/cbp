@@ -60,7 +60,6 @@ const displayDialog = () => {
                                         </template>
                                     </Dropdown>
                                     <Link v-if="!$page.props.auth.user" :href="route('login')" class="dark:text-gray-500">Zaloguj się</Link>
-                                    <Link v-if="!$page.props.auth.user" :href="route('register')" class="dark:text-gray-500">Zarejestruj się</Link>
                                 </div>
 
                             </div>
