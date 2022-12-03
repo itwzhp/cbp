@@ -23,7 +23,7 @@ const truncateText = (text, length, suffix) => {
       <div class="p-1 pl-3 flex flex-col justify-start w-full">
         <div class="h-3/6">
           <h5 class="text-blue-500 text-sm font-medium mb-2">
-            <a :href="route('materials.show')"><span class="">{{ truncateText(props.item.title, 80, '...') }}</span></a>
+            <span class="">{{ truncateText(props.item.title, 80, '...') }}</span>
           </h5>
         </div>
         <div class="h-2/6">
