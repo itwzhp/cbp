@@ -1,11 +1,11 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import {Head} from '@inertiajs/inertia-vue3';
 import Attachment from "@/Components/Attachment.vue";
 </script>
 
 <template>
-    <Head title="Materials" />
+    <Head title="Materials"/>
 
     <AuthenticatedLayout>
         <template #header>
@@ -16,7 +16,12 @@ import Attachment from "@/Components/Attachment.vue";
 
             <div>
                 <h4 class="mt-3">Załączniki</h4>
-                <Attachment v-for="attachment in $page.props.material.attachments" :attachment="attachment"></Attachment>
+                <Attachment v-for="attachment in $page.props.material.attachments"
+                            :attachment="attachment"></Attachment>
+
+                <a :href="route('materials.download', $page.props.material.slug)">
+                    <i class="fa fa-download"></i> Pobierz wszystkie załączniki
+                </a>
             </div>
 
         </template>

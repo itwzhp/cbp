@@ -68,4 +68,9 @@ class Attachment extends Model
 
         return $attachment;
     }
+
+    public function getAbsolutePath(): string
+    {
+        return Storage::path($this->path);
+    }
 }
