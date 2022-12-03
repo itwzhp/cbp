@@ -1,6 +1,7 @@
 <?php
 namespace App\Console;
 
+use App\Domains\Files\Commands\LinkWpFilesStorageCommand;
 use App\Domains\Migration\Commands\PostsMigrationCommand;
 use App\Domains\Migration\Commands\RefreshCommand;
 use App\Domains\Migration\Commands\TagsMigrationCommand;
@@ -17,11 +18,12 @@ class Kernel extends ConsoleKernel
         PostsMigrationCommand::class,
         WpImportCommand::class,
         RefreshCommand::class,
+        LinkWpFilesStorageCommand::class,
     ];
 
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        //
     }
 
     protected function commands()
