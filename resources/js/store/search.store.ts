@@ -20,7 +20,7 @@ const defaultValues: Search = {
     loading: false,
 };
 
-const searchUrl = "http://127.0.0.1:8000/api/materials";
+const searchUrl = "http://cbp.local/api/materials";
 
 export const useSearchStore = defineStore("search", {
     state: () => useSessionStorage("search", defaultValues),

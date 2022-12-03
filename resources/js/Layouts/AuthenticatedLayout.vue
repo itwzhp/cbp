@@ -31,7 +31,7 @@ const displayDialog = () => {
                             </Link>
                         </div>
                         <div class="-my-2 -mr-2">
-                            <Link :href="route('materials')">
+                            <Link :href="route('materials.index')">
                                 <ApplicationLogo class="block h-14 w-auto" />
                             </Link>
                         </div>
@@ -84,7 +84,7 @@ const displayDialog = () => {
                             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
                             Wyszukaj
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('materials')" :active="route().current('materials')">
+                        <ResponsiveNavLink :href="route('materials.index')" :active="route().current('materials.index')">
                             Materiały
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
@@ -113,7 +113,7 @@ const displayDialog = () => {
                         <div class="flex">
                             <!-- Navigation Links -->
                             <div class="max-h-10 hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('materials')" :active="route().current('materials')">
+                                <NavLink :href="route('materials.index')" :active="route().current('materials.index')">
                                     Materiały
                                 </NavLink>
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
@@ -137,7 +137,7 @@ const displayDialog = () => {
                 <slot />
             </main>
         </div>
-        
+
     </div>
     <SearchSlideOver />
 </template>

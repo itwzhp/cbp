@@ -21,8 +21,6 @@ class MaterialIndexController extends Controller
             ->orderBy('published_at', 'desc')
             ->paginate(15);
 
-//        $materials = Material::forTags($request->input('tags'))->paginate(15); // ->toSql(); //->paginate(15);
-
         return [
             'content' => Fractal::create()
                 ->collection($materials->items())

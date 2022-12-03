@@ -28,6 +28,7 @@ class DefaultMaterialTransformer extends TransformerAbstract
     {
         return [
             'id'           => $material->id,
+            'slug'         => $material->slug,
             'title'        => $material->title,
             'content'      => $material->description,
             'published_at' => $material->published_at->timestamp ?? null,

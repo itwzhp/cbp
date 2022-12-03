@@ -9,8 +9,8 @@ enum PrintColorEnum: string
     public static function fromWp(?int $wpId): ?self
     {
         return match ($wpId) {
-            1 => self::COLOR,
-            2 => self::BLACK,
+            1       => self::COLOR,
+            2       => self::BLACK,
             default => null
         };
     }
