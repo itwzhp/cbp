@@ -47,7 +47,9 @@ jobs:
 
       - name: TODOs
         run: |
-          echo 'TODO: nanieść migracje - php artisan migrate --force'
           echo 'TODO: wgrać aplikację'
+          echo 'TODO: pobrać zależności - composer install'
+          echo 'TODO: odtworzyć .env' - php artisan env:decrypt --env=production --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env
+          echo 'TODO: nanieść migracje - php artisan migrate --force'
           echo 'php artisan optimize'
 

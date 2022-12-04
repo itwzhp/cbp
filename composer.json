@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "ext-zip": "*",
         "barryvdh/laravel-debugbar": "^3.7",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.6.3",
@@ -19,8 +20,7 @@
         "spatie/laravel-fractal": "^6.0",
         "spatie/laravel-model-states": "^2.4",
         "spatie/laravel-permission": "^5.5",
-        "tightenco/ziggy": "^1.0",
-        "ext-zip": "*"
+        "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",

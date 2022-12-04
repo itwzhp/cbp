@@ -1,5 +1,6 @@
 <?php
 
+use App\Domains\Users\Controllers\MicrosoftLoginController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -14,7 +15,10 @@ Route::middleware('guest')->group(function () {
 
     Route::post('login', [AuthenticatedSessionController::class, 'store'])
         ->middleware(AllowOnlyOnLocalMiddleware::class);
+
+    Route::get('socialite/login', MicrosoftLoginController::class)->name('socialite.login');
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
