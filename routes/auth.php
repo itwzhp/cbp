@@ -16,7 +16,8 @@ Route::middleware('guest')->group(function () {
     Route::post('login', [AuthenticatedSessionController::class, 'store'])
         ->middleware(AllowOnlyOnLocalMiddleware::class);
 
-    Route::get('socialite/login', MicrosoftLoginController::class)->name('socialite.login');
+    Route::get('sl', [MicrosoftLoginController::class, 'login'])->name('ms.login');
+    Route::any('/callback', [MicrosoftLoginController::class, 'callback'])->name('ms.redirect');
 });
 
 
