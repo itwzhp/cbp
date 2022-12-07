@@ -101,38 +101,24 @@ const displayDialog = () => {
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
-                        <Dropdown width="48">
-                            <template #trigger>
-                                <span class="inline-flex rounded-md">
-                                    <button type="button"
-                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                        Konspekty
-                                    </button>
-                                </span>
-                            </template>
-                            <template #content>
-                                <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
-                                                   :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
-                                    Kształceniowe
-                                </ResponsiveNavLink>
-                                <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
-                                                   :active="route().current('materials.tag', {tag: '2-konspekt-ksztalceniowy'})">
-                                    Kształceniowe
-                                </ResponsiveNavLink>
-                            </template>
-                        </Dropdown>
-
+                        <ResponsiveNavLink :block="true" :active="route().current('materials.tag')">
+                            Konspekty
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
+                                            :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
+                            &emsp;Kształceniowe
+                        </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('materials.tag', '2-program')"
                                            :active="route().current('materials.tag', {tag: '2-program'})">
-                            Program/plan
+                            &emsp;Program/plan
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('materials.tag', '2-propozycja-programowa')"
                                            :active="route().current('materials.tag', {tag: '2-propozycja-programowa'})">
-                            Propozycje programowe
+                            &emsp;Propozycje programowe
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('materials.tag', '2-poradnik')"
                                            :active="route().current('materials.tag', {tag: '2-poradnik'})">
-                            Poradniki
+                            &emsp;Poradniki
                         </ResponsiveNavLink>
 
                     </div>
@@ -175,9 +161,17 @@ const displayDialog = () => {
                                                         :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
                                             Kształceniowe
                                         </ResponsiveNavLink>
-                                        <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
-                                                        :active="route().current('materials.tag', {tag: '2-konspekt-ksztalceniowy'})">
-                                            Kształceniowe
+                                        <ResponsiveNavLink :href="route('materials.tag', '2-program')"
+                                                        :active="route().current('materials.tag', {tag: '2-program'})">
+                                            Program/plan
+                                        </ResponsiveNavLink>
+                                        <ResponsiveNavLink :href="route('materials.tag', '2-propozycja-programowa')"
+                                                        :active="route().current('materials.tag', {tag: '2-propozycja-programowa'})">
+                                            Propozycje programowe
+                                        </ResponsiveNavLink>
+                                        <ResponsiveNavLink :href="route('materials.tag', '2-poradnik')"
+                                                        :active="route().current('materials.tag', {tag: '2-poradnik'})">
+                                            Poradniki
                                         </ResponsiveNavLink>
                                     </template>
                                 </Dropdown>
