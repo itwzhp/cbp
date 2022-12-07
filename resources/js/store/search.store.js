@@ -2,16 +2,7 @@ import { useSessionStorage } from "@vueuse/core";
 import axios from "axios";
 import { defineStore } from "pinia";
 
-interface Search {
-    input: string | null;
-    showDialog: boolean;
-    data: [] | null;
-    page: number;
-    hasNextPage: boolean;
-    loading: boolean;
-}
-
-const defaultValues: Search = {
+const defaultValues = {
     input: null,
     showDialog: false,
     data: [],
@@ -20,7 +11,7 @@ const defaultValues: Search = {
     loading: false,
 };
 
-const searchUrl = "http://cbp.local/api/materials";
+const searchUrl = `${import.meta.env.VITE_API_URL}/api/materials`;
 
 export const useSearchStore = defineStore("search", {
     state: () => useSessionStorage("search", defaultValues),
@@ -28,7 +19,6 @@ export const useSearchStore = defineStore("search", {
         getSearchInput: (state) => state.input,
         getShowDialog: (state) => state.showDialog,
         getSearchData: (state) => state.data,
-        getHasNextPage: (state) => state.hasNextPage,
         getLoading: (state) => state.loading,
     },
     actions: {
@@ -38,7 +28,7 @@ export const useSearchStore = defineStore("search", {
         hideDialog() {
             this.showDialog = false;
         },
-        async getData(input: string) {
+        async getData(input) {
             this.loading = true;
             this.input = input;
             this.data = [];

@@ -58,7 +58,7 @@ const submit = () => {
   if (scrollContent) {
     scrollContent.scrollTop = 0;
   }
-  store.getData(form.search)
+  store.getData(form.search);
 };
 
 const hideDialog = () => {
