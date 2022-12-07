@@ -163,6 +163,26 @@ const displayDialog = () => {
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
+                                <Dropdown width="48">
+                                    <template #trigger>
+                                        <span class="inline-flex rounded-md">
+                                            <button type="button"
+                                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                                Konspekty
+                                            </button>
+                                        </span>
+                                    </template>
+                                    <template #content>
+                                        <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
+                                                        :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
+                                            Kształceniowe
+                                        </ResponsiveNavLink>
+                                        <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
+                                                        :active="route().current('materials.tag', {tag: '2-konspekt-ksztalceniowy'})">
+                                            Kształceniowe
+                                        </ResponsiveNavLink>
+                                    </template>
+                                </Dropdown>
                             </div>
                         </div>
                     </div>
