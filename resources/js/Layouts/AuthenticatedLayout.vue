@@ -4,6 +4,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
+import NavButton from '@/Components/NavButton.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import SearchSlideOver from '@/Components/SearchSlideOver.vue';
 import {useSearchStore} from "../store/search.store";
@@ -165,12 +166,9 @@ const displayDialog = () => {
                                 </NavLink>
                                 <Dropdown width="48">
                                     <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button type="button"
-                                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                                Konspekty
-                                            </button>
-                                        </span>
+                                        <NavButton :active="route().current('materials.tag')">
+                                            Konspekty
+                                        </NavButton>
                                     </template>
                                     <template #content>
                                         <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
