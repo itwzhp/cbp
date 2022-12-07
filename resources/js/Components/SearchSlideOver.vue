@@ -12,52 +12,52 @@ import MaterialMiniCard from '@/Components/MaterialMiniCard.vue';
 import Spinner from '@/Components/Spinner.vue';
 
 const store = useSearchStore();
-let scrollContent;
+// let scrollContent;
 
-const addListener = () => {
-  scrollContent = document.getElementById('infinite-scroll');
-  scrollContent.addEventListener('scroll', handleScroll);
-}
+// const addListener = () => {
+//   scrollContent = document.getElementById('infinite-scroll');
+//   scrollContent.addEventListener('scroll', handleScroll);
+// }
 
-const removeListener = () => {
-  if (scrollContent) {
-    scrollContent.removeEventListener('scroll', handleScroll);
-    scrollContent = null;
-  }
-}
+// const removeListener = () => {
+//   if (scrollContent) {
+//     scrollContent.removeEventListener('scroll', handleScroll);
+//     scrollContent = null;
+//   }
+// }
 
-const handleScroll = () => {
-  if (scrollContent.scrollTop + scrollContent.clientHeight == scrollContent.scrollHeight) {
-    console.log("[scroll event] load next page...");
-    store.getNextPage();
-  }
-}
+// const handleScroll = () => {
+//   if (scrollContent.scrollTop + scrollContent.clientHeight == scrollContent.scrollHeight) {
+//     console.log("[scroll event] load next page...");
+//     store.getNextPage();
+//   }
+// }
 
-onMounted(() => {
-  watchEffect(() => {
-    const data = store.getShowDialog;
-    setTimeout(() => {
-      if (data) {
-        addListener();
-      } else {
-        removeListener();
-      }
-    });
-  })
-})
+// onMounted(() => {
+//   watchEffect(() => {
+//     const data = store.getShowDialog;
+//     setTimeout(() => {
+//       if (data) {
+//         addListener();
+//       } else {
+//         removeListener();
+//       }
+//     });
+//   })
+// })
 
-onUnmounted(() => {
-  watchEffect(() => {});
-})
+// onUnmounted(() => {
+//   watchEffect(() => {});
+// })
 
 const form = useForm({
   search: store.getSearchInput,
 });
 
 const submit = () => {
-  if (scrollContent) {
-    scrollContent.scrollTop = 0;
-  }
+  // if (scrollContent) {
+  //   scrollContent.scrollTop = 0;
+  // }
   store.getData(form.search);
 };
 
@@ -96,7 +96,7 @@ const hideDialog = () => {
                           Wciśnij Enter żeby zatwierdzić, wciśnij ESC żeby wyjść
                         </div>
                       </form>
-                      <div id="infinite-scroll" style="overflow:auto; max-height: 400px;" class="mt-5 mb-5 grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                      <!-- <div id="infinite-scroll" style="overflow:auto; max-height: 400px;" class="mt-5 mb-5 grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         <MaterialMiniCard
                           v-for="(item, index) in store.getSearchData" :key="index"
                           :item="item"
@@ -104,7 +104,7 @@ const hideDialog = () => {
                       </div>
                       <div v-if="store.getLoading" class="text-center pt-2">
                         <Spinner />
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </DialogPanel>

@@ -7,6 +7,7 @@ const defaultValues = {
     showDialog: false,
     data: [],
     page: null,
+    refreshedAt: null,
     hasNextPage: false,
     loading: false,
 };
@@ -19,6 +20,8 @@ export const useSearchStore = defineStore("search", {
         getSearchInput: (state) => state.input,
         getShowDialog: (state) => state.showDialog,
         getSearchData: (state) => state.data,
+        getHasNextPage: (state) => state.hasNextPage,
+        getRefreshedAt: (state) => state.refreshedAt,
         getLoading: (state) => state.loading,
     },
     actions: {
@@ -44,6 +47,7 @@ export const useSearchStore = defineStore("search", {
                 this.page = request.data.meta.page;
                 this.hasNextPage = request.data.meta.hasNextPage;
                 this.data = request.data.content;
+                this.refreshedAt = new Date();
             } catch (error) {
                 this.loading = false;
             }

@@ -18,7 +18,7 @@ const displayDialog = () => {
 
 <template>
     <div>
-        <div class="min-h-screen bg-gradient-to-b from-white-300 via-white-200 to-white-100">
+        <div class="bg-gradient-to-b from-white-300 via-white-200 to-white-100">
             <nav class="border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -132,7 +132,7 @@ const displayDialog = () => {
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main id="main-content" style="height: calc(100vh - 137px); overflow: auto">
                 <slot />
             </main>
         </div>
