@@ -1,18 +1,18 @@
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import SearchSlideOver from '@/Components/SearchSlideOver.vue';
-import { useSearchStore } from "../store/search.store";
-import { Link } from '@inertiajs/inertia-vue3';
+import {useSearchStore} from "../store/search.store";
+import {Link} from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
 const store = useSearchStore();
 const displayDialog = () => {
-  store.displayDialog();
+    store.displayDialog();
 }
 </script>
 
@@ -25,30 +25,30 @@ const displayDialog = () => {
                     <!-- Primary Navigation Menu -->
                     <div class="flex items-center justify-between border-gray-100 py-6 md:justify-start md:space-x-10">
                         <div class="hidden sm:flex justify-start lg:w-0 lg:flex-1">
-                            <Link class="dark:text-gray-500">
-                                <font-awesome-icon icon="fa-solid fa-repeat" class="mr-1" />
-                                Zmień serwis
-                            </Link>
                         </div>
                         <div class="-my-2 -mr-2">
-                            <Link :href="route('materials.index')">
-                                <ApplicationLogo class="block h-14 w-auto" />
+                            <Link :href="route('welcome')">
+                                <ApplicationLogo class="block h-14 w-auto"/>
                             </Link>
                         </div>
                         <div class="hidden sm:flex items-center justify-end md:flex md:flex-1 lg:w-0">
                             <div class="ml-3 relative">
                                 <div class="flex space-x-4">
                                     <span @click="displayDialog()" class="dark:text-gray-500 cursor-pointer">
-                                        <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                                        <font-awesome-icon icon="fa-solid fa-magnifying-glass"/>
                                         Wyszukaj
                                     </span>
                                     <Dropdown align="right" width="48" v-if="$page.props.auth.user">
                                         <template #trigger>
                                             <span class="inline-flex rounded-md">
-                                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                                <button type="button"
+                                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                                     {{ $page.props.auth.user.name }}
-                                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                         viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd"
+                                                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                              clip-rule="evenodd"/>
                                                     </svg>
                                                 </button>
                                             </span>
@@ -59,17 +59,26 @@ const displayDialog = () => {
                                             </DropdownLink>
                                         </template>
                                     </Dropdown>
-                                    <Link v-if="!$page.props.auth.user" :href="route('login')" class="dark:text-gray-500">Zaloguj się</Link>
+                                    <Link v-if="!$page.props.auth.user" :href="route('login')"
+                                          class="dark:text-gray-500">Zaloguj się
+                                    </Link>
                                 </div>
 
                             </div>
                         </div>
                         <!-- Hamburger -->
                         <div class="-mr-2 flex items-center sm:hidden">
-                            <button @click="showingNavigationDropdown = ! showingNavigationDropdown" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                            <button @click="showingNavigationDropdown = ! showingNavigationDropdown"
+                                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                                    <path :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    <path
+                                        :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 6h16M4 12h16M4 18h16"/>
+                                    <path
+                                        :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"/>
                                 </svg>
                             </button>
                         </div>
@@ -77,18 +86,54 @@ const displayDialog = () => {
                 </div>
 
                 <!-- Responsive Navigation Menu -->
-                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
+                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}"
+                     class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink @click="displayDialog()">
-                            <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                            <font-awesome-icon icon="fa-solid fa-magnifying-glass"/>
                             Wyszukaj
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('materials.index')" :active="route().current('materials.index')">
+                        <ResponsiveNavLink :href="route('materials.index')"
+                                           :active="route().current('materials.index')">
                             Materiały
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
+                        <Dropdown width="48">
+                            <template #trigger>
+                                <span class="inline-flex rounded-md">
+                                    <button type="button"
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                        Konspekty
+                                    </button>
+                                </span>
+                            </template>
+                            <template #content>
+                                <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
+                                                   :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
+                                    Kształceniowe
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
+                                                   :active="route().current('materials.tag', {tag: '2-konspekt-ksztalceniowy'})">
+                                    Kształceniowe
+                                </ResponsiveNavLink>
+                            </template>
+                        </Dropdown>
+
+                        <ResponsiveNavLink :href="route('materials.tag', '2-program')"
+                                           :active="route().current('materials.tag', {tag: '2-program'})">
+                            Program/plan
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('materials.tag', '2-propozycja-programowa')"
+                                           :active="route().current('materials.tag', {tag: '2-propozycja-programowa'})">
+                            Propozycje programowe
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('materials.tag', '2-poradnik')"
+                                           :active="route().current('materials.tag', {tag: '2-poradnik'})">
+                            Poradniki
+                        </ResponsiveNavLink>
+
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -127,16 +172,16 @@ const displayDialog = () => {
             <!-- Page Heading -->
             <header class="bg-white shadow" v-if="$slots.header">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
+                    <slot name="header"/>
                 </div>
             </header>
 
             <!-- Page Content -->
             <main id="main-content" style="height: calc(100vh - 137px); overflow: auto">
-                <slot />
+                <slot/>
             </main>
         </div>
 
     </div>
-    <SearchSlideOver />
+    <SearchSlideOver/>
 </template>

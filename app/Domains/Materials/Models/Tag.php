@@ -4,10 +4,13 @@ namespace App\Domains\Materials\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 /**
  * @property int           id
  * @property string        name
+ * @property string|null   slug
  * @property int           taxonomy_id
  * @property int|null      parent_id
  * @property int|null      wp_id
@@ -18,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Tag extends Model
 {
+    use HasSlug;
+
     protected $fillable = [
         'name',
         'taxonomy_id',
@@ -33,5 +38,12 @@ class Tag extends Model
     public function parent(): BelongsTo
     {
         return $this->belongsTo(__CLASS__, 'parent_id');
+    }
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom(['taxonomy_id', 'name'])
+            ->saveSlugsTo('slug');
     }
 }

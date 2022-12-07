@@ -2,6 +2,7 @@
 namespace App\Console;
 
 use App\Domains\Files\Commands\LinkWpFilesStorageCommand;
+use App\Domains\Materials\Commands\RegenerateSlugsCommand;
 use App\Domains\Migration\Commands\PostsMigrationCommand;
 use App\Domains\Migration\Commands\RefreshCommand;
 use App\Domains\Migration\Commands\TagsMigrationCommand;
@@ -19,6 +20,7 @@ class Kernel extends ConsoleKernel
         WpImportCommand::class,
         RefreshCommand::class,
         LinkWpFilesStorageCommand::class,
+        RegenerateSlugsCommand::class,
     ];
 
     protected function schedule(Schedule $schedule)
