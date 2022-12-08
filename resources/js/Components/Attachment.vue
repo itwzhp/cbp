@@ -5,7 +5,7 @@ const props = defineProps({
 })
 
 const mimeToIcon = (mime) => {
-    switch (mime){
+    switch (mime) {
         case 'application/pdf':
             return 'fa-file-pdf';
         case 'image/png':
@@ -31,13 +31,44 @@ const mimeToIcon = (mime) => {
     }
 }
 
+const details = {
+    copies: 'Liczba kopii',
+    print_color: 'Kolor wydruku',
+    thickness: 'Grubość kartki',
+    size: 'Wielkość kartki',
+    paper_color: 'Kolor papieru',
+    element: 'Element zajęć',
+    comment: 'Uwagi',
+}
+
+const presentDetails = (attachment) => {
+    let present = {};
+
+    for (let detail in details){
+        if (attachment[detail])
+            present[detail] = attachment[detail];
+    }
+
+    return present;
+}
+
 </script>
 <template>
-    <div>
-        <a :href="this.attachment.url" target="_blank">
-            <h5><i class="fa-regular" :class="mimeToIcon(this.attachment.mime)"></i> {{ this.attachment.name }}</h5>
-        </a>
-        <div>{{ this.attachment }}</div>
+    <div class="flex items-start mb-3">
+        <div class="p-3 rounded-full bg-gray-200">
+            <i class="fa-regular" :class="mimeToIcon(this.attachment.mime)"></i>
+        </div>
+        <div class="pl-3">
+            <div class="flex">
+                <h5 class="font-semibold mr-5">{{ this.attachment.name }}</h5>
+                <a :href="this.attachment.url" target="_blank">Pobierz</a>
+            </div>
+            <div class="flex gap-4 text-sm">
+                <div v-for="(detail, key) in presentDetails(attachment)">
+                    <span class="font-semibold">{{ details[key] }}:</span> {{ detail }}
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 

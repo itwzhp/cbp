@@ -14,14 +14,16 @@ import Attachment from "@/Components/Attachment.vue";
             </h2>
             <div v-html="$page.props.material.content"></div>
 
-            <div>
-                <h4 class="mt-3">Załączniki</h4>
+            <div class="mt-5">
+                <div class="flex justify-between content-center items-center">
+                    <h4 class="text-lg font-semibold mb-2">Załączniki do wydruku</h4>
+                    <a :href="route('materials.download', $page.props.material.slug)">
+                        <i class="fa fa-download"></i> Pobierz wszystkie załączniki
+                    </a>
+                </div>
                 <Attachment v-for="attachment in $page.props.material.attachments"
                             :attachment="attachment"></Attachment>
 
-                <a :href="route('materials.download', $page.props.material.slug)">
-                    <i class="fa fa-download"></i> Pobierz wszystkie załączniki
-                </a>
             </div>
 
         </template>
