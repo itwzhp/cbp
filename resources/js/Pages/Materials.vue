@@ -6,18 +6,15 @@ import { useSearchStore } from "../store/search.store";
 import MaterialCard from "@/Components/MaterialCard.vue";
 import { watchEffect } from "@vue/runtime-core";
 import Spinner from "@/Components/Spinner.vue";
+import { usePage } from '@inertiajs/inertia-vue3'
 
-const tag = route().params.tag;
-console.log(route().params);
-
+const tag = usePage().props.value.tag;
 const store = useSearchStore();
-if (!store.getSearchData.length || (!tag && store.getSearchData.length)) {
-  store.getData();
-}
 
-if (tag) {
-  store.getData(null, [tag]);
-}
+// if (!store.getSearchData.length) {
+//   store.getData();
+// }
+store.getData(null, tag ? [tag] : null);
 
 let scrollContent;
 
