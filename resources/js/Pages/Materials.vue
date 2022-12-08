@@ -7,9 +7,16 @@ import MaterialCard from "@/Components/MaterialCard.vue";
 import { watchEffect } from "@vue/runtime-core";
 import Spinner from "@/Components/Spinner.vue";
 
+const tag = route().params.tag;
+console.log(route().params);
+
 const store = useSearchStore();
-if (!store.getSearchData.length) {
+if (!store.getSearchData.length || (!tag && store.getSearchData.length)) {
   store.getData();
+}
+
+if (tag) {
+  store.getData(null, [tag]);
 }
 
 let scrollContent;

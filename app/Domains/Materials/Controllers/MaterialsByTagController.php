@@ -9,8 +9,8 @@ class MaterialsByTagController extends Controller
 {
     public function __invoke(Tag $tag)
     {
-        return Inertia::render('Material')->with([
-            'tag' => $tag->slug,
+        return Inertia::render('Materials')->with([
+            'tag' => $tag->id
         ]);
     }
 }

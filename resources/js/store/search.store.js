@@ -31,15 +31,21 @@ export const useSearchStore = defineStore("search", {
         hideDialog() {
             this.showDialog = false;
         },
-        async getData(input) {
+        async getData(input, tagIds) {
             this.loading = true;
             this.input = input;
             this.data = [];
             this.page = null;
             this.hasNextPage = false;
-            const params = new URLSearchParams();
-            if (input?.length >= 3) {
-                params.append("search", input);
+            const params = {
+                tags: null,
+                search: null
+            }
+            if (tagIds?.length) {
+                this.input = null;
+                params.tags = tagIds;
+            } else if (input?.length >= 3) {
+                params.search = input;
             }
             try {
                 const request = await axios.get(searchUrl, { params });
