@@ -4,6 +4,7 @@ import { defineStore } from "pinia";
 
 const defaultValues = {
     input: null,
+    tagIds: null,
     showDialog: false,
     data: [],
     page: null,
@@ -43,6 +44,7 @@ export const useSearchStore = defineStore("search", {
             }
             if (tagIds?.length) {
                 this.input = null;
+                this.tagIds = tagIds;
                 params.tags = tagIds;
             } else if (input?.length >= 3) {
                 params.search = input;
@@ -61,9 +63,16 @@ export const useSearchStore = defineStore("search", {
         async getNextPage() {
             if (!this.loading && this.getHasNextPage) {
                 this.loading = true;
-                const params = new URLSearchParams([["page", String(this.page + 1)]]);
+                const params = {
+                    page: String(this.page + 1),
+                    search: null,
+                    tags: null
+                }
                 if (this.input?.length >= 3) {
-                    params.append("search", this.input);
+                    params.search = this.input;
+                }
+                if (this.tagIds?.length) {
+                    params.tags = this.tagIds;
                 }
                 try {
                     const request = await axios.get(searchUrl, { params });
