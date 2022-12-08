@@ -31,26 +31,35 @@ const mimeToIcon = (mime) => {
     }
 }
 
-const details = {
-    copies: 'Liczba kopii',
-    print_color: 'Kolor wydruku',
-    thickness: 'Grubość kartki',
-    size: 'Wielkość kartki',
-    paper_color: 'Kolor papieru',
-    element: 'Element zajęć',
-    comment: 'Uwagi',
-}
+const details = new Map([
+    ['copies', 'Liczba kopii'],
+    ['print_color', 'Kolor wydruku'],
+    ['thickness', 'Grubość kartki'],
+    ['size', 'Wielkość kartki'],
+    ['paper_color', 'Kolor papieru'],
+    ['element', 'Element zajęć'],
+    ['comment', 'Uwagi'],
+]);
+// const details = {
+//     copies: 'Liczba kopii',
+//     print_color: 'Kolor wydruku',
+//     thickness: 'Grubość kartki',
+//     size: 'Wielkość kartki',
+//     paper_color: 'Kolor papieru',
+//     element: 'Element zajęć',
+//     comment: 'Uwagi',
+// }
 
-const presentDetails = (attachment) => {
-    let present = {};
+// const presentDetails = (attachment) => {
+//     let present = {};
 
-    for (let detail in details){
-        if (attachment[detail])
-            present[detail] = attachment[detail];
-    }
+//     for (let detail in details){
+//         if (attachment[detail])
+//             present[detail] = attachment[detail];
+//     }
 
-    return present;
-}
+//     return present;
+// }
 
 </script>
 <template>
@@ -64,9 +73,16 @@ const presentDetails = (attachment) => {
                 <a :href="this.attachment.url" target="_blank">Pobierz</a>
             </div>
             <div class="flex gap-4 text-sm">
-                <div v-for="(detail, key) in presentDetails(attachment)">
-                    <span class="font-semibold">{{ details[key] }}:</span> {{ detail }}
-                </div>
+                <template v-for="(detail, key) in Object.keys(attachment)" :key="key">
+                    <div v-if="details.get(detail) && attachment[detail]">
+                         <span class="font-semibold">{{details.get(detail)}}:</span> {{attachment[detail]}}
+                    </div>
+                </template>
+                <!-- <div class="flex gap-4 text-sm">
+                    <div v-for="(detail, key) in presentDetails(attachment)">
+                        <span class="font-semibold">{{ details[key] }}:</span> {{ detail }}
+                    </div>
+                </div> -->
             </div>
         </div>
     </div>

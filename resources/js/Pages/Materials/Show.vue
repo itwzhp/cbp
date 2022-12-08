@@ -21,8 +21,8 @@ import Attachment from "@/Components/Attachment.vue";
                         <i class="fa fa-download"></i> Pobierz wszystkie załączniki
                     </a>
                 </div>
-                <Attachment v-for="attachment in $page.props.material.attachments"
-                            :attachment="attachment"></Attachment>
+                <Attachment v-for="(attachment, key) in $page.props.material.attachments"
+                            :key="key" :attachment="attachment"></Attachment>
 
             </div>
 
