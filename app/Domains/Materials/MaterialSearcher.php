@@ -14,8 +14,11 @@ class MaterialSearcher
     const MODE_OR = 'or';
     const MODE_AND = 'and';
     const MODE_ANDOR = 'andor';
+
     protected string $search;
+
     protected Collection $tags;
+
     protected string $mode = self::MODE_OR;
 
     public static function make(): self

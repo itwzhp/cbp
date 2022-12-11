@@ -2,7 +2,6 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Domains\Materials\Models\Taxonomy;
 use App\Domains\Users\Roles\RoleHelper;
 use Tests\TestCase;
 

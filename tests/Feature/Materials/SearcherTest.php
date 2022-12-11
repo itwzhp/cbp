@@ -10,15 +10,21 @@ use Tests\TestCase;
 class SearcherTest extends TestCase
 {
     protected Material $material;
+
     protected Taxonomy $tax1;
+
     protected Taxonomy $tax2;
+
     protected Taxonomy $unusedTaxonomy;
 
     /** @var Tag[] */
     protected array $presentTags1;
+
     /** @var Tag[] */
     protected array $presentTags2;
+
     protected Tag $unusedTagFromTax1;
+
     protected Tag $unusedTagFromTax2;
 
     protected function setUp(): void

@@ -21,7 +21,6 @@ trait MaterialConcern
 
     public function createTaxonomy(int $tagsCount = 1, array $params = []): Taxonomy
     {
-
         /** @var Taxonomy $taxonomy */
         $taxonomy = Taxonomy::factory()->create();
 
