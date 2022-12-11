@@ -5,6 +5,7 @@ use App\Domains\Files\Enums\PrintColorEnum;
 use App\Domains\Files\Enums\SizeEnum;
 use App\Domains\Files\Enums\ThicknessEnum;
 use App\Domains\Materials\Models\Material;
+use App\Helpers\FilesystemsHelper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -46,7 +47,7 @@ class Attachment extends Model
 
     public function url(): string
     {
-        return Storage::url($this->path);
+        return Storage::disk(FilesystemsHelper::PUBLIC)->url($this->path);
     }
 
     public static function fromPath(string $path): ?self
@@ -69,8 +70,8 @@ class Attachment extends Model
         return $attachment;
     }
 
-    public function getAbsolutePath(): string
+    public function getContents(): string
     {
-        return Storage::path($this->path);
+        return Storage::disk(FilesystemsHelper::PUBLIC)->get($this->path);
     }
 }

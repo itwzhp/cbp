@@ -20,7 +20,6 @@ Route::middleware('guest')->group(function () {
     Route::any('/callback', [MicrosoftLoginController::class, 'callback'])->name('ms.redirect');
 });
 
-
 Route::middleware('auth')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
         ->name('verification.notice');

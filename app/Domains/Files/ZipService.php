@@ -3,14 +3,23 @@ namespace App\Domains\Files;
 
 use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\Models\Material;
+use App\Helpers\FilesystemsHelper;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 use ZipArchive;
 
 class ZipService
 {
+    protected Filesystem $filesystem;
+
+    public function __construct(?Filesystem $filesystem)
+    {
+        $this->filesystem = Storage::disk(FilesystemsHelper::PUBLIC);
+    }
+
     public function ensureZipExists(Material $material): bool
     {
-        if (Storage::exists($this->path($material))) {
+        if ($this->filesystem->exists($this->path($material))) {
             return true;
         }
 
@@ -30,15 +39,20 @@ class ZipService
 
     protected function create(Material $material): void
     {
-        $filename = Storage::path($this->path($material));
+        $tmpFilename = tempnam('/tmp/', '');
 
         $zip = new ZipArchive();
-        $zip->open($filename, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+        $zip->open($tmpFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
         /** @var Attachment $attachment */
         foreach ($material->attachments as $attachment) {
-            $zip->addFile($attachment->getAbsolutePath(), basename($attachment->path));
+            $zip->addFromString(
+                basename($attachment->path),
+                $attachment->getContents()
+            );
         }
         $zip->close();
+
+        $this->filesystem->put($this->path($material), file_get_contents($tmpFilename));
     }
 }

@@ -32,6 +32,5 @@ class MicrosoftLoginController extends Controller
 
     protected function register(MicrosoftUser $msUser)
     {
-
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Helpers\FilesystemsHelper;
+
 return [
 
     /*
@@ -56,7 +58,7 @@ return [
             'throw'                   => false,
         ],
 
-        'wp_local' => [
+        FilesystemsHelper::LOCAL => [
             'driver'     => 'local',
             'root'       => storage_path('wp'),
             'url'        => env('APP_URL') . '/wp',
@@ -64,6 +66,25 @@ return [
             'throw'      => false,
         ],
 
+        FilesystemsHelper::PUBLIC => [
+            'driver'            => 'azure',
+            'name'              => env('AZURE_STORAGE_NAME'),
+            'key'               => env('AZURE_STORAGE_KEY'),
+            'container'         => env('AZURE_STORAGE_CONTAINER_PUBLIC'),
+            'url'               => env('AZURE_STORAGE_URL'),
+            'prefix'            => null,
+            'connection_string' => env('AZURE_STORAGE_CONNECTION_STRING'),
+        ],
+
+        FilesystemsHelper::PRIVATE => [
+            'driver'            => 'azure',
+            'name'              => env('AZURE_STORAGE_NAME'),
+            'key'               => env('AZURE_STORAGE_KEY'),
+            'container'         => env('AZURE_STORAGE_CONTAINER_PRIVATE'),
+            'url'               => env('AZURE_STORAGE_URL'),
+            'prefix'            => null,
+            'connection_string' => env('AZURE_STORAGE_CONNECTION_STRING'),
+        ],
     ],
 
     /*
