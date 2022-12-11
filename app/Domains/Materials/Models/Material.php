@@ -2,16 +2,20 @@
 namespace App\Domains\Materials\Models;
 
 use App\Domains\Files\Models\Attachment;
+use App\Domains\Materials\Factories\MaterialFactory;
 use App\Domains\Materials\States\MaterialState;
 use App\Domains\Users\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\ModelStates\HasStates;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 /**
  * @property int                          id
@@ -37,6 +41,8 @@ use Spatie\ModelStates\HasStates;
 class Material extends Model
 {
     use HasStates;
+    use HasFactory;
+    use HasSlug;
 
     protected $dates = [
         'published_at',
@@ -126,5 +132,17 @@ class Material extends Model
             'title'       => $this->title,
             'description' => $this->description,
         ];
+    }
+
+    protected static function newFactory(): MaterialFactory
+    {
+        return MaterialFactory::new();
+    }
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
     }
 }

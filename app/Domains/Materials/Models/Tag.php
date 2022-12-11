@@ -1,7 +1,9 @@
 <?php
 namespace App\Domains\Materials\Models;
 
+use App\Domains\Materials\Factories\TagFactory;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Sluggable\HasSlug;
@@ -22,9 +24,11 @@ use Spatie\Sluggable\SlugOptions;
 class Tag extends Model
 {
     use HasSlug;
+    use HasFactory;
 
     protected $fillable = [
         'name',
+        'slug',
         'taxonomy_id',
         'wp_id',
         'parent_id',
@@ -45,5 +49,10 @@ class Tag extends Model
         return SlugOptions::create()
             ->generateSlugsFrom(['taxonomy_id', 'name'])
             ->saveSlugsTo('slug');
+    }
+
+    protected static function newFactory(): TagFactory
+    {
+        return new TagFactory();
     }
 }
