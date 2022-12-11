@@ -5,16 +5,15 @@ use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\Models\Material;
 use App\Helpers\FilesystemsHelper;
 use Illuminate\Contracts\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Storage;
 use ZipArchive;
 
 class ZipService
 {
     protected Filesystem $filesystem;
 
-    public function __construct(?Filesystem $filesystem)
+    public function __construct()
     {
-        $this->filesystem = Storage::disk(FilesystemsHelper::PUBLIC);
+        $this->filesystem = FilesystemsHelper::getPublic();
     }
 
     public function ensureZipExists(Material $material): bool

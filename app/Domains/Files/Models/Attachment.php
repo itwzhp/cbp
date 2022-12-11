@@ -47,7 +47,7 @@ class Attachment extends Model
 
     public function url(): string
     {
-        return Storage::disk(FilesystemsHelper::PUBLIC)->url($this->path);
+        return FilesystemsHelper::getPublic()->url($this->path);
     }
 
     public static function fromPath(string $path): ?self
@@ -72,6 +72,6 @@ class Attachment extends Model
 
     public function getContents(): string
     {
-        return Storage::disk(FilesystemsHelper::PUBLIC)->get($this->path);
+        return FilesystemsHelper::getPublic()->get($this->path);
     }
 }

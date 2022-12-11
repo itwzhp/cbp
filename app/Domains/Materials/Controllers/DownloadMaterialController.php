@@ -4,7 +4,6 @@ namespace App\Domains\Materials\Controllers;
 use App\Domains\Files\ZipService;
 use App\Domains\Materials\Models\Material;
 use App\Helpers\FilesystemsHelper;
-use Illuminate\Support\Facades\Storage;
 
 class DownloadMaterialController
 {
@@ -16,7 +15,7 @@ class DownloadMaterialController
 
         $zipService->ensureZipExists($material);
 
-        return Storage::disk(FilesystemsHelper::PUBLIC)
+        return FilesystemsHelper::getPublic()
             ->download($zipService->path($material));
     }
 }
