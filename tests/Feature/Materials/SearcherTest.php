@@ -5,6 +5,7 @@ use App\Domains\Materials\MaterialSearcher;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Models\Tag;
 use App\Domains\Materials\Models\Taxonomy;
+use Illuminate\Database\Eloquent\Collection;
 use Tests\TestCase;
 
 class SearcherTest extends TestCase
@@ -94,7 +95,7 @@ class SearcherTest extends TestCase
         $materials = $query->get();
 
         // then
-        $this->assertCount(1, $materials->where('id', $this->material->id));
+        $this->assertMaterialIsPresentIn($materials);
     }
 
     /** @test */
@@ -112,6 +113,16 @@ class SearcherTest extends TestCase
         $materials = $query->get();
 
         // then
+        $this->assertMaterialIsNotPresentIn($materials);
+    }
+
+    protected function assertMaterialIsPresentIn(Collection $materials)
+    {
+        $this->assertCount(1, $materials->where('id', $this->material->id));
+    }
+
+    protected function assertMaterialIsNotPresentIn(Collection $materials)
+    {
         $this->assertCount(0, $materials->where('id', $this->material->id));
     }
 }
