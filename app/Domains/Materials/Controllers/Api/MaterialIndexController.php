@@ -1,11 +1,10 @@
 <?php
 namespace App\Domains\Materials\Controllers\Api;
 
-use App\Domains\Materials\Models\Material;
+use App\Domains\Materials\MaterialSearcher;
 use App\Domains\Materials\Requests\Api\IndexRequest;
 use App\Domains\Materials\Transformers\DefaultMaterialTransformer;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Spatie\Fractalistic\ArraySerializer;
 use Spatie\Fractalistic\Fractal;
 
@@ -13,10 +12,11 @@ class MaterialIndexController extends Controller
 {
     public function __invoke(IndexRequest $request)
     {
-        /** @var LengthAwarePaginator $materials */
-        $materials = Material::search($request->input('search'))
-            ->published()
-            ->forTags($request->input('tags'))
+        $materials = MaterialSearcher::make()
+            ->search($request->input('search'))
+            ->withTags($request->input('tags', []))
+            ->setMode($request->input('mode', MaterialSearcher::MODE_OR))
+            ->query()
             ->with('owner', 'tags')
             ->orderBy('published_at', 'desc')
             ->paginate(15);

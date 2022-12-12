@@ -11,11 +11,19 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class MaterialSearcher
 {
-    const MODE_OR = 'or';
-    const MODE_AND = 'and';
-    const MODE_ANDOR = 'andor';
+    public const MODE_OR = 'or';
+    public const MODE_AND = 'and';
+    public const MODE_ANDOR = 'andor';
+    public const SQL_SUBQUERY = <<<'EOL'
+(exists(
+        select *
+        from material_tag
+        where material_id = materials.id
+          and (?)
+    ))
+EOL;
 
-    protected string $search;
+    protected ?string $search;
 
     protected Collection $tags;
 
@@ -26,7 +34,7 @@ class MaterialSearcher
         return new MaterialSearcher();
     }
 
-    public function search(string $string): self
+    public function search(?string $string): self
     {
         $this->search = $string;
 
@@ -86,17 +94,17 @@ class MaterialSearcher
         }
 
         if ($this->isOrMode()) {
-            return $this->addOrClause($query, $this->tags);
+            return $this->addSubquery($query, $this->tags, 'or');
         }
 
         if ($this->isAndMode()) {
-            return $this->addAndClause($query, $this->tags);
+            return $this->addSubquery($query, $this->tags, 'and');
         }
 
         $tagsGrouped = $this->tags->groupBy('taxonomy_id');
 
         foreach ($tagsGrouped as $group) {
-            $query = $this->addOrClause($query, $group);
+            $query = $this->addSubquery($query, $group, 'or');
         }
 
         return $query;
@@ -117,27 +125,16 @@ class MaterialSearcher
         return $this->mode === static::MODE_ANDOR;
     }
 
-    protected function addOrClause(Builder $query, Collection $tags): Builder
+    protected function addSubquery(Builder $query, Collection $tags, string $operator = 'or'): Builder
     {
-        return $query->where(function (Builder $q) use ($tags) {
-            /** @var Tag $tag */
-            foreach ($tags as $tag) {
-                $q->orWhereHas('tags', function (Builder $tq) use ($tag) {
-                    $tq->where('id', $tag->id);
-                });
-            }
-        });
-    }
+        if (!in_array(trim(strtolower($operator)), ['and', 'or'])) {
+            throw new \InvalidArgumentException('Wrong operator');
+        }
 
-    protected function addAndClause(Builder $query, Collection $tags): Builder
-    {
-        return $query->where(function (Builder $q) use ($tags) {
-            /** @var Tag $tag */
-            foreach ($tags as $tag) {
-                $q->whereHas('tags', function (Builder $tq) use ($tag) {
-                    $tq->where('id', $tag->id);
-                });
-            }
-        });
+        $tagsOrString = $tags->map(function (Tag $tag) {
+            return 'tag_id = ' . $tag->id;
+        })->implode(" {$operator} ");
+
+        return $query->whereRaw(str_replace('?', $tagsOrString, static::SQL_SUBQUERY));
     }
 }

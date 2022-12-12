@@ -124,12 +124,12 @@ class SearcherTest extends TestCase
             ->inAndOrMode()
             ->withTags([
                 $this->presentTags1[0]->id,
-                $this->presentTags1[1]->id,
+                $this->presentTags2[0]->id,
                 $this->unusedTagFromTax1->id,
             ])
             ->query();
 
-        dd($query->toSql());
+        dd($query->toSql(), $query->getBindings(), $query->count());
 
         // when
 
