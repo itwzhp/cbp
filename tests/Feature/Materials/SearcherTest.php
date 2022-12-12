@@ -116,6 +116,26 @@ class SearcherTest extends TestCase
         $this->assertMaterialIsNotPresentIn($materials);
     }
 
+    /** @test */
+    public function it_tests_andor_mode()
+    {
+        // given
+        $query = MaterialSearcher::make()
+            ->inAndOrMode()
+            ->withTags([
+                $this->presentTags1[0]->id,
+                $this->presentTags1[1]->id,
+                $this->unusedTagFromTax1->id,
+            ])
+            ->query();
+
+        dd($query->toSql());
+
+        // when
+
+        // then
+    }
+
     protected function assertMaterialIsPresentIn(Collection $materials)
     {
         $this->assertCount(1, $materials->where('id', $this->material->id));

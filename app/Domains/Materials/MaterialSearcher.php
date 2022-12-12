@@ -71,6 +71,73 @@ class MaterialSearcher
 
     public function query(): Builder
     {
-        return Material::query();
+        $query = Material::query();
+
+        if (!empty($this->search)) {
+            $query = $query->search($this->search);
+        }
+
+        if (count($this->tags) === 0) {
+            return $query;
+        }
+
+        if (empty($this->mode)) {
+            $this->mode = static::MODE_OR;
+        }
+
+        if ($this->isOrMode()) {
+            return $this->addOrClause($query, $this->tags);
+        }
+
+        if ($this->isAndMode()) {
+            return $this->addAndClause($query, $this->tags);
+        }
+
+        $tagsGrouped = $this->tags->groupBy('taxonomy_id');
+
+        foreach ($tagsGrouped as $group) {
+            $query = $this->addOrClause($query, $group);
+        }
+
+        return $query;
+    }
+
+    protected function isOrMode(): bool
+    {
+        return $this->mode === static::MODE_OR;
+    }
+
+    protected function isAndMode(): bool
+    {
+        return $this->mode === static::MODE_AND;
+    }
+
+    protected function isAndOrMode(): bool
+    {
+        return $this->mode === static::MODE_ANDOR;
+    }
+
+    protected function addOrClause(Builder $query, Collection $tags): Builder
+    {
+        return $query->where(function (Builder $q) use ($tags) {
+            /** @var Tag $tag */
+            foreach ($tags as $tag) {
+                $q->orWhereHas('tags', function (Builder $tq) use ($tag) {
+                    $tq->where('id', $tag->id);
+                });
+            }
+        });
+    }
+
+    protected function addAndClause(Builder $query, Collection $tags): Builder
+    {
+        return $query->where(function (Builder $q) use ($tags) {
+            /** @var Tag $tag */
+            foreach ($tags as $tag) {
+                $q->whereHas('tags', function (Builder $tq) use ($tag) {
+                    $tq->where('id', $tag->id);
+                });
+            }
+        });
     }
 }
