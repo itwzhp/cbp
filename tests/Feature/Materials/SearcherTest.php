@@ -129,11 +129,31 @@ class SearcherTest extends TestCase
             ])
             ->query();
 
-        dd($query->toSql(), $query->getBindings(), $query->count());
-
         // when
+        $materials = $query->get();
 
         // then
+        $this->assertMaterialIsPresentIn($materials);
+    }
+
+    /** @test */
+    public function it_tests_and_mode()
+    {
+        // given
+        $query = MaterialSearcher::make()
+            ->inAndMode()
+            ->withTags([
+                $this->presentTags1[0]->id,
+                $this->presentTags2[0]->id,
+                $this->unusedTagFromTax1->id,
+            ])
+            ->query();
+
+        // when
+        $materials = $query->get();
+
+        // then
+        $this->assertMaterialIsNotPresentIn($materials);
     }
 
     protected function assertMaterialIsPresentIn(Collection $materials)
