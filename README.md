@@ -2,11 +2,38 @@
 
 ### Coding standards
 
-Running PINT
+Running PINT (linter)
 
 ```shell
 ./vendor/bin/pint
 ```
+
+Test suite
+
+```shell
+./vendor/bin/phpunit
+```
+
+###### Note: 
+For tests to work one must prepare test database:
+1. Create DB called `cbp_test`
+2. Temporary change used db in `.env`, set
+
+   ```dotenv
+    DB_DATABASE=cbp_test
+   ```
+
+3. Migrate and seed the DB:
+    ```shell
+   php artisan migrate
+   php artisan db:seed
+   ```
+4. Set the env back to normal db
+
+   ```dotenv
+    DB_DATABASE=cbp
+   ```
+
 
 ### Local development
 
