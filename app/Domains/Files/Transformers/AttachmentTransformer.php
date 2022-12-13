@@ -12,7 +12,7 @@ class AttachmentTransformer extends TransformerAbstract
             'id'          => $attachment->id,
             'name'        => $attachment->name,
             'mime'        => $attachment->mime,
-            'url'         => $attachment->url(),
+            'url'         => $attachment->downloadUrl(),
             'element'     => $attachment->element,
             'copies'      => $attachment->copies,
             'print_color' => $attachment->print_color,

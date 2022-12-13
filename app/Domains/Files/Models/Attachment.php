@@ -74,4 +74,18 @@ class Attachment extends Model
     {
         return FilesystemsHelper::getPublic()->get($this->path);
     }
+
+    public function downloadUrl(): string
+    {
+        return route('attachments.download', $this);
+    }
+
+    public function incrementDownloads(): self
+    {
+        $this->update([
+            'downloads' => $this->downloads + 1,
+        ]);
+
+        return $this;
+    }
 }

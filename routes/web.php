@@ -1,5 +1,6 @@
 <?php
 
+use App\Domains\Files\Controllers\DownloadAttachmentController;
 use App\Domains\Materials\Controllers\DownloadMaterialController;
 use App\Domains\Materials\Controllers\MaterialsByTagController;
 use App\Domains\Materials\Controllers\MaterialsController;
@@ -17,6 +18,12 @@ Route::prefix('/materials')
         Route::get('/{material:slug}/download', DownloadMaterialController::class)->name('download');
 
         Route::get('/t/{tag:slug}', MaterialsByTagController::class)->name('tag');
+    });
+
+Route::prefix('/attachments')
+    ->as('attachments.')
+    ->group(function () {
+        Route::get('/{attachment}', DownloadAttachmentController::class)->name('download');
     });
 
 Route::get('/dashboard', function () {

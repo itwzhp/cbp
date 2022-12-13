@@ -6,6 +6,7 @@ use App\Domains\Materials\Commands\RegenerateSlugsCommand;
 use App\Domains\Migration\Commands\CopyWpFilesCommand;
 use App\Domains\Migration\Commands\PostsMigrationCommand;
 use App\Domains\Migration\Commands\RefreshCommand;
+use App\Domains\Migration\Commands\RemoveDuplicateAttachmentsCommand;
 use App\Domains\Migration\Commands\TagsMigrationCommand;
 use App\Domains\Migration\Commands\UsersMigrationCommand;
 use App\Domains\Migration\Commands\WpImportCommand;
@@ -23,6 +24,7 @@ class Kernel extends ConsoleKernel
         LinkWpFilesStorageCommand::class,
         RegenerateSlugsCommand::class,
         CopyWpFilesCommand::class,
+        RemoveDuplicateAttachmentsCommand::class,
     ];
 
     protected function schedule(Schedule $schedule)
