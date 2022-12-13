@@ -6,9 +6,6 @@ use App\Domains\Materials\Models\Tag;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
-/**
- * @method-static self search(string $string)
- */
 class MaterialSearcher
 {
     public const MODE_OR = 'or';
@@ -70,11 +67,6 @@ EOL;
         $this->mode = $mode;
 
         return $this;
-    }
-
-    public static function __callStatic(string $name, array $arguments)
-    {
-        return (new self())->$name($arguments);
     }
 
     public function query(): Builder
