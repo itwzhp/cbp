@@ -105,7 +105,7 @@ const displayDialog = () => {
                             Konspekty
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
-                                            :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
+                                           :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
                             &emsp;Kształceniowe
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('materials.tag', '2-program')"
@@ -158,7 +158,7 @@ const displayDialog = () => {
                                     </template>
                                     <template #content>
                                         <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
-                                                        :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
+                                                           :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
                                             Kształceniowe
                                         </ResponsiveNavLink>
                                         <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-programowy')"
@@ -184,6 +184,13 @@ const displayDialog = () => {
                     </div>
                 </div>
             </nav>
+
+            <div v-if="$page.props.flash && $page.props.flash.message">
+                <div class="p-3 my-5 bg-gray-200 max-w-7xl mx-auto"
+                     :class="$page.props.flash.message.class">
+                    {{ $page.props.flash.message }}
+                </div>
+            </div>
 
             <!-- Page Heading -->
             <header class="bg-white shadow" v-if="$slots.header">

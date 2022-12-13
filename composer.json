@@ -18,6 +18,7 @@
         "matthewbdaly/laravel-azure-storage": "^2.0",
         "socialiteproviders/microsoft": "^4.2",
         "spatie/fractalistic": "^2.9",
+        "spatie/laravel-flash": "^1.9",
         "spatie/laravel-fractal": "^6.0",
         "spatie/laravel-model-states": "^2.4",
         "spatie/laravel-permission": "^5.5",

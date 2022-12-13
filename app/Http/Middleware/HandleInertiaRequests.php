@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
@@ -26,16 +25,10 @@ class HandleInertiaRequests extends Middleware
         return parent::version($request);
     }
 
-    /**
-     * Define the props that are shared by default.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return array
-     */
-    public function share(Request $request)
+    public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            'auth' => [
+            'auth'  => [
                 'user' => $request->user(),
             ],
             'ziggy' => function () use ($request) {
@@ -43,6 +36,9 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'flash' => [
+                'message' => session('laravel_flash_message') ?? session('message'),
+            ],
         ]);
     }
 }
