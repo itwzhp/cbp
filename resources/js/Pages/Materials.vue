@@ -14,7 +14,7 @@ const store = useSearchStore();
 // if (!store.getSearchData.length) {
 //   store.getData();
 // }
-store.getData(null, tag ? [tag] : null);
+store.getData(null, tag ? [tag] : []);
 
 let scrollContent;
 

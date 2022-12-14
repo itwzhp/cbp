@@ -1,70 +1,20 @@
 <script setup>
-import { ref, watch, onUnmounted, onMounted } from 'vue'
-import { watchEffect } from '@vue/runtime-core';
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { useForm } from '@inertiajs/inertia-vue3';
-import { useSearchStore } from "../store/search.store";
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import MaterialMiniCard from '@/Components/MaterialMiniCard.vue';
-import Spinner from '@/Components/Spinner.vue';
+  import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+  import { useForm } from '@inertiajs/inertia-vue3';
+  import { useSearchStore } from "../store/search.store";
+  import PrimaryButton from '@/Components/PrimaryButton.vue';
+  import TextInput from '@/Components/TextInput.vue';
+  import InputError from '@/Components/InputError.vue';
+  import Taxonomy from '@/Components/Taxonomy.vue';
 
-const store = useSearchStore();
-// let scrollContent;
+  const store = useSearchStore();
+  store.getTaxonomies().then();
 
-// const addListener = () => {
-//   scrollContent = document.getElementById('infinite-scroll');
-//   scrollContent.addEventListener('scroll', handleScroll);
-// }
-
-// const removeListener = () => {
-//   if (scrollContent) {
-//     scrollContent.removeEventListener('scroll', handleScroll);
-//     scrollContent = null;
-//   }
-// }
-
-// const handleScroll = () => {
-//   if (scrollContent.scrollTop + scrollContent.clientHeight == scrollContent.scrollHeight) {
-//     console.log("[scroll event] load next page...");
-//     store.getNextPage();
-//   }
-// }
-
-// onMounted(() => {
-//   watchEffect(() => {
-//     const data = store.getShowDialog;
-//     setTimeout(() => {
-//       if (data) {
-//         addListener();
-//       } else {
-//         removeListener();
-//       }
-//     });
-//   })
-// })
-
-// onUnmounted(() => {
-//   watchEffect(() => {});
-// })
-
-const form = useForm({
-  search: store.getSearchInput,
-});
-
-const submit = () => {
-  // if (scrollContent) {
-  //   scrollContent.scrollTop = 0;
-  // }
-  store.getData(form.search);
-};
-
-const hideDialog = () => {
-  store.hideDialog();
-}
-
+  const form = useForm({search: store.getSearchInput});
+  const tagSelected = (tag) => store.pushTags([tag]);
+  const tagRemoved = (tag) => store.removeTags([tag]);
+  const submit = () => store.getData(form.search);
+  const hideDialog = () => store.hideDialog();
 </script>
 <template>
     <TransitionRoot as="template" :show="store.getShowDialog">
@@ -96,6 +46,11 @@ const hideDialog = () => {
                           Wciśnij Enter żeby zatwierdzić, wciśnij ESC żeby wyjść
                         </div>
                       </form>
+                      <div>
+                        <template v-for="(item, index) in store.getTaxonomiesData" :key="index">
+                          <Taxonomy @tagSelected="tagSelected($event)" @tagRemoved="tagRemoved($event)" :item="item" :defaultIds="store.getTagIds" />
+                        </template>
+                      </div>
                       <!-- <div id="infinite-scroll" style="overflow:auto; max-height: 400px;" class="mt-5 mb-5 grid xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         <MaterialMiniCard
                           v-for="(item, index) in store.getSearchData" :key="index"

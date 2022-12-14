@@ -1,17 +1,15 @@
 <script setup>
+  const props = defineProps({
+    item: { type: Object, required: true }
+  })
 
-const props = defineProps({
-  item: { type: Object, required: true }
-})
-
-const truncateText = (text, length, suffix) => {
-  if (text.length > length) {
-      return text.substring(0, length) + suffix;
-  } else {
-      return text;
-  }
-};
-
+  const truncateText = (text, length, suffix) => {
+    if (text.length > length) {
+        return text.substring(0, length) + suffix;
+    } else {
+        return text;
+    }
+  };
 </script>
 <template>
     <div class="flex flex-col sm:flex-row sm:max-w-xl rounded-lg bg-white shadow-lg">

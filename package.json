@@ -12,6 +12,7 @@
         "@fortawesome/vue-fontawesome": "^3.0.1",
         "@headlessui/vue": "^1.7.3",
         "@heroicons/vue": "^2.0.13",
+        "@vueform/multiselect": "^2.5.7",
         "@vueuse/core": "^9.2.0",
         "moment": "^2.29.4",
         "pinia": "^2.0.21"
