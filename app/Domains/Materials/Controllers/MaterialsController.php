@@ -3,6 +3,7 @@ namespace App\Domains\Materials\Controllers;
 
 use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Transformers\FullMaterialTransformer;
+use App\Helpers\ComponentsHelper;
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -12,12 +13,12 @@ class MaterialsController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Materials');
+        return Inertia::render(ComponentsHelper::MATERIALS);
     }
 
     public function show(Material $material)
     {
-        return Inertia::render('Materials/Show')
+        return Inertia::render(ComponentsHelper::MATERIALS_SHOW)
             ->with([
                 'material' => fractal($material)
                     ->transformWith(new FullMaterialTransformer())

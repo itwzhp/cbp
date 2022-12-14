@@ -1,6 +1,7 @@
 <?php
 namespace App\Domains\Users\Controllers;
 
+use App\Domains\Users\Events\UserLoggedInViaSocialiteEvent;
 use App\Domains\Users\Exceptions\UnauthorizedException;
 use App\Domains\Users\Models\User;
 use App\Http\Controllers\Controller;
@@ -30,6 +31,8 @@ class MicrosoftLoginController extends Controller
         }
 
         Auth::login($user);
+
+        event(new UserLoggedInViaSocialiteEvent($user));
 
         return redirect('/');
     }

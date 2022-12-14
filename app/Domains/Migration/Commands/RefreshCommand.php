@@ -11,6 +11,9 @@ class RefreshCommand extends Command
     {
         $this->call('migrate:fresh');
         $this->call('db:seed');
-        $this->call('wp:import');
+        $this->call(WpImportCommand::class);
+        $this->call(PostsMigrationCommand::class);
+        $this->call(FixLinksInDescription::class);
+        $this->call(RemoveDuplicateAttachmentsCommand::class);
     }
 }

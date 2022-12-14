@@ -17,6 +17,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string|null first_name
  * @property string|null last_name
  * @property string      email
+ * @property Carbon|null email_verified_at
  * @property string      password
  * @property Carbon      created_at
  * @property Carbon      updated_at
@@ -39,6 +40,7 @@ class User extends Authenticatable
         'last_name',
         'wp_id',
         'created_at',
+        'email_verified_at',
     ];
 
     protected $hidden = [
@@ -62,5 +64,12 @@ class User extends Authenticatable
         }
 
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function getAvatarUrl(): string
+    {
+        return 'https://www.gravatar.com/avatar/'
+            . md5(strtolower(trim($this->email)))
+            . '?s=40';
     }
 }

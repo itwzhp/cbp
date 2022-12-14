@@ -12,6 +12,7 @@ class TagTransformer extends TransformerAbstract
             'id'        => $tag->id,
             'parent_id' => $tag->parent_id,
             'name'      => $tag->name,
+            'slug'      => $tag->slug,
         ];
     }
 }

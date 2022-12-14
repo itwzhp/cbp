@@ -1,17 +1,17 @@
 <?php
 namespace App\Domains\Materials\Controllers;
 
-use App\Domains\Materials\Models\Tag;
+use App\Domains\Users\Models\User;
 use App\Helpers\ComponentsHelper;
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 
-class MaterialsByTagController extends Controller
+class MaterialsByOwnerController extends Controller
 {
-    public function __invoke(Tag $tag)
+    public function __invoke(User $user)
     {
         return Inertia::render(ComponentsHelper::MATERIALS)->with([
-            'tag' => $tag->id,
+            'owner' => $user->id,
         ]);
     }
 }

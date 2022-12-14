@@ -1,6 +1,8 @@
 <?php
 namespace App\Providers;
 
+use App\Domains\Users\Events\UserLoggedInViaSocialiteEvent;
+use App\Domains\Users\Listeners\AdjustUserEmailConfirmationListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -15,11 +17,14 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        Registered::class         => [
+        Registered::class                    => [
             SendEmailVerificationNotification::class,
         ],
-        SocialiteWasCalled::class => [
+        SocialiteWasCalled::class            => [
             MicrosoftExtendSocialite::class . '@handle',
+        ],
+        UserLoggedInViaSocialiteEvent::class => [
+            AdjustUserEmailConfirmationListener::class,
         ],
     ];
 
