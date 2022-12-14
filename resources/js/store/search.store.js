@@ -5,6 +5,7 @@ import { defineStore } from "pinia";
 const defaultValues = {
   input: null,
   tagIds: [],
+  tagMode: 'or',
   showDialog: false,
   data: [],
   taxonomies: [],
@@ -27,7 +28,8 @@ export const useSearchStore = defineStore("search", {
     getRefreshedAt: (state) => state.refreshedAt,
     getLoading: (state) => state.loading,
     getTagIds: (state) => state.tagIds,
-    getTaxonomiesData: (state) => state.taxonomies
+    getTaxonomiesData: (state) => state.taxonomies,
+    getTagMode: (state) => state.tagMode
   },
   actions: {
     displayDialog() {
@@ -44,12 +46,16 @@ export const useSearchStore = defineStore("search", {
       this.hasNextPage = false;
       const params = {
         tags: null,
-        search: null
+        search: null,
+        mode: null
       }
       if (tagIds) {
         this.input = null;
         this.tagIds = tagIds;
         params.tags = tagIds;
+        if (tagIds.length) {
+          params.mode = this.tagMode;
+        }
       } else if (input?.length >= 3) {
         params.search = input;
       }
@@ -77,6 +83,7 @@ export const useSearchStore = defineStore("search", {
         }
         if (this.tagIds?.length) {
           params.tags = this.tagIds;
+          params.mode = this.tagMode;
         }
         try {
           const request = await axios.get(searchUrl, { params });
@@ -105,6 +112,12 @@ export const useSearchStore = defineStore("search", {
     removeTags(tagIds) {
       this.tagIds = this.tagIds.filter(tag => !tagIds.includes(tag));
       this.getData(this.input, this.tagIds.map(tag => tag));
+    },
+    setTagMode(mode) {
+      if (mode !== this.tagMode) {
+        this.tagMode = mode;
+        this.getData(this.input, this.tagIds.map(tag => tag));
+      }
     }
   },
 });

@@ -6,6 +6,7 @@
   import TextInput from '@/Components/TextInput.vue';
   import InputError from '@/Components/InputError.vue';
   import Taxonomy from '@/Components/Taxonomy.vue';
+  import TagSearchMode from '@/Components/TagSearchMode.vue';
 
   const store = useSearchStore();
   store.getTaxonomies().then();
@@ -13,6 +14,7 @@
   const form = useForm({search: store.getSearchInput});
   const tagSelected = (tag) => store.pushTags([tag]);
   const tagRemoved = (tag) => store.removeTags([tag]);
+  const tagModeChanged = (mode) => store.setTagMode(mode);
   const submit = () => store.getData(form.search);
   const hideDialog = () => store.hideDialog();
 </script>
@@ -27,7 +29,7 @@
             <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
               <TransitionChild as="template" enter="transform transition ease-in-out duration-500 sm:duration-700" enter-from="translate-x-full" enter-to="translate-x-0" leave="transform transition ease-in-out duration-500 sm:duration-700" leave-from="translate-x-0" leave-to="translate-x-full">
                 <DialogPanel class="pointer-events-auto relative w-screen max-w-full">
-                  <div class="flex h-4/6 flex-col bg-white py-6 shadow-xl">
+                  <div class="flex h-5/6 flex-col bg-white py-6 shadow-xl">
                     <div class="px-4 sm:px-6">
                       <DialogTitle class="text-lg font-medium text-gray-900 text-right">
                         <button @click="hideDialog()" type="button" class="text-neutral-500 border border-neutral-500 hover:bg-neutral-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800">
@@ -47,6 +49,12 @@
                         </div>
                       </form>
                       <div>
+                        <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Tags mode</h3>
+                        <TagSearchMode @modeChanged="tagModeChanged($event)" :mode="store.getTagMode" />
+                      </div>
+                      <hr class="mt-5 mb-5">
+                      <div>
+                        <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Taxonimes</h3>
                         <template v-for="(item, index) in store.getTaxonomiesData" :key="index">
                           <Taxonomy @tagSelected="tagSelected($event)" @tagRemoved="tagRemoved($event)" :item="item" :defaultIds="store.getTagIds" />
                         </template>
