@@ -17,7 +17,7 @@ const truncateText = (text, length, suffix) => {
 <template>
     <div class="p-1 sm:p-1 md:p-2 lg:p-3 sm:w-1/2 md:w-1/3 lg:w-1/4">
         <div class="h-full w-full mb-3 bg-white border rounded-lg shadow-md flex flex-col justify-between p-2">
-            <h5 class="mb-3 mt-1 text-3xl font-bold text-gray-900 "> {{ props.item.title }}</h5>
+            <h5 class="mb-3 mt-1 text-xl font-bold text-gray-900 "> {{ props.item.title }}</h5>
             <div class=" mb-2">
                 <a :href="route('materials.owner', props.item.owner.id)"
                    class="text-base text-gray-500 sm:text-lg">
