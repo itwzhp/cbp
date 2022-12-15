@@ -38,6 +38,8 @@ use Spatie\Sluggable\SlugOptions;
  * @property-read Collection|Field[]      $fields
  * @property-read Collection|Setup[]      $setups
  * @property-read Collection|Scenario[]   $scenarios
+ * @property-read string|null             $author
+ * @property-read int|null                $authors_count
  *
  * @method static Builder published()
  * @method static Builder search(string $search)
@@ -123,6 +125,24 @@ class Material extends Model implements HasMedia
             $builder->where('title', 'like', "%{$search}%")
                 ->orWhere('description', 'like', "%{$search}%");
         });
+    }
+
+    public function scopeWithAuthor(Builder $builder): Builder
+    {
+        $builder->addSelect([
+            'author' => Field::authors()
+                ->whereColumn('material_id', 'materials.id')
+                ->select('value')
+                ->take(1),
+        ]);
+
+        $builder->addSelect([
+            'authors_count' => Field::authors()
+                ->whereColumn('material_id', 'materials.id')
+                ->selectRaw('count(*)'),
+        ]);
+
+        return $builder;
     }
 
     public function getTagsGrouped(): Collection

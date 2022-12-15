@@ -15,9 +15,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon        updated_at
  * @property-read Material material
  *
- * @method Builder ofType(string $type)
- * @method Builder authors()
- * @method Builder redactors()
+ * @method static Builder ofType(string $type)
+ * @method static Builder authors()
+ * @method static Builder redactors()
  */
 class Field extends Model
 {

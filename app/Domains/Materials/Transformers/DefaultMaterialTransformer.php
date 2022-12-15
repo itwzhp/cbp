@@ -22,8 +22,6 @@ class DefaultMaterialTransformer extends TransformerAbstract
     ];
 
     protected array $defaultIncludes = [
-        'owner',
-        'taxonomies',
     ];
 
     public function transform(Material $material): array
@@ -80,12 +78,12 @@ class DefaultMaterialTransformer extends TransformerAbstract
 
     protected function getAuthor(Material $material): string
     {
-        /** @var Field $author */
-        $author = $material->fields()->authors()->first();
-        $authorsCount = $material->fields()->authors()->count();
+        if ($material->authors_count === 1) {
+            return $material->author ?? $material->owner->getFullName();
+        }
 
-        if ($author !== null) {
-            return $author->value . ($authorsCount > 1 ? ' i in.' : '');
+        if ($material->authors_count > 1) {
+            return $material->author . ' et al.';
         }
 
         return $material->owner->getFullName();

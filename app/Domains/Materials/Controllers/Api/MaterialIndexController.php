@@ -17,7 +17,7 @@ class MaterialIndexController extends Controller
             ->withTags($request->input('tags', []))
             ->setMode($request->input('mode', MaterialSearcher::MODE_OR))
             ->query()
-            ->with('owner', 'tags')
+            ->withAuthor()
             ->orderBy('published_at', 'desc')
             ->paginate(24);
 
