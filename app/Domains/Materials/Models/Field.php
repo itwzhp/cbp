@@ -2,6 +2,7 @@
 namespace App\Domains\Materials\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -13,6 +14,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon        created_at
  * @property Carbon        updated_at
  * @property-read Material material
+ *
+ * @method Builder ofType(string $type)
+ * @method Builder authors()
+ * @method Builder redactors()
  */
 class Field extends Model
 {
@@ -30,5 +35,15 @@ class Field extends Model
     public function material(): BelongsTo
     {
         return $this->belongsTo(Material::class);
+    }
+
+    public function scopeOfType(Builder $query, string $type): Builder
+    {
+        return $query->where('type', $type);
+    }
+
+    public function scopeAuthors(Builder $query): Builder
+    {
+        return $query->ofType(static::TYPE_AUTHOR);
     }
 }

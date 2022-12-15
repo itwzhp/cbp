@@ -2,6 +2,7 @@
 namespace App\Domains\Materials\Transformers;
 
 use App\Domains\Files\Transformers\AttachmentTransformer;
+use App\Domains\Materials\Models\Field;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Users\Transformers\OwnerTransformer;
 use League\Fractal\Resource\Collection;
@@ -17,6 +18,7 @@ class DefaultMaterialTransformer extends TransformerAbstract
         'fields',
         'setups',
         'scenarios',
+        'authors',
     ];
 
     protected array $defaultIncludes = [
@@ -32,6 +34,8 @@ class DefaultMaterialTransformer extends TransformerAbstract
             'title'        => $material->title,
             'content'      => $material->description,
             'published_at' => $material->published_at->timestamp ?? null,
+            'author'       => $this->getAuthor($material),
+            'thumb'        => $material->thumb(),
         ];
     }
 
@@ -64,5 +68,26 @@ class DefaultMaterialTransformer extends TransformerAbstract
     public function includeScenarios(Material $material): Collection
     {
         return $this->collection($material->scenarios, new ScenarioTransformer());
+    }
+
+    public function includeAuthors(Material $material): Collection
+    {
+        return $this->collection(
+            $material->fields->where('type', Field::TYPE_AUTHOR),
+            new FieldTransformer()
+        );
+    }
+
+    protected function getAuthor(Material $material): string
+    {
+        /** @var Field $author */
+        $author = $material->fields()->authors()->first();
+        $authorsCount = $material->fields()->authors()->count();
+
+        if ($author !== null) {
+            return $author->value . ($authorsCount > 1 ? ' i in.' : '');
+        }
+
+        return $material->owner->getFullName();
     }
 }

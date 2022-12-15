@@ -13,6 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\ModelStates\HasStates;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -38,11 +42,12 @@ use Spatie\Sluggable\SlugOptions;
  * @method static Builder published()
  * @method static Builder search(string $search)
  */
-class Material extends Model
+class Material extends Model implements HasMedia
 {
     use HasStates;
     use HasFactory;
     use HasSlug;
+    use InteractsWithMedia;
 
     protected $dates = [
         'published_at',
@@ -144,5 +149,18 @@ class Material extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this
+            ->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_FILL, 300, 300)
+            ->nonQueued();
+    }
+
+    public function thumb(): string
+    {
+        return url('/images/scout.jpg');
     }
 }
