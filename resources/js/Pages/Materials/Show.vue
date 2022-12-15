@@ -2,6 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import {Head} from '@inertiajs/inertia-vue3';
 import Attachment from "@/Components/Attachment.vue";
+import TaxonomyBadge from "@/Components/TaxonomyBadge.vue";
 </script>
 
 <template>
@@ -13,6 +14,12 @@ import Attachment from "@/Components/Attachment.vue";
                 <a :href="route('materials.show', $page.props.material.slug)">{{ $page.props.material.title }}</a>
             </h2>
             <div v-html="$page.props.material.content"></div>
+
+            <TaxonomyBadge
+                v-for="(item, index) in $page.props.material.taxonomies"
+                :key="index"
+                :taxonomy="item"
+            ></TaxonomyBadge>
 
             <div class="mt-5">
                 <div class="flex justify-between content-center items-center">

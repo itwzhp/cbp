@@ -106,6 +106,8 @@ class UsersMigrationCommand extends Command
             'gazeta.pl',
             'op.pl',
             'o2.pl',
+            'autograf.pl',
+            'onet.eu',
         ])) {
             return false;
         }

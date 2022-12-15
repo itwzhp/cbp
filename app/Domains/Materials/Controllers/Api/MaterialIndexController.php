@@ -19,7 +19,7 @@ class MaterialIndexController extends Controller
             ->query()
             ->with('owner', 'tags')
             ->orderBy('published_at', 'desc')
-            ->paginate(15);
+            ->paginate(24);
 
         return [
             'content' => Fractal::create()

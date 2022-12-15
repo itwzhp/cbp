@@ -52,7 +52,7 @@ onUnmounted(() => {
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 border-b border-gray-200">
-            <div>
+            <div class="flex flex-wrap">
               <MaterialCard
                 v-for="(item, index) in store.getSearchData"
                 :key="index"
