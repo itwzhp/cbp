@@ -1,12 +1,12 @@
 <script setup>
-import { onUnmounted, onMounted } from "vue";
+import {onUnmounted, onMounted} from "vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/inertia-vue3";
-import { useSearchStore } from "../store/search.store";
+import {Head} from "@inertiajs/inertia-vue3";
+import {useSearchStore} from "@/store/search.store";
 import MaterialCard from "@/Components/MaterialCard.vue";
-import { watchEffect } from "@vue/runtime-core";
+import {watchEffect} from "@vue/runtime-core";
 import Spinner from "@/Components/Spinner.vue";
-import { usePage } from '@inertiajs/inertia-vue3'
+import {usePage} from '@inertiajs/inertia-vue3'
 
 const tag = usePage().props.value.tag;
 const store = useSearchStore();
@@ -24,10 +24,12 @@ const addListener = () => {
 };
 
 const handleScroll = () => {
-  if (scrollContent.scrollTop + scrollContent.clientHeight == scrollContent.scrollHeight) {
-    console.log("[scroll event] load next page...");
-    store.getNextPage();
-  }
+    const eps = 2;
+
+    if (scrollContent.scrollTop + scrollContent.clientHeight + eps > scrollContent.scrollHeight) {
+        console.log("[scroll event] load next page...");
+        store.getNextPage();
+    }
 };
 
 onMounted(() => {

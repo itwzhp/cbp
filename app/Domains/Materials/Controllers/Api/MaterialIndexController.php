@@ -10,6 +10,8 @@ use Spatie\Fractalistic\Fractal;
 
 class MaterialIndexController extends Controller
 {
+    public const SIZE_PER_PAGE = 24;
+
     public function __invoke(IndexRequest $request)
     {
         $materials = MaterialSearcher::make()
@@ -19,7 +21,7 @@ class MaterialIndexController extends Controller
             ->query()
             ->withAuthor()
             ->orderBy('published_at', 'desc')
-            ->paginate(24);
+            ->paginate(static::SIZE_PER_PAGE);
 
         return [
             'content' => Fractal::create()
@@ -29,7 +31,7 @@ class MaterialIndexController extends Controller
                 ->toArray(),
             'meta'    => [
                 'page'        => $materials->currentPage(),
-                'size'        => 15,
+                'size'        => static::SIZE_PER_PAGE,
                 'hasNextPage' => $materials->hasMorePages(),
             ],
         ];
