@@ -7,7 +7,7 @@ import NavLink from '@/Components/NavLink.vue';
 import NavButton from '@/Components/NavButton.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import SearchSlideOver from '@/Components/SearchSlideOver.vue';
-import {useSearchStore} from "../store/search.store";
+import {useSearchStore} from "@/store/search.store";
 import {Link} from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
@@ -152,7 +152,7 @@ const displayDialog = () => {
                                 </NavLink>
                                 <Dropdown width="48">
                                     <template #trigger>
-                                        <NavButton :active="route().current('materials.tag')">
+                                        <NavButton :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'}) || route().current('materials.tag', { tag: '2-konspekt-programowy'})">
                                             Konspekty
                                         </NavButton>
                                     </template>
@@ -167,18 +167,18 @@ const displayDialog = () => {
                                         </ResponsiveNavLink>
                                     </template>
                                 </Dropdown>
-                                <ResponsiveNavLink :href="route('materials.tag', '2-program')"
+                                <NavLink :href="route('materials.tag', '2-program')"
                                                    :active="route().current('materials.tag', {tag: '2-program'})">
                                     Program/plan
-                                </ResponsiveNavLink>
-                                <ResponsiveNavLink :href="route('materials.tag', '2-propozycja-programowa')"
+                                </NavLink>
+                                <NavLink :href="route('materials.tag', '2-propozycja-programowa')"
                                                    :active="route().current('materials.tag', {tag: '2-propozycja-programowa'})">
                                     Propozycje programowe
-                                </ResponsiveNavLink>
-                                <ResponsiveNavLink :href="route('materials.tag', '2-poradnik')"
+                                </NavLink>
+                                <NavLink :href="route('materials.tag', '2-poradnik')"
                                                    :active="route().current('materials.tag', {tag: '2-poradnik'})">
                                     Poradniki
-                                </ResponsiveNavLink>
+                                </NavLink>
                             </div>
                         </div>
                     </div>
