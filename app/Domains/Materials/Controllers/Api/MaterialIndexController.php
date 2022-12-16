@@ -20,6 +20,7 @@ class MaterialIndexController extends Controller
             ->setMode($request->input('mode', MaterialSearcher::MODE_OR))
             ->query()
             ->withAuthor()
+            ->with('media', 'owner')
             ->orderBy('published_at', 'desc')
             ->paginate(static::SIZE_PER_PAGE);
 

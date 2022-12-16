@@ -173,14 +173,31 @@ class Material extends Model implements HasMedia
 
     public function registerMediaConversions(Media $media = null): void
     {
-        $this
-            ->addMediaConversion('preview')
-            ->fit(Manipulations::FIT_FILL, 300, 300)
+        $this->addMediaConversion('thumb')
+            ->fit(Manipulations::FIT_FILL, 290, 192)
             ->nonQueued();
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('cover')
+            ->useFallbackUrl(url('/images/scout.jpg'))
+            ->useFallbackUrl(url('/images/scout_thumb.jpg'), 'thumb')
+            ->singleFile()
+            ->registerMediaConversions(function (Media $media) {
+                $this->addMediaConversion('cover')
+                    ->width(1000)
+                    ->height(300);
+            });
     }
 
     public function thumb(): string
     {
-        return url('/images/scout.jpg');
+        return $this->getFirstMediaUrl('cover', 'thumb');
+    }
+
+    public function cover(): string
+    {
+        return $this->getFirstMediaUrl('cover', 'cover');
     }
 }

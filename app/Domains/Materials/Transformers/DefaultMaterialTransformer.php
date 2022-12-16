@@ -34,6 +34,7 @@ class DefaultMaterialTransformer extends TransformerAbstract
             'published_at' => $material->published_at->timestamp ?? null,
             'author'       => $this->getAuthor($material),
             'thumb'        => $material->thumb(),
+            'cover'        => $material->cover(),
         ];
     }
 

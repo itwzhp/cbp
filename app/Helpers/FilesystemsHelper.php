@@ -9,6 +9,7 @@ class FilesystemsHelper
     const LOCAL = 'wp_local';
     const PUBLIC = 'azure_public';
     const PRIVATE = 'azure_private';
+    const IMAGES = 'azure_images';
 
     public static function getPublic(): Filesystem
     {
@@ -23,5 +24,10 @@ class FilesystemsHelper
     public static function getLocal(): Filesystem
     {
         return Storage::disk(static::LOCAL);
+    }
+
+    public static function getImages(): Filesystem
+    {
+        return Storage::disk(static::IMAGES);
     }
 }
