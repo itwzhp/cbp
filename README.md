@@ -63,17 +63,5 @@ FILESYSTEM_DISK=wp_local
    import data from `cbp_wp` database.
 4. Enjoy
 
-#### Files
-
-If you want to test files on local env, download all directories from `wp-content/uploads` into `storage/wp/` directory.
-
-For file links to work on local environment one must create symbolic link from storage to public directory. Just run helper command:
-
-```shell
-php artisan wp:storage
-```
-## API
-
-Go to:
 
 [API docs](ENDPOINTS.md)
