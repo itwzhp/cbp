@@ -1,27 +1,9 @@
 <script setup>
-import {computed} from "vue";
-
 const props = defineProps({
     setup: {
         type: Object,
         required: true
     }
-});
-
-const items = computed(() => {
-    let items = {};
-
-    for (let key in props.setup) {
-        if (key === 'id') {
-            continue;
-        }
-
-        if (this.setup[key]) {
-            items[key] = props.setup[key];
-        }
-    }
-
-    return items;
 });
 
 const keyToText = {
@@ -44,7 +26,7 @@ const keyToText = {
 
 <template>
     <div class="columns-2">
-        <div v-for="(item, key) in items" :key="key">
+        <div v-for="(item, key) in setup" :key="key">
             <span class="font-bold">{{ keyToText[key] }}: </span> {{ item }}
         </div>
     </div>
