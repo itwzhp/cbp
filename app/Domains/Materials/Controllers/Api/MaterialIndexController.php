@@ -21,7 +21,7 @@ class MaterialIndexController extends Controller
             ->query()
             ->withAuthor()
             ->with('media', 'owner')
-            ->orderBy('published_at', 'desc')
+//            ->orderBy('published_at', 'desc')
             ->paginate(static::SIZE_PER_PAGE);
 
         return [

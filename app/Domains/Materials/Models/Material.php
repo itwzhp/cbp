@@ -117,14 +117,18 @@ class Material extends Model implements HasMedia
 
     public function scopeSearch(Builder $builder, ?string $search)
     {
-        if (empty($search)) {
-            return;
-        }
-
-        $builder->where(function (Builder $builder) use ($search) {
-            $builder->where('title', 'like', "%{$search}%")
-                ->orWhere('description', 'like', "%{$search}%");
+        return $builder->when($search, function (Builder $query, string $search) {
+            $query->whereRaw('match(title, description) against (? in boolean mode)', [$search]);
         });
+
+//        if (empty($search)) {
+//            return;
+//        }
+
+//        $builder->where(function (Builder $builder) use ($search) {
+//            $builder->where('title', 'like', "%{$search}%")
+//                ->orWhere('description', 'like', "%{$search}%");
+//        });
     }
 
     public function scopeWithAuthor(Builder $builder): Builder
