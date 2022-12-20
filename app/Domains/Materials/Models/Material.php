@@ -180,6 +180,10 @@ class Material extends Model implements HasMedia
         $this->addMediaConversion('thumb')
             ->fit(Manipulations::FIT_FILL, 290, 192)
             ->nonQueued();
+
+        $this->addMediaConversion('cover')
+            ->fit(Manipulations::FIT_CROP, 1000, 300)
+            ->nonQueued();
     }
 
     public function registerMediaCollections(): void
@@ -187,12 +191,8 @@ class Material extends Model implements HasMedia
         $this->addMediaCollection('cover')
             ->useFallbackUrl(url('/images/scout.jpg'))
             ->useFallbackUrl(url('/images/scout_thumb.jpg'), 'thumb')
-            ->singleFile()
-            ->registerMediaConversions(function (Media $media) {
-                $this->addMediaConversion('cover')
-                    ->width(1000)
-                    ->height(300);
-            });
+            ->useFallbackUrl(url('/images/scout_thumb.jpg'), 'cover')
+            ->singleFile();
     }
 
     public function thumb(): string
