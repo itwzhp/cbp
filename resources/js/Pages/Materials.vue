@@ -14,7 +14,11 @@ const store = useSearchStore();
 // if (!store.getSearchData.length) {
 //   store.getData();
 // }
-store.getData(null, tag ? [tag] : []);
+if (route().current() ===  'materials.index') {
+  store.getData();
+} else {
+  store.getData(null, tag ? [tag] : []);
+}
 
 let scrollContent;
 

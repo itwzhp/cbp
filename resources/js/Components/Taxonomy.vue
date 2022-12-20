@@ -18,7 +18,7 @@
     });
   }
   const select = ($event) => emit('tagSelected', $event.value);
-  const deselect = ($event) => emit('tagRemoved', $event.value);
+  const deselect = ($event) => emit('tagRemoved', $event.id || $event.value);
 </script>
 
 <template>

@@ -40,7 +40,6 @@ export const useSearchStore = defineStore("search", {
     },
     async getData(input, tagIds) {
       this.loading = true;
-      this.input = input;
       this.data = [];
       this.page = null;
       this.hasNextPage = false;
@@ -49,15 +48,27 @@ export const useSearchStore = defineStore("search", {
         search: null,
         mode: null
       }
-      if (tagIds) {
+      // case 1 - tag from url
+      if (tagIds && !input) {
         this.input = null;
         this.tagIds = tagIds;
         params.tags = tagIds;
         if (tagIds.length) {
           params.mode = this.tagMode;
         }
-      } else if (input?.length >= 3) {
-        params.search = input;
+      // case 2 any arguments
+      } else if (input || tagIds) {
+        this.input = input;
+        this.tagIds = tagIds;
+      }
+      // case 3 no arguments - get already setted in store
+
+      if (this.input?.length >= 3) {
+        params.search = this.input;
+      }
+      params.tags = this.tagIds?.length ? this.tagIds : [];
+      if (this.tagIds.length) {
+        params.mode = this.tagMode;
       }
       try {
         const request = await axios.get(searchUrl, { params });
@@ -104,19 +115,19 @@ export const useSearchStore = defineStore("search", {
         console.error('taxonimes get error');
       }
     },
-    pushTags(tagIds) {
+    async pushTags(tagIds) {
       const tags = [...this.tagIds, ...tagIds];
       this.tagIds = [...new Set(tags)];
-      this.getData(this.input, this.tagIds.map(tag => tag));
+      return this.getData();
     },
-    removeTags(tagIds) {
+    async removeTags(tagIds) {
       this.tagIds = this.tagIds.filter(tag => !tagIds.includes(tag));
-      this.getData(this.input, this.tagIds.map(tag => tag));
+      return this.getData();
     },
-    setTagMode(mode) {
+    async setTagMode(mode) {
       if (mode !== this.tagMode) {
         this.tagMode = mode;
-        this.getData(this.input, this.tagIds.map(tag => tag));
+        return this.getData();
       }
     }
   },

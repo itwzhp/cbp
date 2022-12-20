@@ -1,5 +1,6 @@
 <script setup>
   import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+  import { Inertia } from "@inertiajs/inertia";
   import { useForm } from '@inertiajs/inertia-vue3';
   import { useSearchStore } from "../store/search.store";
   import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -12,10 +13,15 @@
   store.getTaxonomies().then();
 
   const form = useForm({search: store.getSearchInput});
-  const tagSelected = (tag) => store.pushTags([tag]);
-  const tagRemoved = (tag) => store.removeTags([tag]);
-  const tagModeChanged = (mode) => store.setTagMode(mode);
-  const submit = () => store.getData(form.search);
+  const redirect = () => {
+    if (route().current() !==  'materials.index') {
+      Inertia.get(route('materials.index'));
+    }
+  };
+  const tagSelected = (tag) => store.pushTags([tag]).then(() => redirect());
+  const tagRemoved = (tag) => store.removeTags([tag]).then(() => redirect());
+  const tagModeChanged = (mode) => store.setTagMode(mode).then(() => redirect());
+  const submit = () => store.getData(form.search, store.getTagIds).then(() => redirect());
   const hideDialog = () => store.hideDialog();
 </script>
 <template>

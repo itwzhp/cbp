@@ -1,6 +1,6 @@
 <script setup>
   import { ref } from 'vue';
-  import { watchEffect } from "@vue/runtime-core";
+  import { watch } from "@vue/runtime-core";
   import Multiselect from '@vueform/multiselect'
 
   const props = defineProps({
@@ -8,8 +8,8 @@
   });
   const emit = defineEmits(['modeChanged']);
   const mode = ref(props.mode);
-  watchEffect(() => {
-    emit('modeChanged', mode.value);
+  watch(mode, (newValue) => {
+    emit('modeChanged', newValue);
   })
 </script>
 
