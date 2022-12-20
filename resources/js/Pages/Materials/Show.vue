@@ -40,13 +40,13 @@ const setActiveTab = (id) => {
                 <div>
                     <div class="flex mt-5 mb-3">
                         <div class="flex-1 text-center font-bold border-b-2 cursor-pointer"
-                             :class="activeTab == 0 ? 'border-teal-400 color-real-400' : ''"
+                             :class="activeTab == 0 ? 'border-zhp-700 text-zhp-700' : ''"
                              @click="setActiveTab(0)"
                         >
                             Informacje o publikacji
                         </div>
                         <div class="flex-1 text-center font-bold border-b-2 cursor-pointer"
-                             :class="activeTab == 1 ? 'border-teal-400 color-teal-400' : ''"
+                             :class="activeTab == 1 ? 'border-zhp-700 text-zhp-700' : ''"
                              @click="setActiveTab(1)"
                         >
                             Konspekt i materiał
