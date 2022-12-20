@@ -10,7 +10,7 @@ const keyToText = {
     capacity_min: "Minimalna liczba uczestników",
     capacity_opt: "Optymalna liczba uczestników",
     capacity_max: "Maksymalna liczba uczestników",
-    duration: "Czas trwania",
+    duration: "Czas trwania (min)",
     time: "Pora dnia",
     instructor_count: "Wymagana liczba instruktorów",
     instructor_competence: "Wymagania dla prowadzącego",
@@ -27,7 +27,9 @@ const keyToText = {
 <template>
     <div class="columns-2">
         <div v-for="(item, key) in setup" :key="key">
-            <span class="font-bold">{{ keyToText[key] }}: </span> {{ item }}
+            <div v-if="key !== 'id' && setup[key]">
+                <span class="font-bold text-sm">{{ keyToText[key] }}: </span> {{ item }}
+            </div>
         </div>
     </div>
 </template>

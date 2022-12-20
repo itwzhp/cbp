@@ -5,6 +5,7 @@ import TaxonomyBadge from "@/Components/Materials/TaxonomyBadge.vue";
 import SidebarLayout from "@/Layouts/SidebarLayout.vue";
 import {ref} from 'vue';
 import Setup from "@/Components/Materials/Setup.vue";
+import Scenario from "@/Components/Materials/Scenario.vue";
 
 let activeTab = ref(0);
 
@@ -68,10 +69,24 @@ const setActiveTab = (id) => {
                     <div v-if="activeTab === 1">
 
                         <div v-if="$page.props.material.setups.length > 0">
+                            <h3 class="text-lg font-bold mt-4 mb-2">
+                                Informacje organizacyjne
+                            </h3>
                             <Setup v-for="(setup, key) in $page.props.material.setups"
                                    :key="key"
                                    :setup="setup"
                             ></Setup>
+                        </div>
+
+                        <div v-if="$page.props.material.scenarios.length > 0">
+                            <h3 class="text-lg font-bold mt-4 mb-2">
+                                Przebieg
+                            </h3>
+                            <Scenario
+                                v-for="(scenario, key) in $page.props.material.scenarios"
+                                :itemId="key"
+                                :scenario="scenario"
+                            ></Scenario>
                         </div>
 
 
