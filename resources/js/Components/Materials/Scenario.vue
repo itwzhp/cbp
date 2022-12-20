@@ -15,7 +15,7 @@ const props = defineProps({
 <template>
     <div class="flex my-2 border-b border-gray-200">
         <div>
-            <div class="rounded-full bg-gray-200 text-xl w-10 h-10 text-center flex-1">
+            <div class=" text-2xl w-10 h-10 text-center flex-1">
                 {{ itemId + 1 }}
             </div>
         </div>
