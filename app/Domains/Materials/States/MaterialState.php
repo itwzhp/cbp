@@ -11,12 +11,20 @@ abstract class MaterialState extends State
         return parent::config()
             ->default(Draft::class)
             ->allowTransition(Draft::class, Pending::class)
-            ->allowTransition(Draft::class, Rejected::class)
-            ->allowTransition(Pending::class, InReview::class)
-            ->allowTransition(InReview::class, Published::class)
+            ->allowTransition([
+                Draft::class,
+                InReview::class,
+            ], Published::class)
             ->allowTransition(InReview::class, ChangesRequested::class)
-            ->allowTransition(InReview::class, Rejected::class)
-            ->allowTransition(ChangesRequested::class, InReview::class)
+            ->allowTransition([
+                InReview::class,
+                Draft::class,
+                ChangesRequested::class,
+            ], Rejected::class)
+            ->allowTransition([
+                Pending::class,
+                ChangesRequested::class,
+            ], InReview::class)
             ->allowTransition([
                 Draft::class,
                 Pending::class,
