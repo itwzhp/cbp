@@ -16,6 +16,7 @@ return new class extends Migration
         SQL
             );
         } catch (QueryException $exception) {
+            // MariaDB support
             DB::statement(<<<'SQL'
 ALTER TABLE materials ADD FULLTEXT INDEX `materials_fulltext_index` (title, description);
 SQL

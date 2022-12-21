@@ -18,6 +18,15 @@ class TagsRepository
             ]);
     }
 
+    public function createWithTax(string $taxonomyName, string $tagName): Tag
+    {
+        $taxonomy = Taxonomy::firstOrCreate([
+            'name' => ucfirst($taxonomyName),
+        ]);
+
+        return $this->create($taxonomy, ucfirst($tagName));
+    }
+
     public function findByWpId(int $wpId): ?Tag
     {
         return Tag::where('wp_id', $wpId)->first();

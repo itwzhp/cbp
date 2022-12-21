@@ -16,6 +16,15 @@ abstract class MaterialState extends State
             ->allowTransition(InReview::class, Published::class)
             ->allowTransition(InReview::class, ChangesRequested::class)
             ->allowTransition(InReview::class, Rejected::class)
-            ->allowTransition(ChangesRequested::class, InReview::class);
+            ->allowTransition(ChangesRequested::class, InReview::class)
+            ->allowTransition([
+                Draft::class,
+                Pending::class,
+                InReview::class,
+                Published::class,
+                ChangesRequested::class,
+                Rejected::class,
+                Archived::class,
+            ], Archived::class);
     }
 }

@@ -10,6 +10,7 @@ use App\Domains\Migration\Commands\PostsMigrationCommand;
 use App\Domains\Migration\Commands\RefreshCommand;
 use App\Domains\Migration\Commands\RemoveDuplicateAttachmentsCommand;
 use App\Domains\Migration\Commands\TagsMigrationCommand;
+use App\Domains\Migration\Commands\TaxonomyChangerCommand;
 use App\Domains\Migration\Commands\UsersMigrationCommand;
 use App\Domains\Migration\Commands\WpImportCommand;
 use Illuminate\Console\Scheduling\Schedule;
@@ -29,6 +30,7 @@ class Kernel extends ConsoleKernel
         RemoveDuplicateAttachmentsCommand::class,
         FixLinksInDescription::class,
         AttachImagesCommand::class,
+        TaxonomyChangerCommand::class,
     ];
 
     protected function schedule(Schedule $schedule)

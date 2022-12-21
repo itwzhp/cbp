@@ -28,7 +28,7 @@ use Spatie\Sluggable\SlugOptions;
  * @property string                       slug
  * @property string|null                  description
  * @property int|null                     wp_id
- * @property string                       state
+ * @property MaterialState                state
  * @property Carbon                       created_at
  * @property Carbon                       updated_at
  * @property Carbon|null                  published_at
@@ -93,6 +93,11 @@ class Material extends Model implements HasMedia
         return $this
             ->hasMany(Scenario::class)
             ->orderBy('order');
+    }
+
+    public static function findByWp(int $wpId): ?Material
+    {
+        return Material::where('wp_id', $wpId)->first();
     }
 
     public function scopePublished(Builder $builder): Builder
