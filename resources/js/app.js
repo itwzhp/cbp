@@ -18,7 +18,7 @@ import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import { globalFilters } from "./Filters/globalFilters";
 
 const appName =
-    window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
+    window.document.getElementsByTagName("title")[0]?.innerText || "CBP";
 const pinia = createPinia();
 
 createInertiaApp({
@@ -40,4 +40,4 @@ createInertiaApp({
     },
 });
 
-InertiaProgress.init({ color: "#4B5563" });
+InertiaProgress.init({ color: '#78a22f' });
