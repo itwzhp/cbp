@@ -43,6 +43,7 @@ use Spatie\Sluggable\SlugOptions;
  *
  * @method static Builder published()
  * @method static Builder search(string $search)
+ * @method static Builder withAuthor()
  */
 class Material extends Model implements HasMedia
 {
