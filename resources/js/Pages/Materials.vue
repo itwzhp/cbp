@@ -58,6 +58,12 @@ onUnmounted(() => {
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 border-b border-gray-200">
+            <div v-if="store.getSearchData?.length === 0 && store.getLoading" class="text-center pt-2">
+              <Spinner />
+            </div>
+            <div v-if="store.getSearchData?.length === 0 && !store.getLoading" class="text-center pt-2">
+              Brak wyników
+            </div>
             <div class="flex flex-wrap">
               <MaterialCard
                 v-for="(item, index) in store.getSearchData"
@@ -65,9 +71,6 @@ onUnmounted(() => {
                 :item="item"
               />
             </div>
-            <!-- <div v-if="store.getLoading" class="text-center pt-2">
-              <Spinner />
-            </div> -->
           </div>
         </div>
       </div>
