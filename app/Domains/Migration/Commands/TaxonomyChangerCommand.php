@@ -36,7 +36,7 @@ class TaxonomyChangerCommand extends Command
 
     private function attachNewTaxonomies(): void
     {
-        $filepath = storage_path('app/CBP_materialy.csv');
+        $filepath = storage_path('CBP_materialy.csv');
 
         if (($handle = fopen($filepath, 'r')) === false) {
             return;
