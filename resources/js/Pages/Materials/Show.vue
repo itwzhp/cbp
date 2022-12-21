@@ -8,6 +8,7 @@ import Setup from "@/Components/Materials/Setup.vue";
 import Scenario from "@/Components/Materials/Scenario.vue";
 import Print from "@/Components/Print.vue";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import AuthorsShort from "@/Components/Materials/AuthorsShort.vue";
 
 let activeTab = ref(0);
 
@@ -54,6 +55,8 @@ const setActiveTab = (id) => {
                 <h2 class="font-semibold text-3xl text-gray-800 leading-tight font-medium mb-2">
                     <a :href="route('materials.show', $page.props.material.slug)">{{ $page.props.material.title }}</a>
                 </h2>
+
+                <AuthorsShort :fields="$page.props.material.fields"/>
 
                 <div>
                     <div class="flex mt-5 mb-3">
