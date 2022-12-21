@@ -13,11 +13,14 @@ const props = defineProps({
             <p>{{ taxonomy.taxonomy_name }}:</p>
         </div>
         <div class="rounded-r border border-zhp-700 text-gray-900 text-sm p-1 flex justify-center">
+            <!-- // TODO: żeby ten border-r nie był widoczny na ostatnim elemencie -->
             <Link
                 v-for="tag in taxonomy.tags"
                 :href="route('materials.tag', tag.slug )"
                 class="px-2 border-r"
-            >{{ tag.name }}</Link>
+            >
+                {{ tag.name }}
+            </Link>
         </div>
     </div>
 </template>

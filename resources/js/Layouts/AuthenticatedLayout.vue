@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -7,8 +7,8 @@ import NavLink from '@/Components/NavLink.vue';
 import NavButton from '@/Components/NavButton.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import SearchSlideOver from '@/Components/SearchSlideOver.vue';
-import { useSearchStore } from "@/store/search.store";
-import { Link } from '@inertiajs/inertia-vue3';
+import {useSearchStore} from "@/store/search.store";
+import {Link} from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
 const store = useSearchStore();
@@ -22,11 +22,12 @@ const headline = ref(null);
     <div>
         <div class="bg-gradient-to-b from-white-300 via-white-200 to-white-100">
             <div ref="headline">
-                <nav class="border-b border-gray-100">
+                <nav class="border-b border-gray-100 print:hidden">
                     <!-- Primary Navigation Menu -->
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <!-- Primary Navigation Menu -->
-                        <div class="flex items-center justify-between border-gray-100 py-6 md:justify-start md:space-x-10">
+                        <div
+                            class="flex items-center justify-between border-gray-100 py-6 md:justify-start md:space-x-10">
                             <div class="hidden sm:flex justify-start lg:w-0 lg:flex-1">
                             </div>
                             <div class="-my-2 -mr-2">
@@ -47,11 +48,12 @@ const headline = ref(null);
                                                     <button type="button"
                                                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                                         {{ $page.props.auth.user.name }}
-                                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                                            viewBox="0 0 20 20" fill="currentColor">
+                                                        <svg class="ml-2 -mr-0.5 h-4 w-4"
+                                                             xmlns="http://www.w3.org/2000/svg"
+                                                             viewBox="0 0 20 20" fill="currentColor">
                                                             <path fill-rule="evenodd"
-                                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                                clip-rule="evenodd"/>
+                                                                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                                  clip-rule="evenodd"/>
                                                         </svg>
                                                     </button>
                                                 </span>
@@ -63,7 +65,7 @@ const headline = ref(null);
                                             </template>
                                         </Dropdown>
                                         <Link v-if="!$page.props.auth.user" :href="route('login')"
-                                            class="dark:text-gray-500">Zaloguj się
+                                              class="dark:text-gray-500">Zaloguj się
                                         </Link>
                                     </div>
 
@@ -90,14 +92,14 @@ const headline = ref(null);
 
                     <!-- Responsive Navigation Menu -->
                     <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}"
-                        class="sm:hidden">
+                         class="sm:hidden">
                         <div class="pt-2 pb-3 space-y-1">
                             <ResponsiveNavLink @click="displayDialog()">
                                 <font-awesome-icon icon="fa-solid fa-magnifying-glass"/>
                                 Wyszukaj
                             </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('materials.index')"
-                                            :active="route().current('materials.index')">
+                                               :active="route().current('materials.index')">
                                 Materiały
                             </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
@@ -107,19 +109,19 @@ const headline = ref(null);
                                 Konspekty
                             </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
-                                            :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
+                                               :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
                                 &emsp;Kształceniowe
                             </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('materials.tag', '2-program')"
-                                            :active="route().current('materials.tag', {tag: '2-program'})">
+                                               :active="route().current('materials.tag', {tag: '2-program'})">
                                 &emsp;Program/plan
                             </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('materials.tag', '2-propozycja-programowa')"
-                                            :active="route().current('materials.tag', {tag: '2-propozycja-programowa'})">
+                                               :active="route().current('materials.tag', {tag: '2-propozycja-programowa'})">
                                 &emsp;Propozycje programowe
                             </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('materials.tag', '2-poradnik')"
-                                            :active="route().current('materials.tag', {tag: '2-poradnik'})">
+                                               :active="route().current('materials.tag', {tag: '2-poradnik'})">
                                 &emsp;Poradniki
                             </ResponsiveNavLink>
 
@@ -140,13 +142,14 @@ const headline = ref(null);
                         </div>
                     </div>
                 </nav>
-                <nav>
+                <nav class="print:hidden">
                     <div class="max-w-7xl max-h-10 mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex justify-between h-12">
                             <div class="flex">
                                 <!-- Navigation Links -->
                                 <div class="max-h-10 hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                    <NavLink :href="route('materials.index')" :active="route().current('materials.index')">
+                                    <NavLink :href="route('materials.index')"
+                                             :active="route().current('materials.index')">
                                         Materiały
                                     </NavLink>
                                     <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
@@ -154,31 +157,33 @@ const headline = ref(null);
                                     </NavLink>
                                     <Dropdown width="48">
                                         <template #trigger>
-                                            <NavButton :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'}) || route().current('materials.tag', { tag: '2-konspekt-programowy'})">
+                                            <NavButton
+                                                :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'}) || route().current('materials.tag', { tag: '2-konspekt-programowy'})">
                                                 Konspekty
                                             </NavButton>
                                         </template>
                                         <template #content>
-                                            <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
-                                                            :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
+                                            <ResponsiveNavLink
+                                                :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
+                                                :active="route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy'})">
                                                 Kształceniowe
                                             </ResponsiveNavLink>
                                             <ResponsiveNavLink :href="route('materials.tag', '2-konspekt-programowy')"
-                                                            :active="route().current('materials.tag', { tag: '2-konspekt-programowy'})">
+                                                               :active="route().current('materials.tag', { tag: '2-konspekt-programowy'})">
                                                 Programowe
                                             </ResponsiveNavLink>
                                         </template>
                                     </Dropdown>
                                     <NavLink :href="route('materials.tag', '2-program')"
-                                                    :active="route().current('materials.tag', {tag: '2-program'})">
+                                             :active="route().current('materials.tag', {tag: '2-program'})">
                                         Program/plan
                                     </NavLink>
                                     <NavLink :href="route('materials.tag', '2-propozycja-programowa')"
-                                                    :active="route().current('materials.tag', {tag: '2-propozycja-programowa'})">
+                                             :active="route().current('materials.tag', {tag: '2-propozycja-programowa'})">
                                         Propozycje programowe
                                     </NavLink>
                                     <NavLink :href="route('materials.tag', '2-poradnik')"
-                                                    :active="route().current('materials.tag', {tag: '2-poradnik'})">
+                                             :active="route().current('materials.tag', {tag: '2-poradnik'})">
                                         Poradniki
                                     </NavLink>
                                 </div>
@@ -189,21 +194,23 @@ const headline = ref(null);
 
                 <div v-if="$page.props.flash && $page.props.flash.message">
                     <div class="p-3 my-5 bg-gray-200 max-w-7xl mx-auto"
-                        :class="$page.props.flash.message.class">
+                         :class="$page.props.flash.message.class">
                         {{ $page.props.flash.message }}
                     </div>
                 </div>
 
                 <!-- Page Heading -->
                 <header class="bg-white shadow" v-if="$slots.header">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 print:px-1 print:py-1">
                         <slot name="header"/>
                     </div>
                 </header>
             </div>
 
             <!-- Page Content -->
-            <main id="main-content" :style="`height: calc(100vh - ${10 + (headline?.clientHeight || 0)}px); overflow: auto`">
+            <!--            // TODO : overflow hidden na wersji do wydruku -->
+            <main id="main-content" class="print:overflow-hidden"
+                  :style="`height: calc(100vh - ${10 + (headline?.clientHeight || 0)}px); overflow: auto`">
                 <slot/>
             </main>
         </div>

@@ -6,6 +6,8 @@ import SidebarLayout from "@/Layouts/SidebarLayout.vue";
 import {ref} from 'vue';
 import Setup from "@/Components/Materials/Setup.vue";
 import Scenario from "@/Components/Materials/Scenario.vue";
+import Print from "@/Components/Print.vue";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 let activeTab = ref(0);
 
@@ -21,8 +23,23 @@ const setActiveTab = (id) => {
     <SidebarLayout>
         <template #default>
 
-            <img :src="$page.props.material.cover" class="w-full">
-            <div class="p-6 flex justify-between align-middle border-b-2 border-gray-200">
+            <div class="w-full relative print:hidden">
+                <img :src="$page.props.material.cover" class="w-full">
+                <div class="absolute top-0 left-0 right-0 flex justify-between p-4">
+                    <div>
+                        <div class="rounded-full bg-gray-200 p-3 font-bold text-center">
+                            Program
+                        </div>
+                    </div>
+                    <Print>
+                        <!-- // TODO: zrobić tę ikonkę realnie okrągłą i wyśrodkowaną -->
+                        <div class="rounded-full bg-gray-200 p-3 w-11 h-11 text-center">
+                            <font-awesome-icon icon="fa-print"/>
+                        </div>
+                    </Print>
+                </div>
+            </div>
+            <div class="p-6 print:p-1 flex justify-between align-middle border-b-2 border-gray-200">
                 <div>
                     <img :src="$page.props.material.owner.avatar" class="inline-block w-6 h-6 rounded-full">
                     {{ $page.props.material.owner.name }}
@@ -54,6 +71,8 @@ const setActiveTab = (id) => {
                         </div>
                     </div>
 
+                    <!-- // TODO: na wersji do wydruku chcemy mieć albo tylko drugi tab widoczny, albo oba jeden pod drugim - doprecyzuję
+                         // TODO: to z nimi, ale pewnie trzeba będzie tu zrobić jakiegoś miksa stylów z tailwinda zamiast tego v-if -->
                     <div v-if="activeTab === 0">
                         <h3 class="text-lg font-bold mb-2 mt-4">Pełny opis</h3>
                         <div v-html="$page.props.material.content" class="py-3 text-justify"></div>

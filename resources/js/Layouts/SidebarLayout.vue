@@ -6,14 +6,14 @@ import {Link} from '@inertiajs/inertia-vue3'
 <template>
     <AuthenticatedLayout>
         <template #header>
-            <Link :href="route('materials.index')" class="text-sm"><i class="fa fa-chevron-left"></i> powrót</Link>
+            <Link :href="route('materials.index')" class="text-sm print:hidden"><i class="fa fa-chevron-left"></i> powrót</Link>
         </template>
 
-        <div class="flex max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <div class="w-3/4">
+        <div class="flex max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 print:w-full print:p-0">
+            <div class="w-3/4 print:w-full">
                 <slot></slot>
             </div>
-            <div class="w-1/4">
+            <div class="w-1/4 print:hidden">
                 <slot name="sidebar"></slot>
             </div>
         </div>
