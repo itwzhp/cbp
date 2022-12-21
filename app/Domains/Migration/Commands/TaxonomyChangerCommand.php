@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 
 class TaxonomyChangerCommand extends Command
 {
-    const TAXONOMIES_SLUGS_TO_DELETE = [
+    public const TAXONOMIES_SLUGS_TO_DELETE = [
         'motyw',
         'category',
         'typ-materialu',
