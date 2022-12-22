@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -26,6 +28,8 @@ SQL
 
     public function down()
     {
-        //
+        Schema::table('materials', function (Blueprint $table) {
+            $table->dropIndex('materials_fulltext_index');
+        });
     }
 };
