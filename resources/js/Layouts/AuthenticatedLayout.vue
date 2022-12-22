@@ -201,16 +201,14 @@ const headline = ref(null);
 
                 <!-- Page Heading -->
                 <header class="bg-white shadow" v-if="$slots.header">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 print:px-1 print:py-1">
+                    <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8 print:px-1 print:py-1">
                         <slot name="header"/>
                     </div>
                 </header>
             </div>
 
             <!-- Page Content -->
-            <!--            // TODO : overflow hidden na wersji do wydruku -->
-            <main id="main-content" class="print:overflow-hidden"
-                  :style="`height: calc(100vh - ${10 + (headline?.clientHeight || 0)}px); overflow: auto`">
+            <main id="main-content" class="main-content" :style="`height: calc(100vh - ${20 + (headline?.clientHeight || 0)}px); overflow: auto`">
                 <slot/>
             </main>
         </div>
@@ -219,3 +217,10 @@ const headline = ref(null);
     <SearchSlideOver/>
 </template>
 <style src="@vueform/multiselect/themes/default.css"></style>
+<style scoped>
+    @media print {
+        .main-content {
+          height: auto !important;
+        }
+    }
+</style>
