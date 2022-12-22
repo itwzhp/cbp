@@ -19,6 +19,7 @@ class DefaultMaterialTransformer extends TransformerAbstract
         'setups',
         'scenarios',
         'authors',
+        'licence',
     ];
 
     protected array $defaultIncludes = [
@@ -75,6 +76,11 @@ class DefaultMaterialTransformer extends TransformerAbstract
             $material->fields->where('type', Field::TYPE_AUTHOR),
             new FieldTransformer()
         );
+    }
+
+    public function includeLicence(Material $material): Item
+    {
+        return $this->item($material->licence, new LicenceTransformer());
     }
 
     protected function getAuthor(Material $material): string

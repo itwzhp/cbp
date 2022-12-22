@@ -40,6 +40,7 @@ use Spatie\Sluggable\SlugOptions;
  * @property-read Collection|Scenario[]   $scenarios
  * @property-read string|null             $author
  * @property-read int|null                $authors_count
+ * @property-read Licence|null            $licence
  *
  * @method static Builder published()
  * @method static Builder search(string $search)
@@ -87,6 +88,11 @@ class Material extends Model implements HasMedia
     public function setups(): HasMany
     {
         return $this->hasMany(Setup::class);
+    }
+
+    public function licence(): BelongsTo
+    {
+        return $this->belongsTo(Licence::class);
     }
 
     public function scenarios(): HasMany

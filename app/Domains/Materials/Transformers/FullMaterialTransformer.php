@@ -10,5 +10,6 @@ class FullMaterialTransformer extends DefaultMaterialTransformer
         'fields',
         'setups',
         'scenarios',
+        'licence',
     ];
 }
