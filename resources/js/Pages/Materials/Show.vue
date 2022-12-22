@@ -33,10 +33,9 @@ const setActiveTab = (id) => {
                         </div>
                     </div>
                     <Print>
-                        <!-- // TODO: zrobić tę ikonkę realnie okrągłą i wyśrodkowaną -->
-                        <div class="rounded-full bg-gray-200 p-3 w-11 h-11 text-center">
+                        <button class="w-11 h-11 rounded-full bg-gray-200">
                             <font-awesome-icon icon="fa-print"/>
-                        </div>
+                        </button>
                     </Print>
                 </div>
             </div>
@@ -60,13 +59,13 @@ const setActiveTab = (id) => {
 
                 <div>
                     <div class="flex mt-5 mb-3">
-                        <div class="flex-1 text-center font-bold border-b-2 cursor-pointer"
+                        <div class="print:hidden flex-1 text-center font-bold border-b-2 cursor-pointer"
                              :class="activeTab == 0 ? 'border-zhp-700 text-zhp-700' : ''"
                              @click="setActiveTab(0)"
                         >
                             Informacje o publikacji
                         </div>
-                        <div class="flex-1 text-center font-bold border-b-2 cursor-pointer"
+                        <div class="print:hidden flex-1 text-center font-bold border-b-2 cursor-pointer"
                              :class="activeTab == 1 ? 'border-zhp-700 text-zhp-700' : ''"
                              @click="setActiveTab(1)"
                         >
@@ -76,7 +75,14 @@ const setActiveTab = (id) => {
 
                     <!-- // TODO: na wersji do wydruku chcemy mieć albo tylko drugi tab widoczny, albo oba jeden pod drugim - doprecyzuję
                          // TODO: to z nimi, ale pewnie trzeba będzie tu zrobić jakiegoś miksa stylów z tailwinda zamiast tego v-if -->
-                    <div v-if="activeTab === 0">
+
+                    <!-- // TODO coś tam nakleciłem :) jest jedno pod drugim -->
+                    <div class="print:block" :class="{ hidden: activeTab !== 0}">
+                        <div class="hidden print:flex mt-5 mb-3">
+                            <div class="flex-1 text-center font-bold border-b-2 cursor-pointer border-zhp-700 text-zhp-700">
+                                Informacje o publikacji
+                            </div>
+                        </div>
                         <h3 class="text-lg font-bold mb-2 mt-4">Pełny opis</h3>
                         <div v-html="$page.props.material.content" class="py-3 text-justify"></div>
 
@@ -88,8 +94,12 @@ const setActiveTab = (id) => {
 
                     </div>
 
-                    <div v-if="activeTab === 1">
-
+                    <div class="print:block" :class="{ hidden: activeTab !== 1}">
+                        <div class="hidden print:flex mt-5 mb-3">
+                            <div class="flex-1 text-center font-bold border-b-2 cursor-pointer border-zhp-700 text-zhp-700">
+                                Konspekt i materiał
+                            </div>
+                        </div>
                         <div v-if="$page.props.material.setups.length > 0">
                             <h3 class="text-lg font-bold mt-4 mb-2">
                                 Informacje organizacyjne
