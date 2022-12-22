@@ -125,7 +125,7 @@ const setActiveTab = (id) => {
                         <div class="mt-5">
                             <div class="flex justify-between content-center items-center">
                                 <h4 class="text-lg font-semibold mb-2">Załączniki do wydruku</h4>
-                                <!-- todo: dodać spinner na przycisk pobierania wszystkich załączników - przygotowanie zipa może chwilę potrwać-->
+                                <!-- // TODO: dodać spinner na przycisk pobierania wszystkich załączników - przygotowanie zipa może chwilę potrwać-->
                                 <a :href="route('materials.download', $page.props.material.slug)">
                                     <i class="fa fa-download"></i> Pobierz wszystkie załączniki
                                 </a>

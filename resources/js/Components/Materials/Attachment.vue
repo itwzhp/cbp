@@ -63,10 +63,10 @@ const details = new Map([
 
 </script>
 <template>
-    <div class="flex items-start mb-3">
-        <div class="p-3 rounded-full bg-gray-200">
+    <div class="flex items-center mb-3">
+        <button class="w-11 h-11 rounded-full bg-gray-200 cursor-default">
             <i class="fa-regular" :class="mimeToIcon(this.attachment.mime)"></i>
-        </div>
+        </button>
         <div class="pl-3">
             <div class="flex">
                 <h5 class="font-semibold mr-5">{{ this.attachment.name }}</h5>
