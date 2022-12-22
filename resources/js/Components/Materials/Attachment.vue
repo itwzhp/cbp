@@ -64,7 +64,7 @@ const details = new Map([
 </script>
 <template>
     <div class="flex items-center mb-3">
-        <button class="w-11 h-11 rounded-full bg-gray-200 cursor-default">
+        <button class="w-9 h-9 rounded-full bg-gray-200 cursor-default">
             <i class="fa-regular" :class="mimeToIcon(this.attachment.mime)"></i>
         </button>
         <div class="pl-3">
