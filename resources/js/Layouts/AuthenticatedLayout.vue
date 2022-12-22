@@ -208,7 +208,7 @@ const headline = ref(null);
             </div>
 
             <!-- Page Content -->
-            <main id="main-content" class="main-content" :style="`height: calc(100vh - ${20 + (headline?.clientHeight || 0)}px); overflow: auto`">
+            <main id="main-content" class="main-content" :style="`height: calc(100vh - ${headline?.clientHeight || 0}px); overflow: auto`">
                 <slot/>
             </main>
         </div>
