@@ -22,18 +22,18 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 /**
- * @property int                          id
- * @property int                          user_id
- * @property string                       title
- * @property string                       slug
- * @property string|null                  description
- * @property int|null                     wp_id
- * @property MaterialState                state
- * @property Carbon                       created_at
- * @property Carbon                       updated_at
- * @property Carbon|null                  published_at
+ * @property int           $id
+ * @property int           $user_id
+ * @property string        $title
+ * @property string        $slug
+ * @property string|null   $description
+ * @property int|null      $wp_id
+ * @property MaterialState $state
+ * @property Carbon        $created_at
+ * @property Carbon        $updated_at
+ * @property Carbon|null   $published_at
  * @property-read Collection|Attachment[] $attachments
- * @property-read User                    owner
+ * @property-read User                    $owner
  * @property-read Collection|Tag[]        $tags
  * @property-read Collection|Field[]      $fields
  * @property-read Collection|Setup[]      $setups

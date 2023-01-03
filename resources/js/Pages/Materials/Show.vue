@@ -122,7 +122,7 @@ const setActiveTab = (id) => {
                         </div>
 
 
-                        <div class="mt-5">
+                        <div class="mt-5" v-if="$page.props.material.attachments.length > 0">
                             <div class="flex justify-between content-center items-center">
                                 <h4 class="text-lg font-semibold mb-2">Załączniki do wydruku</h4>
                                 <!-- // TODO: dodać spinner na przycisk pobierania wszystkich załączników - przygotowanie zipa może chwilę potrwać-->
