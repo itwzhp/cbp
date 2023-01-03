@@ -132,15 +132,6 @@ class Material extends Model implements HasMedia
         return $builder->when($search, function (Builder $query, string $search) {
             $query->whereRaw('match(title, description) against (? in boolean mode)', [$search]);
         });
-
-//        if (empty($search)) {
-//            return;
-//        }
-
-//        $builder->where(function (Builder $builder) use ($search) {
-//            $builder->where('title', 'like', "%{$search}%")
-//                ->orWhere('description', 'like', "%{$search}%");
-//        });
     }
 
     public function scopeWithAuthor(Builder $builder): Builder
@@ -203,7 +194,7 @@ class Material extends Model implements HasMedia
         $this->addMediaCollection('cover')
             ->useFallbackUrl(url('/images/scout.jpg'))
             ->useFallbackUrl(url('/images/scout_thumb.jpg'), 'thumb')
-            ->useFallbackUrl(url('/images/scout_thumb.jpg'), 'cover')
+            ->useFallbackUrl(url('/images/scout_cover.jpg'), 'cover')
             ->singleFile();
     }
 
