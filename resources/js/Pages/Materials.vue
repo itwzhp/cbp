@@ -62,11 +62,11 @@ onUnmounted(() => {
           <div class="p-6 border-b border-gray-200">
             <div v-if="store.getSearchInput?.length || store.getTagIds?.length">
               <div v-if="store.getSearchInput?.length" class="pb-2">
-                <div>Fraza:</div> 
+                <div>Fraza:</div>
                 <SearchInputBadge />
               </div>
               <div v-if="store.getTagIds?.length">
-                <div>Tagi:</div>
+                <div>Kategorie:</div>
                 <template v-for="(item, index) in store.getTagDetails" :key="index">
                   <TagBadge :tag="item" />
                 </template>
