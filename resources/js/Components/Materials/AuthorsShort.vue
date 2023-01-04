@@ -1,54 +1,36 @@
 <script setup>
-import {computed} from "vue";
+  import { computed } from "vue";
 
-const props = defineProps({
+  const props = defineProps({
     fields: {
         type: Array,
         required: true
     }
-});
-
-const authors = computed(() => {
-    let group = props.fields.filter((item) => {
-        return item.type === 'author';
-    });
-
-    // TODO: trochę wymiękłem jak się dostać tutaj do tych elementów. Powyższy filter powinien zawsze odfiltrować tablicę
-    // TODO: do jednego elementu, który zawiera pola type i fields
-    return group.fields;
-})
-const reviewers = computed(() => {
-    let group = props.fields.filter((item) => {
-        return item.type === 'reviewer';
-    });
-
-    return group.fields;
-})
-const redactors = computed(() => {
-    let group = props.fields.filter((item) => {
-        return item.type === 'redactor';
-    });
-
-    return group.fields;
-})
-
+  });
+  const filterFields = (type) => {
+    let group = props.fields.filter((item) => item.type === type);
+    return group.length ? group[0].fields : [];
+  };
+  const authors = computed(() => filterFields('author'));
+  const reviewers = computed(() => filterFields('reviewer'));
+  const redactors = computed(() => filterFields('redactor'));
 </script>
 
 <template>
-    <div>
-        <h3>Autorzy:</h3>
-        <div v-for="author in authors">
-            {{ author }}
-        </div>
-
-        <h3>Redaktorzy:</h3>
-        <div v-for="redactor in redactors">
-            {{ redactor }}
-        </div>
-
-        <h3>Recenzenci:</h3>
-        <div v-for="reviewer in reviewers">
-            {{ reviewer }}
-        </div>
+  <div>
+    <h3 class="font-bold">Autorzy:</h3>
+    <div v-for="(author, key) in authors" :key="key">
+      <h5 class="text-sm">{{ author.value }}</h5>
     </div>
+
+    <h3 class="font-bold mt-3">Redaktorzy:</h3>
+    <div v-for="(redactor, key) in redactors" :key="key">
+      <h5 class="text-sm">{{ redactor.value }}</h5>
+    </div>
+
+    <h3 class="font-bold mt-3">Recenzenci:</h3>
+    <div v-for="(reviewer, key) in reviewers" :key="key">
+      <h5 class="text-sm">{{ reviewer.value }}</h5>
+    </div>
+  </div>
 </template>
