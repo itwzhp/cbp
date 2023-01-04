@@ -9,6 +9,7 @@ import Scenario from "@/Components/Materials/Scenario.vue";
 import Print from "@/Components/Print.vue";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import AuthorsShort from "@/Components/Materials/AuthorsShort.vue";
+import Avatar from "@/Components/Avatar.vue";
 
 let activeTab = ref(0);
 
@@ -73,10 +74,6 @@ const setActiveTab = (id) => {
                         </div>
                     </div>
 
-                    <!-- // TODO: na wersji do wydruku chcemy mieć albo tylko drugi tab widoczny, albo oba jeden pod drugim - doprecyzuję
-                         // TODO: to z nimi, ale pewnie trzeba będzie tu zrobić jakiegoś miksa stylów z tailwinda zamiast tego v-if -->
-
-                    <!-- // TODO coś tam nakleciłem :) jest jedno pod drugim -->
                     <div class="print:block" :class="{ hidden: activeTab !== 0}">
                         <div class="hidden print:flex mt-5 mb-3">
                             <div class="flex-1 text-center font-bold border-b-2 cursor-pointer border-zhp-700 text-zhp-700">
@@ -141,7 +138,33 @@ const setActiveTab = (id) => {
         </template>
 
         <template #sidebar>
-            sidebar
+            <div class="p-3">
+                <h3 class="text-lg font-bold">Materiał przeznaczony dla</h3>
+                <div class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5">
+                    <Avatar imgSrc="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"/>
+                    <Avatar />
+                    <Avatar imgSrc="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"/>
+                </div>
+                <hr class="mt-5 mb-5">
+                <h3 class="text-lg font-bold mb-2 mt-4">Stopka redakcyjna</h3>
+                <h5 class="text-md font-bold mb-2">Autorzy</h5>
+                <div v-for="(value, key) in [1,2,3]" :key="key" class="grid grid-cols-4 gap-1 place-items-center mt-5 mb-5">
+                    <div class="col-span-1">
+                        <Avatar />
+                    </div>
+                    <div class="col-span-3">
+                        <h3 class="text-md">hm. Adam Kowalski</h3>
+                        <h3 class="text-xs leading-4">Chorągiew Stołeczna, hufiec Zielonka</h3>
+                    </div>
+                </div>
+                <hr class="mt-5 mb-5">
+                <h3 class="text-lg font-bold">Cele Zrównoważonego Rozwoju</h3>
+                <div class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5">
+                    <Avatar imgSrc="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"/>
+                    <Avatar />
+                    <Avatar imgSrc="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"/>
+                </div>
+            </div>
         </template>
 
     </SidebarLayout>
