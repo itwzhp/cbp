@@ -29,7 +29,14 @@ export const useSearchStore = defineStore("search", {
     getLoading: (state) => state.loading,
     getTagIds: (state) => state.tagIds,
     getTaxonomiesData: (state) => state.taxonomies,
-    getTagMode: (state) => state.tagMode
+    getTagMode: (state) => state.tagMode,
+    getTagDetails: (state) => {
+      let flatTaxonomies = [];
+      state.taxonomies.forEach((taxonomie) => {
+        flatTaxonomies = [...flatTaxonomies, ...taxonomie.tags];
+      });
+      return flatTaxonomies.filter((taxonomie) => state.tagIds.includes(taxonomie.id));
+    }
   },
   actions: {
     displayDialog() {
@@ -129,6 +136,10 @@ export const useSearchStore = defineStore("search", {
         this.tagMode = mode;
         return this.getData();
       }
+    },
+    async clearInput() {
+      this.input = null;
+      return this.getData();
     }
   },
 });

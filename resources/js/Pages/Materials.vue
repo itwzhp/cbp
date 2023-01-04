@@ -4,6 +4,8 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head} from "@inertiajs/inertia-vue3";
 import {useSearchStore} from "@/store/search.store";
 import MaterialCard from "@/Components/MaterialCard.vue";
+import TagBadge from "@/Components/TagBadge.vue";
+import SearchInputBadge from "@/Components/SearchInputBadge.vue";
 import {watchEffect} from "@vue/runtime-core";
 import Spinner from "@/Components/Spinner.vue";
 import {usePage} from '@inertiajs/inertia-vue3'
@@ -58,6 +60,19 @@ onUnmounted(() => {
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 border-b border-gray-200">
+            <div v-if="store.getSearchInput?.length || store.getTagIds?.length">
+              <div v-if="store.getSearchInput?.length" class="pb-2">
+                <div>Fraza:</div> 
+                <SearchInputBadge />
+              </div>
+              <div v-if="store.getTagIds?.length">
+                <div>Tagi:</div>
+                <template v-for="(item, index) in store.getTagDetails" :key="index">
+                  <TagBadge :tag="item" />
+                </template>
+              </div>
+              <hr class="mt-5 mb-5">
+            </div>
             <div v-if="store.getSearchData?.length === 0 && store.getLoading" class="text-center pt-2">
               <Spinner />
             </div>

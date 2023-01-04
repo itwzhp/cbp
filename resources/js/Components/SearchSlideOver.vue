@@ -1,4 +1,5 @@
 <script setup>
+  import { watch } from "@vue/runtime-core";
   import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
   import { Inertia } from "@inertiajs/inertia";
   import { useForm } from '@inertiajs/inertia-vue3';
@@ -18,6 +19,13 @@
       Inertia.get(route('materials.index'));
     }
   };
+
+  watch(store, (newValue) => {
+    if (!store.getSearchInput) {
+      form.search = null;
+    }
+  })
+
   const tagSelected = (tag) => store.pushTags([tag]).then(() => redirect());
   const tagRemoved = (tag) => store.removeTags([tag]).then(() => redirect());
   const tagModeChanged = (mode) => store.setTagMode(mode).then(() => redirect());
