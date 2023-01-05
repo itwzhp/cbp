@@ -150,7 +150,14 @@ const download = async (url) => {
                                         </div>
                                     </template>
                                     <template v-else>
-                                        <i class="fa fa-download"></i> Pobierz wszystkie załączniki
+                                        <div class="grid grid-cols-4 gap-1 place-items-end">
+                                            <div class="col-span-1 mr-2">
+                                                <i class="fa fa-download"></i>
+                                            </div>
+                                            <div class="col-span-3 w-full">
+                                                Pobierz wszystkie załączniki
+                                            </div>
+                                        </div>
                                     </template>
                                 </button>
                             </div>
