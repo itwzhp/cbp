@@ -3,12 +3,12 @@
   import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
   import { Inertia } from "@inertiajs/inertia";
   import { useForm } from '@inertiajs/inertia-vue3';
-  import { useSearchStore } from "../store/search.store";
+  import { useSearchStore } from "../../store/search.store";
   import PrimaryButton from '@/Components/PrimaryButton.vue';
   import TextInput from '@/Components/TextInput.vue';
   import InputError from '@/Components/InputError.vue';
-  import Taxonomy from '@/Components/Taxonomy.vue';
-  import TagSearchMode from '@/Components/TagSearchMode.vue';
+  import Taxonomy from '@/Components/Materials/Taxonomy.vue';
+  import TagSearchMode from '@/Components/Materials/TagSearchMode.vue';
 
   const store = useSearchStore();
   store.getTaxonomies().then();

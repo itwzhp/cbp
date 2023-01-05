@@ -6,7 +6,7 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import NavButton from '@/Components/NavButton.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import SearchSlideOver from '@/Components/SearchSlideOver.vue';
+import SearchSlideOver from '@/Components/Materials/SearchSlideOver.vue';
 import {useSearchStore} from "@/store/search.store";
 import {Link} from '@inertiajs/inertia-vue3';
 

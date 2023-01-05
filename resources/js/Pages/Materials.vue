@@ -4,8 +4,8 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {Head} from "@inertiajs/inertia-vue3";
 import {useSearchStore} from "@/store/search.store";
 import MaterialCard from "@/Components/MaterialCard.vue";
-import TagBadge from "@/Components/TagBadge.vue";
-import SearchInputBadge from "@/Components/SearchInputBadge.vue";
+import TagBadge from "@/Components/Materials/TagBadge.vue";
+import SearchInputBadge from "@/Components/Materials/SearchInputBadge.vue";
 import {watchEffect} from "@vue/runtime-core";
 import Spinner from "@/Components/Spinner.vue";
 import {usePage} from '@inertiajs/inertia-vue3'
