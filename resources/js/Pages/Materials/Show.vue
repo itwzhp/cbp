@@ -1,4 +1,6 @@
 <script setup>
+import axios from "axios";
+import fileDownload from 'js-file-download'
 import {Head} from '@inertiajs/inertia-vue3';
 import Attachment from "@/Components/Materials/Attachment.vue";
 import TaxonomyBadge from "@/Components/Materials/TaxonomyBadge.vue";
@@ -11,11 +13,24 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import AuthorsShort from "@/Components/Materials/AuthorsShort.vue";
 import Authors from "@/Components/Materials/Authors.vue";
 import Avatar from "@/Components/Avatar.vue";
+import Spinner from "@/Components/Spinner.vue";
 
 let activeTab = ref(0);
+const downloadInProgress = ref(false);
 
 const setActiveTab = (id) => {
     activeTab.value = id;
+}
+
+const download = async (url) => {
+    try {
+        downloadInProgress.value = true;
+        const request = await axios.get(url, { responseType: 'blob' });
+        fileDownload(request.data, request.headers['content-disposition'].split('filename=')[1]);
+        downloadInProgress.value = false;
+    } catch (error) {
+        downloadInProgress.value = false;
+    }
 }
 
 </script>
@@ -123,10 +138,21 @@ const setActiveTab = (id) => {
                         <div class="mt-5" v-if="$page.props.material.attachments.length > 0">
                             <div class="flex justify-between content-center items-center">
                                 <h4 class="text-lg font-semibold mb-2">Załączniki do wydruku</h4>
-                                <!-- // TODO: dodać spinner na przycisk pobierania wszystkich załączników - przygotowanie zipa może chwilę potrwać-->
-                                <a :href="route('materials.download', $page.props.material.slug)">
-                                    <i class="fa fa-download"></i> Pobierz wszystkie załączniki
-                                </a>
+                                <button @click="download(route('materials.download', $page.props.material.slug))" :disabled="downloadInProgress">
+                                    <template v-if="downloadInProgress">
+                                        <div class="grid grid-cols-4 gap-1 place-items-center">
+                                            <div class="col-span-1">
+                                                <Spinner width="6" height="6" />
+                                            </div>
+                                            <div class="col-span-3 w-full">
+                                                Trwa pobieranie
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <i class="fa fa-download"></i> Pobierz wszystkie załączniki
+                                    </template>
+                                </button>
                             </div>
                             <Attachment v-for="(attachment, key) in $page.props.material.attachments"
                                         :key="key" :attachment="attachment"
