@@ -13,13 +13,13 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="flex my-2 border-b border-gray-200">
-        <div>
+    <div class="flex flex-row my-2 border-b border-gray-200">
+        <div class="basis-1/12">
             <div class=" text-2xl w-10 h-10 text-center flex-1">
                 {{ itemId + 1 }}
             </div>
         </div>
-        <div class="flex-grow px-2">
+        <div class="basis-9/12">
             <h5 class="font-bold">
                 {{ scenario.title }}
             </h5>
@@ -33,10 +33,11 @@ const props = defineProps({
                 </div>
             </div>
         </div>
-        <div class="flex-1">
+        <div class="basis-2/12">
             <span class="font-bold">{{ scenario.form }}</span>
             <span v-if="scenario.duration">
-                {{ scenario.duration }} min.
+                <br>
+                {{ scenario.duration }} min
             </span>
         </div>
     </div>
