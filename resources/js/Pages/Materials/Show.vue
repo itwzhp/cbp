@@ -36,7 +36,7 @@ const download = async (url) => {
 </script>
 
 <template>
-    <Head title="Materials"/>
+    <Head :title="$page.props.material.title"/>
 
     <SidebarLayout>
         <template #default>
