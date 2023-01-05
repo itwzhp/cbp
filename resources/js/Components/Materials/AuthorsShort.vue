@@ -7,13 +7,13 @@
         required: true
     }
   });
-  const filterFields = (type) => {
-    let group = props.fields.filter((item) => item.type === type);
-    return group.length ? group[0].fields : [];
+  const findFields = (type) => {
+    const group = props.fields.find((item) => item.type === type);
+    return group?.fields || [];
   };
-  const authors = computed(() => filterFields('author'));
-  const reviewers = computed(() => filterFields('reviewer'));
-  const redactors = computed(() => filterFields('redactor'));
+  const authors = computed(() => findFields('author'));
+  const redactors = computed(() => findFields('redactor'));
+  const reviewers = computed(() => findFields('reviewer'));
 </script>
 
 <template>
