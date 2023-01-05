@@ -38,7 +38,9 @@ class ZipService
 
     protected function create(Material $material): void
     {
-        $tmpFilename = tempnam('/tmp/', '');
+        $this->ensureDirExists('tmp');
+
+        $tmpFilename = storage_path('tmp/' . uniqid('tmp_zip', true));
 
         $zip = new ZipArchive();
         $zip->open($tmpFilename, ZipArchive::CREATE | ZipArchive::OVERWRITE);
@@ -53,5 +55,18 @@ class ZipService
         $zip->close();
 
         $this->filesystem->put($this->path($material), file_get_contents($tmpFilename));
+
+        unlink($tmpFilename);
+    }
+
+    protected function ensureDirExists(string $path): void
+    {
+        try {
+            if (!mkdir($concurrentDirectory = storage_path($path)) && !is_dir($concurrentDirectory)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $concurrentDirectory));
+            }
+        } catch (\ErrorException $exception) {
+            // dir exists
+        }
     }
 }
