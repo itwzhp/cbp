@@ -1,13 +1,12 @@
 <?php
 namespace App\Domains\Materials\Models;
 
+use App\Domains\Materials\Models\Traits\BelongsToMaterial;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int           id
- * @property int           material_id
  * @property int|null      capacity_min
  * @property int|null      capacity_opt
  * @property int|null      capacity_max
@@ -23,10 +22,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null   participant_clothing
  * @property Carbon        created_at
  * @property Carbon        updated_at
- * @property-read Material $material
  */
 class Setup extends Model
 {
+    use BelongsToMaterial;
+
     protected $fillable = [
         'material_id',
         'capacity_min',
@@ -43,11 +43,6 @@ class Setup extends Model
         'participant_materials',
         'participant_clothing',
     ];
-
-    public function material(): BelongsTo
-    {
-        return $this->belongsTo(Material::class);
-    }
 
     public function isEmpty(): bool
     {

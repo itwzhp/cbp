@@ -36,6 +36,11 @@ class ZipService
             . '.zip';
     }
 
+    public function deleteZipForMaterial(Material $material): void
+    {
+        $this->filesystem->delete($this->path($material));
+    }
+
     protected function create(Material $material): void
     {
         $this->ensureDirExists('tmp');

@@ -1,13 +1,12 @@
 <?php
 namespace App\Domains\Materials\Models;
 
+use App\Domains\Materials\Models\Traits\BelongsToMaterial;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int         id
- * @property int         material_id
  * @property int|null    order
  * @property string|null title
  * @property string|null form
@@ -21,10 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Scenario extends Model
 {
-    protected $guarded = [];
+    use BelongsToMaterial;
 
-    public function material(): BelongsTo
-    {
-        return $this->belongsTo(Material::class);
-    }
+    protected $guarded = [];
 }

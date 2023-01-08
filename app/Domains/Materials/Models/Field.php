@@ -1,19 +1,17 @@
 <?php
 namespace App\Domains\Materials\Models;
 
+use App\Domains\Materials\Models\Traits\BelongsToMaterial;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int           id
- * @property int           material_id
  * @property string        type
  * @property string        value
  * @property Carbon        created_at
  * @property Carbon        updated_at
- * @property-read Material material
  *
  * @method static Builder ofType(string $type)
  * @method static Builder authors()
@@ -21,6 +19,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Field extends Model
 {
+    use BelongsToMaterial;
+
     public const TYPE_AUTHOR = 'author';
     public const TYPE_REDACTOR = 'redactor';
     public const TYPE_REVIEWER = 'reviewer';
@@ -31,11 +31,6 @@ class Field extends Model
     public const TYPE_SCOPE = 'scope';
 
     protected $guarded = [];
-
-    public function material(): BelongsTo
-    {
-        return $this->belongsTo(Material::class);
-    }
 
     public function scopeOfType(Builder $query, string $type): Builder
     {

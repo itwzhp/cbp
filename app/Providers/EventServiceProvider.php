@@ -1,6 +1,8 @@
 <?php
 namespace App\Providers;
 
+use App\Domains\Files\Listeners\ClearCachedZipListener;
+use App\Domains\Materials\Events\MaterialChangedEvent;
 use App\Domains\Users\Events\UserLoggedInViaSocialiteEvent;
 use App\Domains\Users\Listeners\AdjustUserEmailConfirmationListener;
 use Illuminate\Auth\Events\Registered;
@@ -25,6 +27,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserLoggedInViaSocialiteEvent::class => [
             AdjustUserEmailConfirmationListener::class,
+        ],
+        MaterialChangedEvent::class          => [
+            ClearCachedZipListener::class,
+
         ],
     ];
 

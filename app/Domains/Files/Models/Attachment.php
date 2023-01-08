@@ -4,17 +4,15 @@ namespace App\Domains\Files\Models;
 use App\Domains\Files\Enums\PrintColorEnum;
 use App\Domains\Files\Enums\SizeEnum;
 use App\Domains\Files\Enums\ThicknessEnum;
-use App\Domains\Materials\Models\Material;
+use App\Domains\Materials\Models\Traits\BelongsToMaterial;
 use App\Helpers\FilesystemsHelper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 
 /**
  * @property int           id
  * @property string        name
- * @property int           material_id
  * @property int|null      wp_id
  * @property string        path
  * @property string        mime
@@ -28,10 +26,11 @@ use Illuminate\Support\Facades\Storage;
  * @property string|null   paper_color
  * @property Carbon        created_at
  * @property Carbon        updated_at
- * @property-read Material material
  */
 class Attachment extends Model
 {
+    use BelongsToMaterial;
+
     protected $guarded = [];
 
     protected $casts = [
@@ -39,11 +38,6 @@ class Attachment extends Model
         'print_color' => PrintColorEnum::class,
         'thickness'   => ThicknessEnum::class,
     ];
-
-    public function material(): BelongsTo
-    {
-        return $this->belongsTo(Material::class);
-    }
 
     public function url(): string
     {
