@@ -2,6 +2,7 @@
     "preset": "laravel",
     "rules": {
         "single_blank_line_before_namespace": false,
+        "no_blank_lines_before_namespace": true,
         "blank_line_after_opening_tag": false,
         "binary_operator_spaces": {
             "operators": {

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Domains\Materials\Models\Traits;
 
 use App\Domains\Materials\Models\Material;
