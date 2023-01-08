@@ -28,7 +28,6 @@
           </div>
           <div class="col-span-3 w-full">
               <h3 class="text-md leading-4">{{ author.value }}</h3>
-              <!-- <h3 class="text-xs leading-4">Chorągiew Stołeczna, hufiec Zielonka</h3> -->
           </div>
       </div>
     </template>

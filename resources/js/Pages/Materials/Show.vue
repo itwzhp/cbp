@@ -14,6 +14,7 @@ import AuthorsShort from "@/Components/Materials/AuthorsShort.vue";
 import Authors from "@/Components/Materials/Authors.vue";
 import Avatar from "@/Components/Avatar.vue";
 import Spinner from "@/Components/Spinner.vue";
+import Licence from "@/Components/Materials/Licence.vue";
 
 let activeTab = ref(0);
 const downloadInProgress = ref(false);
@@ -134,7 +135,6 @@ const download = async (url) => {
                             ></Scenario>
                         </div>
 
-
                         <div class="mt-5" v-if="$page.props.material.attachments.length > 0">
                             <div class="flex justify-between content-center items-center">
                                 <h4 class="text-lg font-semibold mb-2">Załączniki do wydruku</h4>
@@ -173,6 +173,8 @@ const download = async (url) => {
 
         <template #sidebar>
             <div class="max-w-sm p-3 bg-white border border-gray-200 rounded-md shadow-sm ml-1">
+                <Licence :licence="$page.props.material.licence"/>
+                <hr class="mt-5 mb-5">
                 <h3 class="text-lg font-bold">Materiał przeznaczony dla</h3>
                 <div class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5">
                     <Avatar imgSrc="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"/>

@@ -11,7 +11,9 @@ import { Head } from "@inertiajs/inertia-vue3";
                 <div class="overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 border-b border-gray-200">
                         <div>
+                            <h1 class="text-3xl">Strona główna - co tu ma być?</h1>
                         </div>
+                        <p>Czy jakaś stopka?</p>
                     </div>
                 </div>
             </div>
