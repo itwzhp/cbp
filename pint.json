@@ -26,6 +26,11 @@
         },
         "phpdoc_align": {
             "align": "vertical"
+        },
+        "no_extra_blank_lines": {
+            "tokens": [
+                "extra", "square_brace_block", "return"
+            ]
         }
     }
 }

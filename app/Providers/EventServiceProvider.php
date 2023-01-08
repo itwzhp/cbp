@@ -32,7 +32,6 @@ class EventServiceProvider extends ServiceProvider
         ],
         MaterialChangedEvent::class          => [
             ClearCachedZipListener::class,
-
         ],
     ];
 
