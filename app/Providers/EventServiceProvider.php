@@ -3,6 +3,8 @@ namespace App\Providers;
 
 use App\Domains\Files\Listeners\ClearCachedZipListener;
 use App\Domains\Materials\Events\MaterialChangedEvent;
+use App\Domains\Materials\Models\Material;
+use App\Domains\Materials\Models\Observers\MaterialObserver;
 use App\Domains\Users\Events\UserLoggedInViaSocialiteEvent;
 use App\Domains\Users\Listeners\AdjustUserEmailConfirmationListener;
 use Illuminate\Auth\Events\Registered;
@@ -32,6 +34,13 @@ class EventServiceProvider extends ServiceProvider
             ClearCachedZipListener::class,
 
         ],
+    ];
+
+    /**
+     * @var array<class-string, array<int, class-string>>
+     */
+    protected $observers = [
+        Material::class => [MaterialObserver::class],
     ];
 
     public function boot()
