@@ -25,7 +25,18 @@
             }
         },
         "phpdoc_align": {
-            "align": "vertical"
+            "align": "vertical",
+            "tags": [
+                "method",
+                "param",
+                "property",
+                "property-read",
+                "property-write",
+                "return",
+                "throws",
+                "type",
+                "var"
+            ]
         },
         "no_extra_blank_lines": {
             "tokens": [

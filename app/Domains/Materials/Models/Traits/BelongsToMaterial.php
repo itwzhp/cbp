@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @property int $material_id
+ * @property      int      $material_id
  * @property-read Material $material
  * @mixin Model
  */
