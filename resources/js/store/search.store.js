@@ -127,9 +127,9 @@ export const useSearchStore = defineStore("search", {
       this.tagIds = [...new Set(tags)];
       return this.getData();
     },
-    async removeTags(tagIds) {
+    async removeTags(tagIds, skipRequest) {
       this.tagIds = this.tagIds.filter(tag => !tagIds.includes(tag));
-      return this.getData();
+      return skipRequest ?  Promise.resolve() : this.getData();
     },
     async setTagMode(mode) {
       if (mode !== this.tagMode) {
