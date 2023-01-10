@@ -11,7 +11,7 @@ use Inertia\Inertia;
 
 Route::get('/', WelcomeController::class)->name('welcome');
 
-Route::prefix('/materials')
+Route::prefix('/m')
     ->as('materials.')
     ->group(function () {
         Route::get('/', [MaterialsController::class, 'index'])->name('index');

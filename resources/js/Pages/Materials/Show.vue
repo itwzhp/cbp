@@ -26,7 +26,7 @@ const setActiveTab = (id) => {
 const download = async (url) => {
     try {
         downloadInProgress.value = true;
-        const request = await axios.get(url, { responseType: 'blob' });
+        const request = await axios.get(url, {responseType: 'blob'});
         fileDownload(request.data, request.headers['content-disposition'].split('filename=')[1]);
         downloadInProgress.value = false;
     } catch (error) {
@@ -73,8 +73,9 @@ const download = async (url) => {
                     <a :href="route('materials.show', $page.props.material.slug)">{{ $page.props.material.title }}</a>
                 </h2>
 
-                <AuthorsShort :fields="$page.props.material.fields"/>
-
+                <div class="hidden print:block">
+                    <AuthorsShort :fields="$page.props.material.fields"/>
+                </div>
                 <div>
                     <div class="flex mt-5 mb-3">
                         <div class="print:hidden flex-1 text-center font-bold border-b-2 cursor-pointer"
@@ -93,7 +94,8 @@ const download = async (url) => {
 
                     <div class="print:block" :class="{ hidden: activeTab !== 0}">
                         <div class="hidden print:flex mt-5 mb-3">
-                            <div class="flex-1 text-center font-bold border-b-2 cursor-pointer border-zhp-700 text-zhp-700">
+                            <div
+                                class="flex-1 text-center font-bold border-b-2 cursor-pointer border-zhp-700 text-zhp-700">
                                 Informacje o publikacji
                             </div>
                         </div>
@@ -110,7 +112,8 @@ const download = async (url) => {
 
                     <div class="print:block" :class="{ hidden: activeTab !== 1}">
                         <div class="hidden print:flex mt-5 mb-3">
-                            <div class="flex-1 text-center font-bold border-b-2 cursor-pointer border-zhp-700 text-zhp-700">
+                            <div
+                                class="flex-1 text-center font-bold border-b-2 cursor-pointer border-zhp-700 text-zhp-700">
                                 Konspekt i materiał
                             </div>
                         </div>
@@ -138,11 +141,12 @@ const download = async (url) => {
                         <div class="mt-5" v-if="$page.props.material.attachments.length > 0">
                             <div class="flex justify-between content-center items-center">
                                 <h4 class="text-lg font-semibold mb-2">Załączniki do wydruku</h4>
-                                <button @click="download(route('materials.download', $page.props.material.slug))" :disabled="downloadInProgress">
+                                <button @click="download(route('materials.download', $page.props.material.slug))"
+                                        :disabled="downloadInProgress">
                                     <template v-if="downloadInProgress">
                                         <div class="grid grid-cols-4 gap-1 place-items-center">
                                             <div class="col-span-1">
-                                                <Spinner width="6" height="6" />
+                                                <Spinner width="6" height="6"/>
                                             </div>
                                             <div class="col-span-3 w-full">
                                                 Trwa pobieranie
@@ -150,7 +154,7 @@ const download = async (url) => {
                                         </div>
                                     </template>
                                     <template v-else>
-                                        <div class="grid grid-cols-4 gap-1 place-items-end">
+                                        <div class="grid grid-cols-4 gap-1 place-items-end  print:hidden">
                                             <div class="col-span-1 mr-2">
                                                 <i class="fa fa-download"></i>
                                             </div>
@@ -173,21 +177,12 @@ const download = async (url) => {
 
         <template #sidebar>
             <div class="max-w-sm p-3 bg-white border border-gray-200 rounded-md shadow-sm ml-1">
-                <Licence :licence="$page.props.material.licence"/>
-                <hr class="mt-5 mb-5">
-                <h3 class="text-lg font-bold">Materiał przeznaczony dla</h3>
-                <div class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5">
-                    <Avatar imgSrc="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"/>
-                    <Avatar />
-                    <Avatar imgSrc="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"/>
-                </div>
-                <hr class="mt-5 mb-5">
-                <Authors :fields="$page.props.material.fields" />
+                <Authors :fields="$page.props.material.fields"/>
                 <hr class="mt-5 mb-5">
                 <h3 class="text-lg font-bold">Cele Zrównoważonego Rozwoju</h3>
                 <div class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5">
                     <Avatar imgSrc="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"/>
-                    <Avatar />
+                    <Avatar/>
                     <Avatar imgSrc="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"/>
                 </div>
             </div>
