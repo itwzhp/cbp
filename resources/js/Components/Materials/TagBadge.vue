@@ -1,10 +1,17 @@
 <script setup>
+  import { Inertia } from "@inertiajs/inertia";
   import { useSearchStore } from "@/store/search.store";
   const props = defineProps({
     tag: { type: Object, required: true }
   });
   const store = useSearchStore();
-  const tagRemove = (tag) => store.removeTags([tag]);
+  const isMaterialsIndexRoute = route().current() ===  'materials.index';
+  const redirect = () => {
+    if (!isMaterialsIndexRoute) {
+      Inertia.get(route('materials.index'));
+    }
+  };
+  const tagRemove = (tag) => store.removeTags([tag], !isMaterialsIndexRoute).then(() => redirect());
 </script>
 
 <template>
