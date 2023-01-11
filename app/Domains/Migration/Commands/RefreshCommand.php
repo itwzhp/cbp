@@ -23,7 +23,6 @@ class RefreshCommand extends Command
 
         $this->info('Removing duplicate attachments and creating cover photos');
         $this->call(RemoveDuplicateAttachmentsCommand::class);
-        $this->call(AttachImagesCommand::class);
 
         $this->info('Attaching new taxonomies');
         $this->call(TaxonomyChangerCommand::class);
