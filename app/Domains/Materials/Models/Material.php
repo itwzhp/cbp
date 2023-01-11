@@ -1,6 +1,7 @@
 <?php
 namespace App\Domains\Materials\Models;
 
+use App\Domains\Files\ImagesHelper;
 use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\Factories\MaterialFactory;
 use App\Domains\Materials\States\MaterialState;
@@ -193,7 +194,7 @@ class Material extends Model implements HasMedia
     {
         $this->addMediaCollection('cover')
             ->useFallbackUrl(url('/images/scout.jpg'))
-            ->useFallbackUrl(url('/images/scout_thumb.jpg'), 'thumb')
+            ->useFallbackUrl(ImagesHelper::getFallbackForMaterial($this), 'thumb')
             ->useFallbackUrl(url('/images/scout_cover.jpg'), 'cover')
             ->singleFile();
     }
