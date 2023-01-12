@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property      int      $material_id
  * @property-read Material $material
+ *
  * @mixin Model
  */
 trait BelongsToMaterial

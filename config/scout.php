@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'driver' => env('SCOUT_DRIVER', 'database'),
+    'driver'       => env('SCOUT_DRIVER', 'database'),
 
     /*
     |--------------------------------------------------------------------------
@@ -27,7 +27,7 @@ return [
     |
     */
 
-    'prefix' => env('SCOUT_PREFIX', ''),
+    'prefix'       => env('SCOUT_PREFIX', ''),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ return [
     |
     */
 
-    'queue' => env('SCOUT_QUEUE', false),
+    'queue'        => env('SCOUT_QUEUE', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -66,7 +66,7 @@ return [
     |
     */
 
-    'chunk' => [
+    'chunk'        => [
         'searchable'   => 500,
         'unsearchable' => 500,
     ],
@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'soft_delete' => false,
+    'soft_delete'  => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -97,7 +97,7 @@ return [
     |
     */
 
-    'identify' => env('SCOUT_IDENTIFY', false),
+    'identify'     => env('SCOUT_IDENTIFY', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -110,7 +110,7 @@ return [
     |
     */
 
-    'algolia' => [
+    'algolia'      => [
         'id'     => env('ALGOLIA_APP_ID', ''),
         'secret' => env('ALGOLIA_SECRET', ''),
     ],
@@ -128,7 +128,7 @@ return [
     |
     */
 
-    'meilisearch' => [
+    'meilisearch'  => [
         'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
         'key'  => env('MEILISEARCH_KEY', null),
     ],

@@ -18,14 +18,14 @@ return [
     |
     */
 
-    'disks' => [
-        'local' => [
+    'disks'   => [
+        'local'                    => [
             'driver' => 'local',
             'root'   => storage_path('app'),
             'throw'  => false,
         ],
 
-        'public' => [
+        'public'                   => [
             'driver'     => 'local',
             'root'       => storage_path('app/public'),
             'url'        => env('APP_URL') . '/storage',
@@ -33,7 +33,7 @@ return [
             'throw'      => false,
         ],
 
-        's3' => [
+        's3'                       => [
             'driver'                  => 's3',
             'key'                     => env('AWS_ACCESS_KEY_ID'),
             'secret'                  => env('AWS_SECRET_ACCESS_KEY'),
@@ -45,7 +45,7 @@ return [
             'throw'                   => false,
         ],
 
-        FilesystemsHelper::LOCAL => [
+        FilesystemsHelper::LOCAL   => [
             'driver'     => 'local',
             'root'       => storage_path('wp'),
             'url'        => env('APP_URL') . '/wp',
@@ -53,7 +53,7 @@ return [
             'throw'      => false,
         ],
 
-        FilesystemsHelper::PUBLIC => [
+        FilesystemsHelper::PUBLIC  => [
             'driver'            => 'azure',
             'name'              => env('AZURE_STORAGE_NAME'),
             'key'               => env('AZURE_STORAGE_KEY'),
@@ -63,7 +63,7 @@ return [
             'connection_string' => env('AZURE_STORAGE_CONNECTION_STRING'),
         ],
 
-        FilesystemsHelper::IMAGES => [
+        FilesystemsHelper::IMAGES  => [
             'driver'            => 'azure',
             'name'              => env('AZURE_STORAGE_NAME'),
             'key'               => env('AZURE_STORAGE_KEY'),
@@ -84,7 +84,7 @@ return [
         ],
     ],
 
-    'links' => [
+    'links'   => [
         public_path('storage') => storage_path('app/public'),
     ],
 ];

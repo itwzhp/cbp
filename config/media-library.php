@@ -173,7 +173,7 @@ return [
      */
     'media_downloader'                          => Spatie\MediaLibrary\Downloaders\DefaultDownloader::class,
 
-    'remote' => [
+    'remote'                                    => [
         /*
          * Any extra headers that should be included when uploading media to
          * a remote disk. Even though supported headers may vary between
@@ -187,7 +187,7 @@ return [
         ],
     ],
 
-    'responsive_images'               => [
+    'responsive_images'                         => [
         /*
          * This class is responsible for calculating the target widths of the responsive
          * images. By default we optimize for filesize and create variations that each are 30%
@@ -215,7 +215,7 @@ return [
      * the Media Library Pro Vue and React components to move uploaded files
      * in a S3 bucket to their right place.
      */
-    'enable_vapor_uploads'            => env('ENABLE_MEDIA_LIBRARY_VAPOR_UPLOADS', false),
+    'enable_vapor_uploads'                      => env('ENABLE_MEDIA_LIBRARY_VAPOR_UPLOADS', false),
 
     /*
      * When converting Media instances to response the media library will add
@@ -226,11 +226,11 @@ return [
      *
      * More info: https://css-tricks.com/native-lazy-loading/
      */
-    'default_loading_attribute_value' => null,
+    'default_loading_attribute_value'           => null,
 
     /*
      * You can specify a prefix for that is used for storing all media.
      * If you set this to `/my-subdir`, all your media will be stored in a `/my-subdir` directory.
      */
-    'prefix'                          => env('MEDIA_PREFIX', ''),
+    'prefix'                                    => env('MEDIA_PREFIX', ''),
 ];
