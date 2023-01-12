@@ -36,26 +36,13 @@ class ImagesHelper
         $troopDoesTag = $material->tags->where('taxonomy_id', $troopDoesTaxonomy->id ?? 0)->first();
 
         if ($troopDoesTag !== null) {
-            $troopDoesSlug = static::getSlugFromTag($troopDoesTag);
-
-            return url('/images/' . static::TROOP_DOES_LUT[$troopDoesSlug]);
+            return $troopDoesTag->thumb();
         }
-
-//        $typeTaxonomy = Taxonomy::where('slug', static::TYPE_SLUG)->first();
-//
-//        /** @var Tag $typeTag */
-//        $typeTag = $material->tags->where('taxonomy_id', $typeTag->id ?? 0)->first();
-//
-//        if ($typeTag !== null) {
-//            $typeSlug = static::getSlugFromTag($typeTag);
-//
-//            return url('/images/' . static::TYPE_LUT[$typeSlug]);
-//        }
 
         return url('/images/scout_thumb.jpg');
     }
 
-    protected static function getSlugFromTag(Tag $tag): string
+    public static function getSlugFromTag(Tag $tag): string
     {
         $slugExploded = explode('-', $tag->slug);
         unset($slugExploded[0]);

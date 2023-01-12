@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -21,10 +22,11 @@ use Spatie\Sluggable\SlugOptions;
  * @property-read Taxonomy taxonomy
  * @property-read Tag|null parent
  */
-class Tag extends Model
+class Tag extends Model implements HasMedia
 {
     use HasSlug;
     use HasFactory;
+    use TagHasMedia;
 
     protected $fillable = [
         'name',

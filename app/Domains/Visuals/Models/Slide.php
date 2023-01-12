@@ -14,7 +14,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property Carbon created_at
  * @property Carbon updated_at
  */
-class Slider extends Model implements HasMedia
+class Slide extends Model implements HasMedia
 {
     use InteractsWithMedia;
 

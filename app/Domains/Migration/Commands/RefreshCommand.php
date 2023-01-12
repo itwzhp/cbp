@@ -26,5 +26,8 @@ class RefreshCommand extends Command
 
         $this->info('Attaching new taxonomies');
         $this->call(TaxonomyChangerCommand::class);
+
+        $this->info('Attaching images to tags');
+        $this->call(AttachImagesToTagsCommand::class);
     }
 }
