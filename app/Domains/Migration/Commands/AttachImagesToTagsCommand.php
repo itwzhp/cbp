@@ -23,6 +23,7 @@ class AttachImagesToTagsCommand extends Command
             $slug = ImagesHelper::getSlugFromTag($tag);
 
             $tag->addMedia(public_path('/images/' . ImagesHelper::TROOP_DOES_LUT[$slug]))
+                ->preservingOriginal()
                 ->toMediaCollection('thumb');
         }
     }

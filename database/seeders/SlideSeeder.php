@@ -18,6 +18,7 @@ class SlideSeeder extends Seeder
             'url' => route('materials.tag', $tags[0]),
         ]);
         $slide->addMedia(storage_path('scouts.jpg'))
+            ->preservingOriginal()
             ->toMediaCollection('slide');
     }
 }
