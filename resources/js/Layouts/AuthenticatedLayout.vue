@@ -12,9 +12,7 @@ import {Link} from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
 const store = useSearchStore();
-const displayDialog = () => {
-    store.displayDialog();
-}
+const displayDialog = () => store.displayDialog();
 const headline = ref(null);
 </script>
 

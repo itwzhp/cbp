@@ -38,6 +38,8 @@ const handleScroll = () => {
     }
 };
 
+const displayDialog = () => store.displayDialog();
+
 onMounted(() => {
   addListener();
   watchEffect(() => {
@@ -60,6 +62,12 @@ onUnmounted(() => {
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 border-b border-gray-200">
+            <div class="pb-2">
+              <button @click="displayDialog()" type="button" class="font-bold border border-2 border-zhp-300 hover:border-zhp-500 px-3 py-2 text-xs font-medium text-center rounded-3xl focus:ring-1 focus:outline-none focus:zhp-500">
+                <font-awesome-icon icon="fa-solid fa-sliders" />
+                Wszystkie filtry
+              </button>
+            </div>
             <div v-if="store.getSearchInput?.length || store.getTagIds?.length">
               <div v-if="store.getSearchInput?.length" class="pb-2">
                 <div>Fraza:</div>
