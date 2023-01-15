@@ -18,13 +18,13 @@
         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
             <div class="flex items-center pl-3 cursor-pointer">
                 <input v-model="mode" id="horizontal-list-radio-license" type="radio" value="or" name="list-radio" class="cursor-pointer w-4 h-4 text-zhp-500 bg-gray-100 border-gray-300 focus:ring-zhp-300">
-                <label for="horizontal-list-radio-license" class="cursor-pointer  py-3 ml-2 w-full text-sm font-medium text-gray-900">OR</label>
+                <label for="horizontal-list-radio-license" class="cursor-pointer  py-3 ml-2 w-full text-sm font-medium text-gray-900">Lub</label>
             </div>
         </li>
         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
             <div class="flex items-center pl-3 cursor-pointer">
                 <input v-model="mode" id="horizontal-list-radio-id" type="radio" value="and" name="list-radio" class="cursor-pointer w-4 h-4 text-zhp-500 bg-gray-100 border-gray-300 focus:ring-zhp-300">
-                <label for="horizontal-list-radio-id" class="cursor-pointer py-3 ml-2 w-full text-sm font-medium text-gray-900">AND</label>
+                <label for="horizontal-list-radio-id" class="cursor-pointer py-3 ml-2 w-full text-sm font-medium text-gray-900">Oraz</label>
             </div>
         </li>
         <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
