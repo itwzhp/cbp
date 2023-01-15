@@ -12,7 +12,16 @@ import {Link} from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
 const store = useSearchStore();
-const displayDialog = () => store.displayDialog();
+const displaySearchDialog = (responsiveNavigationAction) => {
+    if (responsiveNavigationAction) {
+        showingNavigationDropdown.value = false;
+        setTimeout(() => {
+            store.displayDialog();
+        }, 300);
+    } else {
+        store.displayDialog();
+    }
+};
 const headline = ref(null);
 </script>
 
@@ -36,7 +45,7 @@ const headline = ref(null);
                             <div class="hidden sm:flex items-center justify-end md:flex md:flex-1 lg:w-0">
                                 <div class="ml-3 relative">
                                     <div class="flex space-x-4">
-                                        <span @click="displayDialog()" class="dark:text-gray-500 cursor-pointer">
+                                        <span @click="displaySearchDialog()" class="dark:text-gray-500 cursor-pointer">
                                             <font-awesome-icon icon="fa-solid fa-magnifying-glass"/>
                                             Wyszukaj
                                         </span>
@@ -92,7 +101,7 @@ const headline = ref(null);
                     <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}"
                          class="sm:hidden">
                         <div class="pt-2 pb-3 space-y-1">
-                            <ResponsiveNavLink @click="displayDialog()">
+                            <ResponsiveNavLink @click="displaySearchDialog(true)">
                                 <font-awesome-icon icon="fa-solid fa-magnifying-glass"/>
                                 Wyszukaj
                             </ResponsiveNavLink>
