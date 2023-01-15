@@ -15,8 +15,12 @@
 </script>
 
 <template>
-    <span class="bg-gray-100 text-gray-800 text-md font-medium mr-2 px-2.5 py-0.5 rounded">
+  <button
+    @click="tagRemove(tag.id)"
+    type="button"
+    class="border border-1 border-zhp-300 hover:border-zhp-500 px-2 py-1 m-0.5 text-xs font-medium text-center rounded-3xl focus:ring-1 focus:outline-none focus:zhp-500 text-white bg-zhp-500"
+  >
     {{ tag.name }}
-    <font-awesome-icon @click="tagRemove(tag.id)" class="text-sm cursor-pointer" icon="fa-solid fa-xmark" />
-  </span>
+    <font-awesome-icon  class="text-xs cursor-pointer" icon="fa-solid fa-xmark" />
+  </button>
 </template>

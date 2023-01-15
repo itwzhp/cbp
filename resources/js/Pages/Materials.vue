@@ -74,7 +74,7 @@ onUnmounted(() => {
                 <SearchInputBadge />
               </div>
               <div v-if="store.getTagIds?.length">
-                <div>Kategorie:</div>
+                <div>Tagi:</div>
                 <template v-for="(item, index) in store.getTagDetails" :key="index">
                   <TagBadge :tag="item" />
                 </template>

@@ -5,8 +5,12 @@
 </script>
 
 <template>
-    <span class="bg-zhp-100 text-dark-800 text-md font-medium mr-2 px-2.5 py-0.5 rounded">
-    {{ store.getSearchInput }}
-    <font-awesome-icon @click="clearInput()" class="text-sm cursor-pointer" icon="fa-solid fa-xmark" />
-  </span>
+  <button
+    @click="clearInput()"
+    type="button"
+    class="border border-1 border-zhp-300 hover:border-zhp-500 px-2 py-1 m-0.5 text-xs font-medium text-center rounded-3xl focus:ring-1 focus:outline-none focus:zhp-500 text-white bg-zhp-500"
+  >
+    "{{ store.getSearchInput }}"
+    <font-awesome-icon  class="text-xs cursor-pointer" icon="fa-solid fa-xmark" />
+  </button> 
 </template>

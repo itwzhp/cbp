@@ -38,12 +38,12 @@
         <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in-out duration-500" leave-from="opacity-100" leave-to="opacity-0">
           <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
         </TransitionChild>
-        <div class="fixed inset-0 overflow-hidden">
-          <div class="absolute inset-0 overflow-hidden">
+        <div class="fixed inset-0">
+          <div class="absolute inset-0">
             <div class="pointer-events-none fixed inset-y-0 flex max-w-full">
               <TransitionChild as="template" enter="transform transition ease-in-out duration-500 sm:duration-700" enter-from="-translate-x-full" enter-to="-translate-x-0" leave="transform transition ease-in-out duration-500 sm:duration-700" leave-from="-translate-x-0" leave-to="-translate-x-full">
-                <DialogPanel class="pointer-events-auto relative w-screen max-w-md">
-                  <div class="flex h-full flex-col bg-white py-6 shadow-xl">
+                <DialogPanel class="pointer-events-auto relative w-screen max-w-md overflow-auto bg-white">
+                  <div class="flex h-full flex-col bg-white py-6">
                     <div class="px-4 sm:px-6">
                       <DialogTitle class="text-lg font-medium text-gray-900 text-left">
                         <button @click="hideDialog()" type="button" class="text-zhp-500 border border-zhp-500 hover:bg-zhp-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800">
@@ -53,22 +53,27 @@
                       </DialogTitle>
                     </div>
                     <div class="relative mt-6 flex-1 px-4 sm:px-6">
+                      <h3 class="mb-5 font-semibold text-gray-900 text-3xl">Filtry</h3>
+                      <hr class="mt-5 mb-5">
+                      <h3 class="mb-2 font-semibold text-gray-900 text-xl">Fraza</h3>
                       <form @submit.prevent="submit" class="pb-3">
-                        <div>
-                            <TextInput id="search" type="search" class="mt-1 block w-full text-xl" :disabled="store.getLoading" v-model="form.search" autocomplete="current-search" autofocus placeholder="Wpisz wyszukiwaną frazę" />
-                            <InputError class="mt-2" :message="form.errors.search" />
-                        </div>
-                        <div class="flex justify-end">
-                          Wciśnij Enter żeby zatwierdzić, wciśnij ESC żeby wyjść
+                        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            </div>
+                            <input minlength="3" type="search" id="default-search" :disabled="store.getLoading" v-model="form.search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-zhp-300 focus:border-zhp-300" placeholder="Wpisz wyszukiwaną frazę">
+                            <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-zhp-500 hover:bg-zhp-500 focus:ring-2 focus:outline-none focus:ring-zhp-300 font-medium rounded-lg text-sm px-4 py-2">Szukaj</button>
                         </div>
                       </form>
-                      <div>
-                        <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Tags mode</h3>
-                        <TagSearchMode @modeChanged="tagModeChanged($event)" :mode="store.getTagMode" />
-                      </div>
                       <hr class="mt-5 mb-5">
                       <div>
-                        <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">Taxonimes</h3>
+                        <h3 class="mb-2 font-semibold text-gray-900 text-xl">Tryb tagów</h3>
+                        <TagSearchMode @modeChanged="tagModeChanged($event)" :mode="store.getTagMode" />
+                      </div>
+                      <hr class="mt-5 mb-5">  
+                      <div>
+                        <h3 class="mb-4 font-semibold text-gray-900 text-xl">Tagi</h3>
                         <template v-for="(item, index) in store.getTaxonomiesData" :key="index">
                           <Taxonomy @tagSelected="tagSelected($event)" @tagRemoved="tagRemoved($event)" :item="item" :defaultIds="store.getTagIds" />
                         </template>
