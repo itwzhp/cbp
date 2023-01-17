@@ -5,11 +5,13 @@ use App\Domains\Materials\Controllers\DownloadMaterialController;
 use App\Domains\Materials\Controllers\MaterialsByOwnerController;
 use App\Domains\Materials\Controllers\MaterialsByTagController;
 use App\Domains\Materials\Controllers\MaterialsController;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', WelcomeController::class)->name('welcome');
+Route::get('/', [PagesController::class, 'welcome'])->name('welcome');
+Route::get('/o-cbp', [PagesController::class, 'about'])->name('about');
 
 Route::prefix('/m')
     ->as('materials.')
@@ -34,4 +36,4 @@ Route::get('/dashboard', function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/test', \App\Http\Controllers\TestController::class);
+Route::get('/test', TestController::class);
