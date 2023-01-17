@@ -115,7 +115,7 @@ const headline = ref(null);
                             </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('materials.index')"
                                                :active="route().current('materials.index')">
-                                Materiały
+                                Wszystkie Materiały
                             </ResponsiveNavLink>
                             <ResponsiveNavLink :block="true" :active="route().current('materials.tag')">
                                 Konspekty
@@ -162,7 +162,7 @@ const headline = ref(null);
                                 <div class="max-h-10 hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                     <NavLink :href="route('materials.index')"
                                              :active="route().current('materials.index')">
-                                        Materiały
+                                        Wszystkie Materiały
                                     </NavLink>
                                     <Dropdown width="48">
                                         <template #trigger>
