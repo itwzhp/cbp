@@ -28,12 +28,17 @@ class ImagesHelper
         'propozycja-programowa'  => 'propozycja_programowa.png',
     ];
 
-    public static function getFallbackForMaterial(Material $material): string
-    {
-        $troopDoesTaxonomy = Taxonomy::where('slug', static::TROOP_DOES_SLUG)->first();
+    protected Taxonomy $troopDoesTaxonomy;
 
+    public function __construct()
+    {
+        $this->troopDoesTaxonomy = Taxonomy::where('slug', static::TROOP_DOES_SLUG)->first();
+    }
+
+    public function getFallbackForMaterial(Material $material): string
+    {
         /** @var Tag $troopDoesTag */
-        $troopDoesTag = $material->tags->where('taxonomy_id', $troopDoesTaxonomy->id ?? 0)->first();
+        $troopDoesTag = $material->tags->where('taxonomy_id', $this->troopDoesTaxonomy->id ?? 0)->first();
 
         if ($troopDoesTag !== null) {
             return $troopDoesTag->thumb();

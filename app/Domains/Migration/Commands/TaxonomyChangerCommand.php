@@ -20,6 +20,7 @@ class TaxonomyChangerCommand extends Command
         'rodzaj-programu',
         'seria',
         'post-tag',
+        'post_format',
     ];
 
     protected $signature = 'wp:change_tax';

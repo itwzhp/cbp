@@ -22,7 +22,7 @@ class MaterialIndexController extends Controller
             ->setMode($request->input('mode', MaterialSearcher::MODE_OR))
             ->query()
             ->withAuthor()
-            ->with('media', 'owner', 'tags');
+            ->with('media', 'owner', 'tags.media');
 
         if (empty($request->input('search'))) {
             $materialsBuilder = $materialsBuilder->orderBy('published_at', 'desc');
