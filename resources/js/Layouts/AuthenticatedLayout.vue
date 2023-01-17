@@ -9,6 +9,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import SearchSlideOver from '@/Components/Materials/SearchSlideOver.vue';
 import {useSearchStore} from "@/store/search.store";
 import {Link} from '@inertiajs/inertia-vue3';
+import ZHPLogo from "@/Components/ZHPLogo.vue";
 
 const showingNavigationDropdown = ref(false);
 const store = useSearchStore();
@@ -35,12 +36,19 @@ const headline = ref(null);
                         <!-- Primary Navigation Menu -->
                         <div
                             class="flex items-center justify-between border-gray-100 py-6 md:justify-start md:space-x-10">
-                            <div class="hidden sm:flex justify-start lg:w-0 lg:flex-1">
-                            </div>
-                            <div class="-my-2 -mr-2">
-                                <Link :href="route('welcome')">
+                            <div class="sm:flex justify-start lg:w-0 lg:flex-1">
+                                <NavLink :href="route('welcome')">
                                     <ApplicationLogo class="block h-14 w-auto"/>
-                                </Link>
+                                </NavLink>
+                                <NavLink :href="route('about')">O CBP</NavLink>
+                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                    Dashboard
+                                </NavLink>
+                            </div>
+                            <div class="hidden sm:flex -my-2 -mr-2">
+                                <a href="https://zhp.pl" target="_blank">
+                                    <ZHPLogo class="block h-14 w-auto"/>
+                                </a>
                             </div>
                             <div class="hidden sm:flex items-center justify-end md:flex md:flex-1 lg:w-0">
                                 <div class="ml-3 relative">
@@ -109,9 +117,6 @@ const headline = ref(null);
                                                :active="route().current('materials.index')">
                                 Materiały
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                Dashboard
-                            </ResponsiveNavLink>
                             <ResponsiveNavLink :block="true" :active="route().current('materials.tag')">
                                 Konspekty
                             </ResponsiveNavLink>
@@ -158,9 +163,6 @@ const headline = ref(null);
                                     <NavLink :href="route('materials.index')"
                                              :active="route().current('materials.index')">
                                         Materiały
-                                    </NavLink>
-                                    <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                        Dashboard
                                     </NavLink>
                                     <Dropdown width="48">
                                         <template #trigger>
@@ -215,7 +217,8 @@ const headline = ref(null);
             </div>
 
             <!-- Page Content -->
-            <main id="main-content" class="main-content" :style="`height: calc(100vh - ${headline?.clientHeight || 0}px); overflow: auto`">
+            <main id="main-content" class="main-content"
+                  :style="`height: calc(100vh - ${headline?.clientHeight || 0}px); overflow: auto`">
                 <slot/>
             </main>
         </div>
@@ -225,9 +228,9 @@ const headline = ref(null);
 </template>
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style scoped>
-    @media print {
-        .main-content {
-          height: auto !important;
-        }
+@media print {
+    .main-content {
+        height: auto !important;
     }
+}
 </style>

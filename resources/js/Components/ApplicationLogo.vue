@@ -1,3 +1,3 @@
 <template>
-    <img src="/zhp-logo.svg" alt="zhp-logo">
+    <img src="/cbp-logo.png" alt="cbp-logo">
 </template>
