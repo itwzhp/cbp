@@ -20,9 +20,9 @@ const truncateText = (text, length, suffix) => {
             <Link :href="route('materials.show', props.item.slug)" class="flex-1">
                 <figure class="relative max-w transition-all duration-300 cursor-pointer">
                     <img class="rounded-t-lg" :src="props.item.thumb" :alt="props.item.title">
-                    <figcaption v-if="props.item.thumb" class="absolute px-3 text-lg text-white top-1.5">
+                    <figcaption v-if="props.item.thumb && props.item.type" class="absolute px-3 text-lg text-white top-1.5">
                         <span class="bg-zhp-500 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
-                            Text
+                            {{ props.item.type }}
                         </span>
                     </figcaption>
                 </figure>

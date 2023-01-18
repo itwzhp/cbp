@@ -22,6 +22,7 @@ class MaterialIndexController extends Controller
             ->setMode($request->input('mode', MaterialSearcher::MODE_OR))
             ->query()
             ->withAuthor()
+            ->withType()
             ->with('media', 'owner', 'tags.media');
 
         if (empty($request->input('search'))) {

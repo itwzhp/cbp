@@ -153,6 +153,19 @@ class Material extends Model implements HasMedia
         return $builder;
     }
 
+    public function scopeWithType(Builder $builder): Builder
+    {
+        return $builder->addSelect([
+            'type' => Tag::query()
+                ->join('material_tag', 'tags.id', '=', 'material_tag.tag_id')
+                ->join('taxonomies', 'tags.taxonomy_id', '=', 'taxonomies.id')
+                ->whereColumn('material_tag.material_id', '=', 'materials.id')
+                ->whereRaw('taxonomies.slug = "typ"')
+                ->select('tags.name')
+                ->take(1),
+        ]);
+    }
+
     public function getTagsGrouped(): Collection
     {
         return $this->tags->groupBy('taxonomy_id');

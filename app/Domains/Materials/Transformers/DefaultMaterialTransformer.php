@@ -36,6 +36,7 @@ class DefaultMaterialTransformer extends TransformerAbstract
             'author'       => $this->getAuthor($material),
             'thumb'        => $material->thumb(),
             'cover'        => $material->cover(),
+            'type'         => $material->type,
         ];
     }
 
