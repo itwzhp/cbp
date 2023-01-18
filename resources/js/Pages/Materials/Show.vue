@@ -46,8 +46,8 @@ const download = async (url) => {
                 <img :src="$page.props.material.cover" class="w-full">
                 <div class="absolute top-0 left-0 right-0 flex justify-between p-4">
                     <div>
-                        <div class="rounded-full bg-gray-200 p-3 font-bold text-center">
-                            {{$page.props.material.type }}
+                        <div class="rounded-full bg-gray-200 px-3 py-1 font-bold text-center text-sm">
+                            {{ $page.props.material.type }}
                         </div>
                     </div>
                     <Print>
