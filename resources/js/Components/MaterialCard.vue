@@ -18,7 +18,14 @@ const truncateText = (text, length, suffix) => {
     <div class="flex justify-center sm:p-1 md:p-2 lg:p-3 sm:w-1/2 md:w-1/3 lg:w-1/4">
         <div class="rounded-lg shadow-lg bg-white max-w-sm flex flex-col">
             <Link :href="route('materials.show', props.item.slug)" class="flex-1">
-                <img class="rounded-t-lg" :src="props.item.thumb" alt="props.item.title"/>
+                <figure class="relative max-w transition-all duration-300 cursor-pointer">
+                    <img class="rounded-t-lg" :src="props.item.thumb" :alt="props.item.title">
+                    <figcaption v-if="props.item.thumb" class="absolute px-3 text-lg text-white top-1.5">
+                        <span class="bg-zhp-500 text-white text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
+                            Text
+                        </span>
+                    </figcaption>
+                </figure>
             </Link>
             <div class="p-3 flex flex-col justify-between flex-grow">
                 <div>
