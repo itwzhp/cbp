@@ -30,12 +30,12 @@ const headline = ref(null);
     <div>
         <div class="bg-gradient-to-b from-white-300 via-white-200 to-white-100">
             <div ref="headline">
-                <nav class="border-b border-gray-100 print:hidden">
+                <nav class="print:hidden">
                     <!-- Primary Navigation Menu -->
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <!-- Primary Navigation Menu -->
                         <div
-                            class="flex items-center justify-between border-gray-100 py-6 md:justify-start md:space-x-10">
+                            class="flex items-center justify-between border-gray-100 py-3 md:justify-start md:space-x-10">
                             <div class="flex justify-start lg:w-0 lg:flex-1">
                                 <NavLink :href="route('welcome')">
                                     <ApplicationLogo class="block h-14 min-w-[129px]" />
@@ -154,7 +154,7 @@ const headline = ref(null);
                         </div>
                     </div>
                 </nav>
-                <nav class="print:hidden">
+                <nav class="print:hidden border-b border-gray-100 print:hidden">
                     <div class="max-w-7xl max-h-10 mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex justify-between h-12">
                             <div class="flex">
