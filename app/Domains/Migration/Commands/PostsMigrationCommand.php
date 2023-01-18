@@ -59,8 +59,7 @@ class PostsMigrationCommand extends Command
         $this->importPostsOfType('ksztalcenie');
         $this->importPostsOfType('program');
 
-//        $post = Post::published()->where('ID', 1112)->first();
-//        $this->importPost($post);
+        $this->call(SanitizeFieldsValuesCommand::class);
     }
 
     protected function importPostsOfType(string $type)

@@ -10,6 +10,7 @@ use App\Domains\Migration\Commands\FixLinksInDescription;
 use App\Domains\Migration\Commands\PostsMigrationCommand;
 use App\Domains\Migration\Commands\RefreshCommand;
 use App\Domains\Migration\Commands\RemoveDuplicateAttachmentsCommand;
+use App\Domains\Migration\Commands\SanitizeFieldsValuesCommand;
 use App\Domains\Migration\Commands\TagsMigrationCommand;
 use App\Domains\Migration\Commands\TaxonomyChangerCommand;
 use App\Domains\Migration\Commands\UsersMigrationCommand;
@@ -33,6 +34,7 @@ class Kernel extends ConsoleKernel
         AttachImagesCommand::class,
         TaxonomyChangerCommand::class,
         AttachImagesToTagsCommand::class,
+        SanitizeFieldsValuesCommand::class,
     ];
 
     protected function schedule(Schedule $schedule)
