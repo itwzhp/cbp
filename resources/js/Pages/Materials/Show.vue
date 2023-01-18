@@ -47,7 +47,7 @@ const download = async (url) => {
                 <div class="absolute top-0 left-0 right-0 flex justify-between p-4">
                     <div>
                         <div class="rounded-full bg-gray-200 p-3 font-bold text-center">
-                            Program
+                            {{$page.props.material.type }}
                         </div>
                     </div>
                     <Print>

@@ -4,6 +4,7 @@ namespace App\Domains\Materials\Models;
 use App\Domains\Files\ImagesHelper;
 use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\Factories\MaterialFactory;
+use App\Domains\Materials\Models\Scopes\MaterialTypeScope;
 use App\Domains\Materials\States\MaterialState;
 use App\Domains\Users\Models\User;
 use Carbon\Carbon;
@@ -46,6 +47,7 @@ use Spatie\Sluggable\SlugOptions;
  * @method static Builder published()
  * @method static Builder search(string $search)
  * @method static Builder withAuthor()
+ * @method static Builder withType()
  */
 class Material extends Model implements HasMedia
 {
@@ -63,6 +65,11 @@ class Material extends Model implements HasMedia
     ];
 
     protected $guarded = [];
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new MaterialTypeScope());
+    }
 
     public function owner(): BelongsTo
     {
