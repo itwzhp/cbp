@@ -36,9 +36,9 @@ const headline = ref(null);
                         <!-- Primary Navigation Menu -->
                         <div
                             class="flex items-center justify-between border-gray-100 py-6 md:justify-start md:space-x-10">
-                            <div class="sm:flex justify-start lg:w-0 lg:flex-1">
+                            <div class="flex justify-start lg:w-0 lg:flex-1">
                                 <NavLink :href="route('welcome')">
-                                    <ApplicationLogo class="block h-14 w-auto"/>
+                                    <ApplicationLogo class="block h-14 min-w-[129px]" />
                                 </NavLink>
                                 <NavLink :href="route('about')">O CBP</NavLink>
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
