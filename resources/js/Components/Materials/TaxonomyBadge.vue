@@ -8,15 +8,15 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="flex m-2">
-        <div class="rounded-l bg-zhp-700 text-white p-1 text-sm font-bold flex flex-col justify-center">
+    <div class="flex mb-2">
+        <div class="rounded-l-xl bg-zhp-700 text-white p-2 pl-3 pr-3 text-sm font-bold flex min-w-fit items-center">
             <p>{{ taxonomy.taxonomy_name }}:</p>
         </div>
-        <div class="rounded-r border border-zhp-700 text-gray-900 text-sm p-1 flex justify-center">
+        <div class="rounded-r-xl border border-zhp-700 text-gray-900 text-sm p-2">
             <Link
                 v-for="tag in taxonomy.tags"
                 :href="route('materials.tag', tag.slug )"
-                class="px-2 border-r last:border-none"
+                class="px-2 border-r last:border-none inline-block"
             >
                 {{ tag.name }}
             </Link>
