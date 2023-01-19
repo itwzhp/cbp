@@ -1,7 +1,6 @@
 <?php
 namespace App\Domains\Users\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Domains\Users\Factories\UserFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,7 +23,9 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
     use HasRoles;
 
     protected static function newFactory(): UserFactory
