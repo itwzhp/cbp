@@ -5,7 +5,7 @@
 </script>
 
 <template>
-    <footer v-if="showFooter(route().current())" ref="footer" class="flex flex-col bg-zhp-300 pt-4 pb-2.5 text-white">
+    <footer v-if="showFooter(route().current())" ref="footer" class="flex flex-col bg-zhp-300 pt-4 pb-2.5 text-white print:hidden">
       <div class="bg-zhp-500">
         <div class="md:flex md:flex-row h-40 md:h-36 items-center max-w-7xl mx-auto">
           <div class="flex basis-1/2 p-4">

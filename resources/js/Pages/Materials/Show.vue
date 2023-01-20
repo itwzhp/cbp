@@ -12,6 +12,7 @@ import Print from "@/Components/Print.vue";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import AuthorsShort from "@/Components/Materials/AuthorsShort.vue";
 import Authors from "@/Components/Materials/Authors.vue";
+import AuthorsCard from "@/Components/Materials/AuthorsCard.vue";
 import Avatar from "@/Components/Avatar.vue";
 import Spinner from "@/Components/Spinner.vue";
 import Licence from "@/Components/Materials/Licence.vue";
@@ -108,6 +109,7 @@ const download = async (url) => {
                             :taxonomy="item"
                         ></TaxonomyBadge>
 
+                        <AuthorsCard class="md:hidden" />
                     </div>
 
                     <div class="print:block" :class="{ hidden: activeTab !== 1}">
@@ -176,16 +178,7 @@ const download = async (url) => {
         </template>
 
         <template #sidebar>
-            <div class="max-w-sm p-3 bg-white border border-gray-200 rounded-md shadow-sm ml-1">
-                <Authors :fields="$page.props.material.fields"/>
-                <hr class="mt-5 mb-5">
-                <h3 class="text-lg font-bold">Cele Zrównoważonego Rozwoju</h3>
-                <div class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5">
-                    <Avatar imgSrc="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"/>
-                    <Avatar/>
-                    <Avatar imgSrc="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"/>
-                </div>
-            </div>
+            <AuthorsCard />
         </template>
 
     </SidebarLayout>

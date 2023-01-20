@@ -10,10 +10,10 @@ import {Link} from '@inertiajs/inertia-vue3'
         </template>
 
         <div class="flex max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 print:w-full print:p-0">
-            <div class="w-3/4 print:w-full">
+            <div class="w-full md:w-3/4 print:w-full">
                 <slot></slot>
             </div>
-            <div class="w-1/4 print:hidden">
+            <div class="invisible md:visible w-0 md:w-1/4 print:hidden">
                 <slot name="sidebar"></slot>
             </div>
         </div>
