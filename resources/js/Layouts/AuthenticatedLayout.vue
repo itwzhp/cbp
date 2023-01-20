@@ -7,6 +7,7 @@ import NavLink from '@/Components/NavLink.vue';
 import NavButton from '@/Components/NavButton.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import SearchSlideOver from '@/Components/Materials/SearchSlideOver.vue';
+import Footer from "@/Layouts/Footer.vue";
 import {useSearchStore} from "@/store/search.store";
 import {Link} from '@inertiajs/inertia-vue3';
 import ZHPLogo from "@/Components/ZHPLogo.vue";
@@ -220,13 +221,13 @@ const headline = ref(null);
             <main id="main-content" class="main-content"
                   :style="`height: calc(100vh - ${headline?.clientHeight || 0}px); overflow: auto`">
                 <slot/>
+                <Footer />
             </main>
         </div>
 
     </div>
     <SearchSlideOver/>
 </template>
-<style src="@vueform/multiselect/themes/default.css"></style>
 <style scoped>
 @media print {
     .main-content {
