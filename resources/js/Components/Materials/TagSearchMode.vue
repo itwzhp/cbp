@@ -1,7 +1,6 @@
 <script setup>
   import { ref } from 'vue';
   import { watch } from "@vue/runtime-core";
-  import Multiselect from '@vueform/multiselect'
 
   const props = defineProps({
     mode: { type: String, required: true }
