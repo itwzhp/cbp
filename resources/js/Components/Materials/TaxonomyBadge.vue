@@ -16,7 +16,7 @@ const props = defineProps({
             <Link
                 v-for="tag in taxonomy.tags"
                 :href="route('materials.tag', tag.slug )"
-                class="px-2 border-r last:border-none inline-block"
+                class="px-2 py-0.5 border-r last:border-none inline-block"
             >
                 {{ tag.name }}
             </Link>
