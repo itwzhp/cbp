@@ -13,12 +13,14 @@ class SlideSeeder extends Seeder
         /** @var Collection|Tag[] $tags */
         $tags = Tag::inRandomOrder()->take(3)->get();
 
-        /** @var Slide $slide */
-        $slide = Slide::firstOrCreate([
-            'url' => route('materials.tag', $tags[0]),
-        ]);
-        $slide->addMedia(storage_path('scouts.jpg'))
-            ->preservingOriginal()
-            ->toMediaCollection('slide');
+        foreach ($tags as $tag) {
+            /** @var Slide $slide */
+            $slide = Slide::firstOrCreate([
+                'url' => route('materials.tag', $tag),
+            ]);
+            $slide->addMedia(public_path('images/scout.jpg'))
+                ->preservingOriginal()
+                ->toMediaCollection('slide');
+        }
     }
 }

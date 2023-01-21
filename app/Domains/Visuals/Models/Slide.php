@@ -23,6 +23,10 @@ class Slide extends Model implements HasMedia
 
     protected $guarded = [];
 
+    protected $with = [
+        'media',
+    ];
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('cover')
