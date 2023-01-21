@@ -21,7 +21,7 @@ jobs:
         run: |
           echo 'TODO: zbudować front - npm run prod'
           echo 'TODO: zbudować backend - composer install'
-          echo 'TODO: puścić testy - ./vendor/bin/phpunit'
+          echo 'TODO: puścić testy - ./vendor/bin/pest --parallel'
           echo 'TODO: wystawić artefakt'
 
   deploy:

@@ -5,10 +5,6 @@ use App\Domains\Materials\States\Archived;
 use App\Domains\Materials\States\Published;
 use Carbon\Carbon;
 
-//beforeAll(function () {
-//    $material = Material::factory()->published()->create();
-//});
-
 it('has published material in db', function () {
     /** @var Material $material */
     $material = Material::factory()->published()->create();
