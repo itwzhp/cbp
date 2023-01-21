@@ -75,6 +75,8 @@ jobs:
         run: pwd
       - name: PHP Version
         run: php --version
+      - name: NPM
+        run: npm run prod
 
       # Code quality
       - name: Execute tests (Unit and Feature tests) via PestPHP
