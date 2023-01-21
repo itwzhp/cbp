@@ -4,11 +4,10 @@ name: Tests
 on:
   push:
     branches:
-      - main
+#      - main
   pull_request:
     branches:
-      - main
-      - develop
+#      - main
 
 jobs:
   laravel-tests:

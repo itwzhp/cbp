@@ -1,7 +1,9 @@
 <?php
 namespace App\Domains\Visuals\Models;
 
+use App\Domains\Visuals\Models\Factories\SlideFactory;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
@@ -17,6 +19,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class Slide extends Model implements HasMedia
 {
     use InteractsWithMedia;
+    use HasFactory;
 
     protected $guarded = [];
 
@@ -31,6 +34,11 @@ class Slide extends Model implements HasMedia
     {
         $this->addMediaCollection('slide')
             ->singleFile();
+    }
+
+    protected static function newFactory(): SlideFactory
+    {
+        return SlideFactory::new();
     }
 
     public function slide(): string

@@ -3,8 +3,8 @@
 use App\Domains\Materials\Controllers\Api\MaterialIndexController;
 use App\Domains\Materials\Controllers\Api\MaterialShowController;
 use App\Domains\Materials\Controllers\Api\TaxonomiesGroupsIndexController;
+use App\Domains\Visuals\Controllers\IndexSlidersController;
 use App\Http\Middleware\ForceJsonResponseMiddleware;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::name('api.')
@@ -12,10 +12,6 @@ Route::name('api.')
         ForceJsonResponseMiddleware::class,
     ])
     ->group(function () {
-        Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-            return $request->user();
-        });
-
         Route::name('materials.')
             ->prefix('materials/')
             ->group(function () {
@@ -28,4 +24,6 @@ Route::name('api.')
             ->group(function () {
                 Route::get('/', TaxonomiesGroupsIndexController::class)->name('index');
             });
+
+        Route::get('sliders', IndexSlidersController::class)->name('sliders.index');
     });

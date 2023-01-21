@@ -2,6 +2,7 @@
 
 use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Models\Tag;
+use App\Domains\Visuals\Models\Slide;
 
 it('has taxonomies endpoint', function () {
     /** @var Tag $tag */
@@ -26,5 +27,19 @@ it('has material index API endpoint', function () {
         ->assertJsonFragment([
             'id'    => $material->id,
             'title' => $material->title,
+        ]);
+});
+
+it('has sliders api route', function () {
+    /** @var Slide $slide */
+    $slide = Slide::factory()->create();
+
+    $this->assertInstanceOf(Slide::class, $slide);
+
+    $this->get(route('api.sliders.index'))
+        ->assertStatus(200)
+        ->assertJsonFragment([
+            'id'  => $slide->id,
+            'url' => $slide->url,
         ]);
 });
