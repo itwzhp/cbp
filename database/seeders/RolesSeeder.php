@@ -12,10 +12,10 @@ class RolesSeeder extends Seeder
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        Role::create(['name' => RoleHelper::ADMIN]);
-        Role::create(['name' => RoleHelper::AUTHOR]);
-        Role::create(['name' => RoleHelper::CONTRIBUTOR]);
-        Role::create(['name' => RoleHelper::EDITOR]);
-        Role::create(['name' => RoleHelper::REVIEWER]);
+        Role::findOrCreate(RoleHelper::ADMIN);
+        Role::findOrCreate(RoleHelper::AUTHOR);
+        Role::findOrCreate(RoleHelper::CONTRIBUTOR);
+        Role::findOrCreate(RoleHelper::EDITOR);
+        Role::findOrCreate(RoleHelper::REVIEWER);
     }
 }
