@@ -11,7 +11,7 @@ Running PINT (linter)
 Test suite
 
 ```shell
-./vendor/bin/phpunit
+./vendor/bin/pest --parallel
 ```
 
 ###### Note: 

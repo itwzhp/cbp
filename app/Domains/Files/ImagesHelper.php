@@ -28,7 +28,7 @@ class ImagesHelper
         'propozycja-programowa'  => 'propozycja_programowa.png',
     ];
 
-    protected Taxonomy $troopDoesTaxonomy;
+    protected ?Taxonomy $troopDoesTaxonomy;
 
     public function __construct()
     {

@@ -6,7 +6,9 @@ use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\Factories\MaterialFactory;
 use App\Domains\Materials\Models\Scopes\MaterialTypeScope;
 use App\Domains\Materials\States\MaterialState;
+use App\Domains\Materials\States\Published;
 use App\Domains\Users\Models\User;
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -48,6 +50,8 @@ use Spatie\Sluggable\SlugOptions;
  * @method static Builder search(string $search)
  * @method static Builder withAuthor()
  * @method static Builder withType()
+ *
+ * @mixin Eloquent
  */
 class Material extends Model implements HasMedia
 {
@@ -117,7 +121,9 @@ class Material extends Model implements HasMedia
 
     public function scopePublished(Builder $builder): Builder
     {
-        return $builder->where('published_at', '<', Carbon::now());
+        return $builder
+            ->where('published_at', '<', Carbon::now())
+            ->where('state', Published::class);
     }
 
     public function scopeForTags(Builder $builder, ?array $tags)

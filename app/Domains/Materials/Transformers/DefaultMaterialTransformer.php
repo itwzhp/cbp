@@ -7,6 +7,7 @@ use App\Domains\Materials\Models\Material;
 use App\Domains\Users\Transformers\OwnerTransformer;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
+use League\Fractal\Resource\NullResource;
 use League\Fractal\TransformerAbstract;
 
 class DefaultMaterialTransformer extends TransformerAbstract
@@ -79,8 +80,12 @@ class DefaultMaterialTransformer extends TransformerAbstract
         );
     }
 
-    public function includeLicence(Material $material): Item
+    public function includeLicence(Material $material): Item|NullResource
     {
+        if ($material->licence === null) {
+            return $this->null();
+        }
+
         return $this->item($material->licence, new LicenceTransformer());
     }
 
