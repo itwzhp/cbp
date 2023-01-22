@@ -42,7 +42,7 @@ const headline = ref(null);
                                     <ApplicationLogo class="block h-14 min-w-[129px]" />
                                 </NavLink>
                                 <NavLink :href="route('about')">O CBP</NavLink>
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                                <NavLink :href="route('admin.dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
                             </div>

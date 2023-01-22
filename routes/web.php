@@ -8,7 +8,6 @@ use App\Domains\Materials\Controllers\MaterialsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::get('/', [PagesController::class, 'welcome'])->name('welcome');
 Route::get('/o-cbp', [PagesController::class, 'about'])->name('about');
@@ -29,10 +28,6 @@ Route::prefix('/attachments')
     ->group(function () {
         Route::get('/{attachment}', DownloadAttachmentController::class)->name('download');
     });
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
 
