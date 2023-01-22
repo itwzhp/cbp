@@ -16,25 +16,12 @@ Test suite
 ```
 
 ###### Note: 
-For tests to work one must prepare test database:
-1. Create DB called `cbp_test`
-2. Temporary change used db in `.env`, set
+For tests to work one must prepare test database (call it `cbp_test`) and migrate and seed the DB:
 
-   ```dotenv
-    DB_DATABASE=cbp_test
-   ```
-
-3. Migrate and seed the DB:
-    ```shell
-   php artisan migrate
-   php artisan db:seed
-   ```
-4. Set the env back to normal db
-
-   ```dotenv
-    DB_DATABASE=cbp
-   ```
-
+```shell
+php artisan migrate --database=testing
+php artisan db:seed --database=testing
+```
 
 ### Local development
 
