@@ -114,6 +114,9 @@ jobs:
 
       # Code quality
 
+      - name: Check code style
+        run: php artisan pint
+
       - name: Execute tests (Unit and Feature tests) via PestPHP
         # Set environment
         env:
@@ -122,4 +125,4 @@ jobs:
           DB_PORT: 33306
           DB_USER: root
 
-        run: vendor/bin/pest
+        run: vendor/bin/pest --parallel
