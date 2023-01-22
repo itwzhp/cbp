@@ -20,4 +20,13 @@ trait UserConcerns
 
         return $user;
     }
+
+    public function firstOrCreateUser(): User
+    {
+        if ($user = User::first()) {
+            return $user;
+        }
+
+        return $this->createUser();
+    }
 }
