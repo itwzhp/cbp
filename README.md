@@ -1,4 +1,5 @@
-# cbp
+# CBP
+[![Tests](https://github.com/itwzhp/cbp/workflows/Tests/badge.svg)](https://github.com/itwzhp/cbp/actions?query=workflow:"Tests")
 
 ### Coding standards
 
