@@ -11,12 +11,9 @@ class AnyToPublishedTransition extends Transition
 {
     protected Material $material;
 
-    protected string $message;
-
-    public function __construct(Material $material, string $message)
+    public function __construct(Material $material)
     {
         $this->material = $material;
-        $this->message = $message;
     }
 
     public function handle(): Material
