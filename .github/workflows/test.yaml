@@ -115,7 +115,7 @@ jobs:
       # Code quality
 
       - name: Check code style
-        run: php artisan pint
+        run: vendor/bin/pint --test
 
       - name: Execute tests (Unit and Feature tests) via PestPHP
         # Set environment
