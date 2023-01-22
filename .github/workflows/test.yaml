@@ -51,11 +51,6 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.OS }}-build-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
-      - name: Install NPM packages
-        if: steps.node_modules-cache.outputs.cache-hit != 'true'
-        run: npm install
-      - name: Build frontend
-        run: npm run build
       - name: Install PHP versions
         uses: shivammathur/setup-php@v2
         with:
@@ -89,6 +84,12 @@ jobs:
       - name: Update Dependencies with lowest stable
         if: matrix.dependency-stability == 'prefer-lowest'
         run: composer update --prefer-stable --prefer-lowest
+
+      - name: Install NPM packages
+        if: steps.node_modules-cache.outputs.cache-hit != 'true'
+        run: npm install
+      - name: Build frontend
+        run: npm run build
 
       - name: Generate key
         run: php artisan key:generate
