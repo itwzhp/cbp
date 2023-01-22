@@ -14,7 +14,7 @@ abstract class MaterialState extends State
             ->allowTransition([
                 Draft::class,
                 InReview::class,
-            ], Published::class)
+            ], Published::class, AnyToPublishedTransition::class)
             ->allowTransition(InReview::class, ChangesRequested::class)
             ->allowTransition([
                 InReview::class,

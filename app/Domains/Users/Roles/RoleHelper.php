@@ -11,6 +11,10 @@ class RoleHelper
 
     // Authors
     const MATERIAL_CREATE = 'create materials';
-    const MATERIAL_EDIT = 'edit materials';
-    const MATERIAL_DELETE = 'delete materials';
+    const MATERIAL_EDIT_OWN = 'edit own materials';
+    const MATERIAL_EDIT_ANY = 'edit any materials';
+    const MATERIAL_DELETE_OWN = 'delete own materials';
+    const MATERIAL_DELETE_ANY = 'delete any materials';
+    const MATERIAL_REVIEW = 'review materials';
+    const MATERIAL_PUBLISH = 'publish materials';
 }
