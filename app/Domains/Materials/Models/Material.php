@@ -7,6 +7,7 @@ use App\Domains\Materials\Factories\MaterialFactory;
 use App\Domains\Materials\Models\Scopes\MaterialTypeScope;
 use App\Domains\Materials\States\MaterialState;
 use App\Domains\Materials\States\Published;
+use App\Domains\Reviews\Models\Review;
 use App\Domains\Users\Models\User;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Carbon\Carbon;
@@ -45,11 +46,13 @@ use Spatie\Sluggable\SlugOptions;
  * @property-read string|null             $author
  * @property-read int|null                $authors_count
  * @property-read Licence|null            $licence
+ * @property-read Collection|Review[]     $reviews
  *
  * @method static Builder published()
  * @method static Builder search(string $search)
  * @method static Builder withAuthor()
  * @method static Builder withType()
+ * @method static Builder forOwner(User $user)
  *
  * @mixin Eloquent
  */
@@ -114,6 +117,11 @@ class Material extends Model implements HasMedia
             ->orderBy('order');
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
     public static function findByWp(int $wpId): ?Material
     {
         return Material::where('wp_id', $wpId)->first();
@@ -164,6 +172,11 @@ class Material extends Model implements HasMedia
         ]);
 
         return $builder;
+    }
+
+    public function scopeForOwner(Builder $builder, User $user): Builder
+    {
+        return $builder->where('user_id', $user->id);
     }
 
     public function scopeWithType(Builder $builder): Builder
