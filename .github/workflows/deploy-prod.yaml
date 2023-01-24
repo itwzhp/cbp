@@ -19,9 +19,8 @@ jobs:
 
       - name: TODOs
         run: |
-          echo 'TODO: zbudować front - npm run prod'
           echo 'TODO: zbudować backend - composer install'
-          echo 'TODO: puścić testy - ./vendor/bin/pest --parallel'
+          echo 'TODO: zbudować front - npm run prod'
           echo 'TODO: wystawić artefakt'
 
   deploy:
