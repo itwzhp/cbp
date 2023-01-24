@@ -1,5 +1,5 @@
 <script setup>
-  import { Inertia } from "@inertiajs/inertia";
+  import { router } from '@inertiajs/vue3'
   import { useSearchStore } from "@/store/search.store";
   const props = defineProps({
     tag: { type: Object, required: true }
@@ -8,7 +8,7 @@
   const isMaterialsIndexRoute = route().current() ===  'materials.index';
   const redirect = () => {
     if (!isMaterialsIndexRoute) {
-      Inertia.get(route('materials.index'));
+      router.get(route('materials.index'));
     }
   };
   const tagRemove = (tag) => store.removeTags([tag], !isMaterialsIndexRoute).then(() => redirect());

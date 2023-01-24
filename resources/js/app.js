@@ -11,8 +11,7 @@ dom.watch();
 
 import { createApp, h } from "vue";
 import { createPinia } from "pinia";
-import { createInertiaApp } from "@inertiajs/inertia-vue3";
-import { InertiaProgress } from "@inertiajs/progress";
+import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import { globalFilters } from "./Filters/globalFilters";
@@ -23,21 +22,22 @@ const pinia = createPinia();
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
+    progress: {
+        color: '#78a22f'
+    },
     resolve: (name) =>
         resolvePageComponent(
             `./Pages/${name}.vue`,
             import.meta.glob("./Pages/**/*.vue")
         ),
-    setup({ el, app, props, plugin }) {
-        const App = createApp({ render: () => h(app, props) })
+    setup({ el, App, props, plugin }) {
+        const app = createApp({ render: () => h(App, props) })
             .use(pinia)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .component("font-awesome-icon", FontAwesomeIcon);
-        App.config.globalProperties.$filters = globalFilters;
-        App.mount(el);
-        return App;
+        app.config.globalProperties.$filters = globalFilters;
+        app.mount(el);
+        return app;
     },
 });
-
-InertiaProgress.init({ color: '#78a22f' });

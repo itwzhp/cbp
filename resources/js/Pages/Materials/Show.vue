@@ -1,7 +1,7 @@
 <script setup>
 import axios from "axios";
 import fileDownload from 'js-file-download'
-import {Head} from '@inertiajs/inertia-vue3';
+import {Head} from '@inertiajs/vue3';
 import Attachment from "@/Components/Materials/Attachment.vue";
 import TaxonomyBadge from "@/Components/Materials/TaxonomyBadge.vue";
 import SidebarLayout from "@/Layouts/SidebarLayout.vue";

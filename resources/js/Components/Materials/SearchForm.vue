@@ -1,6 +1,6 @@
 <script setup>
   import { watch } from "@vue/runtime-core";
-  import { useForm } from '@inertiajs/inertia-vue3';
+  import { useForm } from '@inertiajs/vue3'
   import { useSearchStore } from "../../store/search.store";
 
   const emit = defineEmits(['searchSubmit']);

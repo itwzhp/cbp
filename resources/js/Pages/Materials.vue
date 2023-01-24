@@ -1,16 +1,16 @@
 <script setup>
 import {onUnmounted, onMounted} from "vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head} from "@inertiajs/inertia-vue3";
+import {Head} from "@inertiajs/vue3";
 import {useSearchStore} from "@/store/search.store";
 import MaterialCard from "@/Components/MaterialCard.vue";
 import TagBadge from "@/Components/Materials/TagBadge.vue";
 import SearchInputBadge from "@/Components/Materials/SearchInputBadge.vue";
 import {watchEffect} from "@vue/runtime-core";
 import Spinner from "@/Components/Spinner.vue";
-import {usePage} from '@inertiajs/inertia-vue3'
+import { usePage } from '@inertiajs/vue3'
 
-const tag = usePage().props.value.tag;
+const tag = usePage().props.tag;
 const store = useSearchStore();
 
 // if (!store.getSearchData.length) {

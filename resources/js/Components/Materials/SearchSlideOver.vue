@@ -1,6 +1,6 @@
 <script setup>
   import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-  import { Inertia } from "@inertiajs/inertia";
+  import { router } from '@inertiajs/vue3'
   import { useSearchStore } from "../../store/search.store";
   import PrimaryButton from '@/Components/PrimaryButton.vue';
   import TextInput from '@/Components/TextInput.vue';
@@ -14,7 +14,7 @@
 
   const redirect = () => {
     if (route().current() !==  'materials.index') {
-      Inertia.get(route('materials.index'));
+      router.visit(route('materials.index'));
     }
   };
 

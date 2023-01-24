@@ -9,7 +9,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import SearchSlideOver from '@/Components/Materials/SearchSlideOver.vue';
 import Footer from "@/Layouts/Footer.vue";
 import {useSearchStore} from "@/store/search.store";
-import {Link} from '@inertiajs/inertia-vue3';
+import {Link} from '@inertiajs/vue3';
 import ZHPLogo from "@/Components/ZHPLogo.vue";
 
 const showingNavigationDropdown = ref(false);
