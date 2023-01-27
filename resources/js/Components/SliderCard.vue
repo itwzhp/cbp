@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 <template>
   <!-- scale-95 hover:scale-100 hover:transition-transform -->
-  <Link :href="route('materials.show', props.slide.url)" class="flex-1">
+  <Link :href="props.slide.url" class="flex-1">
     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
       <div>
         <img class="rounded-t-lg" :src="slide.image" :alt="slide.image" />
