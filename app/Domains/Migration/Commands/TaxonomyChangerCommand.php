@@ -85,6 +85,6 @@ class TaxonomyChangerCommand extends Command
     {
         $this->info("M: {$material->id} Attaching {$taxonomyName} tag: {$tagName}");
         $tag = $this->tagsRepository->createWithTax($taxonomyName, $tagName);
-        $material->tags()->attach($tag->id);
+        $material->tags()->syncWithoutDetaching([$tag->id]);
     }
 }
