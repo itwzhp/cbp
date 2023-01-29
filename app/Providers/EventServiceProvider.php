@@ -7,11 +7,13 @@ use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Models\Observers\MaterialObserver;
 use App\Domains\Users\Events\UserLoggedInViaSocialiteEvent;
 use App\Domains\Users\Listeners\AdjustUserEmailConfirmationListener;
+use App\Domains\Users\Listeners\LogMaterialStateChangeListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 use SocialiteProviders\Microsoft\MicrosoftExtendSocialite;
+use Spatie\ModelStates\Events\StateChanged;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -32,6 +34,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         MaterialChangedEvent::class          => [
             ClearCachedZipListener::class,
+        ],
+        StateChanged::class                  => [
+            LogMaterialStateChangeListener::class,
         ],
     ];
 
