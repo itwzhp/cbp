@@ -1,4 +1,3 @@
-import { useSessionStorage } from "@vueuse/core";
 import axios from "axios";
 import { defineStore } from "pinia";
 
@@ -19,7 +18,10 @@ const searchUrl = `${import.meta.env.VITE_API_URL}/api/materials`;
 const taxonomiesUrl = `${import.meta.env.VITE_API_URL}/api/taxonomies`;
 
 export const useSearchStore = defineStore("search", {
-  state: () => useSessionStorage("search", defaultValues),
+  state: () => defaultValues,
+  persist: {
+    storage: sessionStorage
+  },
   getters: {
     getSearchInput: (state) => state.input,
     getShowDialog: (state) => state.showDialog,

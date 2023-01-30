@@ -11,6 +11,7 @@ dom.watch();
 
 import { createApp, h } from "vue";
 import { createPinia } from "pinia";
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
@@ -19,6 +20,7 @@ import { globalFilters } from "./Filters/globalFilters";
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "CBP";
 const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

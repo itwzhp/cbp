@@ -12,10 +12,10 @@
         "@fortawesome/vue-fontawesome": "^3.0.1",
         "@headlessui/vue": "^1.7.7",
         "@inertiajs/vue3": "^1.0.0",
-        "@vueuse/core": "^9.11.1",
         "js-file-download": "^0.4.12",
         "moment": "^2.29.4",
         "pinia": "^2.0.29",
+        "pinia-plugin-persistedstate": "^3.0.2",
         "vue3-carousel": "^0.2.9"
     },
     "devDependencies": {
