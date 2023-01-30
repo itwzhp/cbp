@@ -1,4 +1,4 @@
-name: CBP PR check
+name: Szymen pipeline playground
 
 on:
   push:
