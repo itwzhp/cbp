@@ -28,7 +28,7 @@
 #     needs: build
 #     environment: dev
 #     env:
-#       Resource_Group: zhp-cbp
+#       Resource_Group: zhp-cbp-dev
 #     steps:
 #       - name: Login to Azure
 #         uses: azure/login@v1
