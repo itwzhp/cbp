@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: Check PR
+    name: Check github - Szym
     runs-on: ubuntu-latest
     env:
       Resource_Group: zhp-cbp
