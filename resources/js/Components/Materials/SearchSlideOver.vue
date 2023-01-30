@@ -10,8 +10,7 @@
   import SearchForm from '@/Components/Materials/SearchForm.vue';
 
   const store = useSearchStore();
-  store.getTaxonomies().then();
-
+  store.getTaxonomies();
   const redirect = () => {
     if (route().current() !==  'materials.index') {
       router.visit(route('materials.index'));

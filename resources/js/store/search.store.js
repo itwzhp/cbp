@@ -116,8 +116,10 @@ export const useSearchStore = defineStore("search", {
     },
     async getTaxonomies() {
       try {
-        const request = await axios.get(taxonomiesUrl);
-        this.taxonomies = [...request.data];
+        if (!this.taxonomies?.length) {
+          const request = await axios.get(taxonomiesUrl);
+          this.taxonomies = [...request.data];
+        }
       } catch (error) {
         console.error('taxonimes get error');
       }

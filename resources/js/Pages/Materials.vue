@@ -13,9 +13,6 @@ import { usePage } from '@inertiajs/vue3'
 const tag = usePage().props.tag;
 const store = useSearchStore();
 
-// if (!store.getSearchData.length) {
-//   store.getData();
-// }
 if (route().current() ===  'materials.index') {
   store.getData();
 } else {
