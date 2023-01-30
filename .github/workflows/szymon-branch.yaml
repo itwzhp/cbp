@@ -12,7 +12,11 @@ jobs:
       Resource_Group: zhp-cbp
     steps:
       - uses: actions/checkout@v2
-      
+      - uses: php-actions/composer@v6
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -27,17 +31,12 @@ jobs:
           deploymentMode: Validate
           parameters: environment=prod
       
-      - name: Test application
-        - uses: php-actions/composer@v6
-        - uses: actions/setup-node@v3
-          with:
-            node-version: 18
-        - run: composer install
-        - run: ./vendor/bin/pint
-        - run: ./vendor/bin/pest --parallel        
-        - run: echo 'php artisan migrate --database=testing'
-        - run: echo 'php artisan db:seed --database=testing'
-        - run: npm run build
+      - run: composer install
+      - run: ./vendor/bin/pint
+      - run: ./vendor/bin/pest --parallel        
+      - run: echo 'php artisan migrate --database=testing'
+      - run: echo 'php artisan db:seed --database=testing'
+      - run: npm run build
           # echo 'TODO: zbudować front (npm?)'
           # echo 'TODO: zbudować backend (laravel)'
           # echo 'TODO: puścić testy'
