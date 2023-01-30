@@ -1,7 +1,8 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
-import Carousel from '@/Components/Carousel.vue';
+// import Carousel from '@/Components/Carousel.vue';
+import CarouselSlider from '@/Components/CarouselSlider.vue';
 </script>
 
 <template>
@@ -13,7 +14,8 @@ import Carousel from '@/Components/Carousel.vue';
           <div class="p-6 md:py-3 md:px-0 border-b border-gray-200">
             <div>
               <h1 class="text-3xl">Strona główna - co tu ma być?</h1>
-              <Carousel />
+              <CarouselSlider />
+              <!-- <Carousel /> -->
             </div>
           </div>
         </div>

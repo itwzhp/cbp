@@ -1,5 +1,5 @@
 <script setup>
-import { defineComponent, ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Carousel, Pagination, Slide, Navigation } from 'vue3-carousel'
 import SliderCard from "@/Components/SliderCard.vue";
 import Spinner from "@/Components/Spinner.vue";
