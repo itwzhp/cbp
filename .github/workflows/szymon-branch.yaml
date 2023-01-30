@@ -1,0 +1,36 @@
+name: CBP PR check
+
+on:
+  push:
+    branches: [pipelines-add]
+
+jobs:
+  build:
+    name: Check PR
+    runs-on: ubuntu-latest
+    env:
+      Resource_Group: zhp-cbp
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Validate Bicep
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          resourceGroupName: ${{ env.Resource_Group }}
+          template: ./infrastructure/cbp.bicep
+          deploymentMode: Validate
+          parameters: environment=prod
+      
+      - name: TODOs
+        run: |
+          echo 'TODO: zbudować front (npm?)'
+          echo 'TODO: zbudować backend (laravel)'
+          echo 'TODO: puścić testy'
+          echo 'composer install ; ./vendor/bin/pint'
+
