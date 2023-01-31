@@ -7,9 +7,10 @@ use App\Domains\Materials\Controllers\MaterialsByTagController;
 use App\Domains\Materials\Controllers\MaterialsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\WelcomePageController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [PagesController::class, 'welcome'])->name('welcome');
+Route::get('/', WelcomePageController::class)->name('welcome');
 Route::get('/o-cbp', [PagesController::class, 'about'])->name('about');
 
 Route::prefix('/m')
@@ -19,7 +20,7 @@ Route::prefix('/m')
         Route::get('/{material:slug}', [MaterialsController::class, 'show'])->name('show');
         Route::get('/{material:slug}/download', DownloadMaterialController::class)->name('download');
 
-        Route::get('/t/{tag:slug}', MaterialsByTagController::class)->name('tag');
+        Route::get('/t/{tag:slug}/{subtag:slug?}', MaterialsByTagController::class)->name('tag');
         Route::get('/o/{user}', MaterialsByOwnerController::class)->name('owner');
     });
 
@@ -29,6 +30,6 @@ Route::prefix('/attachments')
         Route::get('/{attachment}', DownloadAttachmentController::class)->name('download');
     });
 
-require __DIR__ . '/auth.php';
+require_once __DIR__ . '/auth.php';
 
 Route::get('/test', TestController::class);

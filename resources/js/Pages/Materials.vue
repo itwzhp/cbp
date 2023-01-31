@@ -10,13 +10,13 @@ import {watchEffect} from "@vue/runtime-core";
 import Spinner from "@/Components/Spinner.vue";
 import { usePage } from '@inertiajs/vue3'
 
-const tag = usePage().props.tag;
+const tags = usePage().props.tags;
 const store = useSearchStore();
 
 if (route().current() ===  'materials.index') {
   store.getData();
 } else {
-  store.getData(null, tag ? [tag] : []);
+  store.getData(null, tags ? tags : []);
 }
 
 let scrollContent;

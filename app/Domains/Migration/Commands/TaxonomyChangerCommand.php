@@ -31,15 +31,16 @@ class TaxonomyChangerCommand extends Command
     {
         $this->tagsRepository = app(TagsRepository::class);
 
-        $this->attachNewTaxonomies();
         $this->dropUnwantedTaxonomies();
+        $this->attachNewTaxonomies();
+        $this->addHighlightedTag();
     }
 
     private function attachNewTaxonomies(): void
     {
         $filepath = storage_path('CBP_materialy.csv');
 
-        if (($handle = fopen($filepath, 'r')) === false) {
+        if (($handle = fopen($filepath, 'rb')) === false) {
             return;
         }
 
@@ -86,5 +87,10 @@ class TaxonomyChangerCommand extends Command
         $this->info("M: {$material->id} Attaching {$taxonomyName} tag: {$tagName}");
         $tag = $this->tagsRepository->createWithTax($taxonomyName, $tagName);
         $material->tags()->syncWithoutDetaching([$tag->id]);
+    }
+
+    private function addHighlightedTag(): void
+    {
+        $this->tagsRepository->createWithTax('Inne', 'Wyróżnione');
     }
 }

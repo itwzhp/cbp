@@ -26,7 +26,7 @@ axios.get(`${import.meta.env.VITE_API_URL}/api/sliders`)
           <figure class="relative max-w transition-all duration-300 cursor-pointer">
             <img :src="slide.image" :alt="slide.image">
             <figcaption v-if="slide.image" class="absolute px-3 text-lg text-white bottom-8 left-4">
-              <span class="bg-zhp-300 text-white text-2xl font-medium px-2 py-2 rounded">
+              <span class="bg-cbp-300 text-white text-2xl font-medium px-2 py-2 rounded">
                 {{ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae dolor mi.' }}
               </span>
             </figcaption>
@@ -44,14 +44,14 @@ axios.get(`${import.meta.env.VITE_API_URL}/api/sliders`)
 <style>
 .carousel__prev,
 .carousel__next {
-  color: #a6ce39;
-  border: 1px solid #a6ce39;
+  color: #0e577f;
+  border: 1px solid #147cb5;
   background-color: white;
   border-radius: 50%;
 }
 .carousel__prev:hover,
 .carousel__next:hover {
-  color: #78a22f;
-  border: 1px solid #78a22f;
+  color: #0e577f;
+  border: 1px solid #147cb5;
 }
 </style>

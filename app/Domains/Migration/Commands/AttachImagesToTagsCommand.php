@@ -26,5 +26,20 @@ class AttachImagesToTagsCommand extends Command
                 ->preservingOriginal()
                 ->toMediaCollection('thumb');
         }
+
+        /** @var Taxonomy $typeTaxonomy */
+        $typeTaxonomy = Taxonomy::where('slug', 'typ')->first();
+
+        foreach ($typeTaxonomy->tags as $tag) {
+            $slug = ImagesHelper::getSlugFromTag($tag);
+
+            if (!file_exists(public_path('/images/' . ImagesHelper::TYPE_LUT[$slug]))) {
+                continue;
+            }
+
+            $tag->addMedia(public_path('/images/' . ImagesHelper::TYPE_LUT[$slug]))
+                ->preservingOriginal()
+                ->toMediaCollection('thumb');
+        }
     }
 }

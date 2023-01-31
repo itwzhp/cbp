@@ -30,7 +30,7 @@ class Slide extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('cover')
-            ->fit(Manipulations::FIT_CROP, 1000, 600)
+            ->fit(Manipulations::FIT_CROP, 1280, 400)
             ->nonQueued();
     }
 
