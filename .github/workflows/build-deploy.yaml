@@ -24,7 +24,7 @@ jobs:
       - name: Deploy Bicep
         uses: azure/arm-deploy@v1
         with:
-          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          subscriptionId: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: zhp-cbp-${{ env.ENVIRONMENT_NAME }}
           template: ./infrastructure/cbp.bicep
           deploymentMode: Validate
@@ -35,7 +35,7 @@ jobs:
           echo 'TODO: zbudować aplikację + testy i wystawić artefakt'
 
   deploy:
-    name: Deploy on ${{ github.event_name == 'push' && github.ref_name == 'production' && 'prod' || 'dev' }}
+    name: Deploy
     if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
@@ -50,7 +50,7 @@ jobs:
       - name: Deploy Bicep
         uses: azure/arm-deploy@v1
         with:
-          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          subscriptionId: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: zhp-cbp-${{ env.ENVIRONMENT_NAME }}
           template: ./infrastructure/cbp.bicep
           parameters: environment=${{ env.ENVIRONMENT_NAME }}
