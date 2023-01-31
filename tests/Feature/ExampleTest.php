@@ -2,11 +2,19 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Domains\Materials\Repositories\TagsRepository;
 use App\Domains\Users\Roles\RoleHelper;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->app->make(TagsRepository::class)->createWithTax('Inne', 'Wyróżnione');
+    }
+
     /**
      * A basic test example.
      *

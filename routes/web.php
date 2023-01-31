@@ -30,6 +30,6 @@ Route::prefix('/attachments')
         Route::get('/{attachment}', DownloadAttachmentController::class)->name('download');
     });
 
-require_once __DIR__ . '/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/test', TestController::class);
