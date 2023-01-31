@@ -134,7 +134,7 @@ class Material extends Model implements HasMedia
             ->where('state', Published::class);
     }
 
-    public function scopeForTags(Builder $builder, ?array $tags)
+    public function scopeForTags(Builder $builder, ?array $tags): void
     {
         if (empty($tags)) {
             return;
@@ -149,7 +149,7 @@ class Material extends Model implements HasMedia
         });
     }
 
-    public function scopeSearch(Builder $builder, ?string $search)
+    public function scopeSearch(Builder $builder, ?string $search): Builder
     {
         return $builder->when($search, function (Builder $query, string $search) {
             $query->whereRaw('match(title, description) against (? in boolean mode)', [$search]);
