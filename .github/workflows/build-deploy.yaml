@@ -35,7 +35,7 @@ jobs:
           echo 'TODO: zbudować aplikację + testy i wystawić artefakt'
 
   deploy:
-    name: Deploy on ${{ env.ENVIRONMENT_NAME }}
+    name: Deploy on ${{ github.event_name == 'push' && github.ref_name == 'production' && 'prod' || 'dev' }}
     if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
