@@ -2,7 +2,7 @@ name: Build and deploy
 
 on:
   push:
-    branches: [production, main, pipelines-add]
+    branches: [production, main]
   pull_request:
     branches: [main]
 
@@ -13,15 +13,68 @@ jobs:
   build:
     name: Build and test
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE:  cbp_test
+        ports:
+          - 33306:3306  # external:internal
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
     steps:
+
+###### Prepare environment
       - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
 
       - name: Login to Azure
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy Bicep
+      - name: Install PHP versions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+########### Restore caches
+      - name: Cache node_modules directory
+        uses: actions/cache@v2
+        id: node_modules-cache
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Cache PHP dependencies
+        uses: actions/cache@v2
+        id: vendor-cache
+        with:
+          path: vendor
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/composer.lock') }}
+
+###### Validate bicep
+      - name: Validate Bicep
         uses: azure/arm-deploy@v1
         with:
           subscriptionId: ${{ vars.AZURE_SUBSCRIPTION_ID }}
@@ -30,9 +83,57 @@ jobs:
           deploymentMode: Validate
           parameters: environment=${{ env.ENVIRONMENT_NAME }}
 
-      - name: TODOs
+###### Install dependencies
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: Install Composer Dependencies
+        if: steps.vendor-cache.outputs.cache-hit != 'true'
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Install NPM Dependencies
+        if: steps.node_modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+###### Build
+      - name: Build frontend
+        run: npm run build
+
+      - name: Generate key
+        run: php artisan key:generate
+
+      - name: Optimize
+        run: php artisan optimize
+
+##### Tests
+
+      - name: Run Migrations
+        env:
+          DB_CONNECTION: mysql
+          DB_DATABASE: cbp_test
+          DB_PORT: 33306
+          DB_USER: root
         run: |
-          echo 'TODO: zbudować aplikację + testy i wystawić artefakt'
+          chmod -R 777 storage bootstrap/cache
+          php artisan migrate
+          php artisan db:seed
+
+      - name: Check code style
+        run: vendor/bin/pint --test
+      - name: Execute tests (Unit and Feature tests) via PestPHP
+        env:
+          DB_CONNECTION: mysql
+          DB_DATABASE: cbp_test
+          DB_PORT: 33306
+          DB_USER: root
+        run: vendor/bin/pest --parallel
+
+##### Publish artifact
+      - name: Publish artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: cbp-app
+          path: .
 
   deploy:
     name: Deploy
@@ -40,7 +141,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: cbp-app
 
       - name: Login to Azure
         uses: azure/login@v1
