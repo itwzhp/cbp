@@ -1,0 +1,56 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [production, main, pipelines-add]
+  pull_request:
+    branches: [main]
+
+env:
+  ENVIRONMENT_NAME: "${{ github.event_name == 'push' && github.ref_name == 'production' && 'prod' || 'dev' }}"
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Bicep
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          resourceGroupName: zhp-cbp-${{ env.ENVIRONMENT_NAME }}
+          template: ./infrastructure/cbp.bicep
+          deploymentMode: Validate
+          parameters: environment=${{ env.ENVIRONMENT_NAME }}
+
+      - name: TODOs
+        run: |
+          echo 'TODO: zbudować aplikację + testy i wystawić artefakt'
+
+  deploy:
+    name: Deploy on ${{ env.ENVIRONMENT_NAME }}
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Bicep
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+          resourceGroupName: zhp-cbp-${{ env.ENVIRONMENT_NAME }}
+          template: ./infrastructure/cbp.bicep
+          parameters: environment=${{ env.ENVIRONMENT_NAME }}
