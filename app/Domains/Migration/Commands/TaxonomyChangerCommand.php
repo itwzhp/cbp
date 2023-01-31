@@ -33,6 +33,7 @@ class TaxonomyChangerCommand extends Command
 
         $this->dropUnwantedTaxonomies();
         $this->attachNewTaxonomies();
+        $this->addHighlightedTag();
     }
 
     private function attachNewTaxonomies(): void
@@ -86,5 +87,10 @@ class TaxonomyChangerCommand extends Command
         $this->info("M: {$material->id} Attaching {$taxonomyName} tag: {$tagName}");
         $tag = $this->tagsRepository->createWithTax($taxonomyName, $tagName);
         $material->tags()->syncWithoutDetaching([$tag->id]);
+    }
+
+    private function addHighlightedTag(): void
+    {
+        $this->tagsRepository->createWithTax('Inne', 'Wyróżnione');
     }
 }
