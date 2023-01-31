@@ -5,8 +5,8 @@
 </script>
 
 <template>
-    <footer v-if="showFooter(route().current())" ref="footer" class="flex flex-col bg-zhp-300 pt-4 pb-2.5 text-white print:hidden">
-      <div class="bg-zhp-500">
+    <footer v-if="showFooter(route().current())" ref="footer" class="flex flex-col bg-cbp-100 pt-4 pb-2.5 text-white print:hidden">
+      <div class="bg-cbp-300">
         <div class="md:flex md:flex-row h-40 md:h-36 items-center max-w-7xl mx-auto">
           <div class="flex basis-1/2 p-4">
             <div>
@@ -25,7 +25,7 @@
             </div>
             <div class="my-auto">
               <img class="h-auto w-44" src="/images/wosm-logo.png" alt="wosm-logo" />
-            </div> 
+            </div>
           </div>
         </div>
       </div>

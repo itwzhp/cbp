@@ -31,8 +31,8 @@ class TaxonomyChangerCommand extends Command
     {
         $this->tagsRepository = app(TagsRepository::class);
 
-        $this->attachNewTaxonomies();
         $this->dropUnwantedTaxonomies();
+        $this->attachNewTaxonomies();
     }
 
     private function attachNewTaxonomies(): void
