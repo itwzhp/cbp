@@ -103,9 +103,6 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
 
-      # - name: Optimize
-      #   run: php artisan optimize
-
 ##### Tests
 
       - name: Run Migrations
@@ -113,7 +110,7 @@ jobs:
           DB_CONNECTION: mysql
           DB_DATABASE: cbp_test
           DB_PORT: 33306
-          DB_USERNAME: root
+          DB_USER: root
         run: |
           chmod -R 777 storage bootstrap/cache
           php artisan migrate
@@ -126,10 +123,14 @@ jobs:
           DB_CONNECTION: mysql
           DB_DATABASE: cbp_test
           DB_PORT: 33306
-          DB_USERNAME: root
+          DB_USER: root
         run: vendor/bin/pest --parallel
 
-##### Publish artifact
+##### Prepare & Publish artifact
+
+      - name: Optimize
+        run: php artisan optimize
+
       - name: Publish artifact
         uses: actions/upload-artifact@v3
         with:
@@ -159,3 +160,6 @@ jobs:
           resourceGroupName: zhp-cbp-${{ env.ENVIRONMENT_NAME }}
           template: ./infrastructure/cbp.bicep
           parameters: environment=${{ env.ENVIRONMENT_NAME }}
+
+      - run: |
+          echo 'TODO: odtworzyć .env' - php artisan env:decrypt --env=production --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env
