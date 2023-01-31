@@ -112,7 +112,7 @@ jobs:
           DB_CONNECTION: mysql
           DB_DATABASE: cbp_test
           DB_PORT: 33306
-          DB_USER: root
+          DB_USERNAME: root
         run: |
           chmod -R 777 storage bootstrap/cache
           php artisan migrate
@@ -125,7 +125,7 @@ jobs:
           DB_CONNECTION: mysql
           DB_DATABASE: cbp_test
           DB_PORT: 33306
-          DB_USER: root
+          DB_USERNAME: root
         run: vendor/bin/pest --parallel
 
 ##### Publish artifact
