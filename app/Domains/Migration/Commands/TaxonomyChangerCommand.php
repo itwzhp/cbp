@@ -39,7 +39,7 @@ class TaxonomyChangerCommand extends Command
     {
         $filepath = storage_path('CBP_materialy.csv');
 
-        if (($handle = fopen($filepath, 'r')) === false) {
+        if (($handle = fopen($filepath, 'rb')) === false) {
             return;
         }
 

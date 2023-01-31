@@ -20,19 +20,28 @@ class ImagesHelper
         'sim'                              => 'sim.png',
     ];
     const TYPE_LUT = [
-        'program'                => '',
-        'poradnik'               => '',
-        'praca-naukowa'          => '',
-        'konspekt-ksztalceniowy' => '',
-        'konspekt-programowy'    => '',
+        'program'                => 'program.png',
+        'poradnik'               => 'poradnik.png',
+        'praca-naukowa'          => 'praca_naukowa.png',
+        'konspekt-ksztalceniowy' => 'konspekt_ksztalceniowy.png',
+        'konspekt-programowy'    => 'konspekt_programowy.png',
         'propozycja-programowa'  => 'propozycja_programowa.png',
+        'element-zajec'          => 'element_zajec.png',
+        'gra-programowa'         => 'gra_programowa.png',
+        'gra-ksztalceniowa'      => 'gra_ksztalceniowa.png',
+        'artykul'                => 'artykul.png',
+        'czasopisma'             => 'czasopisma.png',
+        'recenzja'               => 'recenzja.png',
     ];
 
     protected ?Taxonomy $troopDoesTaxonomy;
 
+    protected ?Taxonomy $typeTaxonomy;
+
     public function __construct()
     {
         $this->troopDoesTaxonomy = Taxonomy::where('slug', static::TROOP_DOES_SLUG)->first();
+        $this->typeTaxonomy = Taxonomy::where('slug', static::TYPE_SLUG)->first();
     }
 
     public function getFallbackForMaterial(Material $material): string
@@ -42,6 +51,13 @@ class ImagesHelper
 
         if ($troopDoesTag !== null) {
             return $troopDoesTag->thumb();
+        }
+
+        /** @var Tag $typeTag */
+        $typeTag = $material->tags->where('taxonomy_id', $this->typeTaxonomy->id ?? 0)->first();
+
+        if ($typeTag !== null) {
+            return $typeTag->thumb();
         }
 
         return url('/images/scout_thumb.jpg');
