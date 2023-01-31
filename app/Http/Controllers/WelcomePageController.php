@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Domains\Materials\Models\Tag;
 use App\Domains\Materials\Transformers\HighlightedMaterialTransformer;
+use App\Domains\Visuals\Models\Slide;
+use App\Domains\Visuals\Transformers\SlideTransformer;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,6 +18,7 @@ class WelcomePageController extends Controller
     {
         return Inertia::render('Welcome')
             ->with([
+                'slider'      => $this->getSlider(),
                 'topics'      => $this->getTopics(),
                 'suggestions' => $this->getSuggestions(),
             ]);
@@ -24,19 +27,20 @@ class WelcomePageController extends Controller
     private function getTopics(): array
     {
         return Cache::remember('topics', static::TTL, function () {
-            $konspektTag = Tag::where('slug', 'like', '%konspekt-programowy')->first();
-            $zuchyTag = Tag::where('slug', 'like', '%zuchy')->first();
-            $harcerzeTag = Tag::where('slug', 'like', '%harcerze')->first();
-            $harcerzeStarsiTag = Tag::where('slug', 'like', '%harcerze-starsi')->first();
-            $wedrownicyTag = Tag::where('slug', 'like', '%wedrownicy')->first();
-            $konspektKsztalceniowyTag = Tag::where('slug', 'like', '%konspekt-ksztalceniowy')->first();
-            $graKsztalceniowaTag = Tag::where('slug', 'like', '%gra-ksztalceniowa')->first();
-            $graProgramowaTag = Tag::where('slug', 'like', '%gra-programowa')->first();
-            $propozycjeTag = Tag::where('slug', 'like', '%propozycja-programowa')->first();
-            $poradnikiTag = Tag::where('slug', 'like', '%poradnik')->first();
-            $czasopismaTag = Tag::where('slug', 'like', '%czasopisma')->first();
-            $artykulyTag = Tag::where('slug', 'like', '%artykul')->first();
-            $programTag = Tag::where('slug', 'like', '%program')->first();
+            $randomTag = Tag::first();
+            $konspektTag = Tag::where('slug', 'like', '%konspekt-programowy')->first() ?? $randomTag;
+            $zuchyTag = Tag::where('slug', 'like', '%zuchy')->first() ?? $randomTag;
+            $harcerzeTag = Tag::where('slug', 'like', '%harcerze')->first() ?? $randomTag;
+            $harcerzeStarsiTag = Tag::where('slug', 'like', '%harcerze-starsi')->first() ?? $randomTag;
+            $wedrownicyTag = Tag::where('slug', 'like', '%wedrownicy')->first() ?? $randomTag;
+            $konspektKsztalceniowyTag = Tag::where('slug', 'like', '%konspekt-ksztalceniowy')->first() ?? $randomTag;
+            $graKsztalceniowaTag = Tag::where('slug', 'like', '%gra-ksztalceniowa')->first() ?? $randomTag;
+            $graProgramowaTag = Tag::where('slug', 'like', '%gra-programowa')->first() ?? $randomTag;
+            $propozycjeTag = Tag::where('slug', 'like', '%propozycja-programowa')->first() ?? $randomTag;
+            $poradnikiTag = Tag::where('slug', 'like', '%poradnik')->first() ?? $randomTag;
+            $czasopismaTag = Tag::where('slug', 'like', '%czasopisma')->first() ?? $randomTag;
+            $artykulyTag = Tag::where('slug', 'like', '%artykul')->first() ?? $randomTag;
+            $programTag = Tag::where('slug', 'like', '%program')->first() ?? $randomTag;
 
             return [
                 [
@@ -98,6 +102,16 @@ class WelcomePageController extends Controller
 
             return fractal($highlightedTag->materials)
                 ->transformWith(new HighlightedMaterialTransformer())
+                ->serializeWith(new ArraySerializer())
+                ->toArray();
+        });
+    }
+
+    private function getSlider(): array
+    {
+        return Cache::remember('slider', static::TTL, function () {
+            return fractal(Slide::all())
+                ->transformWith(new SlideTransformer())
                 ->serializeWith(new ArraySerializer())
                 ->toArray();
         });
