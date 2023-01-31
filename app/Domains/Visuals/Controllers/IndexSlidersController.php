@@ -6,6 +6,9 @@ use App\Domains\Visuals\Transformers\SlideTransformer;
 use App\Http\Controllers\Controller;
 use Spatie\Fractalistic\ArraySerializer;
 
+/**
+ * @deprecated
+ */
 class IndexSlidersController extends Controller
 {
     public function __invoke()

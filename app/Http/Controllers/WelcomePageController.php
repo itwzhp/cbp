@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Domains\Materials\Models\Tag;
 use App\Domains\Materials\Transformers\HighlightedMaterialTransformer;
+use App\Domains\Visuals\Models\Slide;
+use App\Domains\Visuals\Transformers\SlideTransformer;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,6 +18,7 @@ class WelcomePageController extends Controller
     {
         return Inertia::render('Welcome')
             ->with([
+                'slider'      => $this->getSlider(),
                 'topics'      => $this->getTopics(),
                 'suggestions' => $this->getSuggestions(),
             ]);
@@ -98,6 +101,16 @@ class WelcomePageController extends Controller
 
             return fractal($highlightedTag->materials)
                 ->transformWith(new HighlightedMaterialTransformer())
+                ->serializeWith(new ArraySerializer())
+                ->toArray();
+        });
+    }
+
+    private function getSlider(): array
+    {
+        return Cache::remember('slider', static::TTL, function () {
+            return fractal(Slide::all())
+                ->transformWith(new SlideTransformer())
                 ->serializeWith(new ArraySerializer())
                 ->toArray();
         });
