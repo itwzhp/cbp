@@ -12,7 +12,7 @@ const props = defineProps({
       <div class="relative w-12 h-12 overflow-hidden bg-gray-300 rounded-full"></div>
     </div>
     <div class="flex flex-col justify-between p-4 leading-normal mt-2 md:mt-0">
-      <h5 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ topic.name }}</h5>
+      <h5 class="text-xl font-bold tracking-tight text-gray-900">{{ topic.name }}</h5>
     </div>
   </Link>
 </template>
