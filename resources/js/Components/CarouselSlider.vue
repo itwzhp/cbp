@@ -2,26 +2,15 @@
 import { ref } from 'vue'
 import { Carousel, Pagination, Slide, Navigation } from 'vue3-carousel'
 import Spinner from "@/Components/Spinner.vue";
-
 import 'vue3-carousel/dist/carousel.css'
-const loading = ref(true);
-const sliders = ref([]);
-
-axios.get(`${import.meta.env.VITE_API_URL}/api/sliders`)
-  .then(response => {
-    loading.value = false;
-    sliders.value = response.data;
-  })
-  .catch(() => loading.value = false);
-
 </script>
 <template>
-  <div v-if="loading" class="h-96 flex justify-center items-center">
+  <div v-if="!$page.props.slider" class="h-96 flex justify-center items-center">
     <Spinner />
   </div>
-  <Carousel v-else :autoplay="5000" :items-to-show="1" :wrap-around="true" :pauseAutoplayOnHover="true">
-    <Slide v-for="slide in sliders" :key="slide.id">
-      <div class="h-full w-full flex justify-center items-center">
+  <Carousel v-else :autoplay="5000" :pauseAutoplayOnHover="true" :items-to-show="1" :wrap-around="true" >
+    <Slide v-for="slide in $page.props.slider" :key="slide.id">
+      <div class="carousel__item h-full w-full flex justify-center items-center">
         <a :href="slide.url">
           <figure class="relative max-w transition-all duration-300 cursor-pointer">
             <img :src="slide.image" :alt="slide.image">
@@ -40,18 +29,3 @@ axios.get(`${import.meta.env.VITE_API_URL}/api/sliders`)
     </template>
   </Carousel>
 </template>
-
-<style>
-.carousel__prev,
-.carousel__next {
-  color: #0e577f;
-  border: 1px solid #147cb5;
-  background-color: white;
-  border-radius: 50%;
-}
-.carousel__prev:hover,
-.carousel__next:hover {
-  color: #0e577f;
-  border: 1px solid #147cb5;
-}
-</style>
