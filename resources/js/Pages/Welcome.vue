@@ -8,7 +8,7 @@ import 'vue3-carousel/dist/carousel.css'
 </script>
 
 <template>
-  <Head title="Materiały" />
+  <Head title="CBP" />
   <AuthenticatedLayout>
     <div class="py-2">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -18,7 +18,7 @@ import 'vue3-carousel/dist/carousel.css'
               <h1 class="text-3xl font-semibold">Strona główna - co tu ma być?</h1>
               <CarouselSlider class="my-5" />
               <div class="mt-12">
-                <h1 class="text-3xl font-semibold sm:w-1/2">Ostatnio dodane</h1>
+                <h1 class="text-3xl font-semibold sm:w-1/2">Proponowane tematy</h1>
                 <Topics class="my-5" />
               </div>
               <div class="mt-12">

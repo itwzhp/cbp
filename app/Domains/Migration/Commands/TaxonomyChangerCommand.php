@@ -64,7 +64,7 @@ class TaxonomyChangerCommand extends Command
             return;
         }
 
-        if (!empty($row[1])) {
+        if (!empty(trim($row[1]))) {
             $this->info("Mam zarchiwizować materiał: {$material->id}: {$material->title}");
             $material->state->transitionTo(Archived::class);
 
@@ -76,7 +76,7 @@ class TaxonomyChangerCommand extends Command
                 continue;
             }
 
-            if (!empty($value)) {
+            if (!empty(trim($value))) {
                 $this->attachTaxonomy($material, $taxonomies[$key], $tags[$key]);
             }
         }

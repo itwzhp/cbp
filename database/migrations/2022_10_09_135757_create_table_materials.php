@@ -28,9 +28,9 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('state', 128);
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->fullText('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->fullText('description');
             $table->string('slug')->unique();
             $table->unsignedInteger('wp_id')->unique()->nullable();
