@@ -2,10 +2,6 @@
 
 use App\Domains\Materials\Models\Material;
 
-it('has materials page')
-    ->get('/m')
-    ->assertStatus(200);
-
 it('has single material page', function () {
     $material = Material::inRandomOrder()->first();
 
@@ -14,6 +10,9 @@ it('has single material page', function () {
         ->assertStatus(200);
 });
 
-it('has about page', function () {
-    $this->get(route('about'))->assertStatus(200);
-});
+it('tests pages are ok', function ($url) {
+    $this->get($url)->assertStatus(200);
+})->with([
+    '/m',
+    fn () => route('about'),
+]);
