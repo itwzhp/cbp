@@ -5,4 +5,6 @@ class ComponentsHelper
 {
     const MATERIALS = 'Materials';
     const MATERIALS_SHOW = 'Materials/Show';
+    const DASHBOARD = 'Admin/Dashboard';
+    const DASHBOARD_SETTINGS = 'Admin/Settings';
 }
