@@ -1,10 +1,10 @@
 <?php
 namespace App\Domains\Admin\Controllers;
 
+use App\Helpers\ComponentsHelper;
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Inertia\Response;
-use App\Helpers\ComponentsHelper;
 
 class DashboardController extends Controller
 {
