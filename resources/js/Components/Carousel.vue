@@ -5,7 +5,7 @@ import SliderCard from "@/Components/SliderCard.vue";
 import Spinner from "@/Components/Spinner.vue";
 
 const breakpoints = {
-  600: {
+  640: {
     itemsToShow: 2,
     snapAlign: 'center',
   },
@@ -26,7 +26,7 @@ const breakpoints = {
   </div>
   <Carousel v-else :items-to-show="1" :snapAlign="'center'" :wrap-around="true" :breakpoints="breakpoints">
     <Slide v-for="slide in $page.props.suggestions" :key="slide.id">
-      <div class="slide-item">
+      <div class="slide-item w-4/6 sm:w-[288px]">
         <SliderCard :slide="slide" />
       </div>
     </Slide>
