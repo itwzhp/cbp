@@ -117,7 +117,7 @@ jobs:
           php artisan db:seed
 
       - name: Check code style
-        run: vendor/bin/pint --test
+        run: vendor/bin/pint --config vendor/apsg/coding-standards/pint.json --test
       - name: Execute tests (Unit and Feature tests) via PestPHP
         env:
           DB_CONNECTION: mysql
