@@ -6,7 +6,7 @@
 Running PINT (linter)
 
 ```shell
-./vendor/bin/pint
+./vendor/bin/pint --config vendor/apsg/coding-standards/pint.json
 ```
 
 Test suite
