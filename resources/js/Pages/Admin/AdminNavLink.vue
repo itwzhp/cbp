@@ -11,7 +11,7 @@ const classes = computed(() => route().current(props.href)
     text: 'ml-3 text-white'
   }
   : {
-    container: 'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-cbp-100/75',
+    container: 'flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-cbp-100/75 not-active',
     svg: 'w-6 h-6 text-gray-500',
     text: 'ml-3'
   }
@@ -28,3 +28,12 @@ const classes = computed(() => route().current(props.href)
   </div>
   </Link>
 </template>
+<style>
+:hover.not-active svg {
+  color: white;
+}
+
+:hover.not-active span {
+  color: white;
+}
+</style>

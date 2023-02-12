@@ -8,6 +8,7 @@ import 'vue3-carousel/dist/carousel.css'
 </script>
 
 <template>
+
   <Head title="CBP" />
   <AuthenticatedLayout>
     <div class="py-2">
@@ -23,7 +24,8 @@ import 'vue3-carousel/dist/carousel.css'
               </div>
               <div class="mt-12">
                 <h1 class="text-3xl font-semibold sm:w-1/2">Aktualne propozycje programowe</h1>
-                <h1 class="text-lg sm:w-1/2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse turpis arcu, consequat sit amet auctor sed, interdum nec metus.</h1>
+                <h1 class="text-lg sm:w-1/2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse turpis
+                  arcu, consequat sit amet auctor sed, interdum nec metus.</h1>
                 <Carousel class="my-5" />
               </div>
             </div>
@@ -37,14 +39,15 @@ import 'vue3-carousel/dist/carousel.css'
 <style>
 .carousel__prev,
 .carousel__next {
-  color: #0e577f;
-  border: 1px solid #147cb5;
+  color: rgb(25, 64, 147);
+  border: 1px solid rgb(37, 46, 120);
   background-color: white;
   border-radius: 50%;
 }
+
 .carousel__prev:hover,
 .carousel__next:hover {
-  color: #0e577f;
-  border: 1px solid #147cb5;
+  color: rgb(25, 64, 147);
+  border: 1px solid rgb(37, 46, 120);
 }
 </style>
