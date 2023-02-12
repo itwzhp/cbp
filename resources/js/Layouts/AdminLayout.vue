@@ -34,7 +34,7 @@ const toggleMobileSidebar = () => {
             </svg>
           </button>
           <Link :href="route('welcome')" class="flex ml-2 md:mr-24">
-          <ApplicationLogo class="block h-14 min-w-[129px]" />
+          <ApplicationLogo />
           </Link>
         </div>
         <div class="flex items-center">
@@ -57,7 +57,7 @@ const toggleMobileSidebar = () => {
               class="z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow" id="dropdown-user">
               <ul class="py-1" role="none">
                 <li>
-                  <Link :href="route('logout')" method="post">
+                  <Link :href="route('logout')" method="post" as="button" class="w-full text-left">
                   <span class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                     Wyloguj
                   </span>
