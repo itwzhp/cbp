@@ -1,19 +1,19 @@
 <script setup>
-import {onUnmounted, onMounted} from "vue";
+import { onUnmounted, onMounted } from "vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {Head} from "@inertiajs/vue3";
-import {useSearchStore} from "@/store/search.store";
+import { Head } from "@inertiajs/vue3";
+import { useSearchStore } from "@/store/search.store";
 import MaterialCard from "@/Components/MaterialCard.vue";
 import TagBadge from "@/Components/Materials/TagBadge.vue";
 import SearchInputBadge from "@/Components/Materials/SearchInputBadge.vue";
-import {watchEffect} from "@vue/runtime-core";
+import { watchEffect } from "@vue/runtime-core";
 import Spinner from "@/Components/Spinner.vue";
 import { usePage } from '@inertiajs/vue3'
 
 const tags = usePage().props.tags;
 const store = useSearchStore();
 
-if (route().current() ===  'materials.index') {
+if (route().current() === 'materials.index') {
   store.getData();
 } else {
   store.getData(null, tags ? tags : []);
@@ -27,12 +27,12 @@ const addListener = () => {
 };
 
 const handleScroll = () => {
-    const eps = 2;
+  const eps = 2;
 
-    if (scrollContent.scrollTop + scrollContent.clientHeight + eps > scrollContent.scrollHeight) {
-        console.log("[scroll event] load next page...");
-        store.getNextPage();
-    }
+  if (scrollContent.scrollTop + scrollContent.clientHeight + eps > scrollContent.scrollHeight) {
+    console.log("[scroll event] load next page...");
+    store.getNextPage();
+  }
 };
 
 const displayDialog = () => store.displayDialog();
@@ -48,11 +48,12 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  watchEffect(() => {});
+  watchEffect(() => { });
 });
 </script>
 
 <template>
+
   <Head title="Materiały" />
   <AuthenticatedLayout>
     <div class="py-2">
@@ -60,7 +61,8 @@ onUnmounted(() => {
         <div class="overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 md:py-3 md:px-0 border-b border-gray-200">
             <div class="pb-2">
-              <button @click="displayDialog()" type="button" class="font-bold border border-2 border-zhp-300 hover:border-zhp-500 px-3 py-2 text-xs font-medium text-center rounded-3xl focus:ring-1 focus:outline-none focus:zhp-500">
+              <button @click="displayDialog()" type="button"
+                class="font-bold border border-2 border-cbp-100 hover:border-cbp-300 px-3 py-2 text-xs font-medium text-center rounded-3xl focus:ring-1 focus:outline-none focus:cbp-300">
                 <font-awesome-icon icon="fa-solid fa-sliders" />
                 Wszystkie filtry
               </button>
@@ -85,11 +87,7 @@ onUnmounted(() => {
               Brak wyników
             </div>
             <div class="flex flex-wrap">
-              <MaterialCard
-                v-for="(item, index) in store.getSearchData"
-                :key="index"
-                :item="item"
-              />
+              <MaterialCard v-for="(item, index) in store.getSearchData" :key="index" :item="item" />
             </div>
           </div>
         </div>

@@ -1,15 +1,15 @@
 <script setup>
 import axios from "axios";
 import fileDownload from 'js-file-download'
-import {Head} from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import Attachment from "@/Components/Materials/Attachment.vue";
 import TaxonomyBadge from "@/Components/Materials/TaxonomyBadge.vue";
 import SidebarLayout from "@/Layouts/SidebarLayout.vue";
-import {ref} from 'vue';
+import { ref } from 'vue';
 import Setup from "@/Components/Materials/Setup.vue";
 import Scenario from "@/Components/Materials/Scenario.vue";
 import Print from "@/Components/Print.vue";
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import AuthorsShort from "@/Components/Materials/AuthorsShort.vue";
 import Authors from "@/Components/Materials/Authors.vue";
 import AuthorsCard from "@/Components/Materials/AuthorsCard.vue";
@@ -27,7 +27,7 @@ const setActiveTab = (id) => {
 const download = async (url) => {
     try {
         downloadInProgress.value = true;
-        const request = await axios.get(url, {responseType: 'blob'});
+        const request = await axios.get(url, { responseType: 'blob' });
         fileDownload(request.data, request.headers['content-disposition'].split('filename=')[1]);
         downloadInProgress.value = false;
     } catch (error) {
@@ -38,7 +38,8 @@ const download = async (url) => {
 </script>
 
 <template>
-    <Head :title="$page.props.material.title"/>
+
+    <Head :title="$page.props.material.title" />
 
     <SidebarLayout>
         <template #default>
@@ -53,7 +54,7 @@ const download = async (url) => {
                     </div>
                     <Print>
                         <button class="w-11 h-11 rounded-full bg-gray-200">
-                            <font-awesome-icon icon="fa-print"/>
+                            <font-awesome-icon icon="fa-print" />
                         </button>
                     </Print>
                 </div>
@@ -75,47 +76,40 @@ const download = async (url) => {
                 </h2>
 
                 <div class="hidden print:block">
-                    <AuthorsShort :fields="$page.props.material.fields"/>
+                    <AuthorsShort :fields="$page.props.material.fields" />
                 </div>
                 <div>
                     <div class="flex mt-5 mb-3">
                         <div class="print:hidden flex-1 text-center font-bold border-b-2 cursor-pointer"
-                             :class="activeTab == 0 ? 'border-zhp-700 text-zhp-700' : ''"
-                             @click="setActiveTab(0)"
-                        >
+                            :class="activeTab == 0 ? 'border-cbp-100 text-cbp-100' : ''" @click="setActiveTab(0)">
                             Informacje o publikacji
                         </div>
                         <div class="print:hidden flex-1 text-center font-bold border-b-2 cursor-pointer"
-                             :class="activeTab == 1 ? 'border-zhp-700 text-zhp-700' : ''"
-                             @click="setActiveTab(1)"
-                        >
+                            :class="activeTab == 1 ? 'border-cbp-100 text-cbp-100' : ''" @click="setActiveTab(1)">
                             Konspekt i materiał
                         </div>
                     </div>
 
-                    <div class="print:block" :class="{ hidden: activeTab !== 0}">
+                    <div class="print:block" :class="{ hidden: activeTab !== 0 }">
                         <div class="hidden print:flex mt-5 mb-3">
                             <div
-                                class="flex-1 text-center font-bold border-b-2 cursor-pointer border-zhp-700 text-zhp-700">
+                                class="flex-1 text-center font-bold border-b-2 cursor-pointer border-cbp-100 text-cbp-100">
                                 Informacje o publikacji
                             </div>
                         </div>
                         <h3 class="text-lg font-bold mb-2 mt-4">Pełny opis</h3>
                         <div v-html="$page.props.material.content" class="py-3 text-justify"></div>
 
-                        <TaxonomyBadge
-                            v-for="(item, index) in $page.props.material.taxonomies"
-                            :key="index"
-                            :taxonomy="item"
-                        ></TaxonomyBadge>
+                        <TaxonomyBadge v-for="(item, index) in $page.props.material.taxonomies" :key="index"
+                            :taxonomy="item"></TaxonomyBadge>
 
                         <AuthorsCard class="md:hidden" />
                     </div>
 
-                    <div class="print:block" :class="{ hidden: activeTab !== 1}">
+                    <div class="print:block" :class="{ hidden: activeTab !== 1 }">
                         <div class="hidden print:flex mt-5 mb-3">
                             <div
-                                class="flex-1 text-center font-bold border-b-2 cursor-pointer border-zhp-700 text-zhp-700">
+                                class="flex-1 text-center font-bold border-b-2 cursor-pointer border-cbp-100 text-cbp-100">
                                 Konspekt i materiał
                             </div>
                         </div>
@@ -123,32 +117,27 @@ const download = async (url) => {
                             <h3 class="text-lg font-bold mt-4 mb-2">
                                 Informacje organizacyjne
                             </h3>
-                            <Setup v-for="(setup, key) in $page.props.material.setups"
-                                   :key="key"
-                                   :setup="setup"
-                            ></Setup>
+                            <Setup v-for="(setup, key) in $page.props.material.setups" :key="key" :setup="setup">
+                            </Setup>
                         </div>
 
                         <div v-if="$page.props.material.scenarios.length > 0">
                             <h3 class="text-lg font-bold mt-4 mb-2">
                                 Przebieg
                             </h3>
-                            <Scenario
-                                v-for="(scenario, key) in $page.props.material.scenarios"
-                                :itemId="key"
-                                :scenario="scenario"
-                            ></Scenario>
+                            <Scenario v-for="(scenario, key) in $page.props.material.scenarios" :itemId="key"
+                                :scenario="scenario"></Scenario>
                         </div>
 
                         <div class="mt-5" v-if="$page.props.material.attachments.length > 0">
                             <div class="flex justify-between content-center items-center">
                                 <h4 class="text-lg font-semibold mb-2">Załączniki do wydruku</h4>
                                 <button @click="download(route('materials.download', $page.props.material.slug))"
-                                        :disabled="downloadInProgress">
+                                    :disabled="downloadInProgress">
                                     <template v-if="downloadInProgress">
                                         <div class="grid grid-cols-4 gap-1 place-items-center">
                                             <div class="col-span-1">
-                                                <Spinner width="6" height="6"/>
+                                                <Spinner width="6" height="6" />
                                             </div>
                                             <div class="col-span-3 w-full">
                                                 Trwa pobieranie
@@ -167,9 +156,8 @@ const download = async (url) => {
                                     </template>
                                 </button>
                             </div>
-                            <Attachment v-for="(attachment, key) in $page.props.material.attachments"
-                                        :key="key" :attachment="attachment"
-                            ></Attachment>
+                            <Attachment v-for="(attachment, key) in $page.props.material.attachments" :key="key"
+                                :attachment="attachment"></Attachment>
                         </div>
                     </div>
 
