@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Domains\Admin\Controllers;
 
 use App\Helpers\ComponentsHelper;
