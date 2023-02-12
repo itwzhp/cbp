@@ -32,7 +32,20 @@ const breakpoints = {
     </Slide>
 
     <template #addons>
-      <Navigation />
+      <navigation>
+        <template #next>
+          <div
+            class="shadow-xl flex justify-center items-center h-8 w-8 text-cbp-100 bg-white border-solid border-cbp-100 rounded-full">
+            <font-awesome-icon icon="fa-solid fa-chevron-right" class="block h-4 w-4" />
+          </div>
+        </template>
+        <template #prev>
+          <div
+            class="shadow-xl flex justify-center items-center h-8 w-8 text-cbp-100 bg-white border-solid border-cbp-100 rounded-full">
+            <font-awesome-icon icon="fa-solid fa-chevron-left" class="block h-4 w-4" />
+          </div>
+        </template>
+      </navigation>
     </template>
   </Carousel>
 </template>

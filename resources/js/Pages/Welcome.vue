@@ -35,19 +35,3 @@ import 'vue3-carousel/dist/carousel.css'
     </div>
   </AuthenticatedLayout>
 </template>
-
-<style>
-.carousel__prev,
-.carousel__next {
-  color: rgb(25, 64, 147);
-  border: 1px solid rgb(37, 46, 120);
-  background-color: white;
-  border-radius: 50%;
-}
-
-.carousel__prev:hover,
-.carousel__next:hover {
-  color: rgb(25, 64, 147);
-  border: 1px solid rgb(37, 46, 120);
-}
-</style>
