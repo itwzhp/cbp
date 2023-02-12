@@ -39,7 +39,7 @@ const headline = ref(null);
                             class="flex items-center justify-between border-gray-100 py-3 md:justify-start md:space-x-10">
                             <div class="flex justify-start lg:w-0 lg:flex-1">
                                 <NavLink :href="route('about')">O CBP</NavLink>
-                                <NavLink v-if="$page.props.auth.user" :href="route('admin.index')"
+                                <NavLink v-if="$page.props.auth.user" :href="route('admin.dashboard')"
                                     :active="route().current('dashboard')">
                                     Admin
                                 </NavLink>

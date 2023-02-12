@@ -76,7 +76,7 @@ const toggleMobileSidebar = () => {
     <div class="h-full px-3 py-4 overflow-y-auto bg-white">
       <ul class="space-y-2">
         <li>
-          <AdminNavLink :href="'admin.index'" :icon="'fa-solid fa-chart-pie'">
+          <AdminNavLink :href="'admin.dashboard'" :icon="'fa-solid fa-chart-pie'">
             Dashboard
           </AdminNavLink>
         </li>

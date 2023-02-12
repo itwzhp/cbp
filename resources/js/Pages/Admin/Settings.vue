@@ -1,9 +1,9 @@
 <script setup>
-import DashboardLayout from '@/Layouts/DashboardLayout.vue';
+import AdminLayout from '@/Layouts/AdminLayout.vue';
 </script>
 
 <template>
-    <DashboardLayout>
+    <AdminLayout>
         Dashboard settings
-    </DashboardLayout>
+    </AdminLayout>
 </template>

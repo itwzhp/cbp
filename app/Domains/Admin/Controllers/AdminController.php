@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Domains\Admin\Controllers;
 
 use App\Helpers\ComponentsHelper;
@@ -6,15 +7,15 @@ use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class DashboardController extends Controller
+class AdminController extends Controller
 {
-    public function index(): Response
+    public function dashboard(): Response
     {
-        return Inertia::render(ComponentsHelper::DASHBOARD);
+        return Inertia::render(ComponentsHelper::ADMIN_DASHBOARD);
     }
 
     public function settings(): Response
     {
-        return Inertia::render(ComponentsHelper::DASHBOARD_SETTINGS);
+        return Inertia::render(ComponentsHelper::ADMIN_SETTINGS);
     }
 }

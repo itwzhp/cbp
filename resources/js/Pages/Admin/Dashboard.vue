@@ -1,10 +1,10 @@
 <script setup>
-import DashboardLayout from '@/Layouts/DashboardLayout.vue';
+import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <DashboardLayout>
+    <AdminLayout>
         Dashboard index
-    </DashboardLayout>
+    </AdminLayout>
 </template>

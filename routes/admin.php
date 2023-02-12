@@ -1,7 +1,7 @@
 <?php
 
-use App\Domains\Admin\Controllers\DashboardController;
+use App\Domains\Admin\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
-Route::get('/settings', [DashboardController::class, 'settings'])->name('settings');
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
