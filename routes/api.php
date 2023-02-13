@@ -1,5 +1,6 @@
 <?php
 
+use App\Domains\Admin\Controllers\AdminController;
 use App\Domains\Materials\Controllers\Api\MaterialIndexController;
 use App\Domains\Materials\Controllers\Api\MaterialShowController;
 use App\Domains\Materials\Controllers\Api\TaxonomiesGroupsIndexController;
@@ -26,4 +27,8 @@ Route::name('api.')
             });
 
         Route::get('sliders', IndexSlidersController::class)->name('sliders.index');
+
+        Route::get('/auth', [AdminController::class, 'testAuth'])->name('test.auth');
+        Route::get('/sanctum', [AdminController::class, 'testSanctum'])->name('test.sanctum');
+
     });

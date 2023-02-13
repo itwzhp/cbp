@@ -17,4 +17,18 @@ class AdminController extends Controller
     {
         return Inertia::render(ComponentsHelper::ADMIN_SETTINGS);
     }
+
+    public function testAuth()
+    {
+        return [
+            'test auth',
+        ];
+    }
+
+    public function testSanctum()
+    {
+        return [
+            'test sanctum',
+        ];
+    }
 }
