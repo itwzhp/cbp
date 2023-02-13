@@ -34,5 +34,4 @@ Route::name('api.')
         Route::get('/sanctum', [AdminController::class, 'testSanctum'])
             ->name('test.sanctum')
             ->middleware('auth:sanctum');
-
     });

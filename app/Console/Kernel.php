@@ -1,6 +1,7 @@
 <?php
 namespace App\Console;
 
+use App\Console\Commands\PintCommand;
 use App\Domains\Files\Commands\LinkWpFilesStorageCommand;
 use App\Domains\Materials\Commands\RegenerateSlugsCommand;
 use App\Domains\Migration\Commands\AttachImagesCommand;
@@ -35,6 +36,7 @@ class Kernel extends ConsoleKernel
         TaxonomyChangerCommand::class,
         AttachImagesToTagsCommand::class,
         SanitizeFieldsValuesCommand::class,
+        PintCommand::class,
     ];
 
     protected function schedule(Schedule $schedule): void
