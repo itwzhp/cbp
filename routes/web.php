@@ -33,3 +33,8 @@ Route::prefix('/attachments')
 require __DIR__ . '/auth.php';
 
 Route::get('/test', TestController::class);
+
+
+Route::get('/auth', [AdminController::class, 'testAuth'])
+    ->name('test.auth')
+    ->middleware('auth');
