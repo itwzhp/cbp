@@ -42,7 +42,10 @@ const download = async (url) => {
   <SidebarLayout>
     <template #default>
       <div class="w-full relative print:hidden">
-        <img :src="$page.props.material.cover" class="w-full" />
+        <img
+          :src="$page.props.material.cover"
+          class="w-full"
+        >
         <div class="absolute top-0 left-0 right-0 flex justify-between p-4">
           <div>
             <div class="rounded-full bg-gray-200 px-3 py-1 font-bold text-center text-sm">
@@ -63,11 +66,11 @@ const download = async (url) => {
           <img
             :src="$page.props.material.owner.avatar"
             class="inline-block w-6 h-6 rounded-full"
-          />
+          >
           {{ $page.props.material.owner.name }}
         </div>
         <p class="text-base text-gray-500 text-sm">
-          <i class="fa fa-calendar text-gray-500"></i>
+          <i class="fa fa-calendar text-gray-500" />
           {{ $filters.dateFormat($page.props.material.published_at) }}
         </p>
       </div>
@@ -100,7 +103,10 @@ const download = async (url) => {
             </div>
           </div>
 
-          <div class="print:block" :class="{ hidden: activeTab !== 0 }">
+          <div
+            class="print:block"
+            :class="{ hidden: activeTab !== 0 }"
+          >
             <div class="hidden print:flex mt-5 mb-3">
               <div
                 class="flex-1 text-center font-bold border-b-2 cursor-pointer border-cbp-100 text-cbp-100"
@@ -108,19 +114,27 @@ const download = async (url) => {
                 Informacje o publikacji
               </div>
             </div>
-            <h3 class="text-lg font-bold mb-2 mt-4">Pełny opis</h3>
-            <div class="py-3 text-justify" v-html="$page.props.material.content"></div>
+            <h3 class="text-lg font-bold mb-2 mt-4">
+              Pełny opis
+            </h3>
+            <div
+              class="py-3 text-justify"
+              v-html="$page.props.material.content"
+            />
 
             <TaxonomyBadge
               v-for="(item, index) in $page.props.material.taxonomies"
               :key="index"
               :taxonomy="item"
-            ></TaxonomyBadge>
+            />
 
             <AuthorsCard class="md:hidden" />
           </div>
 
-          <div class="print:block" :class="{ hidden: activeTab !== 1 }">
+          <div
+            class="print:block"
+            :class="{ hidden: activeTab !== 1 }"
+          >
             <div class="hidden print:flex mt-5 mb-3">
               <div
                 class="flex-1 text-center font-bold border-b-2 cursor-pointer border-cbp-100 text-cbp-100"
@@ -129,29 +143,36 @@ const download = async (url) => {
               </div>
             </div>
             <div v-if="$page.props.material.setups.length > 0">
-              <h3 class="text-lg font-bold mt-4 mb-2">Informacje organizacyjne</h3>
+              <h3 class="text-lg font-bold mt-4 mb-2">
+                Informacje organizacyjne
+              </h3>
               <Setup
                 v-for="(setup, key) in $page.props.material.setups"
                 :key="key"
                 :setup="setup"
-              >
-              </Setup>
+              />
             </div>
 
             <div v-if="$page.props.material.scenarios.length > 0">
-              <h3 class="text-lg font-bold mt-4 mb-2">Przebieg</h3>
+              <h3 class="text-lg font-bold mt-4 mb-2">
+                Przebieg
+              </h3>
               <Scenario
                 v-for="(scenario, key) in $page.props.material.scenarios"
                 :key="key"
                 :item-id="key"
                 :scenario="scenario"
-              >
-              </Scenario>
+              />
             </div>
 
-            <div v-if="$page.props.material.attachments.length > 0" class="mt-5">
+            <div
+              v-if="$page.props.material.attachments.length > 0"
+              class="mt-5"
+            >
               <div class="flex justify-between content-center items-center">
-                <h4 class="text-lg font-semibold mb-2">Załączniki do wydruku</h4>
+                <h4 class="text-lg font-semibold mb-2">
+                  Załączniki do wydruku
+                </h4>
                 <button
                   :disabled="downloadInProgress"
                   @click="
@@ -161,17 +182,24 @@ const download = async (url) => {
                   <template v-if="downloadInProgress">
                     <div class="grid grid-cols-4 gap-1 place-items-center">
                       <div class="col-span-1">
-                        <Spinner width="6" height="6" />
+                        <Spinner
+                          width="6"
+                          height="6"
+                        />
                       </div>
-                      <div class="col-span-3 w-full">Trwa pobieranie</div>
+                      <div class="col-span-3 w-full">
+                        Trwa pobieranie
+                      </div>
                     </div>
                   </template>
                   <template v-else>
                     <div class="grid grid-cols-4 gap-1 place-items-end print:hidden">
                       <div class="col-span-1 mr-2">
-                        <i class="fa fa-download"></i>
+                        <i class="fa fa-download" />
                       </div>
-                      <div class="col-span-3 w-full">Pobierz wszystkie załączniki</div>
+                      <div class="col-span-3 w-full">
+                        Pobierz wszystkie załączniki
+                      </div>
                     </div>
                   </template>
                 </button>
@@ -180,7 +208,7 @@ const download = async (url) => {
                 v-for="(attachment, key) in $page.props.material.attachments"
                 :key="key"
                 :attachment="attachment"
-              ></Attachment>
+              />
             </div>
           </div>
         </div>

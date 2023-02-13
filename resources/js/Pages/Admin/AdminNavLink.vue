@@ -24,7 +24,10 @@ const classes = computed(() =>
 <template>
   <Link :href="route(href)">
     <div :class="classes.container">
-      <font-awesome-icon :class="classes.svg" :icon="props.icon" />
+      <font-awesome-icon
+        :class="classes.svg"
+        :icon="props.icon"
+      />
       <span :class="classes.text">
         <slot />
       </span>

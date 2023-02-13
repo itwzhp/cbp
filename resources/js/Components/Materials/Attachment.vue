@@ -43,15 +43,26 @@ const details = new Map([
 <template>
   <div class="flex items-center mb-3">
     <button class="w-9 h-9 rounded-full bg-gray-200 cursor-default">
-      <i class="fa-regular" :class="mimeToIcon(attachment.mime)"></i>
+      <i
+        class="fa-regular"
+        :class="mimeToIcon(attachment.mime)"
+      />
     </button>
     <div class="pl-3">
       <div class="flex">
-        <h5 class="font-semibold mr-5">{{ attachment.name }}</h5>
-        <a :href="attachment.url" target="_blank">Pobierz</a>
+        <h5 class="font-semibold mr-5">
+          {{ attachment.name }}
+        </h5>
+        <a
+          :href="attachment.url"
+          target="_blank"
+        >Pobierz</a>
       </div>
       <div class="flex gap-4 text-sm">
-        <template v-for="(detail, key) in Object.keys(attachment)" :key="key">
+        <template
+          v-for="(detail, key) in Object.keys(attachment)"
+          :key="key"
+        >
           <div v-if="details.get(detail) && attachment[detail]">
             <span class="font-semibold">{{ details.get(detail) }}:</span>
             {{ attachment[detail] }}

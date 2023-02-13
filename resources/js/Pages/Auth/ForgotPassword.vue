@@ -29,13 +29,19 @@ const submit = () => {
       resetowania hasła.
     </div>
 
-    <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+    <div
+      v-if="status"
+      class="mb-4 font-medium text-sm text-green-600"
+    >
       {{ status }}
     </div>
 
     <form @submit.prevent="submit">
       <div>
-        <InputLabel for="email" value="Email" />
+        <InputLabel
+          for="email"
+          value="Email"
+        />
         <TextInput
           id="email"
           v-model="form.email"
@@ -45,7 +51,10 @@ const submit = () => {
           autofocus
           autocomplete="username"
         />
-        <InputError class="mt-2" :message="form.errors.email" />
+        <InputError
+          class="mt-2"
+          :message="form.errors.email"
+        />
       </div>
 
       <div class="flex items-center justify-end mt-4">

@@ -29,8 +29,15 @@ const searchSubmit = (search) =>
 const hideDialog = () => store.hideDialog();
 </script>
 <template>
-  <TransitionRoot as="template" :show="store.getShowDialog">
-    <Dialog as="div" class="relative z-10" @close="hideDialog()">
+  <TransitionRoot
+    as="template"
+    :show="store.getShowDialog"
+  >
+    <Dialog
+      as="div"
+      class="relative z-10"
+      @close="hideDialog()"
+    >
       <TransitionChild
         as="template"
         enter="ease-in-out duration-500"
@@ -77,29 +84,40 @@ const hideDialog = () => store.hideDialog();
                             fill-rule="evenodd"
                             d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                             clip-rule="evenodd"
-                          ></path>
+                          />
                         </svg>
                         <span class="sr-only">Icon description</span>
                       </button>
                     </DialogTitle>
                   </div>
                   <div class="relative mt-6 flex-1 px-4 sm:px-6">
-                    <h3 class="mb-5 font-semibold text-gray-900 text-3xl">Filtry</h3>
+                    <h3 class="mb-5 font-semibold text-gray-900 text-3xl">
+                      Filtry
+                    </h3>
                     <div>
-                      <h3 class="mb-2 font-semibold text-gray-900 text-xl">Fraza</h3>
+                      <h3 class="mb-2 font-semibold text-gray-900 text-xl">
+                        Fraza
+                      </h3>
                       <SearchForm @search-submit="searchSubmit($event)" />
                     </div>
-                    <hr hidden class="mt-5 mb-5" />
+                    <hr
+                      hidden
+                      class="mt-5 mb-5"
+                    >
                     <div hidden>
-                      <h3 class="mb-2 font-semibold text-gray-900 text-xl">Tryb tagów</h3>
+                      <h3 class="mb-2 font-semibold text-gray-900 text-xl">
+                        Tryb tagów
+                      </h3>
                       <TagSearchMode
                         :mode="store.getTagMode"
                         @mode-changed="tagModeChanged($event)"
                       />
                     </div>
-                    <hr class="mt-5 mb-5" />
+                    <hr class="mt-5 mb-5">
                     <div>
-                      <h3 class="mb-4 font-semibold text-gray-900 text-xl">Tagi</h3>
+                      <h3 class="mb-4 font-semibold text-gray-900 text-xl">
+                        Tagi
+                      </h3>
                       <template
                         v-for="(item, index) in store.getTaxonomiesData"
                         :key="index"

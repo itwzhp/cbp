@@ -11,7 +11,11 @@ const classes = computed(() =>
 </script>
 
 <template>
-  <a style="padding-bottom: 6px" :class="classes" type="button">
+  <a
+    style="padding-bottom: 6px"
+    :class="classes"
+    type="button"
+  >
     <slot />
   </a>
 </template>

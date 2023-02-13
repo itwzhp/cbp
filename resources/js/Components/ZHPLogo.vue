@@ -1,3 +1,6 @@
 <template>
-  <img src="/zhp-logo.svg" alt="zhp-logo" />
+  <img
+    src="/zhp-logo.svg"
+    alt="zhp-logo"
+  >
 </template>

@@ -25,12 +25,11 @@ watch(mode, (newValue) => {
           value="or"
           name="list-radio"
           class="cursor-pointer w-4 h-4 text-cbp-500 bg-gray-100 border-gray-300 focus:ring-cbp-300"
-        />
+        >
         <label
           for="horizontal-list-radio-license"
           class="cursor-pointer py-3 ml-2 w-full text-sm font-medium text-gray-900"
-          >Lub</label
-        >
+        >Lub</label>
       </div>
     </li>
     <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
@@ -42,12 +41,11 @@ watch(mode, (newValue) => {
           value="and"
           name="list-radio"
           class="cursor-pointer w-4 h-4 text-cbp-500 bg-gray-100 border-gray-300 focus:ring-cbp-300"
-        />
+        >
         <label
           for="horizontal-list-radio-id"
           class="cursor-pointer py-3 ml-2 w-full text-sm font-medium text-gray-900"
-          >Oraz</label
-        >
+        >Oraz</label>
       </div>
     </li>
     <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
@@ -59,12 +57,11 @@ watch(mode, (newValue) => {
           value="andor"
           name="list-radio"
           class="cursor-pointer w-4 h-4 text-cbp-500 bg-gray-100 border-gray-300 focus:ring-cbp-300"
-        />
+        >
         <label
           for="horizontal-list-radio-millitary"
           class="cursor-pointer py-3 ml-2 w-full text-sm font-medium text-gray-900"
-          >ANDOR</label
-        >
+        >ANDOR</label>
       </div>
     </li>
   </ul>

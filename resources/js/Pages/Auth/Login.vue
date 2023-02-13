@@ -27,13 +27,22 @@ const submit = () => {
   <GuestLayout>
     <Head title="Log in" />
 
-    <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+    <div
+      v-if="status"
+      class="mb-4 font-medium text-sm text-green-600"
+    >
       {{ status }}
     </div>
 
-    <form v-if="isLocal" @submit.prevent="submit">
+    <form
+      v-if="isLocal"
+      @submit.prevent="submit"
+    >
       <div>
-        <InputLabel for="userid" value="User ID" />
+        <InputLabel
+          for="userid"
+          value="User ID"
+        />
         <TextInput
           id="userid"
           v-model="form.userid"
@@ -43,7 +52,10 @@ const submit = () => {
           autofocus
           autocomplete="userid"
         />
-        <InputError class="mt-2" :message="form.errors.userid" />
+        <InputError
+          class="mt-2"
+          :message="form.errors.userid"
+        />
       </div>
 
       <div class="flex items-center justify-end mt-4">
@@ -65,9 +77,10 @@ const submit = () => {
       </div>
 
       <div>
-        <a :href="route('ms.login')" class="btn btn-primary"
-          >Zaloguj za pomocą konta ZHP</a
-        >
+        <a
+          :href="route('ms.login')"
+          class="btn btn-primary"
+        >Zaloguj za pomocą konta ZHP</a>
       </div>
     </form>
   </GuestLayout>

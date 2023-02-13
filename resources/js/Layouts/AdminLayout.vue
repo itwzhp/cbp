@@ -41,10 +41,13 @@ const toggleMobileSidebar = () => {
                 clip-rule="evenodd"
                 fill-rule="evenodd"
                 d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-              ></path>
+              />
             </svg>
           </button>
-          <Link :href="route('welcome')" class="flex ml-2 md:mr-24">
+          <Link
+            :href="route('welcome')"
+            class="flex ml-2 md:mr-24"
+          >
             <ApplicationLogo />
           </Link>
         </div>
@@ -56,7 +59,9 @@ const toggleMobileSidebar = () => {
             >
               <div class="font-medium text-right mr-3">
                 <div>{{ $page.props.auth.user.name }}</div>
-                <div class="text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
+                <div class="text-sm text-gray-500">
+                  {{ $page.props.auth.user.email }}
+                </div>
               </div>
             </div>
             <div @click="toggleUserDropdown()">
@@ -67,7 +72,11 @@ const toggleMobileSidebar = () => {
                 data-dropdown-toggle="dropdown-user"
               >
                 <span class="sr-only">Open user menu</span>
-                <Avatar :width="10" :height="10" class="rounded-full" />
+                <Avatar
+                  :width="10"
+                  :height="10"
+                  class="rounded-full"
+                />
               </button>
             </div>
             <div
@@ -82,7 +91,10 @@ const toggleMobileSidebar = () => {
               "
               class="z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow"
             >
-              <ul class="py-1" role="none">
+              <ul
+                class="py-1"
+                role="none"
+              >
                 <li>
                   <Link
                     :href="route('logout')"
@@ -114,12 +126,18 @@ const toggleMobileSidebar = () => {
     <div class="h-full px-3 py-4 overflow-y-auto bg-white">
       <ul class="space-y-2">
         <li>
-          <AdminNavLink :href="'admin.dashboard'" :icon="'fa-solid fa-chart-pie'">
+          <AdminNavLink
+            :href="'admin.dashboard'"
+            :icon="'fa-solid fa-chart-pie'"
+          >
             Dashboard
           </AdminNavLink>
         </li>
         <li>
-          <AdminNavLink :href="'admin.settings'" :icon="'fa-solid fa-gear'">
+          <AdminNavLink
+            :href="'admin.settings'"
+            :icon="'fa-solid fa-gear'"
+          >
             Ustawienia
           </AdminNavLink>
         </li>
@@ -128,7 +146,7 @@ const toggleMobileSidebar = () => {
   </aside>
   <div class="p-4 sm:ml-64">
     <div class="p-4 mt-14">
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>

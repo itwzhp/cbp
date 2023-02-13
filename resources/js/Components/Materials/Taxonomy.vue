@@ -19,7 +19,10 @@ const tagAction = (tagId) => {
     <p class="mb-1 font-bold">
       {{ item.taxonomy_name }}
     </p>
-    <template v-for="(tag, index) in props.item.tags" :key="index">
+    <template
+      v-for="(tag, index) in props.item.tags"
+      :key="index"
+    >
       <button
         type="button"
         class="border border-1 border-cbp-300 hover:border-cbp-500 px-2 py-1 m-0.5 text-xs font-medium text-center rounded-3xl focus:ring-1 focus:outline-none focus:cbp-500"

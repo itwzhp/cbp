@@ -19,23 +19,44 @@ const reviewers = computed(() => findFields('reviewer'));
 <template>
   <div>
     <template v-if="authors.length">
-      <h3 class="font-bold">Autorzy:</h3>
-      <div v-for="(author, key) in authors" :key="key">
-        <h5 class="text-sm">{{ author.value }}</h5>
+      <h3 class="font-bold">
+        Autorzy:
+      </h3>
+      <div
+        v-for="(author, key) in authors"
+        :key="key"
+      >
+        <h5 class="text-sm">
+          {{ author.value }}
+        </h5>
       </div>
     </template>
 
     <template v-if="redactors.length">
-      <h3 class="font-bold mt-3">Redaktorzy:</h3>
-      <div v-for="(redactor, key) in redactors" :key="key">
-        <h5 class="text-sm">{{ redactor.value }}</h5>
+      <h3 class="font-bold mt-3">
+        Redaktorzy:
+      </h3>
+      <div
+        v-for="(redactor, key) in redactors"
+        :key="key"
+      >
+        <h5 class="text-sm">
+          {{ redactor.value }}
+        </h5>
       </div>
     </template>
 
     <template v-if="reviewers.length">
-      <h3 class="font-bold mt-3">Recenzenci:</h3>
-      <div v-for="(reviewer, key) in reviewers" :key="key">
-        <h5 class="text-sm">{{ reviewer.value }}</h5>
+      <h3 class="font-bold mt-3">
+        Recenzenci:
+      </h3>
+      <div
+        v-for="(reviewer, key) in reviewers"
+        :key="key"
+      >
+        <h5 class="text-sm">
+          {{ reviewer.value }}
+        </h5>
       </div>
     </template>
   </div>

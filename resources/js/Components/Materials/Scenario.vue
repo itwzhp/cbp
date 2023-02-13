@@ -21,12 +21,18 @@ const props = defineProps({
       <h5 class="font-bold">
         {{ scenario.title }}
       </h5>
-      <div v-html="scenario.description"></div>
+      <div v-html="scenario.description" />
       <div class="flex">
-        <div v-if="scenario.responsible" class="mt-3">
+        <div
+          v-if="scenario.responsible"
+          class="mt-3"
+        >
           <span class="font-bold">Odpowiedzialny: </span> {{ scenario.responsible }}
         </div>
-        <div v-if="scenario.materials" class="mt-3">
+        <div
+          v-if="scenario.materials"
+          class="mt-3"
+        >
           <span class="font-bold">Materiały: </span>{{ scenario.materials }}
         </div>
       </div>
@@ -34,7 +40,7 @@ const props = defineProps({
     <div class="basis-2/12">
       <span class="font-bold">{{ scenario.form }}</span>
       <span v-if="scenario.duration">
-        <br />
+        <br>
         {{ scenario.duration }} min
       </span>
     </div>

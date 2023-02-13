@@ -25,7 +25,10 @@ const keyToText = {
 
 <template>
   <div class="columns-2">
-    <div v-for="(item, key) in setup" :key="key">
+    <div
+      v-for="(item, key) in setup"
+      :key="key"
+    >
       <div v-if="key !== 'id' && setup[key]">
         <span class="font-bold text-sm">{{ keyToText[key] }}: </span> {{ item }}
       </div>

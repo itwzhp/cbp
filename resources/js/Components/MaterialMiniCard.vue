@@ -16,7 +16,9 @@ const truncateText = (text, length, suffix) => {
     <div
       class="p-2 md:w-100 w-36 h-auto flex flex-col justify-start bg-neutral-500 rounded-sm"
     >
-      <p class="text-xs w-100 text-center bg-gray-200 rounded">Poradnik</p>
+      <p class="text-xs w-100 text-center bg-gray-200 rounded">
+        Poradnik
+      </p>
     </div>
     <div class="p-1 pl-3 flex flex-col justify-start w-full">
       <div class="h-3/6">

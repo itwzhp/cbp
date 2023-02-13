@@ -19,9 +19,13 @@ const reviewers = computed(() => findFields('reviewer'));
 
 <template>
   <div v-if="authors.length || reviewers.length || redactors.length">
-    <h3 class="text-lg font-bold mb-2 mt-4">Stopka redakcyjna</h3>
+    <h3 class="text-lg font-bold mb-2 mt-4">
+      Stopka redakcyjna
+    </h3>
     <template v-if="authors.length">
-      <h5 class="text-md font-bold mb-2">Autorzy</h5>
+      <h5 class="text-md font-bold mb-2">
+        Autorzy
+      </h5>
       <div
         v-for="(author, key) in authors"
         :key="key"
@@ -31,12 +35,16 @@ const reviewers = computed(() => findFields('reviewer'));
           <Avatar />
         </div>
         <div class="col-span-3 w-full">
-          <h3 class="text-md leading-4">{{ author.value }}</h3>
+          <h3 class="text-md leading-4">
+            {{ author.value }}
+          </h3>
         </div>
       </div>
     </template>
     <template v-if="redactors.length">
-      <h5 class="text-md font-bold mb-2">Redaktorzy</h5>
+      <h5 class="text-md font-bold mb-2">
+        Redaktorzy
+      </h5>
       <div
         v-for="(redactor, key) in redactors"
         :key="key"
@@ -46,12 +54,16 @@ const reviewers = computed(() => findFields('reviewer'));
           <Avatar />
         </div>
         <div class="col-span-3 w-full">
-          <h3 class="text-md leading-4">{{ redactor.value }}</h3>
+          <h3 class="text-md leading-4">
+            {{ redactor.value }}
+          </h3>
         </div>
       </div>
     </template>
     <template v-if="reviewers.length">
-      <h5 class="text-md font-bold mb-2">Recenzenci</h5>
+      <h5 class="text-md font-bold mb-2">
+        Recenzenci
+      </h5>
       <div
         v-for="(reviewer, key) in reviewers"
         :key="key"
@@ -61,7 +73,9 @@ const reviewers = computed(() => findFields('reviewer'));
           <Avatar />
         </div>
         <div class="col-span-3 w-full">
-          <h3 class="text-md leading-4">{{ reviewer.value }}</h3>
+          <h3 class="text-md leading-4">
+            {{ reviewer.value }}
+          </h3>
         </div>
       </div>
     </template>

@@ -11,7 +11,9 @@ import { Head } from '@inertiajs/vue3';
         <div class="overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 md:py-3 md:px-0 border-b border-gray-200">
             <div>
-              <h1 class="text-3xl">O CBP</h1>
+              <h1 class="text-3xl">
+                O CBP
+              </h1>
             </div>
             <p>Czy jakaś stopka?</p>
           </div>

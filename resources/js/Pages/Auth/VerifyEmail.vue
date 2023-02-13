@@ -27,7 +27,10 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
       will gladly send you another.
     </div>
 
-    <div v-if="verificationLinkSent" class="mb-4 font-medium text-sm text-green-600">
+    <div
+      v-if="verificationLinkSent"
+      class="mb-4 font-medium text-sm text-green-600"
+    >
       A new verification link has been sent to the email address you provided during
       registration.
     </div>
@@ -46,8 +49,9 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
           method="post"
           as="button"
           class="underline text-sm text-gray-600 hover:text-gray-900"
-          >Log Out</Link
         >
+          Log Out
+        </Link>
       </div>
     </form>
   </GuestLayout>

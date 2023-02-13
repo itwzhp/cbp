@@ -22,6 +22,9 @@ const tagRemove = (tag) =>
     @click="tagRemove(tag.id)"
   >
     {{ tag.name }}
-    <font-awesome-icon class="text-xs cursor-pointer" icon="fa-solid fa-xmark" />
+    <font-awesome-icon
+      class="text-xs cursor-pointer"
+      icon="fa-solid fa-xmark"
+    />
   </button>
 </template>

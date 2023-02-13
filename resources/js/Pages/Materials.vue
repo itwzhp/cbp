@@ -73,17 +73,23 @@ onUnmounted(() => {
               </button>
             </div>
             <div v-if="store.getSearchInput?.length || store.getTagIds?.length">
-              <div v-if="store.getSearchInput?.length" class="pb-2">
+              <div
+                v-if="store.getSearchInput?.length"
+                class="pb-2"
+              >
                 <div>Szukana fraza</div>
                 <SearchInputBadge />
               </div>
               <div v-if="store.getTagIds?.length">
                 <div>Tagi</div>
-                <template v-for="(item, index) in store.getTagDetails" :key="index">
+                <template
+                  v-for="(item, index) in store.getTagDetails"
+                  :key="index"
+                >
                   <TagBadge :tag="item" />
                 </template>
               </div>
-              <hr class="mt-5 mb-5" />
+              <hr class="mt-5 mb-5">
             </div>
             <div
               v-if="store.getSearchData?.length === 0 && store.getLoading"

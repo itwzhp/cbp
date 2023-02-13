@@ -12,7 +12,10 @@ const classes = computed(() =>
 </script>
 
 <template>
-  <Link :href="href || ''" :class="`${classes} ${block && 'pointer-events-none'}`">
+  <Link
+    :href="href || ''"
+    :class="`${classes} ${block && 'pointer-events-none'}`"
+  >
     <slot />
   </Link>
 </template>

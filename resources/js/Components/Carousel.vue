@@ -20,7 +20,10 @@ const breakpoints = {
 </script>
 
 <template>
-  <div v-if="!$page.props.suggestions" class="text-center pt-2">
+  <div
+    v-if="!$page.props.suggestions"
+    class="text-center pt-2"
+  >
     <Spinner />
   </div>
   <Carousel
@@ -30,7 +33,10 @@ const breakpoints = {
     :wrap-around="true"
     :breakpoints="breakpoints"
   >
-    <Slide v-for="slide in $page.props.suggestions" :key="slide.id">
+    <Slide
+      v-for="slide in $page.props.suggestions"
+      :key="slide.id"
+    >
       <div class="slide-item w-4/6 sm:w-[288px]">
         <SliderCard :slide="slide" />
       </div>
@@ -42,14 +48,20 @@ const breakpoints = {
           <div
             class="shadow-xl flex justify-center items-center h-8 w-8 text-cbp-100 bg-white border-solid border-cbp-100 rounded-full"
           >
-            <font-awesome-icon icon="fa-solid fa-chevron-right" class="block h-4 w-4" />
+            <font-awesome-icon
+              icon="fa-solid fa-chevron-right"
+              class="block h-4 w-4"
+            />
           </div>
         </template>
         <template #prev>
           <div
             class="shadow-xl flex justify-center items-center h-8 w-8 text-cbp-100 bg-white border-solid border-cbp-100 rounded-full"
           >
-            <font-awesome-icon icon="fa-solid fa-chevron-left" class="block h-4 w-4" />
+            <font-awesome-icon
+              icon="fa-solid fa-chevron-left"
+              class="block h-4 w-4"
+            />
           </div>
         </template>
       </navigation>

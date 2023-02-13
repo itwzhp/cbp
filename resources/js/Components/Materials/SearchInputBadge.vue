@@ -11,6 +11,9 @@ const clearInput = () => store.clearInput();
     @click="clearInput()"
   >
     "{{ store.getSearchInput }}"
-    <font-awesome-icon class="text-xs cursor-pointer" icon="fa-solid fa-xmark" />
+    <font-awesome-icon
+      class="text-xs cursor-pointer"
+      icon="fa-solid fa-xmark"
+    />
   </button>
 </template>

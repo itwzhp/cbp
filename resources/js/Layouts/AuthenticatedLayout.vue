@@ -38,7 +38,9 @@ const headline = ref(null);
               class="flex items-center justify-between border-gray-100 py-3 md:justify-start md:space-x-10"
             >
               <div class="flex justify-start lg:w-0 lg:flex-1">
-                <NavLink :href="route('about')">O CBP</NavLink>
+                <NavLink :href="route('about')">
+                  O CBP
+                </NavLink>
                 <NavLink
                   v-if="$page.props.auth.user"
                   :href="route('admin.dashboard')"
@@ -62,7 +64,11 @@ const headline = ref(null);
                       <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
                       Wyszukaj
                     </span>
-                    <Dropdown v-if="$page.props.auth.user" align="right" width="48">
+                    <Dropdown
+                      v-if="$page.props.auth.user"
+                      align="right"
+                      width="48"
+                    >
                       <template #trigger>
                         <span class="inline-flex rounded-md">
                           <button
@@ -86,7 +92,11 @@ const headline = ref(null);
                         </span>
                       </template>
                       <template #content>
-                        <DropdownLink :href="route('logout')" method="post" as="button">
+                        <DropdownLink
+                          :href="route('logout')"
+                          method="post"
+                          as="button"
+                        >
                           Wyloguj
                         </DropdownLink>
                       </template>
@@ -95,7 +105,8 @@ const headline = ref(null);
                       v-if="!$page.props.auth.user"
                       :href="route('login')"
                       class="dark:text-gray-500"
-                      >Zaloguj się
+                    >
+                      Zaloguj się
                     </Link>
                   </div>
                 </div>
@@ -157,7 +168,10 @@ const headline = ref(null);
               >
                 Wszystkie Materiały
               </ResponsiveNavLink>
-              <ResponsiveNavLink :block="true" :active="route().current('materials.tag')">
+              <ResponsiveNavLink
+                :block="true"
+                :active="route().current('materials.tag')"
+              >
                 Konspekty
               </ResponsiveNavLink>
               <ResponsiveNavLink
@@ -191,7 +205,10 @@ const headline = ref(null);
             </div>
 
             <!-- Responsive Settings Options -->
-            <div v-if="$page.props.auth.user" class="pt-4 pb-1 border-t border-gray-200">
+            <div
+              v-if="$page.props.auth.user"
+              class="pt-4 pb-1 border-t border-gray-200"
+            >
               <div class="px-4">
                 <div class="font-medium text-base text-gray-800">
                   {{ $page.props.auth.user.name }}
@@ -202,7 +219,11 @@ const headline = ref(null);
               </div>
 
               <div class="mt-3 space-y-1">
-                <ResponsiveNavLink :href="route('logout')" method="post" as="button">
+                <ResponsiveNavLink
+                  :href="route('logout')"
+                  method="post"
+                  as="button"
+                >
                   Wyloguj
                 </ResponsiveNavLink>
               </div>
@@ -228,9 +249,9 @@ const headline = ref(null);
                           route().current('materials.tag', {
                             tag: '2-konspekt-ksztalceniowy',
                           }) ||
-                          route().current('materials.tag', {
-                            tag: '2-konspekt-programowy',
-                          })
+                            route().current('materials.tag', {
+                              tag: '2-konspekt-programowy',
+                            })
                         "
                       >
                         Konspekty
@@ -295,7 +316,10 @@ const headline = ref(null);
         </div>
 
         <!-- Page Heading -->
-        <header v-if="$slots.header" class="bg-white shadow">
+        <header
+          v-if="$slots.header"
+          class="bg-white shadow"
+        >
           <div class="max-w-7xl mx-auto py-2 px-4 sm:px-6 lg:px-8 print:px-1 print:py-1">
             <slot name="header" />
           </div>

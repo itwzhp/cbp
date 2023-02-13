@@ -4,8 +4,7 @@ module.exports = {
     },
     extends: [
       'eslint:recommended',
-      'plugin:vue/vue3-recommended',
-      'prettier'
+      'plugin:vue/vue3-recommended'
     ],
     globals: {
       'route': true,
@@ -16,14 +15,12 @@ module.exports = {
       'vue/multi-word-component-names': 'off',
       'vue/require-prop-types': 'off',
       'vue/no-v-html': 'off',
-      'no-unused-vars': ['error', { 'varsIgnorePattern': 'props' }]
+      'no-unused-vars': ['error', { 'varsIgnorePattern': 'props' }],
+      'quotes': [ 2, 'single' ]
     },
     overrides: [
       {
         'files': [ 'resources/js/**/*.vue' ],
-        'rules': {
-          'quotes': [ 2, 'single' ]
-        }
       }
     ]
   }

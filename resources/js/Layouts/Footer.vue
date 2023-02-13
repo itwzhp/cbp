@@ -16,7 +16,9 @@ const showFooter = (currentRoute) =>
         <div class="flex basis-1/2 p-4">
           <div>
             <!-- <img style="opacity: 0.2; z-index: -1;" src="/images/questionmarks.svg" alt="questionmarks"> -->
-            <p class="text-sm font-bold pb-2">CZY WIESZ, ŻE...</p>
+            <p class="text-sm font-bold pb-2">
+              CZY WIESZ, ŻE...
+            </p>
             <p class="text-xs">
               Ponad 500 harcerzy z Polski w wakacje tego roku weźmie udział w USA w
               Światowym Jamboree Skautowe.
@@ -25,10 +27,18 @@ const showFooter = (currentRoute) =>
         </div>
         <div class="flex basis-1/2 justify-center md:justify-end">
           <div class="my-auto">
-            <img class="h-auto w-44" src="/images/wagggs-logo.png" alt="wosm-logo" />
+            <img
+              class="h-auto w-44"
+              src="/images/wagggs-logo.png"
+              alt="wosm-logo"
+            >
           </div>
           <div class="my-auto">
-            <img class="h-auto w-44" src="/images/wosm-logo.png" alt="wosm-logo" />
+            <img
+              class="h-auto w-44"
+              src="/images/wosm-logo.png"
+              alt="wosm-logo"
+            >
           </div>
         </div>
       </div>
@@ -36,9 +46,11 @@ const showFooter = (currentRoute) =>
     <div class="flex justify-center pt-2.5 text-sm">
       <ul class="list-none">
         <li class="md:inline-block">
-          <a href="https://zhp.pl/copyright" target="_blank" class="p-1 hover:underline"
-            >Copyright© </a
-          >1997-{{ year }} Związek Harcerstwa Polskiego
+          <a
+            href="https://zhp.pl/copyright"
+            target="_blank"
+            class="p-1 hover:underline"
+          >Copyright© </a>1997-{{ year }} Związek Harcerstwa Polskiego
           <span class="invisible md:visible">|</span>
         </li>
         <li class="md:inline-block">
@@ -46,26 +58,28 @@ const showFooter = (currentRoute) =>
             href="https://zhp.pl/informacje-i-uwagi-prawne"
             target="_blank"
             class="p-1 hover:underline"
-            >Informacje i uwagi prawne</a
-          ><span class="invisible md:visible">|</span>
+          >Informacje i uwagi prawne</a><span class="invisible md:visible">|</span>
         </li>
         <li class="md:inline-block">
-          <a href="https://zhp.pl/rodo" target="_blank" class="p-1 hover:underline"
-            >Polityka prywatności</a
-          ><span class="invisible md:visible">|</span>
+          <a
+            href="https://zhp.pl/rodo"
+            target="_blank"
+            class="p-1 hover:underline"
+          >Polityka prywatności</a><span class="invisible md:visible">|</span>
         </li>
         <li class="md:inline-block">
-          <a href="https://bip.zhp.pl/" target="_blank" class="p-1 hover:underline"
-            >Biuletyn Informacji Publicznej</a
-          ><span class="invisible md:visible">|</span>
+          <a
+            href="https://bip.zhp.pl/"
+            target="_blank"
+            class="p-1 hover:underline"
+          >Biuletyn Informacji Publicznej</a><span class="invisible md:visible">|</span>
         </li>
         <li class="md:inline-block">
           <a
             href="https://zhp.pl/deklaracja-dostepnosci"
             target="_blank"
             class="p-1 hover:underline"
-            >Deklaracja dostępności</a
-          >
+          >Deklaracja dostępności</a>
         </li>
       </ul>
     </div>
