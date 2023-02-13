@@ -2,13 +2,12 @@
 namespace App\Domains\Users\Models;
 
 use App\Domains\Users\Factories\UserFactory;
+use App\Domains\Users\Repositories\ApiTokensRepository;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Laravel\Sanctum\PersonalAccessToken;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -82,20 +81,6 @@ class User extends Authenticatable
 
     public function getApiToken(): string
     {
-        /** @var PersonalAccessToken $token */
-        $token = $this->tokens()
-            ->where('name', 'api')
-            ->where(function (Builder $q) {
-                $q->whereNull('expires_at')
-                    ->orWhere('expires_at', '>', Carbon::now());
-            })->first();
-
-        if ($token !== null) {
-            return $token->token;
-        }
-
-        $token = $this->createToken('api');
-
-        return $token->plainTextToken;
+        return app(ApiTokensRepository::class)->get($this)->token;
     }
 }

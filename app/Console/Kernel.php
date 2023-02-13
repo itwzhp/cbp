@@ -37,9 +37,9 @@ class Kernel extends ConsoleKernel
         SanitizeFieldsValuesCommand::class,
     ];
 
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
-        //
+        $schedule->command('sanctum:prune-expired --hours=24')->daily();
     }
 
     protected function commands()
