@@ -1,8 +1,7 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { Carousel, Pagination, Slide, Navigation } from 'vue3-carousel'
-import SliderCard from "@/Components/SliderCard.vue";
-import Spinner from "@/Components/Spinner.vue";
+import { Carousel, Slide, Navigation } from 'vue3-carousel';
+import SliderCard from '@/Components/SliderCard.vue';
+import Spinner from '@/Components/Spinner.vue';
 
 const breakpoints = {
   640: {
@@ -24,7 +23,13 @@ const breakpoints = {
   <div v-if="!$page.props.suggestions" class="text-center pt-2">
     <Spinner />
   </div>
-  <Carousel v-else :items-to-show="1" :snapAlign="'center'" :wrap-around="true" :breakpoints="breakpoints">
+  <Carousel
+    v-else
+    :items-to-show="1"
+    :snap-align="'center'"
+    :wrap-around="true"
+    :breakpoints="breakpoints"
+  >
     <Slide v-for="slide in $page.props.suggestions" :key="slide.id">
       <div class="slide-item w-4/6 sm:w-[288px]">
         <SliderCard :slide="slide" />
@@ -35,13 +40,15 @@ const breakpoints = {
       <navigation>
         <template #next>
           <div
-            class="shadow-xl flex justify-center items-center h-8 w-8 text-cbp-100 bg-white border-solid border-cbp-100 rounded-full">
+            class="shadow-xl flex justify-center items-center h-8 w-8 text-cbp-100 bg-white border-solid border-cbp-100 rounded-full"
+          >
             <font-awesome-icon icon="fa-solid fa-chevron-right" class="block h-4 w-4" />
           </div>
         </template>
         <template #prev>
           <div
-            class="shadow-xl flex justify-center items-center h-8 w-8 text-cbp-100 bg-white border-solid border-cbp-100 rounded-full">
+            class="shadow-xl flex justify-center items-center h-8 w-8 text-cbp-100 bg-white border-solid border-cbp-100 rounded-full"
+          >
             <font-awesome-icon icon="fa-solid fa-chevron-left" class="block h-4 w-4" />
           </div>
         </template>

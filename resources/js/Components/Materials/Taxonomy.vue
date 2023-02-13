@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps({
   item: { type: Object, required: true },
-  defaultIds: { type: Array, required: true }
+  defaultIds: { type: Array, required: true },
 });
 const emit = defineEmits(['tagSelected', 'tagRemoved']);
 const isTagSelected = (tagId) => props.defaultIds.includes(tagId);
@@ -11,7 +11,7 @@ const tagAction = (tagId) => {
   } else {
     emit('tagSelected', tagId);
   }
-}
+};
 </script>
 
 <template>
@@ -20,11 +20,21 @@ const tagAction = (tagId) => {
       {{ item.taxonomy_name }}
     </p>
     <template v-for="(tag, index) in props.item.tags" :key="index">
-      <button @click="tagAction(tag.id)" type="button"
+      <button
+        type="button"
         class="border border-1 border-cbp-300 hover:border-cbp-500 px-2 py-1 m-0.5 text-xs font-medium text-center rounded-3xl focus:ring-1 focus:outline-none focus:cbp-500"
-        :class="{ 'text-white': isTagSelected(tag.id), 'bg-cbp-100': isTagSelected(tag.id) }">
+        :class="{
+          'text-white': isTagSelected(tag.id),
+          'bg-cbp-100': isTagSelected(tag.id),
+        }"
+        @click="tagAction(tag.id)"
+      >
         {{ tag.name }}
-        <font-awesome-icon v-if="isTagSelected(tag.id)" class="text-xs cursor-pointer" icon="fa-solid fa-xmark" />
+        <font-awesome-icon
+          v-if="isTagSelected(tag.id)"
+          class="text-xs cursor-pointer"
+          icon="fa-solid fa-xmark"
+        />
       </button>
     </template>
   </div>

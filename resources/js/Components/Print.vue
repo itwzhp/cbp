@@ -1,11 +1,11 @@
 <script setup>
 const print = () => {
-    window.print();
-}
+  window.print();
+};
 </script>
 
 <template>
-    <div @click.prevent="print()" class="cursor-pointer print:hidden">
-        <slot/>
-    </div>
+  <div class="cursor-pointer print:hidden" @click.prevent="print()">
+    <slot />
+  </div>
 </template>

@@ -1,13 +1,15 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link } from '@inertiajs/vue3';
 const props = defineProps({
-  topic: { type: Object, required: true }
-})
+  topic: { type: Object, required: true },
+});
 </script>
 
 <template>
-  <Link :href="topic.url"
-    class="h-20 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100">
+  <Link
+    :href="topic.url"
+    class="h-20 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100"
+  >
     <div class="ml-3 hidden md:block">
       <div class="relative w-12 h-12 overflow-hidden bg-gray-300 rounded-full"></div>
     </div>

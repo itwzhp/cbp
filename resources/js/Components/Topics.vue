@@ -1,5 +1,5 @@
 <script setup>
-import Topic from "@/Components/Topic.vue";
+import Topic from '@/Components/Topic.vue';
 </script>
 
 <template>
