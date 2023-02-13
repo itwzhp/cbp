@@ -1,5 +1,5 @@
-import axios from "axios";
-import { defineStore } from "pinia";
+import axios from 'axios';
+import { defineStore } from 'pinia';
 
 const defaultValues = {
   input: null,
@@ -17,7 +17,7 @@ const defaultValues = {
 const searchUrl = `${import.meta.env.VITE_API_URL}/api/materials`;
 const taxonomiesUrl = `${import.meta.env.VITE_API_URL}/api/taxonomies`;
 
-export const useSearchStore = defineStore("search", {
+export const useSearchStore = defineStore('search', {
   state: () => defaultValues,
   persist: {
     storage: sessionStorage
