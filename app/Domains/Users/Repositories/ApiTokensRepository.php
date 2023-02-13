@@ -40,4 +40,9 @@ class ApiTokensRepository
 
         return $token;
     }
+
+    public function destroy(User $user): int
+    {
+        return $user->tokens()->where('name', 'api')->delete();
+    }
 }

@@ -24,7 +24,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth'  => [
                 'user'        => $user,
-                'token'       => $user->getApiToken(),
+                'token'       => $user?->getApiToken(),
                 'permissions' => $this->getUserPermissions($user),
             ],
             'ziggy' => function () use ($request) {
@@ -38,8 +38,12 @@ class HandleInertiaRequests extends Middleware
         ]);
     }
 
-    protected function getUserPermissions(User $user): array
+    protected function getUserPermissions(?User $user = null): array
     {
+        if ($user === null) {
+            return [];
+        }
+
         return (new FrontendPermissionsAccessor($user))->toArray();
     }
 }
