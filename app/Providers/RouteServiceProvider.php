@@ -17,15 +17,12 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::middleware('api')
+            Route::middleware(['api', ForceJsonResponseMiddleware::class])
+                ->name('api.')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware([
-                'api',
-                'auth:sanctum',
-                ForceJsonResponseMiddleware::class,
-            ])
+            Route::middleware(['middleware', 'auth:sanctum', ForceJsonResponseMiddleware::class])
                 ->name('api.admin.')
                 ->prefix('api/admin')
                 ->group(base_path('routes/admin_api.php'));
