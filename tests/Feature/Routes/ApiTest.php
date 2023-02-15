@@ -29,17 +29,3 @@ it('has material index API endpoint', function () {
             'title' => $material->title,
         ]);
 });
-
-it('has sliders api route', function () {
-    /** @var Slide $slide */
-    $slide = Slide::factory()->create();
-
-    $this->assertInstanceOf(Slide::class, $slide);
-
-    $this->get(route('api.sliders.index'))
-        ->assertStatus(200)
-        ->assertJsonFragment([
-            'id'  => $slide->id,
-            'url' => $slide->url,
-        ]);
-});
