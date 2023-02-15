@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import AdminNavLink from '@/Pages/Admin/AdminNavLink.vue';
+import AdminNavLink from '@/Components/Admin/AdminNavLink.vue';
 import Avatar from '@/Components/Avatar.vue';
 
 const userDropdownHidden = ref(true);
@@ -136,7 +136,7 @@ const toggleMobileSidebar = () => {
         <li>
           <AdminNavLink
             :href="'admin.materials.index'"
-            :icon="'fa-solid fa-chart-pie'"
+            :icon="'fa-solid fa-file'"
           >
             Materiały
           </AdminNavLink>

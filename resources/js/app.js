@@ -25,7 +25,7 @@ pinia.use(piniaPluginPersistedstate);
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     progress: {
-        color: '#78a22f'
+        color: 'rgb(25, 64, 147)'
     },
     resolve: (name) =>
         resolvePageComponent(
