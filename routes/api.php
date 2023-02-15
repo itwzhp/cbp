@@ -17,4 +17,3 @@ Route::name('taxonomies.')
     ->group(function () {
         Route::get('/', TaxonomiesGroupsIndexController::class)->name('index');
     });
-
