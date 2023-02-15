@@ -11,7 +11,7 @@ class ApiTokensRepository
 {
     const API_TOKEN_NAME = 'api';
 
-    public function get(User $user): PersonalAccessToken
+    public function get(User $user): string
     {
         /** @var PersonalAccessToken $token */
         $token = $user->tokens()
@@ -28,7 +28,7 @@ class ApiTokensRepository
         return $this->create($user);
     }
 
-    protected function create(User $user): PersonalAccessToken
+    protected function create(User $user): string
     {
         /** @var PersonalAccessToken $token */
         $token = $user->tokens()->create([
@@ -38,7 +38,7 @@ class ApiTokensRepository
             'expires_at' => Carbon::now()->addWeek(),
         ]);
 
-        return $token;
+        return $plainTextToken;
     }
 
     public function destroy(User $user): int

@@ -7,4 +7,5 @@ class ComponentsHelper
     const MATERIALS_SHOW = 'Materials/Show';
     const ADMIN_DASHBOARD = 'Admin/Dashboard';
     const ADMIN_SETTINGS = 'Admin/Settings';
+    const ADMIN_MATERIALS_INDEX = 'Admin/MaterialsIndex';
 }

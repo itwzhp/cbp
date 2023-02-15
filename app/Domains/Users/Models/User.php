@@ -81,6 +81,6 @@ class User extends Authenticatable
 
     public function getApiToken(): string
     {
-        return app(ApiTokensRepository::class)->get($this)->token;
+        return app(ApiTokensRepository::class)->get($this);
     }
 }

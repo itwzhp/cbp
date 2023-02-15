@@ -22,7 +22,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware(['middleware', 'auth:sanctum', ForceJsonResponseMiddleware::class])
+            Route::middleware(['api', ForceJsonResponseMiddleware::class, 'auth:sanctum'])
                 ->name('api.admin.')
                 ->prefix('api/admin')
                 ->group(base_path('routes/admin_api.php'));
