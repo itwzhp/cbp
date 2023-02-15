@@ -3,7 +3,6 @@
 use App\Domains\Materials\Controllers\Api\MaterialIndexController;
 use App\Domains\Materials\Controllers\Api\MaterialShowController;
 use App\Domains\Materials\Controllers\Api\TaxonomiesGroupsIndexController;
-use App\Domains\Visuals\Controllers\IndexSlidersController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('materials.')
