@@ -2,7 +2,6 @@
 namespace App\Domains\Users\Models;
 
 use App\Domains\Users\Factories\UserFactory;
-use App\Domains\Users\Repositories\ApiTokensRepository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -77,10 +76,5 @@ class User extends Authenticatable
         return 'https://www.gravatar.com/avatar/'
             . md5(strtolower(trim($this->email)))
             . '?s=40';
-    }
-
-    public function getApiToken(): string
-    {
-        return app(ApiTokensRepository::class)->get($this);
     }
 }
