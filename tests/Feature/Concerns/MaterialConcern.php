@@ -14,9 +14,9 @@ trait MaterialConcern
     {
         $user = User::first() ?? $this->createUser();
 
-        return Material::factory()->create([
-            'user_id' => $user->id,
-        ]);
+        return Material::factory()->create($params + [
+                'user_id' => $user->id,
+            ]);
     }
 
     public function createTaxonomy(int $tagsCount = 1, array $params = []): Taxonomy
@@ -24,9 +24,9 @@ trait MaterialConcern
         /** @var Taxonomy $taxonomy */
         $taxonomy = Taxonomy::factory()->create();
 
-        Tag::factory($tagsCount)->create([
-            'taxonomy_id' => $taxonomy->id,
-        ]);
+        Tag::factory($tagsCount)->create($params + [
+                'taxonomy_id' => $taxonomy->id,
+            ]);
 
         return $taxonomy;
     }

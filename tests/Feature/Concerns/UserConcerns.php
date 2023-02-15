@@ -11,14 +11,19 @@ trait UserConcerns
         return User::factory()->create($params);
     }
 
-    public function createAuthor(array $params = []): User
+    public function createUserAndAssignRole(array $params = [], string $role = RoleHelper::AUTHOR): User
     {
         /** @var User $user */
         $user = User::factory()->create($params);
 
-        $user->assignRole(RoleHelper::AUTHOR);
+        $user->assignRole($role);
 
         return $user;
+    }
+
+    public function createAuthor(array $params = []): User
+    {
+        return $this->createUserAndAssignRole($params, RoleHelper::AUTHOR);
     }
 
     public function firstOrCreateUser(): User
@@ -28,5 +33,15 @@ trait UserConcerns
         }
 
         return $this->createUser();
+    }
+
+    public function createReviewer(array $params = []): User
+    {
+        return $this->createUserAndAssignRole($params, RoleHelper::REVIEWER);
+    }
+
+    public function createAdmin(array $params = []): User
+    {
+        return $this->createUserAndAssignRole($params, RoleHelper::ADMIN);
     }
 }
