@@ -28,10 +28,4 @@ Route::name('api.')
 
         Route::get('sliders', IndexSlidersController::class)->name('sliders.index');
 
-        Route::get('/auth', [AdminController::class, 'testAuth'])
-            ->name('test.auth')
-            ->middleware('auth');
-        Route::get('/sanctum', [AdminController::class, 'testSanctum'])
-            ->name('test.sanctum')
-            ->middleware('auth:sanctum');
     });
