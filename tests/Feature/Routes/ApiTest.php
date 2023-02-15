@@ -2,7 +2,6 @@
 
 use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Models\Tag;
-use App\Domains\Visuals\Models\Slide;
 
 it('has taxonomies endpoint', function () {
     /** @var Tag $tag */
