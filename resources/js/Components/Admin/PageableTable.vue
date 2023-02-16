@@ -2,23 +2,54 @@
   import { onMounted, ref } from 'vue';
   import axios from 'axios';
 
-  const materials = ref([{
-    'id': 166,
-    'slug': 'jak-uczyc-gier-i-zabaw',
-    'title': 'Jak uczyć gier i zabaw?',
-    'content': '<span dir="ltr">Gra lub zabawa jest elementem prawie każdej zbiórki. Niekiedy bywa i tak, że grom i zabawom poświęcona jest cała zbiórka </span><span dir="ltr">zastępu. Ale umiejętne prowadzenie gier i zabaw to też sztuka. Sztuka, której trzeba się nauczyć. Są pewne reguły uczenia </span><span dir="ltr">gier. Zapoznaj się z nimi i spróbuj postępować według nich, a przekonasz się, że nauka i organizacja gier nie jest wcale </span><span dir="ltr">sztuką trudną. Każda gra ma swoje przepisy i tylko wtedy “wychodzi”, kiedy wszyscy jej uczestnicy przestrzegają ich wiernie. </span><span dir="ltr">Ważne jest, aby biorący udział w grze dobrze rozumiał jej zasady i przepisy.</span>',
-    'published_at': null,
-    'author': 'AnnaPe',
-    'thumb': 'https://zhpcbpprodstore.blob.core.windows.net/images/8/conversions/uczenie_w_dzialaniu-thumb.jpg',
-    'cover': 'http://127.0.0.1:8000/images/scout_cover.jpg',
-    'type': 'Poradnik'
-  }]);
+  const materials = ref([]);
+  const pagination = ref({current_page: 1});
+  const paginationControls = ref([]);
+
+  const calculatePaginationControls = (pagination) => {
+    return {
+      first: {
+        pageNumber: pagination.current_page
+      },
+      middle: {
+        pageNumber: pagination.current_page !== pagination.total_pages ? pagination.current_page + 1 : null
+      },
+      last: {
+        pageNumber: ![pagination.current_page, pagination.current_page + 1, pagination.current_page + 2].some(page => page === pagination.total_pages) ?
+        pagination.current_page + 2 :
+        null
+      }
+    };
+  }
+
+  const requestData = (next, prev, pageNumber) => {
+    let params = {};
+    if (next) params.page = pagination.value.links.next.split('page=')[1];
+    if (prev) params.page = pagination.value.links.previous.split('page=')[1];
+    if (pageNumber) params.page = pageNumber;
+      
+    axios.get('/api/admin/materials', { params }).then((r) => {
+      materials.value = r.data.data;
+      pagination.value = r.data.meta.pagination;
+      paginationControls.value = calculatePaginationControls(pagination.value);
+    })
+  }
 
   onMounted(() => {
-    axios.get('/api/admin/materials').then((r) => {
-      console.log(r.data);
-    })
+    requestData();
   });
+
+  const nextPage = () => {
+    requestData(true);
+  }
+
+  const prevPage = () => {
+    requestData(false, true);
+  }
+
+  const goToPage = (pageNumber) => {
+    requestData(false, false, pageNumber);
+  }
 
 </script>
 <template>
@@ -189,17 +220,23 @@
       </tbody>
     </table>
     <nav
+      v-if="pagination.count"
       class="flex items-center justify-between p-2"
       aria-label="Table navigation"
     >
-      <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Wyniki <span class="font-semibold text-gray-900 dark:text-white">1-10</span> z <span class="font-semibold text-gray-900 dark:text-white">1000</span></span>
+      <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Wyniki 
+        <span class="font-semibold text-gray-900 dark:text-white">
+          {{ pagination.current_page === 1 ? 1 : pagination.current_page * pagination.count }}-{{ (pagination.current_page === 1 ? 1 : pagination.current_page + 1) * pagination.count }}</span> z <span class="font-semibold text-gray-900 dark:text-white">{{ pagination.total }}
+        </span>
+      </span>
       <ul class="inline-flex items-center -space-x-px">
         <li>
           <a
-            href="#"
-            class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            v-if="pagination.links?.previous"
+            class="cursor-pointer block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            @click="prevPage()"
           >
-            <span class="sr-only">Previous</span>
+            <span class="sr-only">Poprzednia</span>
             <svg
               class="w-5 h-5"
               aria-hidden="true"
@@ -213,43 +250,59 @@
             /></svg>
           </a>
         </li>
-        <li>
-          <a
-            href="#"
-            class="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-          >1</a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >2</a>
-        </li>
-        <li>
-          <a
-            href="#"
-            aria-current="page"
-            class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >3</a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >...</a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >100</a>
-        </li>
-        <li>
-          <a
-            href="#"
-            class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+        <template v-if="pagination.current_page !==1">
+          <li
+            @click="goToPage(1)"
           >
-            <span class="sr-only">Next</span>
+            <a
+              class="cursor-pointer px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >1</a>
+          </li>
+          <li>
+            <a
+              class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >...</a>
+          </li>
+        </template>
+        
+        <li>
+          <a
+            class="cursor-pointer z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+          >{{ paginationControls.first.pageNumber }}</a>
+        </li>
+        <li @click="goToPage(paginationControls.middle.pageNumber)">
+          <a
+            v-if="paginationControls.middle.pageNumber"
+            class="cursor-pointer px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >{{ paginationControls.middle.pageNumber }}</a>
+        </li>
+        <li @click="goToPage(paginationControls.last.pageNumber)">
+          <a
+            v-if="paginationControls.last.pageNumber"
+            aria-current="page"
+            class="cursor-pointer px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >{{ paginationControls.last.pageNumber }}</a>
+        </li>
+        <template v-if="pagination.total_pages !== pagination.current_page && paginationControls.middle.pageNumber !== pagination.total_pages">
+          <li>
+            <a
+              class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >...</a>
+          </li>
+          <li @click="goToPage(pagination.total_pages)">
+            <a
+              href="#"
+              class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >{{ pagination.total_pages }}</a>
+          </li>
+        </template>
+        <li>
+          <a
+            v-if="pagination.links?.next"
+            class="cursor-pointer block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            @click="nextPage()"
+          >
+            <span class="sr-only">Następna</span>
             <svg
               class="w-5 h-5"
               aria-hidden="true"
