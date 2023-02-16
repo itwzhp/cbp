@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
+use League\Fractal\Serializer\ArraySerializer;
 
 class MaterialsIndexController extends Controller
 {
@@ -22,6 +23,7 @@ class MaterialsIndexController extends Controller
         return fractal()
             ->collection($builder->getCollection())
             ->transformWith(new DefaultMaterialTransformer())
+            ->serializeWith(new ArraySerializer())
             ->paginateWith(new IlluminatePaginatorAdapter($builder));
     }
 }
