@@ -36,7 +36,7 @@ abstract class MaterialState extends State
             ], Archived::class);
     }
 
-    public function __toString(): string
+    public function toSimplifiedString(): string
     {
         return match ($this->getValue()) {
             Draft::class            => 'draft',
