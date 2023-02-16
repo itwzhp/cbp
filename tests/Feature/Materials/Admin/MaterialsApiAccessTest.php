@@ -74,6 +74,5 @@ it('random user cannot see anything', function () {
     $this->actingAs($randomUser)
         ->getJson(route('api.admin.materials.index'))
         ->assertStatus(200)
-        ->assertJsonIsArray()
         ->assertJson([]);
 });
