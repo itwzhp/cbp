@@ -23,7 +23,7 @@
 </script>
 <template>
   <div class="relative shadow-md sm:rounded-lg">
-    <div class="grid grid-cols-2 gap-4 p-2">
+    <div class="grid grid-cols-3 gap-4 p-2">
       <div>
         <select
           id="small"
@@ -37,6 +37,28 @@
           </option>
           <option value="creator">
             Tylko moje
+          </option>
+        </select>
+      </div>
+      <div>
+        <select
+          id="small"
+          class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          <option value="all">
+            Wszystkie
+          </option>
+          <option value="draft">
+            Szkice
+          </option>
+          <option value="review">
+            W trakcie recenzji
+          </option>
+          <option value="published">
+            Opublikowane
+          </option>
+          <option value="archived">
+            Odrzucone
           </option>
         </select>
       </div>
