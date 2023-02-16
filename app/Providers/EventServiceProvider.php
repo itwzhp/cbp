@@ -5,6 +5,7 @@ use App\Domains\Files\Listeners\ClearCachedZipListener;
 use App\Domains\Materials\Events\MaterialChangedEvent;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Models\Observers\MaterialObserver;
+use App\Domains\Reviews\Events\ReviewStartedEvent;
 use App\Domains\Users\Events\UserLoggedInViaSocialiteEvent;
 use App\Domains\Users\Listeners\AdjustUserEmailConfirmationListener;
 use App\Domains\Users\Listeners\LogMaterialStateChangeListener;
@@ -38,6 +39,7 @@ class EventServiceProvider extends ServiceProvider
         StateChanged::class                  => [
             LogMaterialStateChangeListener::class,
         ],
+        ReviewStartedEvent::class            => [],
     ];
 
     /**

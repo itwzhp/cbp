@@ -67,3 +67,13 @@ it('admin can see everything', function () {
             'title' => $this->otherMaterial->title,
         ]);
 });
+
+it('random user cannot see anything', function () {
+    $randomUser = $this->createUser();
+
+    $this->actingAs($randomUser)
+        ->getJson(route('api.admin.materials.index'))
+        ->assertStatus(200)
+        ->assertJsonIsArray()
+        ->assertJson([]);
+});
