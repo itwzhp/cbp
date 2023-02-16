@@ -35,4 +35,17 @@ abstract class MaterialState extends State
                 Archived::class,
             ], Archived::class);
     }
+
+    public function __toString(): string
+    {
+        return match ($this->getValue()) {
+            Draft::class            => 'draft',
+            InReview::class         => 'review',
+            ChangesRequested::class => 'changes',
+            Pending::class          => 'pending',
+            Published::class        => 'published',
+            Rejected::class         => 'rejected',
+            Archived::class         => 'archived',
+        };
+    }
 }

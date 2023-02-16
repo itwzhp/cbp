@@ -38,6 +38,7 @@ class DefaultMaterialTransformer extends TransformerAbstract
             'thumb'        => $material->thumb(),
             'cover'        => $material->cover(),
             'type'         => $material->type,
+            'state'        => (string)$material->state,
         ];
     }
 
