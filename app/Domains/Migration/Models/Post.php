@@ -34,8 +34,8 @@ class Post extends Model
 
     protected ?Collection $postmetas = null;
 
-    protected $dates = [
-        'post_date_gmt',
+    protected $casts = [
+        'post_date_gmt' => 'datetime',
     ];
 
     protected $with = [

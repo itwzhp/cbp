@@ -63,12 +63,9 @@ class Material extends Model implements HasMedia
     use HasSlug;
     use InteractsWithMedia;
 
-    protected $dates = [
-        'published_at',
-    ];
-
     protected $casts = [
-        'state' => MaterialState::class,
+        'state'        => MaterialState::class,
+        'published_at' => 'datetime',
     ];
 
     protected $guarded = [];

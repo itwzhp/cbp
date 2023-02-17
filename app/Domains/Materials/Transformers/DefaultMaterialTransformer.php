@@ -2,6 +2,7 @@
 namespace App\Domains\Materials\Transformers;
 
 use App\Domains\Files\Transformers\AttachmentTransformer;
+use App\Domains\Materials\Models\Enums\FieldTypeEnum;
 use App\Domains\Materials\Models\Field;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Users\Transformers\OwnerTransformer;
@@ -60,7 +61,10 @@ class DefaultMaterialTransformer extends TransformerAbstract
 
     public function includeFields(Material $material): Collection
     {
-        return $this->collection($material->fields->groupBy('type'), new FieldGroupTransformer());
+        return $this->collection(
+            $material->fields->groupBy(fn (Field $field) => $field->type->value),
+            new FieldGroupTransformer()
+        );
     }
 
     public function includeSetups(Material $material): Collection
@@ -76,7 +80,7 @@ class DefaultMaterialTransformer extends TransformerAbstract
     public function includeAuthors(Material $material): Collection
     {
         return $this->collection(
-            $material->fields->where('type', Field::TYPE_AUTHOR),
+            $material->fields->where('type', FieldTypeEnum::AUTHOR),
             new FieldTransformer()
         );
     }

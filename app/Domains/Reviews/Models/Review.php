@@ -21,8 +21,8 @@ class Review extends Model
 {
     protected $guarded = [];
 
-    protected $dates = [
-        'accepted_at',
+    protected $casts = [
+        'accepted_at' => 'datetime',
     ];
 
     public function reviewer(): BelongsTo

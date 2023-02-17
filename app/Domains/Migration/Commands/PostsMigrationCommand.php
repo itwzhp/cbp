@@ -1,7 +1,7 @@
 <?php
 namespace App\Domains\Migration\Commands;
 
-use App\Domains\Materials\Models\Field;
+use App\Domains\Materials\Models\Enums\FieldTypeEnum;
 use App\Domains\Materials\Models\Licence;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Models\Setup;
@@ -27,14 +27,14 @@ use Throwable;
 class PostsMigrationCommand extends Command
 {
     const FIELD_MAP = [
-        'wpcf-dane-recenzenta'       => Field::TYPE_REVIEWER,
-        'wpcf-dane-autora'           => Field::TYPE_AUTHOR,
-        'wpcf-tresc'                 => Field::TYPE_CONTENT,
-        'wpcf-zamierzenia'           => Field::TYPE_INTENT,
-        'wpcf-zamierzenia-kp'        => Field::TYPE_INTENT,
-        'wpcf-instrumenty-wymagania' => Field::TYPE_REQUIREMENT,
-        'wpcf-forma-uwagi'           => Field::TYPE_FORM_DESCRIPTION,
-        'wpcf-zakres'                => Field::TYPE_SCOPE,
+        'wpcf-dane-recenzenta'       => FieldTypeEnum::REVIEWER,
+        'wpcf-dane-autora'           => FieldTypeEnum::AUTHOR,
+        'wpcf-tresc'                 => FieldTypeEnum::CONTENT,
+        'wpcf-zamierzenia'           => FieldTypeEnum::INTENT,
+        'wpcf-zamierzenia-kp'        => FieldTypeEnum::INTENT,
+        'wpcf-instrumenty-wymagania' => FieldTypeEnum::REQUIREMENT,
+        'wpcf-forma-uwagi'           => FieldTypeEnum::FORM_DESCRIPTION,
+        'wpcf-zakres'                => FieldTypeEnum::SCOPE,
     ];
 
     protected $signature = 'wp:posts';
@@ -177,9 +177,9 @@ class PostsMigrationCommand extends Command
             return;
         }
 
-        $type = Field::TYPE_AUTHOR;
+        $type = FieldTypeEnum::AUTHOR;
         if ($arData->meta_value == 2) {
-            $type = Field::TYPE_REDACTOR;
+            $type = FieldTypeEnum::REDACTOR;
         }
         if (!empty($arField->meta_value)) {
             $lines = $this->split($arField->meta_value);
