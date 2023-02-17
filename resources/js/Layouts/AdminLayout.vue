@@ -141,6 +141,15 @@ const toggleMobileSidebar = () => {
             Materiały
           </AdminNavLink>
         </li>
+        <!--  TODO: sprawdzić, czy user może tworzyć materiały, inaczej nie wyświetlać        -->
+        <li>
+          <AdminNavLink
+            :href="'admin.materials.create'"
+            :icon="'fa-solid fa-plus'"
+          >
+            Dodaj materiał
+          </AdminNavLink>
+        </li>
         <li>
           <AdminNavLink
             :href="'admin.settings'"

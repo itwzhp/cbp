@@ -29,6 +29,7 @@ use Spatie\Sluggable\SlugOptions;
 /**
  * @property      int                     $id
  * @property      int                     $user_id
+ * @property      int|null                $licence_id
  * @property      string                  $title
  * @property      string                  $slug
  * @property      string|null             $description
