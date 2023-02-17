@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import AuthorsShort from '@/Components/Materials/AuthorsShort.vue';
 import AuthorsCard from '@/Components/Materials/AuthorsCard.vue';
 import Spinner from '@/Components/Spinner.vue';
-import Intents from '@/Components/Materials/Intents.vue';
+import FieldsList from '@/Components/Materials/FieldsList.vue';
 
 let activeTab = ref(0);
 const downloadInProgress = ref(false);
@@ -36,8 +36,8 @@ const download = async (url) => {
   }
 };
 
-const filterIntents = (fields)=>{
-    let intents = fields.filter((group) => group.type == 'intent');
+const filterFields = (fields, type)=>{
+    let intents = fields.filter((group) => group.type === type);
 
     if (!intents || intents.length === 0)
         return [];
@@ -139,8 +139,17 @@ const filterIntents = (fields)=>{
             />
 
             <!-- TODO: jak to filtrowanie zrobić lepiej? W tabeli fields nie zawsze jest element z type intent-->
-            <Intents :intents="filterIntents($page.props.material.fields)" />
+            <FieldsList :fields="filterFields($page.props.material.fields, 'intent')">
+              Po zajęciach uczestniczka/uczestnik będzie:
+            </FieldsList>
 
+            <FieldsList :fields="filterFields($page.props.material.fields, 'requirement')">
+              Realizowane wymagania z instrumentów metodycznych:
+            </FieldsList>
+
+            <FieldsList :fields="filterFields($page.props.material.fields, 'scope')">
+              Zakres tematyczny:
+            </FieldsList>
             <AuthorsCard class="md:hidden" />
           </div>
 
