@@ -35,6 +35,15 @@ const download = async (url) => {
     downloadInProgress.value = false;
   }
 };
+
+const filterIntents = (fields)=>{
+    let intents = fields.filter((group) => group.type == 'intent');
+
+    if (!intents || intents.length === 0)
+        return [];
+
+    return intents[0]['fields'];
+}
 </script>
 
 <template>
@@ -130,7 +139,7 @@ const download = async (url) => {
             />
 
             <!-- TODO: jak to filtrowanie zrobić lepiej? W tabeli fields nie zawsze jest element z type intent-->
-            <Intents :intents="$page.props.material.fields.filter((group) => group.type == 'intent')[0]['fields']" />
+            <Intents :intents="filterIntents($page.props.material.fields)" />
 
             <AuthorsCard class="md:hidden" />
           </div>
