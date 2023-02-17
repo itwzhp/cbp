@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import AuthorsShort from '@/Components/Materials/AuthorsShort.vue';
 import AuthorsCard from '@/Components/Materials/AuthorsCard.vue';
 import Spinner from '@/Components/Spinner.vue';
+import Intents from '@/Components/Materials/Intents.vue';
 
 let activeTab = ref(0);
 const downloadInProgress = ref(false);
@@ -127,6 +128,9 @@ const download = async (url) => {
               :key="index"
               :taxonomy="item"
             />
+
+            <!-- TODO: jak to filtrowanie zrobić lepiej? W tabeli fields nie zawsze jest element z type intent-->
+            <Intents :intents="$page.props.material.fields.filter((group) => group.type == 'intent')[0]['fields']" />
 
             <AuthorsCard class="md:hidden" />
           </div>
