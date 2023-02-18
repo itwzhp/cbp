@@ -12,36 +12,56 @@ class MaterialPolicy
 
     public function viewAny(User $user)
     {
-        return true;
+        return $user->hasRole(RoleHelper::ADMIN);
     }
 
-    public function view(User $user, Material $material)
+    public function view(User $user, Material $material): bool
     {
-        return true;
+        if ($material->isPublished()) {
+            return true;
+        }
+
+        return $this->update($user, $material);
     }
 
-    public function create(User $user)
+    public function create(User $user): bool
     {
-        $user->hasPermissionTo(RoleHelper::MATERIAL_CREATE);
+        return $user->hasPermissionTo(RoleHelper::MATERIAL_CREATE);
     }
 
-    public function update(User $user, Material $material)
+    public function update(User $user, Material $material): bool
     {
-        //
+        if ($user->hasRole(RoleHelper::ADMIN)) {
+            return true;
+        }
+
+        if ($user->can(RoleHelper::MATERIAL_EDIT_ANY)) {
+            return true;
+        }
+
+        if ($user->can(RoleHelper::MATERIAL_EDIT_OWN)) {
+            if ($material->user_id !== $user->id) {
+                return false;
+            }
+
+            return $material->hasEditableState();
+        }
+
+        return false;
     }
 
-    public function delete(User $user, Material $material)
+    public function delete(User $user, Material $material): bool
     {
-        //
+        return $this->update($user, $material);
     }
 
-    public function restore(User $user, Material $material)
+    public function restore(User $user, Material $material): bool
     {
-        //
+        return $user->hasRole(RoleHelper::ADMIN);
     }
 
-    public function forceDelete(User $user, Material $material)
+    public function forceDelete(User $user, Material $material): bool
     {
-        //
+        return $user->hasRole(RoleHelper::ADMIN);
     }
 }

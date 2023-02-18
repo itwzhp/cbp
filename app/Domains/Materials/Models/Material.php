@@ -247,4 +247,14 @@ class Material extends Model implements HasMedia
     {
         return $this->getFirstMediaUrl('cover', 'cover');
     }
+
+    public function hasEditableState(): bool
+    {
+        return $this->state->getValue() !== Published::class;
+    }
+
+    public function isPublished(): bool
+    {
+        return $this->state->getValue() === Published::class;
+    }
 }
