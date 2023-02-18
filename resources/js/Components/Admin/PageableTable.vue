@@ -1,6 +1,7 @@
 <script setup>
   import { onMounted, ref } from 'vue';
   import axios from 'axios';
+  import {Link} from '@inertiajs/vue3';
 
   const materials = ref([]);
   const pagination = ref({current_page: 1});
@@ -27,7 +28,7 @@
     if (next) params.page = pagination.value.links.next.split('page=')[1];
     if (prev) params.page = pagination.value.links.previous.split('page=')[1];
     if (pageNumber) params.page = pageNumber;
-      
+
     axios.get('/api/admin/materials', { params }).then((r) => {
       materials.value = r.data.data;
       pagination.value = r.data.meta.pagination;
@@ -210,10 +211,12 @@
               {{ material.type }}
             </td>
             <td class="px-6 py-4">
-              <a
-                href="#"
+              <Link
+                :href="route('admin.materials.edit', material.id)"
                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >Edytuj</a>
+              >
+                Edytuj
+              </Link>
             </td>
           </tr>
         </template>
@@ -224,7 +227,7 @@
       class="flex items-center justify-between p-2"
       aria-label="Table navigation"
     >
-      <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Wyniki 
+      <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Wyniki
         <span class="font-semibold text-gray-900 dark:text-white">
           {{ pagination.current_page === 1 ? 1 : pagination.current_page * pagination.count }}-{{ (pagination.current_page === 1 ? 1 : pagination.current_page + 1) * pagination.count }}</span> z <span class="font-semibold text-gray-900 dark:text-white">{{ pagination.total }}
         </span>
@@ -264,7 +267,7 @@
             >...</a>
           </li>
         </template>
-        
+
         <li>
           <a
             class="cursor-pointer z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
