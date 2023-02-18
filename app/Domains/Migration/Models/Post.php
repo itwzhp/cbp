@@ -122,10 +122,19 @@ class Post extends Model
 
     public function tagIds(): array
     {
-        return Arr::pluck(DB::connection('wp')
-            ->select(DB::raw('select tax.term_id from wp_term_relationships r
-            left join wp_term_taxonomy tax on r.term_taxonomy_id = tax.term_taxonomy_id
-            where r.object_id = ?'), [$this->ID]), 'term_id');
+        return DB::connection('wp')
+            ->table('wp_term_relationships')
+            ->join(
+                'wp_term_taxonomy',
+                'wp_term_relationships.term_taxonomy_id',
+                '=',
+                'wp_term_taxonomy.term_taxonomy_id'
+            )
+            ->where('wp_term_relationships.object_id', $this->ID)
+            ->select('term_id')
+            ->get()
+            ->pluck('term_id')
+            ->toArray();
     }
 
     public function licence(): ?int
