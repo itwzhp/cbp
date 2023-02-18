@@ -11,6 +11,7 @@ class FieldTransformer extends TransformerAbstract
         return [
             'id'    => $field->id,
             'value' => $field->value,
+            'type'  => $field->type,
         ];
     }
 }
