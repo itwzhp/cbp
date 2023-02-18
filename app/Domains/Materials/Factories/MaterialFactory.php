@@ -22,6 +22,7 @@ class MaterialFactory extends Factory
             'description' => fake()->text(),
             'state'       => Draft::class,
             'user_id'     => User::factory(),
+            'licence_id'  => 1,
         ];
     }
 

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Domains\Users\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -13,8 +14,8 @@ class AdminController extends Controller
         $this->user = Auth::user();
     }
 
-    protected function responseOK()
+    protected function responseOK(): JsonResponse
     {
-        
+        return JsonResponse::fromJsonString(['ok'], 200);
     }
 }

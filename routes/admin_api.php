@@ -13,7 +13,7 @@ Route::name('materials.')
         Route::get('/', MaterialsIndexController::class)->name('index');
 
         Route::middleware(UserCanEditMaterialMiddleware::class)
-            ->prefix('/{materials}')
+            ->prefix('/{material}')
             ->group(function () {
                 Route::post('/', [MaterialUpdateController::class, 'update'])->name('update');
                 Route::delete('/', [MaterialUpdateController::class, 'delete'])->name('destroy');

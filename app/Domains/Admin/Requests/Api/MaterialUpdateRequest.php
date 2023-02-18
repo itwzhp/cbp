@@ -8,8 +8,8 @@ class MaterialUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'       => 'required|string|min:3',
-            'description' => 'required|string',
+            'title'       => 'string|min:3',
+            'description' => 'string',
         ];
     }
 }

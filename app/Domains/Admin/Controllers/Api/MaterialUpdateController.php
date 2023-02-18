@@ -12,7 +12,7 @@ class MaterialUpdateController extends AdminController
     {
         $material->update($request->validated());
 
-        return
+        return $material->toArray();
     }
 
     public function delete(Material $material)
@@ -23,6 +23,6 @@ class MaterialUpdateController extends AdminController
 
         $material->delete();
 
-        return response(['ok'], 200);
+        return $this->responseOK();
     }
 }
