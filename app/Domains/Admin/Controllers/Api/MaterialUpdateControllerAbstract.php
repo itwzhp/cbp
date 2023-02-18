@@ -4,9 +4,9 @@ namespace App\Domains\Admin\Controllers\Api;
 use App\Domains\Admin\Requests\Api\MaterialUpdateRequest;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Users\Exceptions\UnauthorizedException;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AbstractAdminController;
 
-class MaterialUpdateController extends AdminController
+class MaterialUpdateControllerAbstract extends AbstractAdminController
 {
     public function update(Material $material, MaterialUpdateRequest $request)
     {

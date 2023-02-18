@@ -2,9 +2,10 @@
 // prefix: api/admin
 // name: api.admin
 
+use App\Domains\Admin\Controllers\Api\FieldsControllerAbstract;
 use App\Domains\Admin\Controllers\Api\MaterialsIndexController;
-use App\Domains\Admin\Controllers\Api\MaterialUpdateController;
-use App\Domains\Materials\Controllers\Api\FieldsController;
+use App\Domains\Admin\Controllers\Api\MaterialUpdateControllerAbstract;
+use App\Domains\Admin\Controllers\Api\TagsControllerAbstract;
 use App\Domains\Users\Middlewares\UserCanEditMaterialMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -16,15 +17,22 @@ Route::name('materials.')
         Route::middleware(UserCanEditMaterialMiddleware::class)
             ->prefix('/{material}')
             ->group(function () {
-                Route::post('/', [MaterialUpdateController::class, 'update'])->name('update');
-                Route::delete('/', [MaterialUpdateController::class, 'delete'])->name('destroy');
+                Route::post('/', [MaterialUpdateControllerAbstract::class, 'update'])->name('update');
+                Route::delete('/', [MaterialUpdateControllerAbstract::class, 'delete'])->name('destroy');
 
                 Route::prefix('fields')
-                    ->name('fields')
+                    ->name('fields.')
                     ->group(function () {
-                        Route::post('/', [FieldsController::class, 'store'])->name('store');
-                        Route::post('/{field}', [FieldsController::class, 'update'])->name('update');
-                        Route::delete('/{field}', [FieldsController::class, 'delete'])->name('destroy');
+                        Route::post('/', [FieldsControllerAbstract::class, 'store'])->name('store');
+                        Route::post('/{field}', [FieldsControllerAbstract::class, 'update'])->name('update');
+                        Route::delete('/{field}', [FieldsControllerAbstract::class, 'delete'])->name('destroy');
+                    });
+
+                Route::prefix('tags')
+                    ->name('tags.')
+                    ->group(function () {
+                        Route::post('/{tag}', [TagsControllerAbstract::class, 'attach'])->name('attach');
+                        Route::delete('/{tag}', [TagsControllerAbstract::class, 'detach'])->name('detach');
                     });
             });
     });
