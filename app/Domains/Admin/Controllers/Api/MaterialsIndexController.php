@@ -2,7 +2,7 @@
 namespace App\Domains\Admin\Controllers\Api;
 
 use App\Domains\Admin\Requests\Api\MaterialsIndexRequest;
-use App\Domains\Admin\Transformers\MaterialWIthActionsTransformer;
+use App\Domains\Admin\Transformers\MaterialWithActionsTransformer;
 use App\Domains\Materials\MaterialAccessBuilder;
 use App\Domains\Users\Models\User;
 use App\Http\Controllers\Controller;
@@ -20,12 +20,14 @@ class MaterialsIndexController extends Controller
         /** @var LengthAwarePaginator $builder */
         $builder = MaterialAccessBuilder::forUser($user)
             ->search($request->input('search'))
+            ->withType()
+            ->with('owner')
             ->orderBy('created_at', 'desc')
             ->paginate();
 
         return fractal()
             ->collection($builder->getCollection())
-            ->transformWith(new MaterialWIthActionsTransformer($user))
+            ->transformWith(new MaterialWithActionsTransformer($user))
             ->serializeWith(new ArraySerializer())
             ->paginateWith(new IlluminatePaginatorAdapter($builder));
     }

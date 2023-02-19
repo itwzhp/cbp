@@ -48,6 +48,7 @@ use Spatie\Sluggable\SlugOptions;
  * @property-read int|null                $authors_count
  * @property-read Licence|null            $licence
  * @property-read Collection|Review[]     $reviews
+ * @property-read string|null             $type
  *
  * @method static Builder published()
  * @method static Builder search(string $search)
