@@ -4,10 +4,10 @@ use App\Domains\Materials\States\Draft;
 use App\Domains\Materials\States\InReview;
 use App\Domains\Materials\States\Published;
 use App\Domains\Users\Exceptions\UnauthorizedException;
-use App\Domains\Users\Roles\RoleHelper;
+use App\Domains\Users\Roles\RolesEnum;
 
 beforeEach(function () {
-    $this->author = $this->createUser()->assignRole(RoleHelper::AUTHOR);
+    $this->author = $this->createUser()->assignRole(RolesEnum::AUTHOR->value);
     $this->material = $this->createMaterial([
         'user_id' => $this->author->id,
         'state'   => Draft::class,
@@ -33,7 +33,7 @@ test('author cannot publish own material', function () {
 
 test('editor can publish any material', function () {
     // given
-    $editor = $this->createUser()->assignRole(RoleHelper::EDITOR);
+    $editor = $this->createUser()->assignRole(RolesEnum::EDITOR->value);
     $this->actingAs($editor);
 
     // when

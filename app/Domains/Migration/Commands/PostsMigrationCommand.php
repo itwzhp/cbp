@@ -14,7 +14,7 @@ use App\Domains\Migration\Models\Post;
 use App\Domains\Migration\Models\Postmeta;
 use App\Domains\Migration\Operators\Zalacznik;
 use App\Domains\Users\Repositories\UsersRepository;
-use App\Domains\Users\Roles\RoleHelper;
+use App\Domains\Users\Roles\RolesEnum;
 use Database\Seeders\TagsSeeder;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
@@ -87,7 +87,7 @@ class PostsMigrationCommand extends Command
         if ($author === null) {
             throw new InvalidArgumentException('Missing author');
         }
-        $author->assignRole(RoleHelper::AUTHOR);
+        $author->assignRole(RolesEnum::AUTHOR->value);
 
         $licence = Licence::where('wp_id', $post->licence())->first();
 

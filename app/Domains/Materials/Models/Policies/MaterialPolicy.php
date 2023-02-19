@@ -3,7 +3,8 @@ namespace App\Domains\Materials\Models\Policies;
 
 use App\Domains\Materials\Models\Material;
 use App\Domains\Users\Models\User;
-use App\Domains\Users\Roles\RoleHelper;
+use App\Domains\Users\Roles\PermissionsEnum;
+use App\Domains\Users\Roles\RolesEnum;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MaterialPolicy
@@ -12,7 +13,7 @@ class MaterialPolicy
 
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(RoleHelper::ADMIN);
+        return $user->hasRole(RolesEnum::ADMIN);
     }
 
     public function view(User $user, Material $material): bool
@@ -26,20 +27,20 @@ class MaterialPolicy
 
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo(RoleHelper::MATERIAL_CREATE);
+        return $user->hasPermissionTo(PermissionsEnum::MATERIAL_CREATE);
     }
 
     public function update(User $user, Material $material): bool
     {
-        if ($user->hasRole(RoleHelper::ADMIN)) {
+        if ($user->hasRole(RolesEnum::ADMIN)) {
             return true;
         }
 
-        if ($user->can(RoleHelper::MATERIAL_EDIT_ANY)) {
+        if ($user->hasPermissionTo(PermissionsEnum::MATERIAL_EDIT_ANY)) {
             return true;
         }
 
-        if ($user->cannot(RoleHelper::MATERIAL_EDIT_OWN)) {
+        if (!$user->hasPermissionTo(PermissionsEnum::MATERIAL_EDIT_OWN)) {
             return false;
         }
         if (!$user->owns($material)) {
@@ -51,7 +52,7 @@ class MaterialPolicy
 
     public function delete(User $user, Material $material): bool
     {
-        if ($user->can(RoleHelper::MATERIAL_MANAGE)) {
+        if ($user->hasPermissionTo(PermissionsEnum::MATERIAL_MANAGE)) {
             return true;
         }
 
@@ -64,22 +65,22 @@ class MaterialPolicy
 
     public function restore(User $user, Material $material): bool
     {
-        return $user->hasRole(RoleHelper::ADMIN);
+        return $user->hasRole(RolesEnum::ADMIN);
     }
 
     public function forceDelete(User $user, Material $material): bool
     {
-        return $user->hasRole(RoleHelper::ADMIN);
+        return $user->hasRole(RolesEnum::ADMIN);
     }
 
     public function publish(User $user, Material $material): bool
     {
-        return $user->can(RoleHelper::MATERIAL_PUBLISH);
+        return $user->hasPermissionTo(PermissionsEnum::MATERIAL_PUBLISH);
     }
 
     public function submit(User $user, Material $material): bool
     {
-        if ($user->hasRole(RoleHelper::ADMIN)) {
+        if ($user->hasRole(RolesEnum::ADMIN)) {
             return true;
         }
 
@@ -87,7 +88,7 @@ class MaterialPolicy
             return false;
         }
 
-        if ($user->cannot(RoleHelper::MATERIAL_EDIT_OWN)) {
+        if (!$user->hasPermissionTo(PermissionsEnum::MATERIAL_EDIT_OWN)) {
             return false;
         }
 
@@ -96,7 +97,7 @@ class MaterialPolicy
 
     public function archive(User $user, Material $material): bool
     {
-        return $user->can(RoleHelper::MATERIAL_MANAGE);
+        return $user->hasPermissionTo(PermissionsEnum::MATERIAL_MANAGE);
     }
 
     public function review(User $user, Material $material): bool
@@ -105,6 +106,6 @@ class MaterialPolicy
             return false;
         }
 
-        return $user->can(RoleHelper::MATERIAL_REVIEW);
+        return $user->hasPermissionTo(PermissionsEnum::MATERIAL_REVIEW);
     }
 }

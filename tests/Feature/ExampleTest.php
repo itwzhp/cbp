@@ -1,9 +1,8 @@
 <?php
 namespace Tests\Feature;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Domains\Materials\Repositories\TagsRepository;
-use App\Domains\Users\Roles\RoleHelper;
+use App\Domains\Users\Roles\RolesEnum;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
@@ -42,7 +41,7 @@ class ExampleTest extends TestCase
             'id' => $author->id,
         ]);
 
-        $this->assertTrue($author->hasRole(RoleHelper::AUTHOR));
+        $this->assertTrue($author->hasRole(RolesEnum::AUTHOR));
     }
 
     /** @test */

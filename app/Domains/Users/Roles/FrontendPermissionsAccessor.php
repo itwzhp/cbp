@@ -7,9 +7,9 @@ use Illuminate\Contracts\Support\Arrayable;
 class FrontendPermissionsAccessor implements Arrayable
 {
     const PERMISSIONS = [
-        RoleHelper::MATERIAL_CREATE,
-        RoleHelper::MATERIAL_PUBLISH,
-        RoleHelper::MATERIAL_REVIEW,
+        PermissionsEnum::MATERIAL_CREATE,
+        PermissionsEnum::MATERIAL_PUBLISH,
+        PermissionsEnum::MATERIAL_REVIEW,
     ];
 
     protected User $user;
@@ -22,8 +22,8 @@ class FrontendPermissionsAccessor implements Arrayable
     public function toArray(): array
     {
         return collect(static::PERMISSIONS)
-            ->map(function ($permission) {
-                return $this->user->can($permission) ? $permission : null;
+            ->map(function (PermissionsEnum $permission) {
+                return $this->user->can($permission->value) ? $permission->value : null;
             })
             ->filter()
             ->toArray();

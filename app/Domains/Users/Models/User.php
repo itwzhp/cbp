@@ -2,6 +2,7 @@
 namespace App\Domains\Users\Models;
 
 use App\Domains\Users\Factories\UserFactory;
+use BackedEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +28,10 @@ class User extends Authenticatable
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
-    use HasRoles;
+    use HasRoles {
+        hasPermissionTo as protected parentHasPermissionTo;
+        hasRole as protected parentHasRole;
+    }
 
     protected static function newFactory(): UserFactory
     {
@@ -86,5 +90,23 @@ class User extends Authenticatable
         }
 
         return $model->user_id === $this->id;
+    }
+
+    public function hasPermissionTo($permission, $guardName = null): bool
+    {
+        if ($permission instanceof BackedEnum) {
+            $permission = $permission->value;
+        }
+
+        return $this->parentHasPermissionTo($permission);
+    }
+
+    public function hasRole($roles, string $guard = null): bool
+    {
+        if ($roles instanceof BackedEnum) {
+            $roles = $roles->value;
+        }
+
+        return $this->parentHasRole($roles);
     }
 }

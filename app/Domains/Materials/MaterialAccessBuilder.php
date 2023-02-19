@@ -3,22 +3,22 @@ namespace App\Domains\Materials;
 
 use App\Domains\Materials\Models\Material;
 use App\Domains\Users\Models\User;
-use App\Domains\Users\Roles\RoleHelper;
+use App\Domains\Users\Roles\RolesEnum;
 use Illuminate\Database\Eloquent\Builder;
 
 class MaterialAccessBuilder
 {
     public static function forUser(User $user)
     {
-        if ($user->hasRole(RoleHelper::ADMIN)) {
+        if ($user->hasRole(RolesEnum::ADMIN)) {
             return Material::query();
         }
 
-        if ($user->hasRole(RoleHelper::EDITOR)) {
+        if ($user->hasRole(RolesEnum::EDITOR)) {
             return Material::query();
         }
 
-        if ($user->hasRole(RoleHelper::REVIEWER)) {
+        if ($user->hasRole(RolesEnum::REVIEWER)) {
             return Material::where(function (Builder $query) use ($user) {
                 return $query
                     ->forOwner($user)
@@ -28,7 +28,7 @@ class MaterialAccessBuilder
             });
         }
 
-        if ($user->hasRole(RoleHelper::AUTHOR)) {
+        if ($user->hasRole(RolesEnum::AUTHOR)) {
             return Material::forOwner($user);
         }
 

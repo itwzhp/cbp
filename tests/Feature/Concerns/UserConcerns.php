@@ -2,7 +2,8 @@
 namespace Tests\Feature\Concerns;
 
 use App\Domains\Users\Models\User;
-use App\Domains\Users\Roles\RoleHelper;
+use App\Domains\Users\Roles\RolesEnum;
+use BackedEnum;
 
 trait UserConcerns
 {
@@ -11,10 +12,14 @@ trait UserConcerns
         return User::factory()->create($params);
     }
 
-    public function createUserAndAssignRole(array $params = [], string $role = RoleHelper::AUTHOR): User
+    public function createUserAndAssignRole(array $params = [], string|RolesEnum $role = RolesEnum::AUTHOR): User
     {
         /** @var User $user */
         $user = User::factory()->create($params);
+
+        if ($role instanceof BackedEnum) {
+            $role = $role->value;
+        }
 
         $user->assignRole($role);
 
@@ -23,7 +28,7 @@ trait UserConcerns
 
     public function createAuthor(array $params = []): User
     {
-        return $this->createUserAndAssignRole($params, RoleHelper::AUTHOR);
+        return $this->createUserAndAssignRole($params, RolesEnum::AUTHOR);
     }
 
     public function firstOrCreateUser(): User
@@ -37,11 +42,11 @@ trait UserConcerns
 
     public function createReviewer(array $params = []): User
     {
-        return $this->createUserAndAssignRole($params, RoleHelper::REVIEWER);
+        return $this->createUserAndAssignRole($params, RolesEnum::REVIEWER);
     }
 
     public function createAdmin(array $params = []): User
     {
-        return $this->createUserAndAssignRole($params, RoleHelper::ADMIN);
+        return $this->createUserAndAssignRole($params, RolesEnum::ADMIN);
     }
 }

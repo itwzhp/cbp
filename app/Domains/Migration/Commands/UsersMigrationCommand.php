@@ -2,7 +2,7 @@
 namespace App\Domains\Migration\Commands;
 
 use App\Domains\Users\Models\User;
-use App\Domains\Users\Roles\RoleHelper;
+use App\Domains\Users\Roles\RolesEnum;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -55,23 +55,23 @@ class UsersMigrationCommand extends Command
         $value = Str::of($value);
 
         if ($value->contains('contributor')) {
-            return RoleHelper::CONTRIBUTOR;
+            return RolesEnum::CONTRIBUTOR->value;
         }
 
         if ($value->contains('author')) {
-            return RoleHelper::AUTHOR;
+            return RolesEnum::AUTHOR->value;
         }
 
         if ($value->contains('editor')) {
-            return RoleHelper::EDITOR;
+            return RolesEnum::EDITOR->value;
         }
 
         if ($value->contains('recenzent')) {
-            return RoleHelper::REVIEWER;
+            return RolesEnum::REVIEWER->value;
         }
 
         if ($value->contains('administrator')) {
-            return RoleHelper::ADMIN;
+            return RolesEnum::ADMIN->value;
         }
 
         return null;

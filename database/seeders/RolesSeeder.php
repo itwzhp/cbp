@@ -1,7 +1,8 @@
 <?php
 namespace Database\Seeders;
 
-use App\Domains\Users\Roles\RoleHelper;
+use App\Domains\Users\Roles\PermissionsEnum;
+use App\Domains\Users\Roles\RolesEnum;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -19,51 +20,51 @@ class RolesSeeder extends Seeder
         $this->seedAuthor();
         $this->seedReviewer();
         $this->seedEditor();
-        Role::findOrCreate(RoleHelper::ADMIN);
-        Role::findOrCreate(RoleHelper::CONTRIBUTOR);
+        Role::findOrCreate(RolesEnum::ADMIN->value);
+        Role::findOrCreate(RolesEnum::CONTRIBUTOR->value);
     }
 
     private function seedReviewer(): void
     {
         /** @var Role $role */
-        $role = Role::findOrCreate(RoleHelper::REVIEWER);
+        $role = Role::findOrCreate(RolesEnum::REVIEWER->value);
         $role->syncPermissions([
-            RoleHelper::MATERIAL_REVIEW,
+            PermissionsEnum::MATERIAL_REVIEW->value,
         ]);
     }
 
     private function seedEditor(): void
     {
-        $role = Role::findOrCreate(RoleHelper::EDITOR);
+        $role = Role::findOrCreate(RolesEnum::EDITOR->value);
         $role->syncPermissions([
-            RoleHelper::MATERIAL_PUBLISH,
-            RoleHelper::MATERIAL_DELETE_ANY,
-            RoleHelper::MATERIAL_EDIT_ANY,
-            RoleHelper::MATERIAL_REVIEW,
-            RoleHelper::MATERIAL_MANAGE,
+            PermissionsEnum::MATERIAL_PUBLISH->value,
+            PermissionsEnum::MATERIAL_DELETE_ANY->value,
+            PermissionsEnum::MATERIAL_EDIT_ANY->value,
+            PermissionsEnum::MATERIAL_REVIEW->value,
+            PermissionsEnum::MATERIAL_MANAGE->value,
         ]);
     }
 
     private function seedAuthor(): void
     {
-        $role = Role::findOrCreate(RoleHelper::AUTHOR);
+        $role = Role::findOrCreate(RolesEnum::AUTHOR->value);
         $role->syncPermissions([
-            RoleHelper::MATERIAL_CREATE,
-            RoleHelper::MATERIAL_EDIT_OWN,
-            RoleHelper::MATERIAL_DELETE_OWN,
+            PermissionsEnum::MATERIAL_CREATE->value,
+            PermissionsEnum::MATERIAL_EDIT_OWN->value,
+            PermissionsEnum::MATERIAL_DELETE_OWN->value,
         ]);
     }
 
     private function seedPermissions(): void
     {
-        Permission::findOrCreate(RoleHelper::MATERIAL_CREATE);
-        Permission::findOrCreate(RoleHelper::MATERIAL_CREATE);
-        Permission::findOrCreate(RoleHelper::MATERIAL_EDIT_OWN);
-        Permission::findOrCreate(RoleHelper::MATERIAL_EDIT_ANY);
-        Permission::findOrCreate(RoleHelper::MATERIAL_DELETE_OWN);
-        Permission::findOrCreate(RoleHelper::MATERIAL_DELETE_ANY);
-        Permission::findOrCreate(RoleHelper::MATERIAL_REVIEW);
-        Permission::findOrCreate(RoleHelper::MATERIAL_PUBLISH);
-        Permission::findOrCreate(RoleHelper::MATERIAL_MANAGE);
+        Permission::findOrCreate(PermissionsEnum::MATERIAL_CREATE->value);
+        Permission::findOrCreate(PermissionsEnum::MATERIAL_CREATE->value);
+        Permission::findOrCreate(PermissionsEnum::MATERIAL_EDIT_OWN->value);
+        Permission::findOrCreate(PermissionsEnum::MATERIAL_EDIT_ANY->value);
+        Permission::findOrCreate(PermissionsEnum::MATERIAL_DELETE_OWN->value);
+        Permission::findOrCreate(PermissionsEnum::MATERIAL_DELETE_ANY->value);
+        Permission::findOrCreate(PermissionsEnum::MATERIAL_REVIEW->value);
+        Permission::findOrCreate(PermissionsEnum::MATERIAL_PUBLISH->value);
+        Permission::findOrCreate(PermissionsEnum::MATERIAL_MANAGE->value);
     }
 }
