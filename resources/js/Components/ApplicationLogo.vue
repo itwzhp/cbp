@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/vue3';
 <template>
   <Link :href="route('welcome')">
     <img
-      src="/cbp-logo.png"
+      src="/images/cbp_small.png"
       alt="cbp-logo"
       class="h-16"
     >

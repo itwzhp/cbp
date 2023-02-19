@@ -21,3 +21,5 @@ yarn-error.log
 .key
 
 storage/.~lock.CBP_materialy.csv#
+
+*.xmp
