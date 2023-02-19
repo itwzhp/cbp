@@ -9,11 +9,12 @@ use Spatie\Permission\PermissionRegistrar;
 
 class RolesSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         $this->seedPermissions();
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         $this->seedAuthor();
         $this->seedReviewer();
@@ -22,7 +23,7 @@ class RolesSeeder extends Seeder
         Role::findOrCreate(RoleHelper::CONTRIBUTOR);
     }
 
-    private function seedReviewer()
+    private function seedReviewer(): void
     {
         /** @var Role $role */
         $role = Role::findOrCreate(RoleHelper::REVIEWER);
@@ -31,7 +32,7 @@ class RolesSeeder extends Seeder
         ]);
     }
 
-    private function seedEditor()
+    private function seedEditor(): void
     {
         $role = Role::findOrCreate(RoleHelper::EDITOR);
         $role->syncPermissions([
@@ -39,10 +40,11 @@ class RolesSeeder extends Seeder
             RoleHelper::MATERIAL_DELETE_ANY,
             RoleHelper::MATERIAL_EDIT_ANY,
             RoleHelper::MATERIAL_REVIEW,
+            RoleHelper::MATERIAL_MANAGE,
         ]);
     }
 
-    private function seedAuthor()
+    private function seedAuthor(): void
     {
         $role = Role::findOrCreate(RoleHelper::AUTHOR);
         $role->syncPermissions([
@@ -52,7 +54,7 @@ class RolesSeeder extends Seeder
         ]);
     }
 
-    private function seedPermissions()
+    private function seedPermissions(): void
     {
         Permission::findOrCreate(RoleHelper::MATERIAL_CREATE);
         Permission::findOrCreate(RoleHelper::MATERIAL_CREATE);
@@ -62,5 +64,6 @@ class RolesSeeder extends Seeder
         Permission::findOrCreate(RoleHelper::MATERIAL_DELETE_ANY);
         Permission::findOrCreate(RoleHelper::MATERIAL_REVIEW);
         Permission::findOrCreate(RoleHelper::MATERIAL_PUBLISH);
+        Permission::findOrCreate(RoleHelper::MATERIAL_MANAGE);
     }
 }

@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Domains\Users\Models\User;
-use App\Domains\Users\Repositories\ApiTokensRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LocalLoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -34,8 +33,6 @@ class AuthenticatedSessionController extends Controller
 
     public function destroy(Request $request): RedirectResponse
     {
-        app(ApiTokensRepository::class)->destroy(Auth::user());
-
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

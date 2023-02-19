@@ -2,6 +2,7 @@
   import { onMounted, ref } from 'vue';
   import axios from 'axios';
   import {Link} from '@inertiajs/vue3';
+  import StateBagde from '@/Components/Admin/StateBagde.vue';
 
   const materials = ref([]);
   const pagination = ref({current_page: 1});
@@ -171,6 +172,12 @@
             scope="col"
             class="px-6 py-3"
           >
+            Stan
+          </th>
+          <th
+            scope="col"
+            class="px-6 py-3"
+          >
             Akcje
           </th>
         </tr>
@@ -209,6 +216,9 @@
             </td>
             <td class="px-6 py-4">
               {{ material.type }}
+            </td>
+            <td class="px-6 py-4">
+              <StateBagde :state="material.state" />
             </td>
             <td class="px-6 py-4">
               <Link

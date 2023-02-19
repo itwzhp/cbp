@@ -17,4 +17,5 @@ class RoleHelper
     const MATERIAL_DELETE_ANY = 'delete any materials';
     const MATERIAL_REVIEW = 'review materials';
     const MATERIAL_PUBLISH = 'publish materials';
+    const MATERIAL_MANAGE = 'manage materials';
 }

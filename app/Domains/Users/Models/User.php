@@ -4,6 +4,7 @@ namespace App\Domains\Users\Models;
 use App\Domains\Users\Factories\UserFactory;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -76,5 +77,14 @@ class User extends Authenticatable
         return 'https://www.gravatar.com/avatar/'
             . md5(strtolower(trim($this->email)))
             . '?s=40';
+    }
+
+    public function owns(Model $model): bool
+    {
+        if (!isset($model->user_id)) {
+            return false;
+        }
+
+        return $model->user_id === $this->id;
     }
 }

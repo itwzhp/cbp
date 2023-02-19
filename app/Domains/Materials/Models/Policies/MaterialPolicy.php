@@ -10,7 +10,7 @@ class MaterialPolicy
 {
     use HandlesAuthorization;
 
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
         return $user->hasRole(RoleHelper::ADMIN);
     }
@@ -39,20 +39,27 @@ class MaterialPolicy
             return true;
         }
 
-        if ($user->can(RoleHelper::MATERIAL_EDIT_OWN)) {
-            if ($material->user_id !== $user->id) {
-                return false;
-            }
-
-            return $material->hasEditableState();
+        if ($user->cannot(RoleHelper::MATERIAL_EDIT_OWN)) {
+            return false;
+        }
+        if (!$user->owns($material)) {
+            return false;
         }
 
-        return false;
+        return $material->hasEditableState();
     }
 
     public function delete(User $user, Material $material): bool
     {
-        return $this->update($user, $material);
+        if ($user->can(RoleHelper::MATERIAL_MANAGE)) {
+            return true;
+        }
+
+        if (!$user->owns($material)) {
+            return false;
+        }
+
+        return $material->hasEditableState();
     }
 
     public function restore(User $user, Material $material): bool
@@ -63,5 +70,41 @@ class MaterialPolicy
     public function forceDelete(User $user, Material $material): bool
     {
         return $user->hasRole(RoleHelper::ADMIN);
+    }
+
+    public function publish(User $user, Material $material): bool
+    {
+        return $user->can(RoleHelper::MATERIAL_PUBLISH);
+    }
+
+    public function submit(User $user, Material $material): bool
+    {
+        if ($user->hasRole(RoleHelper::ADMIN)) {
+            return true;
+        }
+
+        if ($user->owns($material)) {
+            return false;
+        }
+
+        if ($user->cannot(RoleHelper::MATERIAL_EDIT_OWN)) {
+            return false;
+        }
+
+        return $material->hasEditableState();
+    }
+
+    public function archive(User $user, Material $material): bool
+    {
+        return $user->can(RoleHelper::MATERIAL_MANAGE);
+    }
+
+    public function review(User $user, Material $material): bool
+    {
+        if (!$material->hasEditableState()) {
+            return false;
+        }
+
+        return $user->can(RoleHelper::MATERIAL_REVIEW);
     }
 }
