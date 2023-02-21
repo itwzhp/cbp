@@ -5,6 +5,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import AdminNavLink from '@/Components/Admin/AdminNavLink.vue';
 import Avatar from '@/Components/Avatar.vue';
 import ContentAccess from '@/Components/Admin/ContentAccess.vue';
+import { permissions } from '@/Components/Admin/permissions.js';
 
 const userDropdownHidden = ref(true);
 const mobileSidebarHidden = ref(true);
@@ -142,7 +143,7 @@ const toggleMobileSidebar = () => {
             Materiały
           </AdminNavLink>
         </li>
-        <ContentAccess :permissions="['create materials']">
+        <ContentAccess :permissions="[permissions.CREATE_MATERIALS]">
           <li>
             <AdminNavLink
               :href="'admin.materials.create'"

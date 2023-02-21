@@ -4,6 +4,7 @@
   import {Link} from '@inertiajs/vue3';
   import StateBagde from '@/Components/Admin/StateBagde.vue';
   import ContentAccess from '@/Components/Admin/ContentAccess.vue';
+  import { permissions } from '@/Components/Admin/permissions.js';
 
   const materials = ref([]);
   const pagination = ref({current_page: 1});
@@ -221,7 +222,7 @@
             <td class="px-6 py-4">
               <StateBagde :state="material.state" />
             </td>
-            <ContentAccess :permissions="['create materials']">
+            <ContentAccess :permissions="[permissions.CREATE_MATERIALS]">
               <td class="px-6 py-4">
                 <Link
                   :href="route('admin.materials.edit', material.id)"
