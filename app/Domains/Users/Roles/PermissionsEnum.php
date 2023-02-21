@@ -9,6 +9,7 @@ enum PermissionsEnum: string
     case MATERIAL_DELETE_OWN = 'delete own materials';
     case MATERIAL_DELETE_ANY = 'delete any materials';
     case MATERIAL_REVIEW = 'review materials';
+    case REVIEW_SET = 'review set';
     case MATERIAL_PUBLISH = 'publish materials';
     case MATERIAL_MANAGE = 'manage materials';
 }

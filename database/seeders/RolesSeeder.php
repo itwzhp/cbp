@@ -19,6 +19,7 @@ class RolesSeeder extends Seeder
 
         $this->seedAuthor();
         $this->seedReviewer();
+        $this->seedReviewManager();
         $this->seedEditor();
         Role::findOrCreate(RolesEnum::ADMIN->value);
         Role::findOrCreate(RolesEnum::CONTRIBUTOR->value);
@@ -30,6 +31,16 @@ class RolesSeeder extends Seeder
         $role = Role::findOrCreate(RolesEnum::REVIEWER->value);
         $role->syncPermissions([
             PermissionsEnum::MATERIAL_REVIEW->value,
+        ]);
+    }
+
+    private function seedReviewManager(): void
+    {
+        /** @var Role $role */
+        $role = Role::findOrCreate(RolesEnum::REVIEW_MANAGER->value);
+        $role->syncPermissions([
+            PermissionsEnum::MATERIAL_REVIEW->value,
+            PermissionsEnum::REVIEW_SET->value,
         ]);
     }
 
@@ -57,14 +68,8 @@ class RolesSeeder extends Seeder
 
     private function seedPermissions(): void
     {
-        Permission::findOrCreate(PermissionsEnum::MATERIAL_CREATE->value);
-        Permission::findOrCreate(PermissionsEnum::MATERIAL_CREATE->value);
-        Permission::findOrCreate(PermissionsEnum::MATERIAL_EDIT_OWN->value);
-        Permission::findOrCreate(PermissionsEnum::MATERIAL_EDIT_ANY->value);
-        Permission::findOrCreate(PermissionsEnum::MATERIAL_DELETE_OWN->value);
-        Permission::findOrCreate(PermissionsEnum::MATERIAL_DELETE_ANY->value);
-        Permission::findOrCreate(PermissionsEnum::MATERIAL_REVIEW->value);
-        Permission::findOrCreate(PermissionsEnum::MATERIAL_PUBLISH->value);
-        Permission::findOrCreate(PermissionsEnum::MATERIAL_MANAGE->value);
+        foreach (PermissionsEnum::cases() as $permission) {
+            Permission::findOrCreate($permission->value);
+        }
     }
 }

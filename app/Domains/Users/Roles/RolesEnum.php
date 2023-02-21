@@ -8,4 +8,5 @@ enum RolesEnum: string
     case CONTRIBUTOR = 'Contributor';
     case EDITOR = 'Editor';
     case REVIEWER = 'Reviewer';
+    case REVIEW_MANAGER = 'Review Manager';
 }

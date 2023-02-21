@@ -15,10 +15,7 @@ import 'vue3-carousel/dist/carousel.css';
         <div class="overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 md:py-3 md:px-0 border-b border-gray-200">
             <div>
-              <h1 class="text-3xl font-semibold">
-                Strona główna - co tu ma być?
-              </h1>
-              <CarouselSlider class="my-5" />
+              <CarouselSlider class="mb-5" />
               <div class="mt-12">
                 <h1 class="text-3xl font-semibold sm:w-1/2">
                   Proponowane tematy
