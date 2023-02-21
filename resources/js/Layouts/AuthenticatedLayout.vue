@@ -158,7 +158,17 @@ const headline = ref(null);
             class="sm:hidden"
           >
             <div class="pt-2 pb-3 space-y-1">
-              <ResponsiveNavLink @click="displaySearchDialog(true)">
+              <ResponsiveNavLink
+                :href="route('login')"
+                method="post"
+                as="button"
+              >
+                Zaloguj
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                class="bg-cbp-100/10"
+                @click="displaySearchDialog(true)"
+              >
                 <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
                 Wyszukaj
               </ResponsiveNavLink>
