@@ -4,6 +4,7 @@ import { Link } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import AdminNavLink from '@/Components/Admin/AdminNavLink.vue';
 import Avatar from '@/Components/Avatar.vue';
+import ContentAccess from '@/Components/Admin/ContentAccess.vue';
 
 const userDropdownHidden = ref(true);
 const mobileSidebarHidden = ref(true);
@@ -141,15 +142,16 @@ const toggleMobileSidebar = () => {
             Materiały
           </AdminNavLink>
         </li>
-        <!--  TODO: sprawdzić, czy user może tworzyć materiały, inaczej nie wyświetlać        -->
-        <li>
-          <AdminNavLink
-            :href="'admin.materials.create'"
-            :icon="'fa-solid fa-plus'"
-          >
-            Dodaj materiał
-          </AdminNavLink>
-        </li>
+        <ContentAccess :permissions="['create materials']">
+          <li>
+            <AdminNavLink
+              :href="'admin.materials.create'"
+              :icon="'fa-solid fa-plus'"
+            >
+              Dodaj materiał
+            </AdminNavLink>
+          </li>
+        </ContentAccess>
         <li>
           <AdminNavLink
             :href="'admin.settings'"

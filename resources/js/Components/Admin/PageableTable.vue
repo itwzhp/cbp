@@ -3,6 +3,7 @@
   import axios from 'axios';
   import {Link} from '@inertiajs/vue3';
   import StateBagde from '@/Components/Admin/StateBagde.vue';
+  import ContentAccess from '@/Components/Admin/ContentAccess.vue';
 
   const materials = ref([]);
   const pagination = ref({current_page: 1});
@@ -220,14 +221,16 @@
             <td class="px-6 py-4">
               <StateBagde :state="material.state" />
             </td>
-            <td class="px-6 py-4">
-              <Link
-                :href="route('admin.materials.edit', material.id)"
-                class="font-medium text-blue-600 hover:underline"
-              >
-                Edytuj
-              </Link>
-            </td>
+            <ContentAccess :permissions="['create materials']">
+              <td class="px-6 py-4">
+                <Link
+                  :href="route('admin.materials.edit', material.id)"
+                  class="font-medium text-blue-600 hover:underline"
+                >
+                  Edytuj
+                </Link>
+              </td>
+            </ContentAccess>
           </tr>
         </template>
       </tbody>
