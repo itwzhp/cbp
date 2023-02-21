@@ -33,3 +33,5 @@ Route::prefix('/attachments')
 require __DIR__ . '/auth.php';
 
 Route::get('/test', TestController::class);
+
+require __DIR__ . '/backward_compatibility.php';
