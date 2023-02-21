@@ -155,21 +155,12 @@ const toggleMobileSidebar = () => {
         </ContentAccess>
         <li>
           <AdminNavLink
-            :href="'admin.materials.create'"
-            :icon="'fa-solid fa-plus'"
+            :href="'admin.materials.index'"
+            :icon="'fa-solid fa-file'"
           >
-            Dodaj materiał
+            Recenzje
           </AdminNavLink>
         </li>
-
-      <li>
-          <AdminNavLink
-              :href="'admin.materials.index'"
-              :icon="'fa-solid fa-file'"
-          >
-              Recenzje
-          </AdminNavLink>
-      </li>
         <li>
           <AdminNavLink
             :href="'admin.settings'"
