@@ -158,6 +158,9 @@ const headline = ref(null);
             class="sm:hidden"
           >
             <div class="pt-2 pb-3 space-y-1">
+              <div class="flex justify-center">
+                <ApplicationLogo />
+              </div>
               <ResponsiveNavLink
                 :href="route('login')"
                 method="post"
