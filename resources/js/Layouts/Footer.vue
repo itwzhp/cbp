@@ -12,10 +12,21 @@ const showFooter = (currentRoute) =>
     class="flex flex-col bg-cbp-100 pt-4 pb-2.5 text-white print:hidden"
   >
     <div class="bg-cbp-300">
-      <div class="md:flex md:flex-row h-40 md:h-36 items-center max-w-7xl mx-auto">
-        <div class="flex basis-1/2 p-4">
+      <div class="md:flex md:flex-row h-72 md:h-36 items-center max-w-7xl mx-auto pt-2 md:pt-0">
+        <div class="flex basis-1/6 pt-4 md:p-4 justify-center md:justify-start">
+          <a
+            href="https://zhp.pl/"
+            target="_blank"
+          >
+            <img
+              src="/images/zhp_logo.svg"
+              alt="cbp-logo"
+              class="h-20 sm:h-full"
+            >
+          </a>
+        </div>
+        <div class="flex basis-2/6 p-4">
           <div>
-            <!-- <img style="opacity: 0.2; z-index: -1;" src="/images/questionmarks.svg" alt="questionmarks"> -->
             <p class="text-sm font-bold pb-2">
               CZY WIESZ, ŻE...
             </p>
@@ -25,7 +36,7 @@ const showFooter = (currentRoute) =>
             </p>
           </div>
         </div>
-        <div class="flex basis-1/2 justify-center md:justify-end">
+        <div class="flex basis-3/6 justify-center md:justify-end">
           <div class="my-auto">
             <img
               class="h-auto w-44"
