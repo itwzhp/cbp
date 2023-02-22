@@ -15,8 +15,6 @@ class MaterialIndexController extends Controller
 
     public function __invoke(IndexRequest $request): array
     {
-
-
         /** @var Builder $materialsBuilder */
         $materialsBuilder = MaterialSearcher::make()
             ->search($request->input('search'))
@@ -24,8 +22,8 @@ class MaterialIndexController extends Controller
             ->setMode($request->input('mode', MaterialSearcher::MODE_OR))
             ->query()
             ->published()
-            ->withAuthor();
-//            ->with('media', 'owner', 'tags.media');
+            ->withAuthor()
+            ->with('media', 'owner', 'tags.media');
 
         if (empty($request->input('search'))) {
             $materialsBuilder = $materialsBuilder->orderBy('published_at', 'desc');
