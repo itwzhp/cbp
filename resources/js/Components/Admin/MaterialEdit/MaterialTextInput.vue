@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
+import { router } from '@inertiajs/vue3';
 import debounce from 'lodash.debounce';
 import axios from 'axios';
 import { usePage } from '@inertiajs/vue3';
@@ -8,7 +9,6 @@ const props = defineProps({
   fieldName: { type: String, required: true },
   fieldLabel: { type: String, required: true },
 });
-const emit = defineEmits(['valueSaved']);
 
 const requestResultInfoTime = 5000;
 const inputDebounceTime = 1000;
@@ -33,7 +33,7 @@ watch(
         unSavedChanges.value = false;
         lastSavedValue = field.value;
 
-        emit('valueSaved', field.value);
+        router.reload({ only: ['material'] });
         clearTimeout(succesTimeout);
         succesTimeout = setTimeout(() => {
           savedChanges.value = false;
@@ -87,9 +87,9 @@ watch(field, () => {
     :class="{
       'focus:ring-yellow-400 focus:border-yellow-400': unSavedChanges,
       'focus:ring-green-400 focus:border-green-400': savedChanges && !unSavedChanges,
-      'focus:ring-red-400 focus:border-red-400': saveChangesError
+      'focus:ring-red-400 focus:border-red-400': saveChangesError,
     }"
-    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    class="bg-gray-50/50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
     :placeholder="fieldLabel"
     required
   >
