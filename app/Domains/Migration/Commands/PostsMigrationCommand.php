@@ -18,7 +18,6 @@ use App\Domains\Users\Roles\RolesEnum;
 use App\Helpers\FilesystemsHelper;
 use Database\Seeders\TagsSeeder;
 use Illuminate\Console\Command;
-use Illuminate\Http\FileHelpers;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -125,7 +124,6 @@ class PostsMigrationCommand extends Command
         $material->tags()->detach();
 
         try {
-
             $this->attachType($material, $type);
             $this->attachFormType($post, $material);
 
