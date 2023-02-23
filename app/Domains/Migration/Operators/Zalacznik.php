@@ -6,6 +6,7 @@ use App\Domains\Files\Enums\SizeEnum;
 use App\Domains\Files\Enums\ThicknessEnum;
 use App\Domains\Files\Models\Attachment;
 use App\Domains\Migration\Models\Post;
+use App\Helpers\FilesystemsHelper;
 use Illuminate\Support\Str;
 
 class Zalacznik
@@ -28,7 +29,7 @@ class Zalacznik
 
     public function toAttachment(): Attachment
     {
-        $attachment = Attachment::fromPath($this->getPath());
+        $attachment = Attachment::fromPath($this->getPath(), FilesystemsHelper::PUBLIC);
 
         if ($attachment === null) {
             throw new \InvalidArgumentException($this->getPath());

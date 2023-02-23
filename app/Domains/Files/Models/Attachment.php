@@ -11,21 +11,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 /**
- * @property int           id
- * @property string        name
- * @property int|null      wp_id
- * @property string        path
- * @property string        mime
- * @property int           downloads
- * @property string|null   element
- * @property int|null      copies
- * @property string|null   print_color
- * @property string|null   thickness
- * @property string|null   size
- * @property string|null   comment
- * @property string|null   paper_color
- * @property Carbon        created_at
- * @property Carbon        updated_at
+ * @property int         id
+ * @property string      name
+ * @property int|null    wp_id
+ * @property string      path
+ * @property string      mime
+ * @property int         downloads
+ * @property string|null element
+ * @property int|null    copies
+ * @property string|null print_color
+ * @property string|null thickness
+ * @property string|null size
+ * @property string|null comment
+ * @property string|null paper_color
+ * @property Carbon      created_at
+ * @property Carbon      updated_at
  */
 class Attachment extends Model
 {
@@ -44,13 +44,13 @@ class Attachment extends Model
         return FilesystemsHelper::getPublic()->url($this->path);
     }
 
-    public static function fromPath(string $path): ?self
+    public static function fromPath(string $path, string $disk = 'local'): ?self
     {
         if ($attachment = Attachment::where('path', $path)->first()) {
             return $attachment;
         }
 
-        if (!Storage::exists($path)) {
+        if (!Storage::disk($disk)->exists($path)) {
             return null;
         }
 
@@ -58,7 +58,7 @@ class Attachment extends Model
         $attachment->fill([
             'name' => basename($path),
             'path' => $path,
-            'mime' => Storage::mimeType($path),
+            'mime' => Storage::disk($disk)->mimeType($path),
         ]);
 
         return $attachment;
