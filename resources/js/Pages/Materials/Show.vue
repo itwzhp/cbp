@@ -37,12 +37,8 @@ const download = async (url) => {
 };
 
 const filterFields = (fields, type)=>{
-    let intents = fields.filter((group) => group.type === type);
-
-    if (!intents || intents.length === 0)
-        return [];
-
-    return intents[0]['fields'];
+    const intents = fields.filter((group) => group.type === type);
+    return intents?.length ? intents[0]['fields'] : [];
 }
 </script>
 
@@ -138,7 +134,6 @@ const filterFields = (fields, type)=>{
               :taxonomy="item"
             />
 
-            <!-- TODO: jak to filtrowanie zrobić lepiej? W tabeli fields nie zawsze jest element z type intent-->
             <FieldsList :fields="filterFields($page.props.material.fields, 'intent')">
               Po zajęciach uczestniczka/uczestnik będzie:
             </FieldsList>
