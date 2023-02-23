@@ -22,6 +22,10 @@ class TypesHelper
         /** @var Taxonomy $typesTax */
         $typesTax = Taxonomy::where('name', TagsSeeder::TYPE_NAME)->first();
 
+        if ($typesTax === null) {
+            return null;
+        }
+
         return $typesTax->tags()->where('name', $name)->first();
     }
 }

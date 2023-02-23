@@ -15,8 +15,10 @@ use App\Domains\Migration\Models\Postmeta;
 use App\Domains\Migration\Operators\Zalacznik;
 use App\Domains\Users\Repositories\UsersRepository;
 use App\Domains\Users\Roles\RolesEnum;
+use App\Helpers\FilesystemsHelper;
 use Database\Seeders\TagsSeeder;
 use Illuminate\Console\Command;
+use Illuminate\Http\FileHelpers;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -122,15 +124,20 @@ class PostsMigrationCommand extends Command
     {
         $material->tags()->detach();
 
-        $this->attachType($material, $type);
-        $this->attachFormType($post, $material);
+        try {
 
-        foreach ($post->motifs() as $motif) {
-            $material->tags()->attach($motif->id);
-        }
+            $this->attachType($material, $type);
+            $this->attachFormType($post, $material);
 
-        foreach ($post->tagIds() as $wpId) {
-            $this->tagsRepository->attachWpTag($material, $wpId);
+            foreach ($post->motifs() as $motif) {
+                $material->tags()->attach($motif->id);
+            }
+
+            foreach ($post->tagIds() as $wpId) {
+                $this->tagsRepository->attachWpTag($material, $wpId);
+            }
+        } catch (Throwable $exception) {
+            // do nothing
         }
     }
 
@@ -215,8 +222,8 @@ class PostsMigrationCommand extends Command
         $files = $post->getPostmetas('wpcf-plik-materialu');
         foreach ($files as $file) {
             $path = $this->urlToPath($file->meta_value);
-            if (Storage::exists($path)) {
-                $mime = Storage::mimeType($path);
+            if (Storage::disk(FilesystemsHelper::PUBLIC)->exists($path)) {
+                $mime = Storage::disk(FilesystemsHelper::PUBLIC)->mimeType($path);
                 $material->attachments()->firstOrCreate([
                     'name' => basename($path),
                     'path' => $path,
