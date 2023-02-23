@@ -69,7 +69,7 @@ const hideDialog = () => store.hideDialog();
                     <DialogTitle class="text-lg font-medium text-gray-900 text-left">
                       <button
                         type="button"
-                        class="text-cbp-100 border border-cbp-300 hover:bg-cbp-300 hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800"
+                        class="text-cbp-100 border border-cbp-300 hover:bg-cbp-300 hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center"
                         @click="hideDialog()"
                       >
                         <svg

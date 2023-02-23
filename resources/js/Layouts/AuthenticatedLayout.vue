@@ -58,7 +58,7 @@ const headline = ref(null);
                 <div class="ml-3 relative">
                   <div class="flex space-x-4">
                     <span
-                      class="dark:text-gray-500 cursor-pointer"
+                      class="cursor-pointer"
                       @click="displaySearchDialog()"
                     >
                       <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
@@ -104,7 +104,6 @@ const headline = ref(null);
                     <Link
                       v-if="!$page.props.auth.user"
                       :href="route('login')"
-                      class="dark:text-gray-500"
                     >
                       Zaloguj się
                     </Link>
