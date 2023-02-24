@@ -147,7 +147,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DEPLOY_USER: build
-      DEPLOY_HOST: host.zhp.pl'
+      DEPLOY_HOST: host.zhp.pl
       DEPLOY_PATH: /var/www/vhosts/zhp.pl/cbp-dev.zhp.pl
       PACKAGE_NAME: cbp-app-package
     steps:
