@@ -157,7 +157,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: $PACKAGE_NAME
+          name: cbp-app-package.tar.gz
 
       - name: Copy new version into server 
         run: scp -r ./$PACKAGE_NAME $DEPLOY_USER@$DEPLOY_HOST:/tmp
