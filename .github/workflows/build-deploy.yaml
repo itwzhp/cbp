@@ -151,7 +151,9 @@ jobs:
       DEPLOY_PATH: /var/www/vhosts/zhp.pl/cbp-dev.zhp.pl
       PACKAGE_NAME: cbp-app-package
     steps:
-      
+      - name: Configure SSH
+        run: ${{ secrets.ZHP_PL_SSH_CONFIG }}
+
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
@@ -164,7 +166,7 @@ jobs:
         run: tar -xvf $PACKAGE_NAME.tar.gz -C ./$PACKAGE_NAME
 
       - name: Copy new version into server
-        run: rsync -e "${{ secrets.ZHP_PL_SSH_CONFIG }}" -avzh ./$PACKAGE_NAME $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+        run: rsync -avzh ./$PACKAGE_NAME $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
 
       - run: |
           echo 'TODO: odtworzyć .env' - php artisan env:decrypt --env=production --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env
