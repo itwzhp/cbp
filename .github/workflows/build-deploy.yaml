@@ -165,8 +165,11 @@ jobs:
       - name: Extract package
         run: tar -xvf $PACKAGE_NAME.tar.gz -C ./$PACKAGE_NAME
 
+      # - name: Copy new version into server
+      #   run: rsync -avzh ./$PACKAGE_NAME $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+
       - name: Copy new version into server
-        run: rsync -avzh ./$PACKAGE_NAME $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+        run: scp -r ./$PACKAGE_NAME $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
 
       - run: |
           echo 'TODO: odtworzyć .env' - php artisan env:decrypt --env=production --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env
