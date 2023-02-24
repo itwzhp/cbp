@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Fractal\Fractal;
 use Spatie\Fractalistic\ArraySerializer;
 
-class FieldsControllerAbstract extends AbstractAdminController
+class FieldsController extends AbstractAdminController
 {
     public function store(Material $material, CreateFieldRequest $request): Fractal
     {

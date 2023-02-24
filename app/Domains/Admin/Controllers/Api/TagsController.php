@@ -6,7 +6,7 @@ use App\Domains\Materials\Models\Tag;
 use App\Http\Controllers\AbstractAdminController;
 use Illuminate\Http\JsonResponse;
 
-class TagsControllerAbstract extends AbstractAdminController
+class TagsController extends AbstractAdminController
 {
     public function attach(Material $material, Tag $tag): JsonResponse
     {
