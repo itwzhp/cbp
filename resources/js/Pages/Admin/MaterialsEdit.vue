@@ -1,5 +1,5 @@
 <script setup>
-import {usePage} from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import MaterialTextInput from '@/Components/Admin/MaterialEdit/MaterialTextInput.vue';
 import MaterialSections from '@/Components/Admin/MaterialEdit/MaterialSections.vue';

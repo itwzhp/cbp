@@ -1,5 +1,5 @@
 <script setup>
-import { router } from '@inertiajs/vue3';
+import { router, } from '@inertiajs/vue3';
 import vueFilePond from 'vue-filepond';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
@@ -87,6 +87,9 @@ const downloadAttachment = (attachment) => {
           }
         }"
         :allow-multiple="true"
+        :allow-remove="false"
+        :allow-revert="false"
+        :files="[]"
         @processfile="refreshFiles"
       />
     </ContentAccess>
