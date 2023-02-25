@@ -20,6 +20,6 @@ class AttachmentsController extends AbstractAdminController
     {
         $this->authorize(MaterialActionsEnum::VIEW, $material);
 
-        return response()->download($attachment->url());
+        return $attachment->disk()->download($attachment->path);
     }
 }

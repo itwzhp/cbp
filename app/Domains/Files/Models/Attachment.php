@@ -7,6 +7,7 @@ use App\Domains\Files\Enums\ThicknessEnum;
 use App\Domains\Materials\Models\Traits\BelongsToMaterial;
 use App\Helpers\FilesystemsHelper;
 use Carbon\Carbon;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
@@ -93,5 +94,10 @@ class Attachment extends Model
         ]);
 
         return $this;
+    }
+
+    public function disk(): Filesystem
+    {
+        return FilesystemsHelper::getDisk($this->disk);
     }
 }
