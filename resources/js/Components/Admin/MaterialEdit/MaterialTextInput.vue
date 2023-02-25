@@ -27,7 +27,7 @@ watch(
   field,
   debounce(() => {
     axios
-      .post(`/api/admin/materials/${material.id}`, { [props.fieldName]: field.value })
+      .post(route('api.admin.materials.update', material.id), { [props.fieldName]: field.value })
       .then(() => {
         savedChanges.value = true;
         unSavedChanges.value = false;
