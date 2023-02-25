@@ -4,6 +4,7 @@ namespace App\Domains\Admin\Controllers;
 use App\Domains\Materials\Models\Enums\PresetEnum;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Repositories\MaterialsRepository;
+use App\Domains\Users\Roles\FrontendPermissionsAccessor;
 use App\Helpers\ComponentsHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -24,7 +25,11 @@ class MaterialsController extends Controller
         $material->load('fields', 'attachments', 'licence', 'setups', 'scenarios');
 
         return Inertia::render(ComponentsHelper::ADMIN_MATERIALS_EDIT)
-            ->with(compact('material'));
+            ->with([
+                'material'    => $material,
+                'token'       => csrf_token(),
+                'permissions' => (new FrontendPermissionsAccessor(Auth::user()))->actionsOn($material),
+            ]);
     }
 
     public function create(): Response

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
  * @property string      name
  * @property int|null    wp_id
  * @property string      path
+ * @property string      disk
  * @property string      mime
  * @property int         downloads
  * @property string|null element
@@ -41,7 +42,7 @@ class Attachment extends Model
 
     public function url(): string
     {
-        return FilesystemsHelper::getPublic()->url($this->path);
+        return FilesystemsHelper::getDisk($this->disk)->url($this->path);
     }
 
     public static function fromPath(string $path, string $disk = 'local'): ?self
@@ -66,7 +67,7 @@ class Attachment extends Model
 
     public function getContents(): string
     {
-        return FilesystemsHelper::getPublic()->get($this->path);
+        return FilesystemsHelper::getDisk($this->disk)->get($this->path);
     }
 
     public function downloadUrl(): string
