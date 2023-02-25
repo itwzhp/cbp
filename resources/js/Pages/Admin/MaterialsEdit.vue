@@ -1,11 +1,12 @@
 <script setup>
-import { usePage } from '@inertiajs/vue3';
+import {router, usePage} from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import MaterialTextInput from '@/Components/Admin/MaterialEdit/MaterialTextInput.vue';
 import MaterialSections from '@/Components/Admin/MaterialEdit/MaterialSections.vue';
 import MaterialFields from '@/Components/Admin/MaterialEdit/MaterialFields.vue';
 import MaterialTags from '@/Components/Admin/MaterialEdit/MaterialTags.vue';
 import MaterialLicence from '@/Components/Admin/MaterialEdit/MaterialLicence.vue';
+
 const props = usePage().props.material;
 import vueFilePond from 'vue-filepond';
 
@@ -27,6 +28,10 @@ const FilePond = vueFilePond(
     FilePondPluginFileValidateType,
     FilePondPluginImagePreview
 );
+
+const refreshFiles = () => {
+    router.reload({only:['material']});
+}
 </script>
 
 <template>
@@ -77,7 +82,15 @@ const FilePond = vueFilePond(
               ref="pond"
               name="attachments"
               label-idle="Dodaj pliki do swojego materiału"
-              :server="route('api.admin.materials.upload', $page.props.material.id)"
+              :server="{
+                url: route('api.admin.materials.upload', $page.props.material.id),
+                withCredentials: true,
+                headers: {
+                  'X-CSRF-TOKEN': $page.props.token,
+                }
+              }"
+              :allow-multiple="true"
+              @processfile="refreshFiles"
             />
           </div>
         </div>

@@ -24,7 +24,10 @@ class MaterialsController extends Controller
         $material->load('fields', 'attachments', 'licence', 'setups', 'scenarios');
 
         return Inertia::render(ComponentsHelper::ADMIN_MATERIALS_EDIT)
-            ->with(compact('material'));
+            ->with([
+                'material' => $material,
+                'token'    => csrf_token(),
+            ]);
     }
 
     public function create(): Response

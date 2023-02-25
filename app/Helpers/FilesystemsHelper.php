@@ -3,6 +3,7 @@ namespace App\Helpers;
 
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
+use InvalidArgumentException;
 
 class FilesystemsHelper
 {
@@ -10,6 +11,17 @@ class FilesystemsHelper
     const PUBLIC = 'azure_public';
     const PRIVATE = 'azure_private';
     const IMAGES = 'azure_images';
+
+    public static function getDisk(string $disk): Filesystem
+    {
+        return match ($disk) {
+            self::LOCAL   => self::getLocal(),
+            self::PUBLIC  => self::getPublic(),
+            self::PRIVATE => self::getPrivate(),
+            self::IMAGES  => self::getImages(),
+            default       => throw new InvalidArgumentException('Unknown disk')
+        };
+    }
 
     public static function getPublic(): Filesystem
     {
