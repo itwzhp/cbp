@@ -1,18 +1,32 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import AdminNavLink from '@/Components/Admin/AdminNavLink.vue';
 import Avatar from '@/Components/Avatar.vue';
 import ContentAccess from '@/Components/Admin/ContentAccess.vue';
 import { permissions } from '@/Components/Admin/permissions.js';
+import { Dropdown } from 'flowbite';
 
-const userDropdownHidden = ref(true);
-const mobileSidebarHidden = ref(true);
-
-const toggleUserDropdown = () => {
-  userDropdownHidden.value = !userDropdownHidden.value;
+const initDropdownMenu = () => {
+  const $targetEl = document.getElementById('dropdownMenu');
+  const $triggerEl = document.getElementById('dropdownButton');
+  const options = {
+    placement: 'bottom',
+    offsetSkidding: 0,
+    offsetDistance: 25,
+  };
+  if ($targetEl) {
+    const dropdown = new Dropdown($targetEl, $triggerEl, options);
+    dropdown.hide();
+  }
 };
+
+onMounted(() => {
+  initDropdownMenu();
+});
+
+const mobileSidebarHidden = ref(true);
 const toggleMobileSidebar = () => {
   mobileSidebarHidden.value = !mobileSidebarHidden.value;
 };
@@ -55,10 +69,7 @@ const toggleMobileSidebar = () => {
         </div>
         <div class="flex items-center">
           <div class="flex items-center ml-3">
-            <div
-              class="hidden sm:flex items-center space-x-4 cursor-pointer"
-              @click="toggleUserDropdown()"
-            >
+            <div class="hidden sm:flex items-center space-x-4 cursor-pointer">
               <div class="font-medium text-right mr-3">
                 <div>{{ $page.props.auth.user.name }}</div>
                 <div class="text-sm text-gray-500">
@@ -66,8 +77,9 @@ const toggleMobileSidebar = () => {
                 </div>
               </div>
             </div>
-            <div @click="toggleUserDropdown()">
+            <div>
               <button
+                id="dropdownButton"
                 type="button"
                 class="flex text-sm rounded-full focus:ring-4 focus:ring-gray-300"
                 aria-expanded="true"
@@ -82,16 +94,9 @@ const toggleMobileSidebar = () => {
               </button>
             </div>
             <div
-              id="dropdown-user"
-              :class="{ hidden: userDropdownHidden }"
-              style="
-                width: 190px;
-                position: absolute;
-                inset: 0px auto auto 0px;
-                margin: 0px;
-                transform: translate(calc(100vw - 190px), 82px);
-              "
-              class="z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow"
+              id="dropdownMenu"
+              style="width: 190px"
+              class="z-50 text-base list-none bg-white divide-y divide-gray-100 rounded shadow"
             >
               <ul
                 class="py-1"
