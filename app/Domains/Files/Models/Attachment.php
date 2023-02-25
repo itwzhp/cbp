@@ -83,7 +83,7 @@ class Attachment extends Model
 
     public function getDownloadUrlAttribute(): string
     {
-        return $this->downloadUrl();
+        return $this->url();
     }
 
     public function incrementDownloads(): self
