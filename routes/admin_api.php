@@ -2,6 +2,7 @@
 // prefix: api/admin
 // name: api.admin
 
+use App\Domains\Admin\Controllers\Api\AttachmentsController;
 use App\Domains\Admin\Controllers\Api\FieldsController;
 use App\Domains\Admin\Controllers\Api\MaterialsIndexController;
 use App\Domains\Admin\Controllers\Api\MaterialUpdateController;
@@ -45,6 +46,11 @@ Route::name('materials.')
                         Route::delete('/{setup}', [SetupsController::class, 'destroy'])->name('destroy');
                     });
 
-                Route::any('/upload', [UploadMaterialAttachmentsController::class, 'upload'])->name('upload');
+                Route::prefix('attachments')
+                    ->name('attachments.')
+                    ->group(function () {
+                        Route::post('/', [UploadMaterialAttachmentsController::class, 'upload'])->name('store');
+                        Route::delete('/{attachment}', [AttachmentsController::class, 'destroy'])->name('destroy');
+                    });
             });
     });

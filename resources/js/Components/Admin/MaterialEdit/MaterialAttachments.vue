@@ -5,6 +5,8 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond/dist/filepond.min.css';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+import axios from 'axios';
 
 const material = usePage().props.material;
 const token = usePage().props.token;
@@ -15,8 +17,22 @@ const FilePond = vueFilePond(
     FilePondPluginImagePreview
 );
 
+const deleteAttachment = (attachment) => {
+    axios.delete(route('api.admin.materials.attachments.destroy', {
+        material: attachment.material_id,
+        attachment: attachment.id
+    }))
+        .then(() => {
+            // TODO: to można zrobić jakoś lepiej?
+            material.attachments = material.attachments.filter((item)=>{
+                return item.id !== attachment.id;
+            });
+        });
+}
+
 const refreshFiles = () => {
-    router.reload({only:['material']});
+    // TODO: to działało dopóki nie było w komponencie. Jak wyniosłem te attachments do komponentu, to przestało działać
+    router.reload({only: ['material']});
 }
 </script>
 <template>
@@ -26,6 +42,12 @@ const refreshFiles = () => {
       :key="attachment.id"
     >
       {{ attachment }}
+      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs">
+        <FontAwesomeIcon
+          icon="trash"
+          @click="deleteAttachment(attachment)"
+        />
+      </button>
     </li>
   </ul>
   <FilePond
@@ -34,7 +56,7 @@ const refreshFiles = () => {
     name="attachments"
     label-idle="Dodaj pliki do swojego materiału"
     :server="{
-      url: route('api.admin.materials.upload', material.id),
+      url: route('api.admin.materials.attachments.store', material.id),
       withCredentials: true,
       headers: {
         'X-CSRF-TOKEN': token,

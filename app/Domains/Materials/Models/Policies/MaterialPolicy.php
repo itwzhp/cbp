@@ -32,6 +32,7 @@ class MaterialPolicy
 
     public function update(User $user, Material $material): bool
     {
+        return false;
         if ($user->hasRole(RolesEnum::ADMIN)) {
             return true;
         }

@@ -1,7 +1,9 @@
 <?php
 namespace App\Providers;
 
+use App\Domains\Files\Listeners\AttachmentObserver;
 use App\Domains\Files\Listeners\ClearCachedZipListener;
+use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\Events\MaterialChangedEvent;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Models\Observers\MaterialObserver;
@@ -46,7 +48,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $observers = [
-        Material::class => [MaterialObserver::class],
+        Material::class   => [MaterialObserver::class],
+        Attachment::class => [AttachmentObserver::class],
     ];
 
     public function boot()
