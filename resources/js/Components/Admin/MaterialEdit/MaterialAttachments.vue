@@ -24,7 +24,7 @@ const deleteAttachment = (attachment) => {
     }))
         .then(() => {
             // TODO: to można zrobić jakoś lepiej?
-            material.attachments = material.attachments.filter((item)=>{
+            material.attachments = material.attachments.filter((item) => {
                 return item.id !== attachment.id;
             });
         });
@@ -42,10 +42,13 @@ const refreshFiles = () => {
       :key="attachment.id"
     >
       {{ attachment }}
-      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs">
+      <button
+        v-if="permissions.includes('update')"
+        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs"
+        @click.prevent="deleteAttachment(attachment)"
+      >
         <FontAwesomeIcon
           icon="trash"
-          @click="deleteAttachment(attachment)"
         />
       </button>
     </li>
