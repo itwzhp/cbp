@@ -7,6 +7,8 @@ import 'filepond/dist/filepond.min.css';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import axios from 'axios';
+import ContentAccess from '@/Components/Admin/ContentAccess.vue';
+import { permissions } from '@/Components/Admin/permissions.js';
 
 const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview);
 
@@ -31,28 +33,30 @@ const refreshFiles = () => {
       :key="attachment.id"
     >
       {{ attachment }}
-      <button
-        v-if="$page.props.permissions.includes('update')"
-        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs"
-        @click.prevent="deleteAttachment(attachment)"
-      >
-        <FontAwesomeIcon icon="trash" />
-      </button>
+      <ContentAccess :permissions="[permissions.UPDATE]">
+        <button
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs"
+          @click.prevent="deleteAttachment(attachment)"
+        >
+          <FontAwesomeIcon icon="trash" />
+        </button>
+      </ContentAccess>
     </li>
   </ul>
-  <FilePond
-    v-if="$page.props.permissions.includes('update')"
-    ref="pond"
-    name="attachments"
-    label-idle="Dodaj pliki do swojego materiału"
-    :server="{
-      url: route('api.admin.materials.attachments.store', $page.props.material.id),
-      withCredentials: true,
-      headers: {
-        'X-CSRF-TOKEN': $page.props.token
-      }
-    }"
-    :allow-multiple="true"
-    @processfile="refreshFiles"
-  />
+  <ContentAccess :permissions="[permissions.UPDATE]">
+    <FilePond
+      ref="pond"
+      name="attachments"
+      label-idle="Dodaj pliki do swojego materiału"
+      :server="{
+        url: route('api.admin.materials.attachments.store', $page.props.material.id),
+        withCredentials: true,
+        headers: {
+          'X-CSRF-TOKEN': $page.props.token
+        }
+      }"
+      :allow-multiple="true"
+      @processfile="refreshFiles"
+    />
+  </ContentAccess>
 </template>
