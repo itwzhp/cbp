@@ -53,11 +53,12 @@ const deleteAttachment = (attachment, index) => {
             <div>{{ attachment.name }}</div>
           </div>
           <div class="flex items-center">
-            <button
+            <a
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xs mx-2"
+              :href="attachment.download_url"
             >
               <FontAwesomeIcon icon="file-arrow-down" />
-            </button>
+            </a>
             <ContentAccess :permissions="[permissions.UPDATE]">
               <button
                 :disabled="deleteInProgressFileIndex === attachment.id"
