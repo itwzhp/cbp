@@ -1,5 +1,6 @@
 <script setup>
-import { router, } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
+import { ref } from 'vue';
 import vueFilePond from 'vue-filepond';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
@@ -14,7 +15,9 @@ const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImage
 const refreshFiles = () => {
   router.reload({ only: ['material'] });
 };
-const deleteAttachment = (attachment) => {
+const deleteInProgressFileIndex = ref(null);
+const deleteAttachment = (attachment, index) => {
+  deleteInProgressFileIndex.value = index;
   axios
     .delete(
       route('api.admin.materials.attachments.destroy', {
@@ -22,7 +25,11 @@ const deleteAttachment = (attachment) => {
         attachment: attachment.id
       })
     )
-    .then(() => refreshFiles())
+    .then(() => {
+      deleteInProgressFileIndex.value = null;
+      refreshFiles();
+    })
+    .catch(() => deleteInProgressFileIndex.value = null)
 };
 </script>
 <template>
@@ -54,21 +61,26 @@ const deleteAttachment = (attachment) => {
             </a>
             <ContentAccess :permissions="[permissions.UPDATE]">
               <button
+                :disabled="deleteInProgressFileIndex === attachment.id"
+                :class="{'bg-red-500/50 hover:bg-red-500/50 cursor-wait': deleteInProgressFileIndex === attachment.id}"
                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs mx-2"
-                @click.prevent="deleteAttachment(attachment)"
+                @click.prevent="deleteAttachment(attachment, attachment.id)"
               >
                 <FontAwesomeIcon icon="trash" />
               </button>
             </ContentAccess>
           </div>
         </div>
-        <!-- {{ attachment.path }} -->
       </li>
     </ul>
     <ContentAccess :permissions="[permissions.UPDATE]">
       <FilePond
         ref="pond"
         name="attachments"
+        label-file-processing="Wysyłanie pliku"
+        label-file-processing-complete="Ukończono wysyłanie pliku"
+        label-tap-to-cancel=""
+        label-tap-to-undo=""
         label-idle="Dodaj pliki do swojego materiału"
         :server="{
           url: route('api.admin.materials.attachments.store', $page.props.material.id),
