@@ -50,6 +50,7 @@ Route::name('materials.')
                     ->name('attachments.')
                     ->group(function () {
                         Route::post('/', [UploadMaterialAttachmentsController::class, 'upload'])->name('store');
+                        Route::get('/{attachment}', [AttachmentsController::class, 'download'])->name('show');
                         Route::delete('/{attachment}', [AttachmentsController::class, 'destroy'])->name('destroy');
                     });
             });

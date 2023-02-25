@@ -27,6 +27,8 @@ use Illuminate\Support\Facades\Storage;
  * @property string|null paper_color
  * @property Carbon      created_at
  * @property Carbon      updated_at
+ * @property-read string download_url
+ * @property-read
  */
 class Attachment extends Model
 {
@@ -38,6 +40,10 @@ class Attachment extends Model
         'size'        => SizeEnum::class,
         'print_color' => PrintColorEnum::class,
         'thickness'   => ThicknessEnum::class,
+    ];
+
+    protected $appends = [
+        'download_url',
     ];
 
     public function url(): string
@@ -73,6 +79,11 @@ class Attachment extends Model
     public function downloadUrl(): string
     {
         return route('attachments.download', $this);
+    }
+
+    public function getDownloadUrlAttribute(): string
+    {
+        return $this->downloadUrl();
     }
 
     public function incrementDownloads(): self

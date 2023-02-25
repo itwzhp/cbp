@@ -24,15 +24,6 @@ const deleteAttachment = (attachment) => {
     )
     .then(() => refreshFiles())
 };
-const downloadAttachment = (attachment) => {
-  axios
-    .get(
-      route('api.admin.materials.attachments.destroy', {
-        material: attachment.material_id,
-        attachment: attachment.id
-      })
-    )
-};
 </script>
 <template>
   <div class="flex justify-between text-sm pb-2">
@@ -55,12 +46,12 @@ const downloadAttachment = (attachment) => {
             <div>{{ attachment.name }}</div>
           </div>
           <div class="flex items-center">
-            <button
+            <a
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xs mx-2"
-              @click.prevent="downloadAttachment(attachment)"
+              :href="attachment.download_url"
             >
               <FontAwesomeIcon icon="file-arrow-down" />
-            </button>
+            </a>
             <ContentAccess :permissions="[permissions.UPDATE]">
               <button
                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs mx-2"
