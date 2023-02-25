@@ -76,6 +76,7 @@ const downloadAttachment = (attachment, index) => {
           </div>
           <div class="flex items-center">
             <button
+              title="Pobierz załącznik"
               :disabled="downloadInProgressFileIndex === attachment.id"
               :class="{'bg-blue-500/50 hover:bg-blue-500/50 cursor-wait': downloadInProgressFileIndex === attachment.id}"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xs mx-2"
@@ -86,6 +87,7 @@ const downloadAttachment = (attachment, index) => {
             </button>
             <ContentAccess :permissions="[permissions.UPDATE]">
               <button
+                title="Usuń załącznik"
                 :disabled="deleteInProgressFileIndex === attachment.id"
                 :class="{'bg-red-500/50 hover:bg-red-500/50 cursor-wait': deleteInProgressFileIndex === attachment.id}"
                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs mx-2"
