@@ -78,7 +78,7 @@ const deleteAttachment = (attachment, index) => {
         name="attachments"
         label-file-processing="Wysyłanie pliku"
         label-file-processing-complete="Ukończono wysyłanie pliku"
-        label-tap-to-cancel=""
+        label-tap-to-cancel="proszę czekać"
         label-tap-to-undo=""
         label-idle="Dodaj pliki do swojego materiału"
         :server="{
