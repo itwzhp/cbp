@@ -14,8 +14,8 @@ const defaultValues = {
   loading: false,
 };
 
-const searchUrl = `${import.meta.env.VITE_API_URL}/api/materials`;
-const taxonomiesUrl = `${import.meta.env.VITE_API_URL}/api/taxonomies`;
+const searchUrl = route('api.materials.index');
+const taxonomiesUrl = route('api.taxonomies.index');
 
 export const useSearchStore = defineStore('search', {
   state: () => defaultValues,
