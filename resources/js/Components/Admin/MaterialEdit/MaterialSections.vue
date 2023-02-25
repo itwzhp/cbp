@@ -7,7 +7,7 @@ const multiItemSections = ['Załączniki', 'Scenariusz'];
 const alternativeMultiItemSections = [
   'Cele i zamierzenia',
   'Zakres tematyczny',
-  'Wymagania z instrumentów tematycznych',
+  'Realizowane wymagania z instrumentów metodycznych',
 ];
 </script>
 
