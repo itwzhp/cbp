@@ -70,11 +70,11 @@ const downloadAttachment = (attachment, index) => {
         v-for="attachment in $page.props.material.attachments"
         :key="attachment.id"
       >
-        <div class="flex justify-between text-sm p-2 text-base font-bold text-gray-900 rounded-lg bg-gray-100 group hover:shadow">
-          <div class="flex items-center">
+        <div class="md:flex justify-between text-sm p-2 text-base font-bold text-gray-900 rounded-lg bg-gray-100 group hover:shadow">
+          <div class="md:flex items-center">
             <div>{{ attachment.name }}</div>
           </div>
-          <div class="flex items-center">
+          <div class="md:flex items-center">
             <button
               title="Pobierz załącznik"
               :disabled="downloadInProgressFileIndex === attachment.id"
