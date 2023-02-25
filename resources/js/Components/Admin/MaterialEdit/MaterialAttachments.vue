@@ -10,7 +10,6 @@ const material = usePage().props.material;
 const token = usePage().props.token;
 const permissions = usePage().props.permissions;
 
-// Create component
 const FilePond = vueFilePond(
     FilePondPluginFileValidateType,
     FilePondPluginImagePreview
