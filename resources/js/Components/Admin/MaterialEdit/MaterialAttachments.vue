@@ -13,6 +13,7 @@ import ContentAccess from '@/Components/Admin/ContentAccess.vue';
 import { permissions } from '@/Components/Admin/permissions.js';
 
 const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview);
+const files = ref([]);
 const refreshFiles = () => {
   router.reload({ only: ['material'] });
 };
@@ -29,29 +30,22 @@ const deleteAttachment = (attachment, index) => {
     )
     .then(() => {
       deleteInProgressFileIndex.value = null;
+      files.value = [];
       refreshFiles();
     })
     .catch(() => deleteInProgressFileIndex.value = null)
 };
 
 const downloadInProgressFileIndex = ref(null);
-const downloadAttachment = (attachment, index) => {
-  downloadInProgressFileIndex.value = index;
-  axios
-    .get(
-      route('api.admin.materials.attachments.show', {
-        material: attachment.material_id,
-        attachment: attachment.id
-      })
-    )
-    .then((response) => {
+const downloadAttachment = (attachment) => {
+  downloadInProgressFileIndex.value = attachment.id;
+  fetch(attachment.download_url, { method: 'get', mode: 'no-cors', referrerPolicy: 'no-referrer' })
+    .then(res => res.blob())
+    .then(res => {
       downloadInProgressFileIndex.value = null;
-      fileDownload(
-        response.data,
-        response.headers['content-disposition'].split('filename=')[1]
-    );
+      fileDownload(res, attachment.name);
     })
-    .catch(() => downloadInProgressFileIndex.value = null)
+    .catch(() => downloadInProgressFileIndex.value = null);
 };
 </script>
 <template>
@@ -80,8 +74,7 @@ const downloadAttachment = (attachment, index) => {
               :disabled="downloadInProgressFileIndex === attachment.id"
               :class="{'bg-blue-500/50 hover:bg-blue-500/50 cursor-wait': downloadInProgressFileIndex === attachment.id}"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xs mx-2"
-              :href="attachment.download_url"
-              @click.prevent="downloadAttachment(attachment, attachment.id)"
+              @click.prevent="downloadAttachment(attachment)"
             >
               <FontAwesomeIcon icon="file-arrow-down" />
             </button>
@@ -119,7 +112,7 @@ const downloadAttachment = (attachment, index) => {
         :allow-multiple="true"
         :allow-remove="false"
         :allow-revert="false"
-        :files="[]"
+        :files="files"
         @processfile="refreshFiles"
       />
     </ContentAccess>
