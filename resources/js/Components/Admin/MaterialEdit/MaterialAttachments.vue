@@ -7,7 +7,6 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond/dist/filepond.min.css';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import fileDownload from 'js-file-download';
 import axios from 'axios';
 import ContentAccess from '@/Components/Admin/ContentAccess.vue';
 import { permissions } from '@/Components/Admin/permissions.js';
@@ -35,18 +34,6 @@ const deleteAttachment = (attachment, index) => {
     })
     .catch(() => deleteInProgressFileIndex.value = null)
 };
-
-const downloadInProgressFileIndex = ref(null);
-const downloadAttachment = (attachment) => {
-  downloadInProgressFileIndex.value = attachment.id;
-  fetch(attachment.download_url, { method: 'get', mode: 'no-cors', referrerPolicy: 'no-referrer' })
-    .then(res => res.blob())
-    .then(res => {
-      downloadInProgressFileIndex.value = null;
-      fileDownload(res, attachment.name);
-    })
-    .catch(() => downloadInProgressFileIndex.value = null);
-};
 </script>
 <template>
   <div class="flex justify-between text-sm pb-2">
@@ -69,15 +56,14 @@ const downloadAttachment = (attachment) => {
             <div>{{ attachment.name }}</div>
           </div>
           <div class="md:flex items-center">
-            <button
+            <a
               title="Pobierz załącznik"
-              :disabled="downloadInProgressFileIndex === attachment.id"
-              :class="{'bg-blue-500/50 hover:bg-blue-500/50 cursor-wait': downloadInProgressFileIndex === attachment.id}"
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xs mx-2"
-              @click.prevent="downloadAttachment(attachment)"
+              :href="attachment.download_url"
+              target="_blank"
             >
               <FontAwesomeIcon icon="file-arrow-down" />
-            </button>
+            </a>
             <ContentAccess :permissions="[permissions.UPDATE]">
               <button
                 title="Usuń załącznik"
