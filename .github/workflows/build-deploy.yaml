@@ -8,6 +8,10 @@ on:
 
 env:
   ENVIRONMENT_NAME: "${{ github.event_name == 'push' && github.ref_name == 'production' && 'prod' || 'dev' }}"
+  DEPLOY_USER: build
+  DEPLOY_HOST: zhp-pl
+  PACKAGE_NAME: cbp-app-package.tar.gz
+  DEPLOY_PATH: /var/www/vhosts/zhp.pl/${{ github.ref_name == 'production' && 'cbp-prod.zhp.pl' || 'cbp-dev.zhp.pl' }} # until relase; then change to cbp.zhp.pl for sake of clarity
 
 jobs:
   build:
@@ -103,7 +107,7 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
 
-##### Tests
+#### Tests
 
       - name: Run Migrations
         env:
@@ -126,40 +130,72 @@ jobs:
           DB_USER: root
         run: vendor/bin/pest --parallel
 
-##### Prepare & Publish artifact
+#### Prepare & Publish artifact
 
       - name: Optimize
         run: php artisan optimize
 
-      - name: Publish artifact
+      - name: Compress package
+        run: tar --exclude="./tests"  --exclude="./node_modules" --exclude="./vendor/phpunit" --exclude=".git" --exclude=".github" --exclude="${{ env.PACKAGE_NAME }}" -cvf ${{ env.PACKAGE_NAME }} .
+
+      - name: Publish build artifact
         uses: actions/upload-artifact@v3
         with:
-          name: cbp-app
-          path: .
+          name: ${{ env.PACKAGE_NAME }}
+          path: ${{ env.PACKAGE_NAME }}
 
-  deploy:
-    name: Deploy
+      - name: Publish bicep artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: cbp.bicep
+          path: ./infrastructure/cbp.bicep
+
+  deploy-site:
+    name: Deploy site
     if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Configure SSH
+        run: ${{ secrets.ZHP_PL_SSH_CONFIG }}
+
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: cbp-app
+          name: ${{ env.PACKAGE_NAME }}
 
+      - name: Copy new version into server
+        run: scp -r ./$PACKAGE_NAME $DEPLOY_USER@$DEPLOY_HOST:/tmp
+
+      - name: Ensure deploy folder presence
+        run: ssh zhp-pl "mkdir --parents ${{ env.DEPLOY_PATH }}"
+
+      - name: Extract package
+        run: ssh zhp-pl "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C $DEPLOY_PATH"
+
+      - name: Decrypt env
+        run: ssh zhp-pl "cd $DEPLOY_PATH && /opt/plesk/php/8.2/bin/php artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
+
+  deploy-azure:
+    name: Deploy Azure storage
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Login to Azure
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Download bicep artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: cbp.bicep
 
       - name: Deploy Bicep
         uses: azure/arm-deploy@v1
         with:
           subscriptionId: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: zhp-cbp-${{ env.ENVIRONMENT_NAME }}
-          template: ./infrastructure/cbp.bicep
+          template: cbp.bicep
           parameters: environment=${{ env.ENVIRONMENT_NAME }}
-
-      - run: |
-          echo 'TODO: odtworzyć .env' - php artisan env:decrypt --env=production --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env
