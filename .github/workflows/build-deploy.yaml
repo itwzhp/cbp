@@ -12,7 +12,7 @@ env:
   DEPLOY_HOST: zhp-pl
   PACKAGE_NAME: cbp-app-package.tar.gz
   DEPLOY_PATH: /var/www/vhosts/zhp.pl/${{ github.ref_name == 'production' && 'cbp-prod.zhp.pl' || 'cbp-dev.zhp.pl' }} # until relase; then change to cbp.zhp.pl for sake of clarity
-
+  PHP_PATH: /opt/plesk/php/8.2/bin/php
 jobs:
   build:
     name: Build and test
@@ -174,7 +174,10 @@ jobs:
         run: ssh zhp-pl "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C $DEPLOY_PATH"
 
       - name: Decrypt env
-        run: ssh zhp-pl "cd $DEPLOY_PATH && /opt/plesk/php/8.2/bin/php artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
+        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
+
+      - name: Run db migrations
+        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --filename=.env artisan migrate"
 
   deploy-azure:
     name: Deploy Azure storage
