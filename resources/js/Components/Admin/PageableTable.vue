@@ -247,13 +247,13 @@
           </template>
           <template v-else>
             <tr
-              v-for="(row, key) in emptyRows"
-              :key="key"
+              v-for="(row, emptyRowKey) in emptyRows"
+              :key="emptyRowKey"
               class="bg-white border-b hover:bg-gray-50"
             >
               <td
-                v-for="(col, key) in emptyCols"
-                :key="key"
+                v-for="(col, emptyColKey) in emptyCols"
+                :key="emptyColKey"
               >
                 <EmptyTableRow />
               </td>
