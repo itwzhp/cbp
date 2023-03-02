@@ -3,6 +3,7 @@
   import axios from 'axios';
   import { Link } from '@inertiajs/vue3';
   import StateBagde from '@/Components/Admin/StateBagde.vue';
+  import EmptyTableRow from '@/Components/Admin/EmptyTableRow.vue';
   import ContentAccess from '@/Components/Admin/ContentAccess.vue';
   import { permissions } from '@/Components/Admin/permissions.js';
   import Spinner from '@/Components/Spinner.vue';
@@ -11,6 +12,8 @@
   const pagination = ref({current_page: 1});
   const paginationControls = ref([]);
   const isLoading = ref(false);
+  const emptyRows = [...Array(15).keys()];
+  const emptyCols = [...Array(7).keys()];
 
   const calculatePaginationControls = (pagination) => {
     return {
@@ -239,6 +242,20 @@
                   </Link>
                 </td>
               </ContentAccess>
+            </tr>
+          </template>
+          <template v-else>
+            <tr
+              v-for="(row, key) in emptyRows"
+              :key="key"
+              class="bg-white border-b hover:bg-gray-50"
+            >
+              <td
+                v-for="(col, key) in emptyCols"
+                :key="key"
+              >
+                <EmptyTableRow />
+              </td>
             </tr>
           </template>
         </tbody>
