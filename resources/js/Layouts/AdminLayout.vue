@@ -143,6 +143,7 @@ const toggleMobileSidebar = () => {
         <li>
           <AdminNavLink
             :href="'admin.materials.index'"
+            :child-href="'admin.materials.edit'"
             :icon="'fa-solid fa-file'"
           >
             Materiały

@@ -1,5 +1,5 @@
 <script setup>
-import { usePage } from '@inertiajs/vue3';
+import { usePage, Link } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import MaterialTextInput from '@/Components/Admin/MaterialEdit/MaterialTextInput.vue';
 import MaterialSections from '@/Components/Admin/MaterialEdit/MaterialSections.vue';
@@ -13,9 +13,17 @@ const props = usePage().props.material;
 
 <template>
   <AdminLayout>
-    <h2>Edytuj materiał</h2>
-    <div>{{ $page.props.material.title }}</div>
-    <!-- {{ $page.props.material }} -->
+    <button class="p-2 my-2 hover:bg-gray-50 rounded-lg">
+      <Link
+        :href="route('admin.materials.index')"
+        class="text-sm print:hidden "
+      >
+        <i class="fa fa-chevron-left" /> powrót
+      </Link>
+    </button>
+    <h2>
+      Edytuj materiał
+    </h2>
     <div class="block md:flex md:flex-row">
       <div class="basis-3/4">
         <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6">
