@@ -2,13 +2,17 @@ name: Build and deploy
 
 on:
   push:
-    branches: [production, main, add-copy]
+    branches: [production, main]
   pull_request:
     branches: [main]
 
 env:
   ENVIRONMENT_NAME: "${{ github.event_name == 'push' && github.ref_name == 'production' && 'prod' || 'dev' }}"
-
+  DEPLOY_USER: build
+  DEPLOY_HOST: zhp-pl
+  PACKAGE_NAME: cbp-app-package.tar.gz
+  DEPLOY_PATH: /var/www/vhosts/zhp.pl/${{ github.ref_name == 'production' && 'cbp-prod.zhp.pl' || 'cbp-dev.zhp.pl' }} # until relase; then change to cbp.zhp.pl for sake of clarity
+  PHP_PATH: /opt/plesk/php/8.2/bin/php
 jobs:
   build:
     name: Build and test
@@ -105,26 +109,26 @@ jobs:
 
 ##### Tests
 
-      # - name: Run Migrations
-      #   env:
-      #     DB_CONNECTION: mysql
-      #     DB_DATABASE: cbp_test
-      #     DB_PORT: 33306
-      #     DB_USER: root
-      #   run: |
-      #     chmod -R 777 storage bootstrap/cache
-      #     php artisan migrate
-      #     php artisan db:seed
+      - name: Run Migrations
+        env:
+          DB_CONNECTION: mysql
+          DB_DATABASE: cbp_test
+          DB_PORT: 33306
+          DB_USER: root
+        run: |
+          chmod -R 777 storage bootstrap/cache
+          php artisan migrate
+          php artisan db:seed
 
-      # - name: Check code style
-      #   run: vendor/bin/pint --config vendor/apsg/coding-standards/pint.json --test
-      # - name: Execute tests (Unit and Feature tests) via PestPHP
-      #   env:
-      #     DB_CONNECTION: mysql
-      #     DB_DATABASE: cbp_test
-      #     DB_PORT: 33306
-      #     DB_USER: root
-      #   run: vendor/bin/pest --parallel
+      - name: Check code style
+        run: vendor/bin/pint --config vendor/apsg/coding-standards/pint.json --test
+      - name: Execute tests (Unit and Feature tests) via PestPHP
+        env:
+          DB_CONNECTION: mysql
+          DB_DATABASE: cbp_test
+          DB_PORT: 33306
+          DB_USER: root
+        run: vendor/bin/pest --parallel
 
 ##### Prepare & Publish artifact
 
@@ -132,13 +136,13 @@ jobs:
         run: php artisan optimize
 
       - name: Compress package
-        run: tar --exclude="./tests"  --exclude="./node_modules" --exclude="./vendor/phpunit" --exclude=".git" --exclude=".github" --exclude="cbp-app-package.tar.gz" -cvf cbp-app-package.tar.gz .
+        run: tar --exclude="./tests"  --exclude="./node_modules" --exclude="./vendor/phpunit" --exclude=".git" --exclude=".github" --exclude="${{ env.PACKAGE_NAME }}" -cvf ${{ env.PACKAGE_NAME }} .
 
       - name: Publish build artifact
         uses: actions/upload-artifact@v3
         with:
-          name: cbp-app-package.tar.gz
-          path: cbp-app-package.tar.gz
+          name: ${{ env.PACKAGE_NAME }}
+          path: ${{ env.PACKAGE_NAME }}
 
       - name: Publish bicep artifact
         uses: actions/upload-artifact@v3
@@ -151,11 +155,6 @@ jobs:
     if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
-    env:
-      DEPLOY_USER: build
-      DEPLOY_HOST: zhp-pl
-      DEPLOY_PATH: /var/www/vhosts/zhp.pl/cbp-dev.zhp.pl # TODO - ścieżka zależna od środowiska
-      PACKAGE_NAME: cbp-app-package.tar.gz
     steps:
       - name: Configure SSH
         run: ${{ secrets.ZHP_PL_SSH_CONFIG }}
@@ -168,11 +167,17 @@ jobs:
       - name: Copy new version into server
         run: scp -r ./$PACKAGE_NAME $DEPLOY_USER@$DEPLOY_HOST:/tmp
 
+      - name: Ensure deploy folder presence
+        run: ssh zhp-pl "mkdir --parents ${{ env.DEPLOY_PATH }}"
+
       - name: Extract package
         run: ssh zhp-pl "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C $DEPLOY_PATH"
 
       - name: Decrypt env
-        run: ssh zhp-pl "cd $DEPLOY_PATH && /opt/plesk/php/8.2/bin/php artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
+        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
+
+      - name: Run db migrations
+        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --filename=.env artisan migrate"
 
   deploy-azure:
     name: Deploy Azure storage
