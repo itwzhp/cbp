@@ -177,8 +177,7 @@ jobs:
         run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
 
       - name: Run db migrations
-        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --filename=.env artisan migrate"
-
+        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force"
   deploy-azure:
     name: Deploy Azure storage
     if: github.event_name == 'push'
