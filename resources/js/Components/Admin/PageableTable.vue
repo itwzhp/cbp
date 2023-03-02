@@ -236,9 +236,10 @@
                 <td class="px-6 py-4">
                   <Link
                     :href="route('admin.materials.edit', material.id)"
-                    class="font-medium text-blue-600 hover:underline"
+                    class="font-medium text-blue-600 hover:underline text-lg"
+                    title="Edytuj"
                   >
-                    Edytuj
+                    <font-awesome-icon icon="fa-solid fa-pen-to-square" />
                   </Link>
                 </td>
               </ContentAccess>
