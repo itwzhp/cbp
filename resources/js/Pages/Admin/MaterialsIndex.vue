@@ -5,9 +5,6 @@ import PageableTable from '@/Components/Admin/PageableTable.vue';
 
 <template>
   <AdminLayout>
-    <p class="my-4 text-base font-semibold text-gray-900 md:text-xl">
-      Materiały
-    </p>
     <PageableTable />
   </AdminLayout>
 </template>

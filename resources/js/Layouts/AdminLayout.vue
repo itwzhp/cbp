@@ -8,6 +8,14 @@ import ContentAccess from '@/Components/Admin/ContentAccess.vue';
 import { permissions } from '@/Components/Admin/permissions.js';
 import { Dropdown } from 'flowbite';
 
+const pages = ref(new Map([
+  ['admin.dashboard', 'Dashboard'],
+  ['admin.materials.index', 'Materiały'],
+  ['admin.materials.create', 'Dodaj materiał'],
+  ['admin.materials.edit', 'Edytuj materiał'],
+  ['admin.settings', 'Ustawienia']
+]));
+
 const initDropdownMenu = () => {
   const $targetEl = document.getElementById('dropdownMenu');
   const $triggerEl = document.getElementById('dropdownButton');
@@ -134,45 +142,37 @@ const toggleMobileSidebar = () => {
       <ul class="space-y-2">
         <li>
           <AdminNavLink
-            :href="'admin.dashboard'"
-            :icon="'fa-solid fa-chart-pie'"
+            href="admin.dashboard"
+            icon="fa-solid fa-chart-pie"
           >
-            Dashboard
+            {{ pages.get('admin.dashboard') }}
           </AdminNavLink>
         </li>
         <li>
           <AdminNavLink
-            :href="'admin.materials.index'"
-            :child-href="'admin.materials.edit'"
-            :icon="'fa-solid fa-file'"
+            href="admin.materials.index"
+            child-href="admin.materials.edit"
+            icon="fa-solid fa-file"
           >
-            Materiały
+            {{ pages.get('admin.materials.index') }}
           </AdminNavLink>
         </li>
         <ContentAccess :permissions="[permissions.CREATE_MATERIALS]">
           <li>
             <AdminNavLink
-              :href="'admin.materials.create'"
-              :icon="'fa-solid fa-plus'"
+              href="admin.materials.create"
+              icon="fa-solid fa-plus"
             >
-              Dodaj materiał
+              {{ pages.get('admin.materials.create') }}
             </AdminNavLink>
           </li>
         </ContentAccess>
         <li>
           <AdminNavLink
-            :href="'admin.materials.index'"
-            :icon="'fa-solid fa-file'"
+            href="admin.settings"
+            icon="fa-solid fa-gear"
           >
-            Recenzje
-          </AdminNavLink>
-        </li>
-        <li>
-          <AdminNavLink
-            :href="'admin.settings'"
-            :icon="'fa-solid fa-gear'"
-          >
-            Ustawienia
+            {{ pages.get('admin.settings') }}
           </AdminNavLink>
         </li>
       </ul>
@@ -180,6 +180,9 @@ const toggleMobileSidebar = () => {
   </aside>
   <div class="p-4 sm:ml-64">
     <div class="p-4 mt-14">
+      <p class="my-4 text-base font-semibold text-gray-900 md:text-xl">
+        {{ pages.get(route().current()) }}
+      </p>
       <slot />
     </div>
   </div>
