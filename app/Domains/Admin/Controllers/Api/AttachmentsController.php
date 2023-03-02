@@ -2,6 +2,7 @@
 namespace App\Domains\Admin\Controllers\Api;
 
 use App\Domains\Admin\MaterialActionsEnum;
+use App\Domains\Admin\Requests\Api\UpdateAttachmentRequest;
 use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\Models\Material;
 use App\Http\Controllers\AbstractAdminController;
@@ -10,7 +11,7 @@ class AttachmentsController extends AbstractAdminController
 {
     public function destroy(Material $material, Attachment $attachment)
     {
-        $this->authorize(MaterialActionsEnum::UPDATE->value, $material);
+        $this->authorize(MaterialActionsEnum::UPDATE, $material);
         $attachment->delete();
 
         return $this->responseOK();
@@ -21,5 +22,12 @@ class AttachmentsController extends AbstractAdminController
         $this->authorize(MaterialActionsEnum::VIEW, $material);
 
         return $attachment->disk()->download($attachment->path);
+    }
+
+    public function update(Material $material, Attachment $attachment, UpdateAttachmentRequest $request)
+    {
+        $attachment->update($request->validated());
+
+        return $this->responseOK();
     }
 }

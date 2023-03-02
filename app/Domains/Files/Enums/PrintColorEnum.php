@@ -1,8 +1,12 @@
 <?php
 namespace App\Domains\Files\Enums;
 
+use App\Enums\EnumCasesValidationTrait;
+
 enum PrintColorEnum: string
 {
+    use EnumCasesValidationTrait;
+
     case COLOR = 'color';
     case BLACK = 'black';
 

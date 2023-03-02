@@ -1,8 +1,12 @@
 <?php
 namespace App\Domains\Files\Enums;
 
+use App\Enums\EnumCasesValidationTrait;
+
 enum SizeEnum: string
 {
+    use EnumCasesValidationTrait;
+
     case A4 = 'A4';
     case A3 = 'A3';
     case A2 = 'A2';

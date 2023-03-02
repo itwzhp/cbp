@@ -4,10 +4,12 @@ namespace App\Domains\Files\Models;
 use App\Domains\Files\Enums\PrintColorEnum;
 use App\Domains\Files\Enums\SizeEnum;
 use App\Domains\Files\Enums\ThicknessEnum;
+use App\Domains\Files\Models\Factories\AttachmentFactory;
 use App\Domains\Materials\Models\Traits\BelongsToMaterial;
 use App\Helpers\FilesystemsHelper;
 use Carbon\Carbon;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
@@ -34,6 +36,7 @@ use Illuminate\Support\Facades\Storage;
 class Attachment extends Model
 {
     use BelongsToMaterial;
+    use HasFactory;
 
     protected $guarded = [];
 
@@ -46,6 +49,11 @@ class Attachment extends Model
     protected $appends = [
         'download_url',
     ];
+
+    protected static function newFactory(): AttachmentFactory
+    {
+        return AttachmentFactory::new();
+    }
 
     public function url(): string
     {
