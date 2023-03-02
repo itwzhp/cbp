@@ -2,10 +2,10 @@
 import { computed } from 'vue';
 import { Link } from '@inertiajs/vue3';
 
-const props = defineProps(['href', 'icon']);
+const props = defineProps(['href', 'childHref', 'icon']);
 
 const classes = computed(() =>
-  route().current(props.href)
+  route().current(props.href) || props.childHref && route().current(props.childHref)
     ? {
         container:
           'bg-cbp-100 flex items-center p-2 text-base font-normal text-gray-900 rounded-lg',
