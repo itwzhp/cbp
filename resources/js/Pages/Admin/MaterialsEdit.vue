@@ -21,9 +21,9 @@ const props = usePage().props.material;
         <i class="fa fa-chevron-left" /> powrót
       </Link>
     </button>
-    <h2>
+    <p class="mb-4 text-base font-semibold text-gray-900 md:text-xl">
       Edytuj materiał
-    </h2>
+    </p>
     <div class="block md:flex md:flex-row">
       <div class="basis-3/4">
         <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6">
