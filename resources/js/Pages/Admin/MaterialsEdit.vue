@@ -1,20 +1,29 @@
 <script setup>
-import { usePage } from '@inertiajs/vue3';
+import { usePage, Link } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import MaterialTextInput from '@/Components/Admin/MaterialEdit/MaterialTextInput.vue';
 import MaterialSections from '@/Components/Admin/MaterialEdit/MaterialSections.vue';
 import MaterialFields from '@/Components/Admin/MaterialEdit/MaterialFields.vue';
 import MaterialTags from '@/Components/Admin/MaterialEdit/MaterialTags.vue';
 import MaterialLicence from '@/Components/Admin/MaterialEdit/MaterialLicence.vue';
+import MaterialAttachments from '@/Components/Admin/MaterialEdit/MaterialAttachments.vue';
 
 const props = usePage().props.material;
 </script>
 
 <template>
   <AdminLayout>
-    <h2>Edytuj materiał</h2>
-    <div>{{ $page.props.material.title }}</div>
-    <!-- {{ $page.props.material }} -->
+    <button class="p-2 my-2 hover:bg-gray-50 rounded-lg">
+      <Link
+        :href="route('admin.materials.index')"
+        class="text-sm print:hidden "
+      >
+        <i class="fa fa-chevron-left" /> powrót
+      </Link>
+    </button>
+    <p class="mb-4 text-base font-semibold text-gray-900 md:text-xl">
+      Edytuj materiał
+    </p>
     <div class="block md:flex md:flex-row">
       <div class="basis-3/4">
         <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6">
@@ -44,6 +53,9 @@ const props = usePage().props.material;
           </div>
           <div class="mb-3">
             <MaterialLicence />
+          </div>
+          <div class="mb-3">
+            <MaterialAttachments />
           </div>
         </div>
       </div>

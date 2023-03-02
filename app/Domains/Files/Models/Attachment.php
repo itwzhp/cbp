@@ -7,6 +7,7 @@ use App\Domains\Files\Enums\ThicknessEnum;
 use App\Domains\Materials\Models\Traits\BelongsToMaterial;
 use App\Helpers\FilesystemsHelper;
 use Carbon\Carbon;
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
  * @property string      name
  * @property int|null    wp_id
  * @property string      path
+ * @property string      disk
  * @property string      mime
  * @property int         downloads
  * @property string|null element
@@ -26,6 +28,8 @@ use Illuminate\Support\Facades\Storage;
  * @property string|null paper_color
  * @property Carbon      created_at
  * @property Carbon      updated_at
+ * @property-read string download_url
+ * @property-read
  */
 class Attachment extends Model
 {
@@ -39,9 +43,13 @@ class Attachment extends Model
         'thickness'   => ThicknessEnum::class,
     ];
 
+    protected $appends = [
+        'download_url',
+    ];
+
     public function url(): string
     {
-        return FilesystemsHelper::getPublic()->url($this->path);
+        return FilesystemsHelper::getDisk($this->disk)->url($this->path);
     }
 
     public static function fromPath(string $path, string $disk = 'local'): ?self
@@ -66,12 +74,17 @@ class Attachment extends Model
 
     public function getContents(): string
     {
-        return FilesystemsHelper::getPublic()->get($this->path);
+        return FilesystemsHelper::getDisk($this->disk)->get($this->path);
     }
 
     public function downloadUrl(): string
     {
         return route('attachments.download', $this);
+    }
+
+    public function getDownloadUrlAttribute(): string
+    {
+        return $this->url();
     }
 
     public function incrementDownloads(): self
@@ -81,5 +94,10 @@ class Attachment extends Model
         ]);
 
         return $this;
+    }
+
+    public function disk(): Filesystem
+    {
+        return FilesystemsHelper::getDisk($this->disk);
     }
 }

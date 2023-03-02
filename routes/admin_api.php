@@ -2,11 +2,13 @@
 // prefix: api/admin
 // name: api.admin
 
-use App\Domains\Admin\Controllers\Api\FieldsControllerAbstract;
+use App\Domains\Admin\Controllers\Api\AttachmentsController;
+use App\Domains\Admin\Controllers\Api\FieldsController;
 use App\Domains\Admin\Controllers\Api\MaterialsIndexController;
-use App\Domains\Admin\Controllers\Api\MaterialUpdateControllerAbstract;
+use App\Domains\Admin\Controllers\Api\MaterialUpdateController;
 use App\Domains\Admin\Controllers\Api\SetupsController;
-use App\Domains\Admin\Controllers\Api\TagsControllerAbstract;
+use App\Domains\Admin\Controllers\Api\TagsController;
+use App\Domains\Files\Controllers\Admin\Api\UploadMaterialAttachmentsController;
 use App\Domains\Users\Middlewares\UserCanEditMaterialMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -18,22 +20,22 @@ Route::name('materials.')
         Route::middleware(UserCanEditMaterialMiddleware::class)
             ->prefix('/{material}')
             ->group(function () {
-                Route::post('/', [MaterialUpdateControllerAbstract::class, 'update'])->name('update');
-                Route::delete('/', [MaterialUpdateControllerAbstract::class, 'delete'])->name('destroy');
+                Route::post('/', [MaterialUpdateController::class, 'update'])->name('update');
+                Route::delete('/', [MaterialUpdateController::class, 'delete'])->name('destroy');
 
                 Route::prefix('fields')
                     ->name('fields.')
                     ->group(function () {
-                        Route::post('/', [FieldsControllerAbstract::class, 'store'])->name('store');
-                        Route::post('/{field}', [FieldsControllerAbstract::class, 'update'])->name('update');
-                        Route::delete('/{field}', [FieldsControllerAbstract::class, 'delete'])->name('destroy');
+                        Route::post('/', [FieldsController::class, 'store'])->name('store');
+                        Route::post('/{field}', [FieldsController::class, 'update'])->name('update');
+                        Route::delete('/{field}', [FieldsController::class, 'delete'])->name('destroy');
                     });
 
                 Route::prefix('tags')
                     ->name('tags.')
                     ->group(function () {
-                        Route::post('/{tag}', [TagsControllerAbstract::class, 'attach'])->name('attach');
-                        Route::delete('/{tag}', [TagsControllerAbstract::class, 'detach'])->name('detach');
+                        Route::post('/{tag}', [TagsController::class, 'attach'])->name('attach');
+                        Route::delete('/{tag}', [TagsController::class, 'detach'])->name('detach');
                     });
 
                 Route::prefix('setups')
@@ -42,6 +44,14 @@ Route::name('materials.')
                         Route::post('/', [SetupsController::class, 'store'])->name('store');
                         Route::post('/{setup}', [SetupsController::class, 'update'])->name('update');
                         Route::delete('/{setup}', [SetupsController::class, 'destroy'])->name('destroy');
+                    });
+
+                Route::prefix('attachments')
+                    ->name('attachments.')
+                    ->group(function () {
+                        Route::post('/', [UploadMaterialAttachmentsController::class, 'upload'])->name('store');
+                        Route::get('/{attachment}', [AttachmentsController::class, 'download'])->name('show');
+                        Route::delete('/{attachment}', [AttachmentsController::class, 'destroy'])->name('destroy');
                     });
             });
     });

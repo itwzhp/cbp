@@ -1,6 +1,8 @@
 <?php
 namespace App\Domains\Users\Roles;
 
+use App\Domains\Admin\MaterialActionsEnum;
+use App\Domains\Materials\Models\Material;
 use App\Domains\Users\Models\User;
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -24,6 +26,16 @@ class FrontendPermissionsAccessor implements Arrayable
         return collect(static::PERMISSIONS)
             ->map(function (PermissionsEnum $permission) {
                 return $this->user->can($permission->value) ? $permission->value : null;
+            })
+            ->filter()
+            ->toArray();
+    }
+
+    public function actionsOn(Material $material): array
+    {
+        return collect(MaterialActionsEnum::cases())
+            ->map(function (MaterialActionsEnum $action) use ($material) {
+                return $this->user->can($action->value, $material) ? $action->value : null;
             })
             ->filter()
             ->toArray();

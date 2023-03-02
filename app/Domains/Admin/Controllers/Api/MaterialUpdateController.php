@@ -6,7 +6,7 @@ use App\Domains\Materials\Models\Material;
 use App\Domains\Users\Exceptions\UnauthorizedException;
 use App\Http\Controllers\AbstractAdminController;
 
-class MaterialUpdateControllerAbstract extends AbstractAdminController
+class MaterialUpdateController extends AbstractAdminController
 {
     public function update(Material $material, MaterialUpdateRequest $request)
     {

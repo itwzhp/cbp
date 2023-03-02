@@ -17,6 +17,7 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "matthewbdaly/laravel-azure-storage": "^2.0",
+        "sentry/sentry-laravel": "^3.2",
         "socialiteproviders/microsoft": "^4.2",
         "spatie/fractalistic": "^2.9",
         "spatie/laravel-flash": "^1.9",

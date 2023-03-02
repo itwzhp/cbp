@@ -27,7 +27,13 @@ class CopyWpFilesCommand extends Command
             }
 
             $this->info("Uploading: {$filePath}");
-            $file = $this->azure->put($filePath, $this->local->get($filePath));
+            $file = $this->azure->put(
+                $filePath,
+                $this->local->get($filePath),
+                [
+                    'CacheControl'    => 'max-age=315360000, no-transform, public',
+                ]
+            );
         }
 
         $this->info('Finished');

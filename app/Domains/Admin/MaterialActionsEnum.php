@@ -8,4 +8,7 @@ enum MaterialActionsEnum: string
     case ARCHIVE = 'archive';
     case DELETE = 'delete';
     case REVIEW = 'review';
+    case UPDATE = 'update';
+
+    const VIEW = 'view';
 }

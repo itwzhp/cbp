@@ -16,6 +16,6 @@ class AbstractAdminController extends Controller
 
     protected function responseOK(): JsonResponse
     {
-        return JsonResponse::fromJsonString(['ok'], 200);
+        return JsonResponse::fromJsonString('ok', 200);
     }
 }
