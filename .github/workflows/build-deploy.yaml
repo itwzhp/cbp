@@ -2,16 +2,18 @@ name: Build and deploy
 
 on:
   push:
-    branches: [production, main]
+    branches: [production, main,  app-copy]
   pull_request:
     branches: [main]
 
 env:
-  ENVIRONMENT_NAME: "${{ github.event_name == 'push' && github.ref_name == 'production' && 'prod' || 'dev' }}"
+  # ENVIRONMENT_NAME: "${{ github.event_name == 'push' && github.ref_name == 'production' && 'prod' || 'dev' }}"
+  ENVIRONMENT_NAME: dev
   DEPLOY_USER: build
   DEPLOY_HOST: zhp-pl
   PACKAGE_NAME: cbp-app-package.tar.gz
-  DEPLOY_PATH: /var/www/vhosts/zhp.pl/${{ github.ref_name == 'production' && 'cbp-prod.zhp.pl' || 'cbp-dev.zhp.pl' }} # until relase; then change to cbp.zhp.pl for sake of clarity
+  # DEPLOY_PATH: /var/www/vhosts/zhp.pl/${{ github.ref_name == 'production' && 'cbp-prod.zhp.pl' || 'cbp-dev.zhp.pl' }} # until relase; then change to cbp.zhp.pl for sake of clarity
+  DEPLOY_PATH: /var/www/vhosts/zhp.pl/cbp-dev.zhp.pl # until relase; then change to cbp.zhp.pl for sake of clarity
   PHP_PATH: /opt/plesk/php/8.2/bin/php
 jobs:
   build:
@@ -178,6 +180,7 @@ jobs:
 
       - name: Run db migrations
         run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force"
+
   deploy-azure:
     name: Deploy Azure storage
     if: github.event_name == 'push'
