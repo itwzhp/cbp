@@ -154,7 +154,7 @@ jobs:
 
   deploy-site:
     name: Deploy site
-    if: github.event_name == 'push'
+    # if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -183,7 +183,7 @@ jobs:
 
   deploy-azure:
     name: Deploy Azure storage
-    if: github.event_name == 'push'
+    # if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     steps:
