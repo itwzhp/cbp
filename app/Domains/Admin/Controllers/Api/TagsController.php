@@ -10,7 +10,7 @@ class TagsController extends AbstractAdminController
 {
     public function attach(Material $material, Tag $tag): JsonResponse
     {
-        $material->tags()->attach($tag->id);
+        $material->tags()->syncWithoutDetaching([$tag->id]);
 
         return $this->responseOK();
     }
