@@ -1,8 +1,13 @@
 <script setup>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { ref } from 'vue';
+
 const props = defineProps({
   item: { type: Object, required: true },
   defaultIds: { type: Array, required: true },
+  allowHide: { type: Boolean, required: false },
 });
+
 const emit = defineEmits(['tagSelected', 'tagRemoved']);
 const isTagSelected = (tagId) => props.defaultIds.includes(tagId);
 const tagAction = (tagId) => {
@@ -12,33 +17,58 @@ const tagAction = (tagId) => {
     emit('tagSelected', tagId);
   }
 };
+
+const collapsed = ref(false);
+const changeCollapse = () => {
+  collapsed.value = !collapsed.value;
+};
 </script>
 
 <template>
   <div class="mb-3">
-    <p class="mb-1 font-bold">
-      {{ item.taxonomy_name }}
-    </p>
-    <template
-      v-for="(tag, index) in props.item.tags"
-      :key="index"
+    <p
+      class="mb-1 font-bold"
+      :class="{ 'cursor-pointer': props.allowHide }"
+      @click="changeCollapse()"
     >
+      {{ item.taxonomy_name }}
       <button
-        type="button"
-        class="border border-1 border-cbp-300 hover:border-cbp-500 px-2 py-1 m-0.5 text-xs font-medium text-center rounded-3xl focus:ring-1 focus:outline-none focus:cbp-500"
-        :class="{
-          'text-white': isTagSelected(tag.id),
-          'bg-cbp-100': isTagSelected(tag.id),
-        }"
-        @click="tagAction(tag.id)"
+        v-if="allowHide"
+        class="text-sm px-1"
       >
-        {{ tag.name }}
-        <font-awesome-icon
-          v-if="isTagSelected(tag.id)"
-          class="text-xs cursor-pointer"
-          icon="fa-solid fa-xmark"
+        {{ collapsed && props.defaultIds?.length ? props.defaultIds?.length : "" }}
+        <FontAwesomeIcon
+          v-if="collapsed"
+          icon="chevron-down"
+        />
+        <FontAwesomeIcon
+          v-if="!collapsed"
+          icon="chevron-up"
         />
       </button>
-    </template>
+    </p>
+    <div v-if="!collapsed">
+      <template
+        v-for="(tag, index) in props.item.tags"
+        :key="index"
+      >
+        <button
+          type="button"
+          class="border border-1 border-cbp-300 hover:border-cbp-500 px-2 py-1 m-0.5 text-xs font-medium text-center rounded-3xl focus:ring-1 focus:outline-none focus:cbp-500"
+          :class="{
+            'text-white': isTagSelected(tag.id),
+            'bg-cbp-100': isTagSelected(tag.id),
+          }"
+          @click="tagAction(tag.id)"
+        >
+          {{ tag.name }}
+          <font-awesome-icon
+            v-if="isTagSelected(tag.id)"
+            class="text-xs cursor-pointer"
+            icon="fa-solid fa-xmark"
+          />
+        </button>
+      </template>
+    </div>
   </div>
 </template>
