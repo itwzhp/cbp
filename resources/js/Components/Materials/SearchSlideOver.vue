@@ -35,7 +35,7 @@ const hideDialog = () => store.hideDialog();
   >
     <Dialog
       as="div"
-      class="relative z-10"
+      class="relative z-50"
       @close="hideDialog()"
     >
       <TransitionChild

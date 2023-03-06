@@ -31,7 +31,7 @@ const headline = ref(null);
   <div>
     <div class="bg-gradient-to-b from-white-300 via-white-200 to-white-100">
       <div ref="headline">
-        <nav class="print:hidden absolute sm:static w-full z-50 bg-white">
+        <nav class="print:hidden absolute sm:static w-full z-10 bg-white">
           <!-- Primary Navigation Menu -->
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Primary Navigation Menu -->
