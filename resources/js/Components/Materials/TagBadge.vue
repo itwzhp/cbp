@@ -18,7 +18,7 @@ const tagRemove = (tag) =>
 <template>
   <button
     type="button"
-    class="border border-1 border-cbp-300 hover:border-cbp-300 px-2 py-1 m-0.5 text-xs font-medium text-center rounded-3xl focus:ring-1 focus:outline-none focus:cbp-300 text-white bg-cbp-100"
+    class="border border-1 border-cbp-300 hover:border-cbp-300 px-2 py-1 m-0.5 text-xs font-medium text-center rounded focus:ring-1 focus:outline-none focus:cbp-300 text-white bg-cbp-100"
     @click="tagRemove(tag.id)"
   >
     {{ tag.name }}

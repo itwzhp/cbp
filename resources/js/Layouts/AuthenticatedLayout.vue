@@ -4,6 +4,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
+import NavElement from '@/Components/NavElement.vue';
 import NavButton from '@/Components/NavButton.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import SearchSlideOver from '@/Components/Materials/SearchSlideOver.vue';
@@ -30,85 +31,15 @@ const headline = ref(null);
   <div>
     <div class="bg-gradient-to-b from-white-300 via-white-200 to-white-100">
       <div ref="headline">
-        <nav class="print:hidden">
+        <nav class="print:hidden absolute sm:static w-full z-50 bg-white">
           <!-- Primary Navigation Menu -->
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Primary Navigation Menu -->
             <div
-              class="flex items-center justify-between border-gray-100 py-3 md:justify-start md:space-x-10"
+              class="flex items-center justify-between md:justify-center border-gray-100 py-3 md:space-x-10"
             >
-              <div class="flex justify-start lg:w-0 lg:flex-1">
-                <NavLink :href="route('about')">
-                  O CBP
-                </NavLink>
-                <NavLink
-                  v-if="$page.props.auth.user"
-                  :href="route('admin.dashboard')"
-                  :active="route().current('dashboard')"
-                >
-                  Admin
-                </NavLink>
-              </div>
-              <div class="hidden sm:flex -my-2 -mr-2">
+              <div class="hidden md:flex">
                 <ApplicationLogo />
-              </div>
-              <div
-                class="hidden sm:flex items-center justify-end md:flex md:flex-1 lg:w-0"
-              >
-                <div class="ml-3 relative">
-                  <div class="flex space-x-4">
-                    <span
-                      class="cursor-pointer"
-                      @click="displaySearchDialog()"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
-                      Wyszukaj
-                    </span>
-                    <Dropdown
-                      v-if="$page.props.auth.user"
-                      align="right"
-                      width="48"
-                    >
-                      <template #trigger>
-                        <span class="inline-flex rounded-md">
-                          <button
-                            type="button"
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                          >
-                            {{ $page.props.auth.user.name }}
-                            <svg
-                              class="ml-2 -mr-0.5 h-4 w-4"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"
-                              />
-                            </svg>
-                          </button>
-                        </span>
-                      </template>
-                      <template #content>
-                        <DropdownLink
-                          :href="route('logout')"
-                          method="post"
-                          as="button"
-                        >
-                          Wyloguj
-                        </DropdownLink>
-                      </template>
-                    </Dropdown>
-                    <Link
-                      v-if="!$page.props.auth.user"
-                      :href="route('login')"
-                    >
-                      Zaloguj się
-                    </Link>
-                  </div>
-                </div>
               </div>
               <!-- Hamburger -->
               <div class="-mr-2 flex items-center sm:hidden">
@@ -161,9 +92,8 @@ const headline = ref(null);
                 <ApplicationLogo />
               </div>
               <ResponsiveNavLink
+                v-if="!$page.props.auth.user"
                 :href="route('login')"
-                method="post"
-                as="button"
               >
                 Zaloguj
               </ResponsiveNavLink>
@@ -173,6 +103,12 @@ const headline = ref(null);
               >
                 <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
                 Wyszukaj
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('about')"
+                :active="route().current('about')"
+              >
+                O cbp
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.index')"
@@ -232,22 +168,36 @@ const headline = ref(null);
 
               <div class="mt-3 space-y-1">
                 <ResponsiveNavLink
+                  :href="route('admin.dashboard')"
+                >
+                  Panel administracyjny
+                </ResponsiveNavLink>
+              </div>
+              <div class="mt-3 space-y-1">
+                <ResponsiveNavLink
                   :href="route('logout')"
                   method="post"
                   as="button"
                 >
                   Wyloguj
                 </ResponsiveNavLink>
+                <hr>
               </div>
             </div>
           </div>
         </nav>
         <nav class="print:hidden border-b border-gray-100 print:hidden">
           <div class="max-w-7xl max-h-10 mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-12">
+            <div class="flex justify-center h-12">
               <div class="flex">
                 <!-- Navigation Links -->
                 <div class="max-h-10 hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                  <NavLink
+                    :href="route('about')"
+                    :active="route().current('about')"
+                  >
+                    O cbp
+                  </NavLink>
                   <NavLink
                     :href="route('materials.index')"
                     :active="route().current('materials.index')"
@@ -312,6 +262,66 @@ const headline = ref(null);
                   >
                     Poradniki
                   </NavLink>
+                  <NavElement>
+                    <span
+                      class="cursor-pointer"
+                      @click="displaySearchDialog()"
+                    >
+                      <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                      Wyszukaj
+                    </span>
+                  </NavElement>
+                  <NavElement>
+                    <Dropdown
+                      v-if="$page.props.auth.user"
+                      align="right"
+                      width="48"
+                    >
+                      <template #trigger>
+                        <span class="inline-flex rounded-md">
+                          <button
+                            type="button"
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                          >
+                            {{ $page.props.auth.user.name }}
+                            <svg
+                              class="ml-2 -mr-0.5 h-4 w-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        </span>
+                      </template>
+                      <template #content>
+                        <DropdownLink
+                          v-if="$page.props.auth.user"
+                          :href="route('admin.dashboard')"
+                        >
+                          Panel administracyjny
+                        </DropdownLink>
+                        <DropdownLink
+                          :href="route('logout')"
+                          method="post"
+                          as="button"
+                        >
+                          Wyloguj
+                        </DropdownLink>
+                      </template>
+                    </Dropdown>
+                    <Link
+                      v-if="!$page.props.auth.user"
+                      :href="route('login')"
+                    >
+                      Zaloguj się
+                    </Link>
+                  </NavElement>
                 </div>
               </div>
             </div>
