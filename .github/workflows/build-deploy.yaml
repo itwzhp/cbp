@@ -178,6 +178,9 @@ jobs:
       - name: Decrypt env
         run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
 
+      - name: Install composer
+        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH composer.phar install"
+
       - name: Run db migrations
         run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force"
 
