@@ -182,7 +182,7 @@ jobs:
         run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH composer.phar install"
 
       - name: Run db migrations
-        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force"
+        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force --seed"
 
   deploy-azure:
     name: Deploy Azure storage
