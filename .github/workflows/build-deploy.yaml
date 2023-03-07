@@ -7,13 +7,11 @@ on:
     branches: [main]
 
 env:
-  # ENVIRONMENT_NAME: "${{ github.event_name == 'push' && github.ref_name == 'production' && 'prod' || 'dev' }}"
-  ENVIRONMENT_NAME: dev
+  ENVIRONMENT_NAME: "${{ github.event_name == 'push' && github.ref_name == 'production' && 'prod' || 'dev' }}"
   DEPLOY_USER: build
   DEPLOY_HOST: zhp-pl
   PACKAGE_NAME: cbp-app-package.tar.gz
-  # DEPLOY_PATH: /var/www/vhosts/zhp.pl/${{ github.ref_name == 'production' && 'cbp-prod.zhp.pl' || 'cbp-dev.zhp.pl' }} # until relase; then change to cbp.zhp.pl for sake of clarity
-  DEPLOY_PATH: /var/www/vhosts/zhp.pl/cbp-dev.zhp.pl # until relase; then change to cbp.zhp.pl for sake of clarity
+  DEPLOY_PATH: /var/www/vhosts/zhp.pl/${{ github.ref_name == 'production' && 'cbp-prod.zhp.pl' || 'cbp-dev.zhp.pl' }} # until relase; then change to cbp.zhp.pl for sake of clarity
   PHP_PATH: /opt/plesk/php/8.2/bin/php
 jobs:
   build:
@@ -154,7 +152,7 @@ jobs:
 
   deploy-site:
     name: Deploy site
-    # if: github.event_name == 'push'
+    if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -186,7 +184,7 @@ jobs:
 
   deploy-azure:
     name: Deploy Azure storage
-    # if: github.event_name == 'push'
+    if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     steps:
