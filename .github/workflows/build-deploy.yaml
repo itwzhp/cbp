@@ -2,7 +2,7 @@ name: Build and deploy
 
 on:
   push:
-    branches: [production, main,  app-copy]
+    branches: [production, main]
   pull_request:
     branches: [main]
 
