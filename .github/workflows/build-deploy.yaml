@@ -173,7 +173,7 @@ jobs:
           ssh zhp-pl "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C /tmp/new_cbp_${ENVIRONMENT_NAME}"
 
       - name: Remove old and move new package
-        run: ssh zhp-pl "rm -rf $DEPLOY_PATH/* && mv --force /tmp/new_cbp_${ENVIRONMENT_NAME}/* $DEPLOY_PATH"
+        run: ssh zhp-pl "rm -rf $DEPLOY_PATH/* && rsync -arv /tmp/new_cbp_${ENVIRONMENT_NAME} $DEPLOY_PATH"
 
       - name: Install composer
         run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH composer.phar install"
