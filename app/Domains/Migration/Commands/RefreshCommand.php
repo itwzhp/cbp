@@ -9,8 +9,8 @@ class RefreshCommand extends Command
 
     public function __invoke()
     {
-//        $this->call('migrate:fresh');
-//        $this->call('db:seed');
+        $this->call('migrate:fresh');
+        $this->call('db:seed');
 
         $this->info('Database prepared. Importing users and tags.');
         $this->call(WpImportCommand::class);

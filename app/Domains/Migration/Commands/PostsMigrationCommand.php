@@ -70,15 +70,15 @@ class PostsMigrationCommand extends Command
 
         /** @var Post $post */
         foreach ($posts as $post) {
-//            try {
-            $this->info("Importing post: {$post->post_title}");
-            DB::transaction(function () use ($post, $type) {
-                $this->importPost($post, $type);
-            });
-//            } catch (\Exception $exception) {
-//                $this->error("Post id: {$post->ID}");
-//                $this->error($exception->getMessage());
-//            }
+            try {
+                $this->info("Importing post: {$post->post_title}");
+                DB::transaction(function () use ($post, $type) {
+                    $this->importPost($post, $type);
+                });
+            } catch (\Exception $exception) {
+                $this->error("Post id: {$post->ID}");
+                $this->error($exception->getMessage());
+            }
         }
     }
 
