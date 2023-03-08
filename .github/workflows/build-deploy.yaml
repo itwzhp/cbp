@@ -173,7 +173,9 @@ jobs:
           ssh zhp-pl "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C /tmp/new_cbp_${ENVIRONMENT_NAME}"
 
       - name: Remove old and move new package
-        run: ssh zhp-pl "rm -rf $DEPLOY_PATH/* && mv --force /tmp/new_cbp_${ENVIRONMENT_NAME} $DEPLOY_PATH"
+        run: |
+# TODO - to jest problemowy fragment ssh zhp-pl "rm -rf $DEPLOY_PATH/*"
+          ssh zhp-pl "mv --force /tmp/new_cbp_${ENVIRONMENT_NAME} $DEPLOY_PATH"
 
       - name: Decrypt env
         run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
