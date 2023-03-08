@@ -16,7 +16,7 @@ class UpdateAttachmentRequest extends FormRequest
         /** @var Attachment $attachment */
         $attachment = $this->route('attachment');
 
-        return Auth::user()->can(MaterialActionsEnum::UPDATE, $attachment->material);
+        return Auth::user()->can(MaterialActionsEnum::UPDATE->value, $attachment->material);
     }
 
     public function rules(): array

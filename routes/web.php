@@ -33,5 +33,6 @@ Route::prefix('/attachments')
 require __DIR__ . '/auth.php';
 
 Route::get('/test', TestController::class);
+Route::get('/clear', [TestController::class, 'clearCache']);
 
 require __DIR__ . '/backward_compatibility.php';

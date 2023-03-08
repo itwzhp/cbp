@@ -11,7 +11,7 @@ class AttachmentsController extends AbstractAdminController
 {
     public function destroy(Material $material, Attachment $attachment)
     {
-        $this->authorize(MaterialActionsEnum::UPDATE, $material);
+        $this->authorize(MaterialActionsEnum::UPDATE->value, $material);
         $attachment->delete();
 
         return $this->responseOK();
@@ -19,7 +19,7 @@ class AttachmentsController extends AbstractAdminController
 
     public function download(Material $material, Attachment $attachment)
     {
-        $this->authorize(MaterialActionsEnum::VIEW, $material);
+        $this->authorize(MaterialActionsEnum::VIEW->value, $material);
 
         return $attachment->disk()->download($attachment->path);
     }

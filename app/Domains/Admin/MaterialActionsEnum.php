@@ -9,6 +9,5 @@ enum MaterialActionsEnum: string
     case DELETE = 'delete';
     case REVIEW = 'review';
     case UPDATE = 'update';
-
-    const VIEW = 'view';
+    case VIEW = 'view';
 }
