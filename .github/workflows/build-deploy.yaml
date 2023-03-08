@@ -171,7 +171,7 @@ jobs:
         run: ssh zhp-pl "mkdir --parents ${{ env.DEPLOY_PATH }}"
      
       - name: Extract package to tmp
-        run: ssh zhp-pl "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C /tmp/new_cbp_${ENVIRONMENT_NAME}_zhp"
+        run: ssh zhp-pl "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C /tmp/new_cbp_${ENVIRONMENT_NAME}"
 
       - name: Remove old and move new package
         run: ssh zhp-pl "rm -rf $DEPLOY_PATH/* && mv --force /tmp/new_cbp_${ENVIRONMENT_NAME} $DEPLOY_PATH" 
