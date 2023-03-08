@@ -36,7 +36,7 @@ const deleteAttachment = (attachment, index) => {
 };
 </script>
 <template>
-  <div class="flex justify-between text-sm pb-2">
+  <div class="flex justify-between text-sm font-semibold pb-2">
     <div>Załączniki</div>
     <div class="cursor-pointer">
       <span
@@ -51,14 +51,14 @@ const deleteAttachment = (attachment, index) => {
         v-for="attachment in $page.props.material.attachments"
         :key="attachment.id"
       >
-        <div class="md:flex justify-between text-sm p-2 text-base font-bold text-gray-900 rounded-lg bg-gray-100 group hover:shadow">
+        <div class="md:flex justify-between text-sm p-2 text-base font-medium text-gray-900 rounded-lg bg-gray-100 group hover:shadow">
           <div class="md:flex items-center">
             <div>{{ attachment.name }}</div>
           </div>
           <div class="md:flex items-center">
             <a
               title="Pobierz załącznik"
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xs mx-2"
+              class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded text-xs mx-2"
               :href="attachment.download_url"
               target="_blank"
             >
@@ -69,7 +69,7 @@ const deleteAttachment = (attachment, index) => {
                 title="Usuń załącznik"
                 :disabled="deleteInProgressFileIndex === attachment.id"
                 :class="{'bg-red-500/50 hover:bg-red-500/50 cursor-wait': deleteInProgressFileIndex === attachment.id}"
-                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-xs mx-2"
+                class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded text-xs mx-2"
                 @click.prevent="deleteAttachment(attachment, attachment.id)"
               >
                 <FontAwesomeIcon icon="trash" />

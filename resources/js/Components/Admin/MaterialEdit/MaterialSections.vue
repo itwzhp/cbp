@@ -24,10 +24,10 @@ const alternativeMultiItemSections = [
         :key="key"
       >
         <a
-          class="flex cursor-pointer py-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
+          class="flex cursor-pointer py-3 text-base font-medium text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
         >
           <span
-            class="inline-flex max-h-6 items-center justify-center px-2 py-0.5 ml-3 text-sm font-bold text-gray-500 bg-gray-200 rounded"
+            class="inline-flex max-h-6 items-center justify-center px-2 py-0.5 ml-3 text-sm text-gray-500 bg-gray-200 rounded"
           >+</span>
           <span class="flex-1 ml-3">{{ singleItemSection }}</span>
         </a>
@@ -38,10 +38,10 @@ const alternativeMultiItemSections = [
         :key="key"
       >
         <a
-          class="flex cursor-pointer py-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
+          class="flex cursor-pointer py-3 text-base font-medium text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
         >
           <span
-            class="inline-flex max-h-6 items-center justify-center px-2 py-0.5 ml-3 text-sm font-bold text-gray-500 bg-gray-200 rounded"
+            class="inline-flex max-h-6 items-center justify-center px-2 py-0.5 ml-3 text-sm text-gray-500 bg-gray-200 rounded"
           >+</span>
           <span class="flex-1 ml-3">{{ multiItemSection }}</span>
         </a>
@@ -52,10 +52,10 @@ const alternativeMultiItemSections = [
         :key="key"
       >
         <a
-          class="flex cursor-pointer py-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
+          class="flex cursor-pointer py-3 text-base font-medium text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow"
         >
           <span
-            class="inline-flex max-h-6 items-center justify-center px-2 py-0.5 ml-3 text-sm font-bold text-gray-500 bg-gray-200 rounded"
+            class="inline-flex max-h-6 items-center justify-center px-2 py-0.5 ml-3 text-sm text-gray-500 bg-gray-200 rounded"
           >+</span>
           <span class="flex-1 ml-3">{{ alternativeMultiItemSection }}</span>
         </a>

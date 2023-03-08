@@ -22,12 +22,17 @@ const collapsed = ref(false);
 const changeCollapse = () => {
   collapsed.value = !collapsed.value;
 };
+
+const countChoosenTags = () => {
+  const tagIds = props.item.tags.map((tag) => tag.id);
+  return tagIds?.length && props.defaultIds.filter((x) => tagIds.includes(x)).length;
+};
 </script>
 
 <template>
   <div class="mb-3">
     <p
-      class="mb-1 font-bold"
+      class="mb-1 font-medium"
       :class="{ 'cursor-pointer': props.allowHide }"
       @click="changeCollapse()"
     >
@@ -36,7 +41,7 @@ const changeCollapse = () => {
         v-if="allowHide"
         class="text-sm px-1"
       >
-        {{ collapsed && props.defaultIds?.length ? props.defaultIds?.length : "" }}
+        {{ collapsed && props.defaultIds?.length ? countChoosenTags() : "" }}
         <FontAwesomeIcon
           v-if="collapsed"
           icon="chevron-down"

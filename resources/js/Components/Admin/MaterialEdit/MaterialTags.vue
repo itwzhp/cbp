@@ -2,11 +2,17 @@
 import { router, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { useSearchStore } from '../../../store/search.store';
 import Taxonomy from '@/Components/Materials/Taxonomy.vue';
 
 const store = useSearchStore();
 const materialId = usePage().props.material.id;
+
+const collapsed = ref(true);
+const changeCollapse = () => {
+  collapsed.value = !collapsed.value;
+};
 
 const requestResultInfoTime = 5000;
 const savedChanges = ref(false);
@@ -55,7 +61,7 @@ const attachTag = (tagId) => {
 
 const detachTag = (tagId) => {
   axios
-    .post(
+    .delete(
       route('api.admin.materials.tags.detach', {
         material: materialId,
         tag: tagId,
@@ -72,13 +78,32 @@ const detachTag = (tagId) => {
 
 const getMaterialTagIds = (materialTags) => {
   // TODO map to array of IDs
-  return materialTags || [];
+  return materialTags.map(tag => tag.id) || [];
 };
 </script>
 
 <template>
   <div class="flex justify-between text-sm pb-2">
-    <div>Tagi</div>
+    <div>
+      <p
+        class="mb-1 cursor-pointer font-semibold"
+        @click="changeCollapse()"
+      >
+        Tagi
+        <button
+          class="text-xs px-1"
+        >
+          <FontAwesomeIcon
+            v-if="collapsed"
+            icon="chevron-down"
+          />
+          <FontAwesomeIcon
+            v-if="!collapsed"
+            icon="chevron-up"
+          />
+        </button>
+      </p>
+    </div>
     <div>
       <span
         v-if="savedChanges"
@@ -90,7 +115,10 @@ const getMaterialTagIds = (materialTags) => {
       >Wystąpił błąd! Zmiany nie zostały zapisane.</span>
     </div>
   </div>
-  <div class="w-full bg-gray-50/50 bg-white border border-gray-200 rounded-lg p-3">
+  <div
+    v-if="!collapsed"
+    class="w-full bg-gray-50/50 bg-white border border-gray-200 rounded-lg p-3"
+  >
     <template
       v-for="(item, index) in store.getTaxonomiesData"
       :key="index"
