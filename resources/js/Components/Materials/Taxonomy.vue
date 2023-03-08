@@ -20,7 +20,9 @@ const tagAction = (tagId) => {
 
 const collapsed = ref(false);
 const changeCollapse = () => {
-  collapsed.value = !collapsed.value;
+  if (props.allowHide) {
+    collapsed.value = !collapsed.value;
+  }
 };
 
 const countChoosenTags = () => {
