@@ -22,7 +22,7 @@ class MaterialsController extends Controller
 
     public function edit(Material $material): Response
     {
-        $material->load('fields', 'attachments', 'licence', 'setups', 'scenarios');
+        $material->load('fields', 'attachments', 'licence', 'setups', 'scenarios', 'tags');
 
         return Inertia::render(ComponentsHelper::ADMIN_MATERIALS_EDIT)
             ->with([

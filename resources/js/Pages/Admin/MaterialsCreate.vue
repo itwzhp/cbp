@@ -5,15 +5,22 @@ import { Link } from '@inertiajs/vue3';
 
 <template>
   <AdminLayout>
-    <h2>Utwórz materiał</h2>
-    <Link :href="route('admin.materials.new', 'program')">
-      Program
-    </Link>
-    <Link :href="route('admin.materials.new', 'konspekt')">
-      Konspekt
-    </Link>
-    <Link :href="route('admin.materials.new', 'propozycja')">
-      Porpozycja
-    </Link>
+    <ul class="list-disc pl-4">
+      <li>
+        <Link :href="route('admin.materials.new', 'program')">
+          Program
+        </Link>
+      </li>
+      <li>
+        <Link :href="route('admin.materials.new', 'konspekt')">
+          Konspekt
+        </Link>
+      </li>
+      <li>
+        <Link :href="route('admin.materials.new', 'propozycja')">
+          Porpozycja
+        </Link>
+      </li>
+    </ul>
   </AdminLayout>
 </template>

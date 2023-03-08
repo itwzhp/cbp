@@ -52,6 +52,7 @@ Route::name('materials.')
                         Route::post('/', [UploadMaterialAttachmentsController::class, 'upload'])->name('store');
                         Route::get('/{attachment}', [AttachmentsController::class, 'download'])->name('show');
                         Route::delete('/{attachment}', [AttachmentsController::class, 'destroy'])->name('destroy');
+                        Route::post('/{attachment}', [AttachmentsController::class, 'update'])->name('update');
                     });
             });
     });

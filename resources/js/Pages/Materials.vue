@@ -65,7 +65,7 @@ onUnmounted(() => {
             <div class="pb-2">
               <button
                 type="button"
-                class="font-bold border border-2 border-cbp-100 hover:border-cbp-300 px-3 py-2 text-xs font-medium text-center rounded-3xl focus:ring-1 focus:outline-none focus:cbp-300"
+                class="font-bold border border-2 border-cbp-100 hover:border-cbp-300 px-3 py-2 text-xs font-medium text-center rounded focus:ring-1 focus:outline-none focus:cbp-300"
                 @click="displayDialog()"
               >
                 <font-awesome-icon icon="fa-solid fa-sliders" />

@@ -16,7 +16,6 @@ const showFooter = (currentRoute) =>
         <div class="flex basis-1/6 pt-4 md:p-4 justify-center md:justify-start">
           <a
             href="https://zhp.pl/"
-            target="_blank"
           >
             <img
               src="/images/zhp_logo.svg"

@@ -33,9 +33,9 @@ const props = defineProps({
       <div class="p-3 flex flex-col justify-between flex-grow">
         <div>
           <Link :href="route('materials.show', props.item.slug)">
-            <h5 class="mb-2 font-medium mt-1 text-xl font-bold text-gray-900">
+            <p class="mb-2 font-medium mt-1 text-xl text-gray-900">
               {{ props.item.title }}
-            </h5>
+            </p>
           </Link>
         </div>
         <div class="mb-2">

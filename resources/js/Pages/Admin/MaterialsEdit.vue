@@ -13,7 +13,7 @@ const props = usePage().props.material;
 
 <template>
   <AdminLayout>
-    <button class="p-2 my-2 hover:bg-gray-50 rounded-lg">
+    <button class="p-2 mb-2 hover:bg-gray-50 rounded-lg">
       <Link
         :href="route('admin.materials.index')"
         class="text-sm print:hidden "
@@ -21,9 +21,6 @@ const props = usePage().props.material;
         <i class="fa fa-chevron-left" /> powrót
       </Link>
     </button>
-    <p class="mb-4 text-base font-semibold text-gray-900 md:text-xl">
-      Edytuj materiał
-    </p>
     <div class="block md:flex md:flex-row">
       <div class="basis-3/4">
         <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6">

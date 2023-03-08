@@ -1,8 +1,12 @@
 <?php
 namespace App\Domains\Files\Enums;
 
+use App\Enums\EnumCasesValidationTrait;
+
 enum ThicknessEnum: string
 {
+    use EnumCasesValidationTrait;
+
     case NORMAL = 'normal';
     case THICK = 'thick';
     case VERY_THICK = 'very_thick';
