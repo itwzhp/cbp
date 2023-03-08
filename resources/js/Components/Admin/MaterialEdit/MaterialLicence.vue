@@ -12,7 +12,7 @@ const hardcodedLicences = [
 <template>
   <label
     for="countries"
-    class="block mb-2 text-sm font-semibold text-gray-900 dark:text-white"
+    class="block mb-2 text-sm font-semibold text-gray-900"
   ><div class="flex justify-between">
     <div>Licencja</div>
     <div class="cursor-pointer">

@@ -9,6 +9,7 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import axios from 'axios';
 import ContentAccess from '@/Components/Admin/ContentAccess.vue';
+import MaterialAttachmentDetails from '@/Components/Admin/MaterialEdit/MaterialAttachmentDetails.vue';
 import { permissions } from '@/Components/Admin/permissions.js';
 
 const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview);
@@ -51,7 +52,9 @@ const deleteAttachment = (attachment, index) => {
         v-for="attachment in $page.props.material.attachments"
         :key="attachment.id"
       >
-        <div class="md:flex justify-between text-sm p-2 text-base font-medium text-gray-900 rounded-lg bg-gray-100 group hover:shadow">
+        <div
+          class="md:flex justify-between text-sm p-2 text-base font-medium text-gray-900 rounded-lg bg-gray-100 group hover:shadow"
+        >
           <div class="md:flex items-center">
             <div>{{ attachment.name }}</div>
           </div>
@@ -77,6 +80,10 @@ const deleteAttachment = (attachment, index) => {
             </ContentAccess>
           </div>
         </div>
+        <MaterialAttachmentDetails
+          class="bg-gray-100 py-3 rounded-lg"
+          :attachment="attachment"
+        />
       </li>
     </ul>
     <ContentAccess :permissions="[permissions.UPDATE]">
