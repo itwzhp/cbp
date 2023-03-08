@@ -108,7 +108,7 @@ const headline = ref(null);
                 :href="route('about')"
                 :active="route().current('about')"
               >
-                O cbp
+                O CBP
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.index')"
