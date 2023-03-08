@@ -77,12 +77,12 @@ const submit = () => {
       </div>
 
       <div>
-        <Link
+        <a
           :href="route('ms.login')"
           class="btn btn-primary"
         >
           Zaloguj za pomocą konta ZHP
-        </Link>
+        </a>
       </div>
     </form>
   </GuestLayout>

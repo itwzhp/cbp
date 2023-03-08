@@ -133,7 +133,7 @@ jobs:
 ##### Prepare & Publish artifact
 
       - name: Compress package
-        run: tar --exclude="./tests"  --exclude="./node_modules" --exclude="./vendor/phpunit" --exclude=".git" --exclude=".github" --exclude="${{ env.PACKAGE_NAME }}" -cvf ${{ env.PACKAGE_NAME }} .
+        run: tar --exclude="./tests"  --exclude="./node_modules" --exclude="./vendor" --exclude=".git" --exclude=".github" --exclude="${{ env.PACKAGE_NAME }}" --exclude="./storage/framework" --exclude="./storage/logs"  -cvf ${{ env.PACKAGE_NAME }} .
 
       - name: Publish build artifact
         uses: actions/upload-artifact@v3
