@@ -23,7 +23,7 @@ class UpdateAttachmentRequest extends FormRequest
     {
         return [
             'element'     => 'string',
-            'copies'      => 'number',
+            'copies'      => 'integer',
             'print_color' => [
                 'string',
                 PrintColorEnum::rules(),
