@@ -22,22 +22,34 @@ class UpdateAttachmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'element'     => 'string',
-            'copies'      => 'integer',
+            'element'     => [
+                'nullable',
+                'string',
+            ],
+            'copies'      => ['nullable', 'integer'],
             'print_color' => [
+                'nullable',
                 'string',
                 PrintColorEnum::rules(),
             ],
             'thickness'   => [
+                'nullable',
                 'string',
                 ThicknessEnum::rules(),
             ],
             'size'        => [
+                'nullable',
                 'string',
                 SizeEnum::rules(),
             ],
-            'comment'     => 'string',
-            'paper_color' => 'string',
+            'comment'     => [
+                'nullable',
+                'string',
+            ],
+            'paper_color' => [
+                'nullable',
+                'string',
+            ],
         ];
     }
 }
