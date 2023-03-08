@@ -133,7 +133,7 @@ jobs:
 ##### Prepare & Publish artifact
 
       - name: Compress package
-        run: tar --exclude="./tests"  --exclude="./node_modules" --exclude="./vendor" --exclude=".git" --exclude=".github" --exclude="${{ env.PACKAGE_NAME }}" --exclude="./storage/framework" --exclude="./storage/logs"  -cvf ${{ env.PACKAGE_NAME }} .
+        run: tar --exclude="./tests"  --exclude="./node_modules" --exclude="./vendor" --exclude=".git" --exclude=".github" --exclude="${{ env.PACKAGE_NAME }}" --exclude="./storage/framework" --exclude="./storage/logs" --exclude="./storage/debugbar" -cvf ${{ env.PACKAGE_NAME }} .
 
       - name: Publish build artifact
         uses: actions/upload-artifact@v3
@@ -169,7 +169,7 @@ jobs:
 
       - name: Extract package to tmp
         run: |
-          ssh zhp-pl "mkdir /tmp/new_cbp_${ENVIRONMENT_NAME}"
+          ssh zhp-pl "mkdir -p /tmp/new_cbp_${ENVIRONMENT_NAME}"
           ssh zhp-pl "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C /tmp/new_cbp_${ENVIRONMENT_NAME}"
 
       - name: Remove old and move new package
