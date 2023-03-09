@@ -1,5 +1,5 @@
 <script setup>
-import { usePage, Link } from '@inertiajs/vue3';
+import { usePage, Link, Head } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import MaterialTextInput from '@/Components/Admin/MaterialEdit/MaterialTextInput.vue';
 import MaterialSections from '@/Components/Admin/MaterialEdit/MaterialSections.vue';
@@ -12,6 +12,8 @@ const props = usePage().props.material;
 </script>
 
 <template>
+  <Head title="Edytuj Materiał" />
+
   <AdminLayout>
     <button class="p-2 mb-2 hover:bg-gray-50 rounded-lg">
       <Link

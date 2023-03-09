@@ -1,9 +1,11 @@
 <script setup>
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { Link } from '@inertiajs/vue3';
+import { Link, Head } from '@inertiajs/vue3';
 </script>
 
 <template>
+  <Head title="Utwórz nowy materiał" />
+
   <AdminLayout>
     <ul class="list-disc pl-4">
       <li>
@@ -18,7 +20,7 @@ import { Link } from '@inertiajs/vue3';
       </li>
       <li>
         <Link :href="route('admin.materials.new', 'propozycja')">
-          Porpozycja
+          Propozycja
         </Link>
       </li>
     </ul>
