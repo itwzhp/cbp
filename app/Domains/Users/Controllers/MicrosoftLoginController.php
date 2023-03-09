@@ -20,7 +20,7 @@ class MicrosoftLoginController extends Controller
     public function callback()
     {
         /** @var MicrosoftUser $msUser */
-        $msUser = Socialite::driver('microsoft')->user();
+        $msUser = Socialite::driver('microsoft')->stateless()->user();
 
         $this->validateUser($msUser);
 
