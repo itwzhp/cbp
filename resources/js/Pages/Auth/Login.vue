@@ -5,6 +5,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import ZHPLogo from '@/Components/ZHPLogo.vue';
 
 defineProps({
   canResetPassword: Boolean,
@@ -36,6 +37,7 @@ const submit = () => {
 
     <form
       v-if="isLocal"
+      class="mb-5"
       @submit.prevent="submit"
     >
       <div>
@@ -77,12 +79,13 @@ const submit = () => {
       </div>
     </form>
 
-    <div>
+    <div class="text-center">
       <a
         :href="route('ms.login')"
-        class="btn btn-primary"
+        class="inline-flex items-center px-4 py-2 bg-gray-100 border border-zhp-500 rounded-md font-semibold text-xs text-zhp-500 uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150"
       >
-        Zaloguj za pomocą konta ZHP
+        <ZHPLogo class="mr-5" />
+        Zaloguj za pomocą <br>konta ZHP
       </a>
     </div>
   </GuestLayout>
