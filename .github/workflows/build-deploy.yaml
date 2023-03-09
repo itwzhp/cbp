@@ -193,9 +193,6 @@ jobs:
       - name: Optimize
         run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan optimize"
 
-      - name: Clear config
-        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan config:clear"
-
   deploy-azure:
     name: Deploy Azure storage
     if: github.event_name == 'push'
