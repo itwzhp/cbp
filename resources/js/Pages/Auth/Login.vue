@@ -11,6 +11,7 @@ defineProps({
   canResetPassword: Boolean,
   status: String,
   isLocal: Boolean,
+  token: String,
 });
 
 const form = useForm({
@@ -40,6 +41,11 @@ const submit = () => {
       class="mb-5"
       @submit.prevent="submit"
     >
+      <input
+        type="hidden"
+        name="_token"
+        :value="token"
+      >
       <div>
         <InputLabel
           for="userid"
