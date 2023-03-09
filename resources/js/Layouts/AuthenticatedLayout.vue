@@ -196,7 +196,7 @@ const headline = ref(null);
                     :href="route('about')"
                     :active="route().current('about')"
                   >
-                    O cbp
+                    O CBP
                   </NavLink>
                   <NavLink
                     :href="route('materials.index')"
