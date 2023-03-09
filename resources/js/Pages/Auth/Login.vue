@@ -16,7 +16,6 @@ defineProps({
 
 const form = useForm({
   userid: '',
-  token: this.$page.props.token
 });
 
 const submit = () => {
