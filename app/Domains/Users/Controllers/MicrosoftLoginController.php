@@ -31,6 +31,7 @@ class MicrosoftLoginController extends Controller
         }
 
         Auth::login($user);
+        request()->session()->regenerate();
 
         event(new UserLoggedInViaSocialiteEvent($user));
 
