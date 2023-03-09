@@ -6,6 +6,7 @@ use App\Domains\Admin\Controllers\Api\AttachmentsController;
 use App\Domains\Admin\Controllers\Api\FieldsController;
 use App\Domains\Admin\Controllers\Api\MaterialsIndexController;
 use App\Domains\Admin\Controllers\Api\MaterialUpdateController;
+use App\Domains\Admin\Controllers\Api\ScenariosController;
 use App\Domains\Admin\Controllers\Api\SetupsController;
 use App\Domains\Admin\Controllers\Api\TagsController;
 use App\Domains\Files\Controllers\Admin\Api\UploadMaterialAttachmentsController;
@@ -53,6 +54,15 @@ Route::name('materials.')
                         Route::get('/{attachment}', [AttachmentsController::class, 'download'])->name('show');
                         Route::delete('/{attachment}', [AttachmentsController::class, 'destroy'])->name('destroy');
                         Route::post('/{attachment}', [AttachmentsController::class, 'update'])->name('update');
+                    });
+
+                Route::prefix('scenarios')
+                    ->name('scenarios.')
+                    ->controller(ScenariosController::class)
+                    ->group(function () {
+                        Route::post('/', 'store')->name('store');
+                        Route::post('/{scenario}', 'update')->name('update');
+                        Route::delete('/{scenario}', 'destroy')->name('destroy');
                     });
             });
     });

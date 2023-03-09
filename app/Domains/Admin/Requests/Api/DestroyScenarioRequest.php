@@ -5,7 +5,7 @@ use App\Domains\Admin\Requests\AuthorizesMaterialElementUpdateTrait;
 use App\Domains\Materials\Models\Setup;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DestroySetupRequest extends FormRequest
+class DestroyScenarioRequest extends FormRequest
 {
     use AuthorizesMaterialElementUpdateTrait;
 
@@ -15,10 +15,5 @@ class DestroySetupRequest extends FormRequest
         $setup = $this->route('setup');
 
         return $this->authorizeUpdate($setup);
-    }
-
-    public function rules(): array
-    {
-        return [];
     }
 }

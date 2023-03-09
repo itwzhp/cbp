@@ -1,22 +1,23 @@
 <?php
 namespace App\Domains\Admin\Requests\Api;
 
-use App\Domains\Admin\MaterialActionsEnum;
+use App\Domains\Admin\Requests\AuthorizesMaterialElementUpdateTrait;
 use App\Domains\Files\Enums\PrintColorEnum;
 use App\Domains\Files\Enums\SizeEnum;
 use App\Domains\Files\Enums\ThicknessEnum;
 use App\Domains\Files\Models\Attachment;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class UpdateAttachmentRequest extends FormRequest
 {
+    use AuthorizesMaterialElementUpdateTrait;
+
     public function authorize(): bool
     {
         /** @var Attachment $attachment */
         $attachment = $this->route('attachment');
 
-        return Auth::user()->can(MaterialActionsEnum::UPDATE->value, $attachment->material);
+        return $this->authorizeUpdate($attachment);
     }
 
     public function rules(): array

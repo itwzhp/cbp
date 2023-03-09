@@ -1,20 +1,20 @@
 <?php
 namespace App\Domains\Admin\Requests\Api;
 
-use App\Domains\Materials\Models\Material;
+use App\Domains\Admin\Requests\AuthorizesMaterialElementUpdateTrait;
 use App\Domains\Materials\Models\Setup;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSetupRequest extends FormRequest
 {
+    use AuthorizesMaterialElementUpdateTrait;
+
     public function authorize(): bool
     {
-        /** @var Material $material */
-        $material = $this->route('material');
         /** @var Setup $setup */
         $setup = $this->route('setup');
 
-        return $material->id === $setup->material_id;
+        return $this->authorizeUpdate($setup);
     }
 
     public function rules(): array
