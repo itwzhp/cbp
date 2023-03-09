@@ -27,3 +27,5 @@ storage/.~lock.CBP_materialy.csv#
 *.xmp
 
 .env.dev
+
+.env.local
