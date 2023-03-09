@@ -75,15 +75,15 @@ const submit = () => {
           Zaloguj
         </PrimaryButton>
       </div>
-
-      <div>
-        <a
-          :href="route('ms.login')"
-          class="btn btn-primary"
-        >
-          Zaloguj za pomocą konta ZHP
-        </a>
-      </div>
     </form>
+
+    <div>
+      <a
+        :href="route('ms.login')"
+        class="btn btn-primary"
+      >
+        Zaloguj za pomocą konta ZHP
+      </a>
+    </div>
   </GuestLayout>
 </template>
