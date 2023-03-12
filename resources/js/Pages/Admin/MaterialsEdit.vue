@@ -7,6 +7,7 @@ import MaterialFields from '@/Components/Admin/MaterialEdit/MaterialFields.vue';
 import MaterialTags from '@/Components/Admin/MaterialEdit/MaterialTags.vue';
 import MaterialLicence from '@/Components/Admin/MaterialEdit/MaterialLicence.vue';
 import MaterialAttachments from '@/Components/Admin/MaterialEdit/MaterialAttachments.vue';
+import MaterialSetups from '@/Components/Admin/MaterialEdit/MaterialSetups.vue';
 
 const props = usePage().props.material;
 </script>
@@ -18,7 +19,7 @@ const props = usePage().props.material;
     <button class="p-2 mb-2 hover:bg-gray-50 rounded-lg">
       <Link
         :href="route('admin.materials.index')"
-        class="text-sm print:hidden "
+        class="text-sm print:hidden"
       >
         <i class="fa fa-chevron-left" /> powrót
       </Link>
@@ -55,6 +56,9 @@ const props = usePage().props.material;
           </div>
           <div class="mb-3">
             <MaterialAttachments />
+          </div>
+          <div class="mb-3">
+            <MaterialSetups />
           </div>
         </div>
       </div>
