@@ -12,11 +12,53 @@ import ContentAccess from '@/Components/Admin/ContentAccess.vue';
 import MaterialAttachmentDetails from '@/Components/Admin/MaterialEdit/MaterialAttachmentDetails.vue';
 import { permissions } from '@/Components/Admin/permissions.js';
 
+const requestResultInfoTime = 5000;
+const savedChanges = ref(false);
+const saveChangesError = ref(false);
+let successTimeout = null;
+let errorTimeout = null;
+
+const successInfo = () => {
+  saveChangesError.value = false;
+  savedChanges.value = true;
+  clearTimeout(successTimeout);
+  successTimeout = setTimeout(() => {
+    savedChanges.value = false;
+  }, requestResultInfoTime);
+};
+
+const errorInfo = () => {
+  savedChanges.value = false;
+  saveChangesError.value = true;
+  clearTimeout(errorTimeout);
+  errorTimeout = setTimeout(() => {
+    saveChangesError.value = false;
+  }, requestResultInfoTime);
+};
+
+const attachmentDetailsChanged = (savedSuccessfully) => {
+  return savedSuccessfully ? successInfo() : errorInfo();
+};
+
 const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview);
 const files = ref([]);
 const refreshFiles = () => {
   router.reload({ only: ['material'] });
 };
+
+const expandedFileDetailsIds = ref([]);
+const expandFileDetails = (id) => {
+  if (expandedFileDetailsIds.value.includes(id)) {
+    expandedFileDetailsIds.value = expandedFileDetailsIds.value.filter(
+      (fileDetailsIndex) => fileDetailsIndex !== id
+    );
+  } else {
+    expandedFileDetailsIds.value.push(id);
+  }
+};
+const isFileDetailsExpanded = (id) => {
+  return expandedFileDetailsIds.value.includes(id);
+}
 
 const deleteInProgressFileIndex = ref(null);
 const deleteAttachment = (attachment, index) => {
@@ -31,15 +73,27 @@ const deleteAttachment = (attachment, index) => {
     .then(() => {
       deleteInProgressFileIndex.value = null;
       files.value = [];
+      successInfo();
       refreshFiles();
     })
-    .catch(() => deleteInProgressFileIndex.value = null)
+    .catch(() => {
+      errorInfo();
+      deleteInProgressFileIndex.value = null;
+    });
 };
 </script>
 <template>
   <div class="flex justify-between text-sm font-semibold pb-2">
     <div>Załączniki</div>
     <div class="cursor-pointer">
+      <span
+        v-if="savedChanges"
+        class="text-green-600"
+      >Zapisano wprowadzone zmiany</span>
+      <span
+        v-if="saveChangesError"
+        class="text-red-600"
+      >Wystąpił błąd! Zmiany nie zostały zapisane.</span>
       <span
         class="inline-flex max-h-6 items-center justify-center px-2 py-0.5 ml-3 text-sm font-bold text-gray-500 bg-gray-200 rounded"
       >-</span>
@@ -54,9 +108,28 @@ const deleteAttachment = (attachment, index) => {
       >
         <div
           class="md:flex justify-between text-sm p-2 text-base font-medium text-gray-900 rounded-lg bg-gray-100 group hover:shadow"
+          :class="{ 'rounded-b-none': isFileDetailsExpanded(attachment.id) }"
         >
           <div class="md:flex items-center">
-            <div>{{ attachment.name }}</div>
+            <p
+              title="Szczegóły załącznika"
+              class="mb-1 cursor-pointer font-semibold"
+              @click="expandFileDetails(attachment.id)"
+            >
+              {{ attachment.name }}
+              <button
+                class="text-xs px-1"
+              >
+                <FontAwesomeIcon
+                  v-if="!isFileDetailsExpanded(attachment.id)"
+                  icon="chevron-down"
+                />
+                <FontAwesomeIcon
+                  v-if="isFileDetailsExpanded(attachment.id)"
+                  icon="chevron-up"
+                />
+              </button>
+            </p>
           </div>
           <div class="md:flex items-center">
             <a
@@ -71,7 +144,10 @@ const deleteAttachment = (attachment, index) => {
               <button
                 title="Usuń załącznik"
                 :disabled="deleteInProgressFileIndex === attachment.id"
-                :class="{'bg-red-500/50 hover:bg-red-500/50 cursor-wait': deleteInProgressFileIndex === attachment.id}"
+                :class="{
+                  'bg-red-500/50 hover:bg-red-500/50 cursor-wait':
+                    deleteInProgressFileIndex === attachment.id,
+                }"
                 class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded text-xs mx-2"
                 @click.prevent="deleteAttachment(attachment, attachment.id)"
               >
@@ -81,8 +157,11 @@ const deleteAttachment = (attachment, index) => {
           </div>
         </div>
         <MaterialAttachmentDetails
-          class="bg-gray-100 py-3 rounded-lg"
+          v-if="isFileDetailsExpanded(attachment.id)"
+          class="bg-gray-100 py-3 rounded-b-lg"
           :attachment="attachment"
+          @save-success="attachmentDetailsChanged(true)"
+          @save-error="attachmentDetailsChanged(false)"
         />
       </li>
     </ul>

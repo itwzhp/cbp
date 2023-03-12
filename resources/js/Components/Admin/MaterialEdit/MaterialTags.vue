@@ -77,7 +77,6 @@ const detachTag = (tagId) => {
 };
 
 const getMaterialTagIds = (materialTags) => {
-  // TODO map to array of IDs
   return materialTags.map(tag => tag.id) || [];
 };
 </script>

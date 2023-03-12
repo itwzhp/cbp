@@ -5,16 +5,11 @@ import debounce from 'lodash.debounce';
 import axios from 'axios';
 import ContentAccess from '@/Components/Admin/ContentAccess.vue';
 import { permissions } from '@/Components/Admin/permissions.js';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const props = defineProps({
   attachment: { type: Object, required: true }
 });
-
-const collapsed = ref(true);
-const changeCollapse = () => {
-  collapsed.value = !collapsed.value;
-};
+const emit = defineEmits(['saveSuccess', 'saveError']);
 
 const inputClasses = 'bg-gray-50/50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2';
 const colors = [
@@ -73,30 +68,18 @@ const updateAttachment = () => {
       }
     )
     .then(() => {
+      emit('saveSuccess');
+      refreshFiles();
+    })
+    .catch(() => {
+      emit('saveError');
       refreshFiles();
     });
 };
 </script>
 <template>
   <div class="w-full px-2">
-    <p
-      class="mb-1 font-medium"
-      :class="{ 'cursor-pointer': props.allowHide }"
-      @click="changeCollapse()"
-    >
-      <button class="text-sm px-1">
-        Szczegóły załącznika
-        <FontAwesomeIcon
-          v-if="collapsed"
-          icon="chevron-down"
-        />
-        <FontAwesomeIcon
-          v-if="!collapsed"
-          icon="chevron-up"
-        />
-      </button>
-    </p>
-    <div v-if="!collapsed">
+    <div>
       <ContentAccess :permissions="[permissions.UPDATE]">
         <label
           for="element"
