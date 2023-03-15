@@ -85,8 +85,8 @@ const createScenario = (material) => {
           material
         },
         {
-          title: null,
-          order: null,
+          title: 'Nowy scenariusz',
+          order: 0,
           description: null,
           form: null,
           materials: null,
