@@ -8,6 +8,7 @@ import MaterialTags from '@/Components/Admin/MaterialEdit/MaterialTags.vue';
 import MaterialLicence from '@/Components/Admin/MaterialEdit/MaterialLicence.vue';
 import MaterialAttachments from '@/Components/Admin/MaterialEdit/MaterialAttachments.vue';
 import MaterialSetups from '@/Components/Admin/MaterialEdit/MaterialSetups.vue';
+import MaterialScenarios from '@/Components/Admin/MaterialEdit/MaterialScenarios.vue';
 
 const props = usePage().props.material;
 </script>
@@ -59,6 +60,9 @@ const props = usePage().props.material;
           </div>
           <div class="mb-3">
             <MaterialSetups />
+          </div>
+          <div class="mb-3">
+            <MaterialScenarios />
           </div>
         </div>
       </div>

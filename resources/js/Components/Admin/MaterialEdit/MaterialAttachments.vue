@@ -156,13 +156,15 @@ const deleteAttachment = (attachment, index) => {
             </ContentAccess>
           </div>
         </div>
-        <MaterialAttachmentDetails
-          v-if="isFileDetailsExpanded(attachment.id)"
-          class="bg-gray-100 py-3 rounded-b-lg"
-          :attachment="attachment"
-          @save-success="attachmentDetailsChanged(true)"
-          @save-error="attachmentDetailsChanged(false)"
-        />
+        <ContentAccess :permissions="[permissions.UPDATE]">
+          <MaterialAttachmentDetails
+            v-if="isFileDetailsExpanded(attachment.id)"
+            class="bg-gray-100 py-3 rounded-b-lg"
+            :attachment="attachment"
+            @save-success="attachmentDetailsChanged(true)"
+            @save-error="attachmentDetailsChanged(false)"
+          />
+        </ContentAccess>
       </li>
     </ul>
     <ContentAccess :permissions="[permissions.UPDATE]">
