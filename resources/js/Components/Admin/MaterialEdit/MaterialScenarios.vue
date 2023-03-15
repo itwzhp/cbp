@@ -107,7 +107,7 @@ const createScenario = (material) => {
 };
 
 const sortScenarios = (scenarios) => {
-  return scenarios.sort((a, b) => a.id - b.id);
+  return scenarios.sort((a, b) => a.order - b.order);
 };
 </script>
 <template>
