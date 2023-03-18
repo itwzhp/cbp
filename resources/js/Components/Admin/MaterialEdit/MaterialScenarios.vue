@@ -54,7 +54,7 @@ const isScenarioDetailsExpanded = (id) => {
 };
 
 const deleteInProgressScenarioIndex = ref(null);
-const deleteAttachment = (scenario, index) => {
+const deleteScenario = (scenario, index) => {
   deleteInProgressScenarioIndex.value = index;
   axios
     .delete(
@@ -175,7 +175,7 @@ const sortScenarios = (scenarios) => {
                     deleteInProgressScenarioIndex === scenario.id,
                 }"
                 class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded text-xs mx-2"
-                @click.prevent="deleteAttachment(scenario, scenario.id)"
+                @click.prevent="deleteScenario(scenario, scenario.id)"
               >
                 <FontAwesomeIcon icon="trash" />
               </button>

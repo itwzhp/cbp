@@ -47,7 +47,7 @@ const props = usePage().props.material;
             />
           </div>
           <div class="mb-3">
-            <MaterialFields />
+            <MaterialFields type="author" />
           </div>
           <div class="mb-3">
             <MaterialTags />
@@ -63,6 +63,15 @@ const props = usePage().props.material;
           </div>
           <div class="mb-3">
             <MaterialScenarios />
+          </div>
+          <div class="mb-3">
+            <MaterialFields type="intent" />
+          </div>
+          <div class="mb-3">
+            <MaterialFields type="scope" />
+          </div>
+          <div class="mb-3">
+            <MaterialFields type="requirement" />
           </div>
         </div>
       </div>
