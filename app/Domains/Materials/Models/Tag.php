@@ -4,6 +4,7 @@ namespace App\Domains\Materials\Models;
 use App\Domains\Materials\Factories\TagFactory;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,6 +26,8 @@ use Spatie\Sluggable\SlugOptions;
  * @property-read Taxonomy              taxonomy
  * @property-read Tag|null              parent
  * @property-read Collection|Material[] materials
+ *
+ * @method static Builder findBySlugs(array $slugs)
  *
  * @mixin Eloquent
  */
@@ -62,6 +65,21 @@ class Tag extends Model implements HasMedia
         return SlugOptions::create()
             ->generateSlugsFrom(['taxonomy_id', 'name'])
             ->saveSlugsTo('slug');
+    }
+
+    public function scopeFindBySlugs(Builder $query, array $slugs = []): Builder
+    {
+        if (empty($slugs)) {
+            return $query;
+        }
+
+        return $query->where(function (Builder $builder) use ($slugs) {
+            foreach ($slugs as $slug) {
+                $builder->orWhere('slug', 'like', '%' . $slug);
+            }
+
+            return $builder;
+        });
     }
 
     protected static function newFactory(): TagFactory

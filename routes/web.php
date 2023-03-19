@@ -2,6 +2,7 @@
 
 use App\Domains\Files\Controllers\DownloadAttachmentController;
 use App\Domains\Materials\Controllers\DownloadMaterialController;
+use App\Domains\Materials\Controllers\MaterialsByMultipleTagsController;
 use App\Domains\Materials\Controllers\MaterialsByOwnerController;
 use App\Domains\Materials\Controllers\MaterialsByTagController;
 use App\Domains\Materials\Controllers\MaterialsController;
@@ -21,6 +22,7 @@ Route::prefix('/m')
         Route::get('/{material:slug}/download', DownloadMaterialController::class)->name('download');
 
         Route::get('/t/{tag:slug}/{subtag:slug?}', MaterialsByTagController::class)->name('tag');
+        Route::get('/tt/{tags}', MaterialsByMultipleTagsController::class)->name('tags');
         Route::get('/o/{user}', MaterialsByOwnerController::class)->name('owner');
     });
 
