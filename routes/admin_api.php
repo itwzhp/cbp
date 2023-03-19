@@ -58,11 +58,10 @@ Route::name('materials.')
 
                 Route::prefix('scenarios')
                     ->name('scenarios.')
-                    ->controller(ScenariosController::class)
                     ->group(function () {
-                        Route::post('/', 'store')->name('store');
-                        Route::post('/{scenario}', 'update')->name('update');
-                        Route::delete('/{scenario}', 'destroy')->name('destroy');
+                        Route::post('/', [ScenariosController::class, 'store'])->name('store');
+                        Route::post('/{scenario}', [ScenariosController::class, 'update'])->name('update');
+                        Route::delete('/{scenario}', [ScenariosController::class, 'destroy'])->name('destroy');
                     });
             });
     });
