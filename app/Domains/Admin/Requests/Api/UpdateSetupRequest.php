@@ -20,19 +20,19 @@ class UpdateSetupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'capacity_min'           => 'numeric|min:0',
-            'capacity_opt'           => 'numeric|min:0',
-            'capacity_max'           => 'numeric|min:0',
-            'duration'               => 'numeric|min:0',
-            'time'                   => 'numeric|min:0',
-            'instructor_count'       => 'numeric|min:0',
-            'instructor_competence'  => 'string|min:3',
-            'remarks'                => 'string|min:3',
-            'location'               => 'string|min:3',
-            'technical_requirements' => 'string|min:3',
-            'materials'              => 'string|min:3',
-            'participant_materials'  => 'string|min:3',
-            'participant_clothing'   => 'string|min:3',
+            'capacity_min'           => 'nullable|numeric|min:0',
+            'capacity_opt'           => 'nullable|numeric|min:0',
+            'capacity_max'           => 'nullable|numeric|min:0',
+            'duration'               => 'nullable|numeric|min:0',
+            'time'                   => 'nullable|numeric|min:0',
+            'instructor_count'       => 'nullable|numeric|min:0',
+            'instructor_competence'  => 'nullable|string|min:3',
+            'remarks'                => 'nullable|string|min:3',
+            'location'               => 'nullable|string|min:3',
+            'technical_requirements' => 'nullable|string|min:3',
+            'materials'              => 'nullable|string|min:3',
+            'participant_materials'  => 'nullable|string|min:3',
+            'participant_clothing'   => 'nullable|string|min:3',
         ];
     }
 }

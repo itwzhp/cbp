@@ -11,4 +11,9 @@ class StoreScenarioRequest extends FormRequest
     {
         return Auth::user()->can(MaterialActionsEnum::UPDATE->value, $this->route('material'));
     }
+
+    public function rules(): array
+    {
+        return [];
+    }
 }
