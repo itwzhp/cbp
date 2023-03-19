@@ -11,7 +11,7 @@ class CreateFieldRequest extends FormRequest
         return [
             'type' => [
                 'required',
-                'in:' . implode(',', FieldTypeEnum::cases()),
+                FieldTypeEnum::rules(),
             ],
         ];
     }

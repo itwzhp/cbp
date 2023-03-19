@@ -8,8 +8,9 @@ class MaterialUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'       => 'string|min:3',
-            'description' => 'string',
+            'title'       => 'nullable|string|min:3',
+            'description' => 'nullable|string',
+            'licence_id'  => 'nullable|numeric',
         ];
     }
 }

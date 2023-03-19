@@ -1,8 +1,12 @@
 <?php
 namespace App\Domains\Materials\Models\Enums;
 
+use App\Enums\EnumCasesValidationTrait;
+
 enum FieldTypeEnum: string
 {
+    use EnumCasesValidationTrait;
+
     case AUTHOR = 'author';
     case REDACTOR = 'redactor';
     case REVIEWER = 'reviewer';
