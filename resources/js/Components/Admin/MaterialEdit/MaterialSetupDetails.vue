@@ -87,7 +87,7 @@ const updateAttachment = () => {
         <label
           for="capacity_min"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >capacity_min</label>
+        >Liczba uczestników - min</label>
         <input
           id="capacity_min"
           v-model="capacity_min"
@@ -99,7 +99,7 @@ const updateAttachment = () => {
         <label
           for="capacity_opt"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >capacity_opt</label>
+        >Liczba uczestników - opt</label>
         <input
           id="capacity_opt"
           v-model="capacity_opt"
@@ -111,7 +111,7 @@ const updateAttachment = () => {
         <label
           for="capacity_max"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >capacity_max</label>
+        >Liczba uczestników - maks</label>
         <input
           id="capacity_max"
           v-model="capacity_max"
@@ -123,7 +123,7 @@ const updateAttachment = () => {
         <label
           for="duration"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >duration</label>
+        >Czas trwania</label>
         <input
           id="duration"
           v-model="duration"
@@ -135,7 +135,7 @@ const updateAttachment = () => {
         <label
           for="time"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >time</label>
+        >Pora dnia</label>
         <input
           id="time"
           v-model="time"
@@ -147,7 +147,7 @@ const updateAttachment = () => {
         <label
           for="instructor_count"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >instructor_count</label>
+        >Liczba instruktorów</label>
         <input
           id="instructor_count"
           v-model="instructor_count"
@@ -159,7 +159,7 @@ const updateAttachment = () => {
         <label
           for="instructor_competence"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >instructor_competence</label>
+        >Wymagania dla instruktorów</label>
         <input
           id="instructor_competence"
           v-model="instructor_competence"
@@ -171,7 +171,7 @@ const updateAttachment = () => {
         <label
           for="remarks"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >remarks</label>
+        >Uwagi</label>
         <input
           id="remarks"
           v-model="remarks"
@@ -183,7 +183,7 @@ const updateAttachment = () => {
         <label
           for="location"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >location</label>
+        >Lokalizacja</label>
         <input
           id="location"
           v-model="location"
@@ -195,7 +195,7 @@ const updateAttachment = () => {
         <label
           for="technical_requirements"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >technical_requirements</label>
+        >Wymagania techniczne</label>
         <input
           id="technical_requirements"
           v-model="technical_requirements"
@@ -207,7 +207,7 @@ const updateAttachment = () => {
         <label
           for="materials"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >materials</label>
+        >Materiały</label>
         <input
           id="materials"
           v-model="materials"
@@ -219,7 +219,7 @@ const updateAttachment = () => {
         <label
           for="participant_materials"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >participant_materials</label>
+        >Materiały uczestnika</label>
         <input
           id="participant_materials"
           v-model="participant_materials"
@@ -231,7 +231,7 @@ const updateAttachment = () => {
         <label
           for="participant_clothing"
           class="block mb-1 text-sm font-medium text-gray-900"
-        >participant_clothing</label>
+        >Ubiór uczestnika</label>
         <input
           id="participant_clothing"
           v-model="participant_clothing"
