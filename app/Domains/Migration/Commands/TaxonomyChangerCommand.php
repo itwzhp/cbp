@@ -20,7 +20,7 @@ class TaxonomyChangerCommand extends Command
         'rodzaj-programu',
         'seria',
         'post-tag',
-        'post_format',
+        'post-format',
     ];
 
     protected $signature = 'wp:change_tax';
@@ -31,9 +31,11 @@ class TaxonomyChangerCommand extends Command
     {
         $this->tagsRepository = app(TagsRepository::class);
 
+        $this->info('dropping');
         $this->dropUnwantedTaxonomies();
-        $this->attachNewTaxonomies();
-        $this->addHighlightedTag();
+
+//        $this->attachNewTaxonomies();
+//        $this->addHighlightedTag();
     }
 
     private function attachNewTaxonomies(): void

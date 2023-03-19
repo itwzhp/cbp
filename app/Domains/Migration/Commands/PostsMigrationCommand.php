@@ -234,7 +234,7 @@ class PostsMigrationCommand extends Command
         foreach ($post->attachments as $attachment) {
             $path = $this->urlToPath($attachment->guid);
 
-            if (Storage::exists($path)) {
+            if (Storage::disk(FilesystemsHelper::PUBLIC)->exists($path)) {
                 $mime = Storage::mimeType($path);
                 $material->attachments()->firstOrCreate([
                     'name' => $attachment->post_title,

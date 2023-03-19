@@ -29,5 +29,8 @@ class RefreshCommand extends Command
 
         $this->info('Attaching images to tags');
         $this->call(AttachImagesToTagsCommand::class);
+
+        $this->info('Merging materials');
+        $this->call(MaterialsMergerCommand::class);
     }
 }

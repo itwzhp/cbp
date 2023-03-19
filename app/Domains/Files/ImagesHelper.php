@@ -7,18 +7,7 @@ use App\Domains\Materials\Models\Taxonomy;
 
 class ImagesHelper
 {
-    const TROOP_DOES_SLUG = 'robi-sie-w-druzynie';
     const TYPE_SLUG = 'typ';
-    const TROOP_DOES_LUT = [
-        'obrzedowoscsymbolika'             => 'obrzedowosc-symbolika.png',
-        'uczenie-w-dzialaniu'              => 'uczenie_w_dzialaniu.png',
-        'prawo-i-przyrzeczenie-harcerskie' => 'prawo_i_przyrzeczenie.png',
-        'system-malych-grup'               => 'system_malych_grup.png',
-        'harcerz-i-natura'                 => 'harcerz_i_natura.png',
-        'sluzba'                           => 'sluzba.png',
-        'osobisty-przyklad-instruktora'    => 'przyklad_osobisty.png',
-        'sim'                              => 'sim.png',
-    ];
     const TYPE_LUT = [
         'program'                => 'program.png',
         'poradnik'               => 'poradnik.png',
@@ -33,26 +22,19 @@ class ImagesHelper
         'czasopisma'             => 'czasopisma.png',
         'recenzja'               => 'recenzja.png',
     ];
-
-    protected ?Taxonomy $troopDoesTaxonomy;
+    const HSW_TYPE = 'harcerski-system-wychowawczy';
+    const HSW_LUT = [
+    ];
 
     protected ?Taxonomy $typeTaxonomy;
 
     public function __construct()
     {
-        $this->troopDoesTaxonomy = Taxonomy::where('slug', static::TROOP_DOES_SLUG)->first();
         $this->typeTaxonomy = Taxonomy::where('slug', static::TYPE_SLUG)->first();
     }
 
     public function getFallbackForMaterial(Material $material): string
     {
-        /** @var Tag $troopDoesTag */
-        $troopDoesTag = $material->tags->where('taxonomy_id', $this->troopDoesTaxonomy->id ?? 0)->first();
-
-        if ($troopDoesTag !== null) {
-            return $troopDoesTag->thumb();
-        }
-
         /** @var Tag $typeTag */
         $typeTag = $material->tags->where('taxonomy_id', $this->typeTaxonomy->id ?? 0)->first();
 
