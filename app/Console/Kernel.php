@@ -8,6 +8,7 @@ use App\Domains\Migration\Commands\AttachImagesCommand;
 use App\Domains\Migration\Commands\AttachImagesToTagsCommand;
 use App\Domains\Migration\Commands\CopyWpFilesCommand;
 use App\Domains\Migration\Commands\FixLinksInDescription;
+use App\Domains\Migration\Commands\MaterialsMergerCommand;
 use App\Domains\Migration\Commands\PostsMigrationCommand;
 use App\Domains\Migration\Commands\RefreshCommand;
 use App\Domains\Migration\Commands\RemoveDuplicateAttachmentsCommand;
@@ -37,6 +38,7 @@ class Kernel extends ConsoleKernel
         AttachImagesToTagsCommand::class,
         SanitizeFieldsValuesCommand::class,
         PintCommand::class,
+        MaterialsMergerCommand::class,
     ];
 
     protected function schedule(Schedule $schedule): void
