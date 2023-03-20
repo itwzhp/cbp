@@ -137,7 +137,10 @@ const sortScenarios = (scenarios) => {
     >
       Dodaj scenariusz
     </button>
-    <ul class="my-4 space-y-3">
+    <ul
+      class="space-y-3"
+      :class="{ 'my-4': $page.props.material.scenarios?.length }"
+    >
       <li
         v-for="scenario in sortScenarios($page.props.material.scenarios)"
         :key="scenario.id"
@@ -152,7 +155,7 @@ const sortScenarios = (scenarios) => {
               class="mb-1 cursor-pointer font-semibold"
               @click="expandScenarioDetails(scenario.id)"
             >
-              {{ scenario.title }}
+              {{ scenario.title || 'Nowy scenariusz' }}
               <button class="text-xs px-1">
                 <FontAwesomeIcon
                   v-if="!isScenarioDetailsExpanded(scenario.id)"
