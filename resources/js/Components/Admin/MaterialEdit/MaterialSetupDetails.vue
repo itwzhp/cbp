@@ -93,7 +93,7 @@ const updateAttachment = () => {
           v-model="capacity_min"
           type="number"
           :class="inputClasses"
-          placeholder="capacity_min"
+          placeholder="Liczba uczestników - min"
           required
         >
         <label
@@ -105,7 +105,7 @@ const updateAttachment = () => {
           v-model="capacity_opt"
           type="number"
           :class="inputClasses"
-          placeholder="capacity_opt"
+          placeholder="Liczba uczestników - opt"
           required
         >
         <label
@@ -117,7 +117,7 @@ const updateAttachment = () => {
           v-model="capacity_max"
           type="number"
           :class="inputClasses"
-          placeholder="capacity_max"
+          placeholder="Liczba uczestników - maks"
           required
         >
         <label
@@ -129,7 +129,7 @@ const updateAttachment = () => {
           v-model="duration"
           type="number"
           :class="inputClasses"
-          placeholder="duration"
+          placeholder="Czas trwania"
           required
         >
         <label
@@ -141,7 +141,7 @@ const updateAttachment = () => {
           v-model="time"
           type="text"
           :class="inputClasses"
-          placeholder="time"
+          placeholder="Pora dnia"
           required
         >
         <label
@@ -153,7 +153,7 @@ const updateAttachment = () => {
           v-model="instructor_count"
           type="number"
           :class="inputClasses"
-          placeholder="instructor_count"
+          placeholder="Liczba instruktorów"
           required
         >
         <label
@@ -165,7 +165,7 @@ const updateAttachment = () => {
           v-model="instructor_competence"
           type="text"
           :class="inputClasses"
-          placeholder="instructor_competence"
+          placeholder="Wymagania dla instruktorów"
           required
         >
         <label
@@ -177,7 +177,7 @@ const updateAttachment = () => {
           v-model="remarks"
           type="text"
           :class="inputClasses"
-          placeholder="remarks"
+          placeholder="Uwagi"
           required
         >
         <label
@@ -189,7 +189,7 @@ const updateAttachment = () => {
           v-model="location"
           type="text"
           :class="inputClasses"
-          placeholder="location"
+          placeholder="Lokalizacja"
           required
         >
         <label
@@ -201,7 +201,7 @@ const updateAttachment = () => {
           v-model="technical_requirements"
           type="text"
           :class="inputClasses"
-          placeholder="technical_requirements"
+          placeholder="Wymagania techniczne"
           required
         >
         <label
@@ -213,7 +213,7 @@ const updateAttachment = () => {
           v-model="materials"
           type="text"
           :class="inputClasses"
-          placeholder="materials"
+          placeholder="Materiały"
           required
         >
         <label
@@ -225,7 +225,7 @@ const updateAttachment = () => {
           v-model="participant_materials"
           type="text"
           :class="inputClasses"
-          placeholder="participant_materials"
+          placeholder="Materiały uczestnika"
           required
         >
         <label
@@ -237,7 +237,7 @@ const updateAttachment = () => {
           v-model="participant_clothing"
           type="text"
           :class="inputClasses"
-          placeholder="participant_clothing"
+          placeholder="Ubiór uczestnika"
           required
         >
       </ContentAccess>
