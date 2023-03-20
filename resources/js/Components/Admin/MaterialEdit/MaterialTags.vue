@@ -115,6 +115,10 @@ const getMaterialTagIds = (materialTags) => {
     </div>
   </div>
   <div
+    v-if="collapsed"
+    class="w-full bg-gray-50/50 bg-white border border-gray-200 rounded-lg p-3"
+  />
+  <div
     v-if="!collapsed"
     class="w-full bg-gray-50/50 bg-white border border-gray-200 rounded-lg p-3"
   >
