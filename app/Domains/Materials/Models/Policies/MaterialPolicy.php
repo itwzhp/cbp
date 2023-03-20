@@ -84,7 +84,7 @@ class MaterialPolicy
             return true;
         }
 
-        if ($user->owns($material)) {
+        if (!$user->owns($material)) {
             return false;
         }
 

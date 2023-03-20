@@ -11,9 +11,14 @@ class DestroyScenarioRequest extends FormRequest
 
     public function authorize(): bool
     {
-        /** @var Setup $setup */
-        $setup = $this->route('setup');
+        /** @var Setup $scenario */
+        $scenario = $this->route('scenario');
 
-        return $this->authorizeUpdate($setup);
+        return $this->authorizeUpdate($scenario);
+    }
+
+    public function rules(): array
+    {
+        return [];
     }
 }
