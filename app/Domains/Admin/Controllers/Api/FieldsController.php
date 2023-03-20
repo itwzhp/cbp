@@ -38,6 +38,8 @@ class FieldsController extends AbstractAdminController
             throw new UnauthorizedException('Brak dostępu');
         }
 
+        $field->delete();
+
         return $this->responseOK();
     }
 

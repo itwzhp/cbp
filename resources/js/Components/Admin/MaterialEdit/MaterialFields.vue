@@ -104,16 +104,8 @@ const createField = (material) => {
   createFieldInProgress.value = true;
   axios
     .post(
-      route(
-        'api.admin.materials.fields.store',
-        {
-          material
-        },
-        {
-          value: '',
-          type: props.type
-        }
-      )
+      route('api.admin.materials.fields.store', { material }),
+      { value: '', type: props.type }
     )
     .then(() => {
       createFieldInProgress.value = null;

@@ -29,7 +29,7 @@ Route::name('materials.')
                     ->group(function () {
                         Route::post('/', [FieldsController::class, 'store'])->name('store');
                         Route::post('/{field}', [FieldsController::class, 'update'])->name('update');
-                        Route::delete('/{field}', [FieldsController::class, 'delete'])->name('destroy');
+                        Route::delete('/{field}', [FieldsController::class, 'destroy'])->name('destroy');
                     });
 
                 Route::prefix('tags')
