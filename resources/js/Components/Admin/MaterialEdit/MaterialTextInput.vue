@@ -89,7 +89,7 @@ watch(field, () => {
       'focus:ring-green-400 focus:border-green-400': savedChanges && !unSavedChanges,
       'focus:ring-red-400 focus:border-red-400': saveChangesError,
     }"
-    class="bg-gray-50/50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
     :placeholder="fieldLabel"
     required
   >

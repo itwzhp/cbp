@@ -11,7 +11,7 @@ const props = defineProps({
 });
 const emit = defineEmits(['saveSuccess', 'saveError']);
 
-const inputClasses = 'bg-gray-50/50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5';
+const inputClasses = 'border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5';
 
 const value = ref(props.field.value);
 
@@ -48,7 +48,7 @@ const updateField = () => {
 };
 </script>
 <template>
-  <div class="w-full px-2">
+  <div class="w-full">
     <div>
       <ContentAccess :permissions="[permissions.UPDATE]">
         <input

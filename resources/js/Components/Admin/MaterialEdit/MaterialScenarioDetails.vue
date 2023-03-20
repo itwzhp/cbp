@@ -11,7 +11,7 @@ const props = defineProps({
 });
 const emit = defineEmits(['saveSuccess', 'saveError']);
 
-const inputClasses = 'bg-gray-50/50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2';
+const inputClasses = 'border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2';
 
 const title = ref(props.scenario.title);
 const order = ref(props.scenario.order);
