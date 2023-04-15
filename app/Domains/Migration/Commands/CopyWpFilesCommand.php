@@ -1,6 +1,7 @@
 <?php
 namespace App\Domains\Migration\Commands;
 
+use App\Helpers\FilesystemsHelper;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Arr;
@@ -16,8 +17,8 @@ class CopyWpFilesCommand extends Command
 
     public function __invoke()
     {
-        $this->local = Storage::disk('wp_local');
-        $this->azure = Storage::disk('azure_public');
+        $this->local = Storage::disk(FilesystemsHelper::LOCAL);
+        $this->azure = Storage::disk(FilesystemsHelper::PUBLIC);
 
         $dir = $this->argument('dir') ?? $this->selectDir();
 

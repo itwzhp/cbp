@@ -34,8 +34,8 @@ class TaxonomyChangerCommand extends Command
         $this->info('dropping');
         $this->dropUnwantedTaxonomies();
 
-//        $this->attachNewTaxonomies();
-//        $this->addHighlightedTag();
+        $this->attachNewTaxonomies();
+        $this->addHighlightedTag();
     }
 
     private function attachNewTaxonomies(): void
@@ -61,6 +61,10 @@ class TaxonomyChangerCommand extends Command
 
     private function processRow(array $taxonomies, array $tags, array $row): void
     {
+        if (empty($row[0])) {
+            return;
+        }
+
         $material = Material::findByWp($row[0]);
         if ($material === null) {
             return;
