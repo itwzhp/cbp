@@ -41,7 +41,7 @@ class AttachImagesToTagsCommand extends Command
 
         foreach ($czrTaxonomy->tags as $tag) {
             $number = explode('.', $tag->name)[0];
-            $path = storage_path("/app/czr/{$number}.png");
+            $path = storage_path("/czr/{$number}.png");
 
             if (!file_exists($path)) {
                 $this->error('Brakujący plik:');
