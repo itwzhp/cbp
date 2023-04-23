@@ -12,14 +12,15 @@ class AttachImagesToTagsCommand extends Command
 
     public function __invoke()
     {
-//        $this->attachThumbsToCategories();
-        $this->attachThumbsToCZRs();
+        $this->attachThumbsToCategories();
+//        $this->attachThumbsToCZRs();
+        $typeTaxonomy = Taxonomy::where('slug', 'typ')->delete();
     }
 
     private function attachThumbsToCategories(): void
     {
         /** @var Taxonomy $typeTaxonomy */
-        $typeTaxonomy = Taxonomy::where('slug', 'typ')->first();
+        $typeTaxonomy = Taxonomy::where('slug', 'typ-materialu')->first();
 
         foreach ($typeTaxonomy->tags as $tag) {
             $slug = ImagesHelper::getSlugFromTag($tag);

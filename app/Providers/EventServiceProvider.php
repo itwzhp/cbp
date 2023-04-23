@@ -7,6 +7,8 @@ use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\Events\MaterialChangedEvent;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Models\Observers\MaterialObserver;
+use App\Domains\Materials\Models\Observers\TaxonomyObserver;
+use App\Domains\Materials\Models\Taxonomy;
 use App\Domains\Reviews\Events\ReviewStartedEvent;
 use App\Domains\Users\Events\UserLoggedInViaSocialiteEvent;
 use App\Domains\Users\Listeners\AdjustUserEmailConfirmationListener;
@@ -50,6 +52,7 @@ class EventServiceProvider extends ServiceProvider
     protected $observers = [
         Material::class   => [MaterialObserver::class],
         Attachment::class => [AttachmentObserver::class],
+        Taxonomy::class   => [TaxonomyObserver::class],
     ];
 
     public function boot()
