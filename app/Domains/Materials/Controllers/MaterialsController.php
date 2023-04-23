@@ -30,7 +30,10 @@ class MaterialsController extends Controller
                     ->serializeWith(new ArraySerializer())
                     ->toArray(),
                 'czr'      => fractal()
-                    ->collection($material->tags->where('taxonomy_id', $czrTax->id))
+                    ->collection(
+                        $material->tags->where('taxonomy_id', $czrTax->id)
+                            ->sortBy('name', SORT_NATURAL)
+                    )
                     ->transformWith(new TagWithIconTransformer())
                     ->serializeWith(new ArraySerializer()),
             ]);
