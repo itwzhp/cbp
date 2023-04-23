@@ -24,7 +24,7 @@ class TagsSeeder extends Seeder
         'program'     => 'Konspekt programowy',
         'propozycje'  => 'Propozycja programowa',
     ];
-    public const FORM_NAME = 'Typ materiału';
+    public const FORM_NAME = 'Forma';
     public const FORMS = [
         1  => 'Program obozu',
         2  => 'Program biwaku',
