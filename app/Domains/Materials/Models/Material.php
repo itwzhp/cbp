@@ -185,7 +185,7 @@ class Material extends Model implements HasMedia
                 ->join('material_tag', 'tags.id', '=', 'material_tag.tag_id')
                 ->join('taxonomies', 'tags.taxonomy_id', '=', 'taxonomies.id')
                 ->whereColumn('material_tag.material_id', '=', 'materials.id')
-                ->whereRaw('taxonomies.slug = "typ"')
+                ->whereRaw('taxonomies.slug = "typ-materialu"')
                 ->select('tags.name')
                 ->take(1),
         ]);
