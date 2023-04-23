@@ -7,7 +7,7 @@ use App\Domains\Materials\Models\Taxonomy;
 
 class ImagesHelper
 {
-    const TYPE_SLUG = 'typ';
+    const TYPE_SLUG = 'typ-materialu';
     const TYPE_LUT = [
         'program'                => 'program.png',
         'poradnik'               => 'poradnik.png',

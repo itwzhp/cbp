@@ -230,11 +230,11 @@ class Material extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $imagesHelepr = app(ImagesHelper::class);
+        $imagesHelper = app(ImagesHelper::class);
 
         $this->addMediaCollection('cover')
             ->useFallbackUrl(url('/images/scout.jpg'))
-            ->useFallbackUrl($imagesHelepr->getFallbackForMaterial($this), 'thumb')
+            ->useFallbackUrl($imagesHelper->getFallbackForMaterial($this), 'thumb')
             ->useFallbackUrl(url('/images/scout_cover.jpg'), 'cover')
             ->singleFile();
     }
