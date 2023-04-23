@@ -5,6 +5,7 @@ const props = defineProps({
   imgSrc: { type: String },
   height: { type: Number },
   width: { type: Number },
+  tooltip: { type: String },
 });
 const classes = computed(() =>
   props.imgSrc?.length
@@ -27,7 +28,7 @@ const svgClasses = computed(
       <img
         :class="classes"
         :src="props.imgSrc"
-        alt="avatar"
+        :alt="tooltip ?? 'avatar'"
       >
     </template>
     <template v-else>

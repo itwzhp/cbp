@@ -16,7 +16,7 @@ trait TagHasMedia
             ->singleFile()
             ->registerMediaConversions(function (Media $media) {
                 $this->addMediaConversion('icon')
-                    ->fit(Manipulations::FIT_CROP, 40, 40);
+                    ->fit(Manipulations::FIT_CROP, 80, 80);
             });
 
         $this

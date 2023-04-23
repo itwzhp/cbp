@@ -11,4 +11,9 @@ class TaxonomiesRepository
             'name' => $name,
         ]);
     }
+
+    public function getCZR(): ?Taxonomy
+    {
+        return Taxonomy::where('slug', 'cele-zrownowazonego-rozwoju')->first();
+    }
 }

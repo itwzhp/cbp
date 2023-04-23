@@ -1,6 +1,7 @@
 <script setup>
 import Authors from './Authors.vue';
 import Avatar from '@/Components/Avatar.vue';
+import {Link} from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -13,13 +14,17 @@ import Avatar from '@/Components/Avatar.vue';
       Cele Zrównoważonego Rozwoju
     </h3>
     <div class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5">
-      <Avatar
-        img-src="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"
-      />
-      <Avatar />
-      <Avatar
-        img-src="https://cdn.pixabay.com/photo/2016/11/18/23/38/child-1837375__340.png"
-      />
+      <Link
+        v-for="czrTag in $page.props.czr"
+        :key="czrTag.id"
+        :href="route('materials.tag', czrTag.slug)"
+        :alt="czrTag.name"
+      >
+        <Avatar
+          :img-src="czrTag.icon"
+          :tooltip="czrTag.name"
+        />
+      </Link>
     </div>
   </div>
 </template>
