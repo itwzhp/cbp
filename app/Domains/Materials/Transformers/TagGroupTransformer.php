@@ -18,6 +18,6 @@ class TagGroupTransformer extends TransformerAbstract
 
     public function includeTags(Collection $group)
     {
-        return $this->collection($group, new TagTransformer());
+        return $this->collection($group->sortBy('name', SORT_NATURAL), new TagTransformer());
     }
 }

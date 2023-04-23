@@ -193,8 +193,8 @@ jobs:
       - name: Optimize
         run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan optimize"
 
-      - name: Final
-        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan wp:refresh"
+#      - name: Final
+#        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan wp:refresh"
 
   deploy-azure:
     name: Deploy Azure storage

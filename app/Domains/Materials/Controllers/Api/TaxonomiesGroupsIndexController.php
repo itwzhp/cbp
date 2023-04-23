@@ -12,7 +12,11 @@ class TaxonomiesGroupsIndexController extends Controller
     public function __invoke()
     {
         return Fractal::create()
-            ->collection(Tag::with('taxonomy')->get()->groupBy('taxonomy_id'))
+            ->collection(
+                Tag::with('taxonomy')
+                    ->get()
+                    ->groupBy('taxonomy_id')
+            )
             ->transformWith(new TagGroupTransformer())
             ->serializeWith(new ArraySerializer());
     }
