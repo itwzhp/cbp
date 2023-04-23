@@ -14,7 +14,6 @@ class AttachImagesToTagsCommand extends Command
     {
         $this->attachThumbsToCategories();
 //        $this->attachThumbsToCZRs();
-        $typeTaxonomy = Taxonomy::where('slug', 'typ')->delete();
     }
 
     private function attachThumbsToCategories(): void
