@@ -111,44 +111,226 @@ const headline = ref(null);
                 O CBP
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                :href="route('materials.index')"
+                :block="true"
+              >
+                Harcerski System Wychowawczy
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'harcerski-system-wychowawczy,zasady-harcerskiego-wychowania,cechy-metody-harcerskiej')"
+              >
+                &emsp;O HSW
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'praca-z-metodykami')"
                 :active="route().current('materials.index')"
               >
-                Wszystkie Materiały
+                &emsp;Grupy Wiekowe
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                :block="true"
-                :active="route().current('materials.tag')"
-              >
-                Konspekty
-              </ResponsiveNavLink>
-              <ResponsiveNavLink
-                :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
+                :href="route('materials.tags', 'system-malych-grup')"
                 :active="
                   route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy' })
                 "
               >
-                &emsp;Kształceniowe
+                &emsp;System Małych Grup
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                :href="route('materials.tag', '2-program')"
+                :href="route('materials.tags', 'prawa-przyrzeczenie-i-obietnica')"
                 :active="route().current('materials.tag', { tag: '2-program' })"
               >
-                &emsp;Program/plan
+                &emsp;Prawa, Przyrzeczenie i Obietnica
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                :href="route('materials.tag', '2-propozycja-programowa')"
+                :href="route('materials.tags', 'sluzba')"
                 :active="
                   route().current('materials.tag', { tag: '2-propozycja-programowa' })
                 "
               >
-                &emsp;Propozycje programowe
+                &emsp;Służba
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                :href="route('materials.tag', '2-poradnik')"
+                :href="route('materials.tags', 'system-instrumentow-metodycznych')"
                 :active="route().current('materials.tag', { tag: '2-poradnik' })"
               >
-                &emsp;Poradniki
+                &emsp;System Instrumentów Metodycznych
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'uczenie-w-dzialaniu')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Uczenie w działaniu
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'osobisty-przyklad-instruktora')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Osobisty Przykład Instruktora
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'obrzedowosc-i-symbolika')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Obrzędowość i Symbolika
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'planowanie-w-druzynie,funkcjonowanie-druzyn')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Planowanie wychowawcze
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :block="true"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                Wyzwania Wychowawcze
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'rozwoj-psychofizyczny-dzieci-i-mlodziezy,praca-nad-emocjami,rozwoj-fizyczny')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Rozwój psychofizyczny
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'wyzwania-i-trudnosci-wychowawcze,pandemia,wojna,praca-nad-emocjami')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Społeczne sytuacje kryzysowe
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'harcerz-i-natura')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;W otoczeniu przyrody
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'wychowanie-druchowe-i-religijne')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Wychowanie duchowe i religijne
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'wychowanie-ekonomiczne')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Wychowanie ekonomiczne
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'wychowanie-patriotyczne')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Wychowanie patriotyczne
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :block="true"
+              >
+                Szerokie Horyzonty
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'techniki,majsterka-zuchowa')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Specjalności
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'wychowanie-wodne')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Aktywności wodne
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'pierwsza-pomoc')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Pierwsza pomoc
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'zdrowie')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Zdrowie
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'edukacja-globalna,wiedza-o-swiecie')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Edukacja globalna
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'materialy-skautowe-i-zagraniczne')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Skauting
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :block="true"
+              >
+                Zorganizowane Drużyny
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'bezpieczenstwo')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Bezpieczeństwo
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'aspekty-prawne-dryzyny')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Aspekty prawne
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'nabor-i-promocja-druzyny')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Nabór i promocja
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'sojusznicy')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Sojusznicy
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'dokumentacja')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Dokumentacja
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :block="true
+                "
+              >
+                Praca z kadrą
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'druzynowy,komendant-i-komenda-szczepu')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;W drużynie i szczepie
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'komendant-hufca,osoba-od-pracy-z-kadra-w-choragwi,metodykprogramowiec-hufca,namiestnik-hufca,ksztalceniowiec-hufca,namiestnik-hufca')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;W hufcu
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'komendant-choragwi,osoba-od-pracy-z-kadra-w-choragwi,metodykprogramowiec-choragwi,czlonek-referatu,ksztalceniowiec-choragwi,ksi-choragwi')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;W chorągwi
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'kwatermistrzobsluga-baz,finanse,organizacjabiuro,promocja,ruch-przyjaciol-harcerstwa')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Kadra wspierająca
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'kurs-przewodnikowski,kurs-podharcmistrzowski,kurs-harcmistrzowski')"
+                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+              >
+                &emsp;Formy kształceniowe
               </ResponsiveNavLink>
             </div>
 
@@ -198,12 +380,129 @@ const headline = ref(null);
                   >
                     O CBP
                   </NavLink>
-                  <NavLink
-                    :href="route('materials.index')"
-                    :active="route().current('materials.index')"
-                  >
-                    Wszystkie Materiały
-                  </NavLink>
+                  <Dropdown width="48">
+                    <template #trigger>
+                      <NavButton>
+                        Harcerski System Wychowawczy
+                      </NavButton>
+                    </template>
+                    <template #content>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'harcerski-system-wychowawczy,zasady-harcerskiego-wychowania,cechy-metody-harcerskiej')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '2-konspekt-ksztalceniowy',
+                          })
+                        "
+                      >
+                        O HSW
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'praca-z-metodykami')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '2-konspekt-programowy',
+                          })
+                        "
+                      >
+                        Grupy Wiekowe
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'system-malych-grup')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '13-system-malych-grup',
+                          })
+                        "
+                      >
+                        System Małych Grup
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'prawa-przyrzeczenie-i-obietnica')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '13-prawa-przyrzeczenie-i-obietnica',
+                          })
+                        "
+                      >
+                        Prawa, Przyrzeczenie i Obietnica
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'sluzba')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '13-sluzba',
+                          })
+                        "
+                      >
+                        Służba
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'system-instrumentow-metodycznych')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '13-system-instrumentow-metodycznych',
+                          })
+                        "
+                      >
+                        System Instrumentów Metodycznych
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'uczenie-w-dzialaniu')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '13-uczenie-w-dzialaniu',
+                          })
+                        "
+                      >
+                        Uczenie w działaniu
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'osobisty-przyklad-instruktora')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '13-osobisty-przyklad-instruktora',
+                          })
+                        "
+                      >
+                        Osobisty Przykład Instruktora
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'obrzedowosc-i-symbolika')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '13-obrzedowosc-i-symbolika',
+                          })
+                        "
+                      >
+                        Obrzędowość i Symbolika
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'planowanie-w-druzynie,funkcjonowanie-druzyn')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '13-obrzedowosc-i-symbolika',
+                          })
+                        "
+                      >
+                        Planowanie wychowawcze
+                      </ResponsiveNavLink>
+                    </template>
+                  </Dropdown>
+                  <Dropdown width="48">
+                    <template #trigger>
+                      <NavButton
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '2-konspekt-ksztalceniowy',
+                          }) ||
+                            route().current('materials.tag', {
+                              tag: '2-konspekt-programowy',
+                            })
+                        "
+                      />
+                    </template>
+                  </Dropdown>
                   <Dropdown width="48">
                     <template #trigger>
                       <NavButton
@@ -216,52 +515,259 @@ const headline = ref(null);
                             })
                         "
                       >
-                        Konspekty
+                        Wyzwania wychowawcze
                       </NavButton>
                     </template>
                     <template #content>
                       <ResponsiveNavLink
-                        :href="route('materials.tag', '2-konspekt-ksztalceniowy')"
+                        :href="route('materials.tags', 'rozwoj-psychofizyczny-dzieci-i-mlodziezy,praca-nad-emocjami,rozwoj-fizyczny')"
                         :active="
                           route().current('materials.tag', {
                             tag: '2-konspekt-ksztalceniowy',
                           })
                         "
                       >
-                        Kształceniowe
+                        Rozwój psychofizyczny
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
-                        :href="route('materials.tag', '2-konspekt-programowy')"
+                        :href="route('materials.tags', 'wyzwania-i-trudnosci-wychowawcze,pandemia,wojna,praca-nad-emocjami')"
                         :active="
                           route().current('materials.tag', {
                             tag: '2-konspekt-programowy',
                           })
                         "
                       >
-                        Programowe
+                        Społeczne sytuacje kryzysowe
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'harcerz-i-natura')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '2-konspekt-programowy',
+                          })
+                        "
+                      >
+                        W otoczeniu przyrody
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'wychowanie-druchowe-i-religijne')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '2-konspekt-programowy',
+                          })
+                        "
+                      >
+                        Wychowanie druchowe i religijne
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'wychowanie-ekonomiczne')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '2-konspekt-programowy',
+                          })
+                        "
+                      >
+                        Wychowanie ekonomiczne
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'wychowanie-patriotyczne')"
+                        :active="
+                          route().current('materials.tag', {
+                            tag: '2-konspekt-programowy',
+                          })
+                        "
+                      >
+                        Wychowanie Patriotyczne
                       </ResponsiveNavLink>
                     </template>
                   </Dropdown>
-                  <NavLink
-                    :href="route('materials.tag', '2-program')"
-                    :active="route().current('materials.tag', { tag: '2-program' })"
-                  >
-                    Program/plan
-                  </NavLink>
-                  <NavLink
-                    :href="route('materials.tag', '2-propozycja-programowa')"
-                    :active="
-                      route().current('materials.tag', { tag: '2-propozycja-programowa' })
-                    "
-                  >
-                    Propozycje programowe
-                  </NavLink>
-                  <NavLink
-                    :href="route('materials.tag', '2-poradnik')"
-                    :active="route().current('materials.tag', { tag: '2-poradnik' })"
-                  >
-                    Poradniki
-                  </NavLink>
+                  <Dropdown>
+                    <template #trigger>
+                      <NavButton>
+                        Szerokie horyzonty
+                      </NavButton>
+                    </template>
+                    <template #content>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'techniki,majsterka-zuchowa')"
+                        :active="
+                          route().current('material.tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Specjalności
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'wychowanie-wodne')"
+                        :active="
+                          route().current('material.tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Aktywności wodne
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'pierwsza-pomoc')"
+                        :active="
+                          route().current('material.tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Pierwsza Pomoc
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'zdrowie')"
+                        :active="
+                          route().current('material.tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Zdrowie
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'edukacja-globalna,wiedza-o-swiecie')"
+                        :active="
+                          route().current('material.tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Edukacja globalna
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'materialy-skautowe-i-zagraniczne')"
+                        :active="
+                          route().current('material.tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Skauting
+                      </ResponsiveNavLink>
+                    </template>
+                  </Dropdown>
+                  <Dropdown>
+                    <template #trigger>
+                      <NavButton>
+                        Zorganizowane Drużyny
+                      </NavButton>
+                    </template>
+                    <template #content>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'bezpieczenstwo')"
+                        :active="
+                          route().current('material.tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Bezpieczeństwo
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'aspekty-prawne-dryzyny')"
+                        :active="
+                          route().current('material.tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Aspekty Prawne
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'nabor-i-promocja-druzyny')"
+                        :active="
+                          route().current('material.tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Nabór i promocja
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'sojusznicy')"
+                        :active="
+                          route().current('material.tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Sojusznicy
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'dokumentacja')"
+                        :active="
+                          route().current('material.tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Dokumentacja
+                      </ResponsiveNavLink>
+                    </template>
+                  </Dropdown>
+                  <Dropdown>
+                    <template #trigger>
+                      <NavButton>
+                        Praca z kadrą
+                      </NavButton>
+                    </template>
+                    <template #content>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'druzynowy,komendant-i-komenda-szczepu')"
+                        :active="
+                          route().current('material-tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        W drużynie i szczepie
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'komendant-hufca,osoba-od-pracy-z-kadra-w-choragwi,metodykprogramowiec-hufca,namiestnik-hufca,ksztalceniowiec-hufca,namiestnik-hufca')"
+                        :active="
+                          route().current('material-tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        W hufcu
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'komendant-choragwi,osoba-od-pracy-z-kadra-w-choragwi,metodykprogramowiec-choragwi,czlonek-referatu,ksztalceniowiec-choragwi,ksi-choragwi')"
+                        :active="
+                          route().current('material-tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        W chorągwi
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'kwatermistrzobsluga-baz,finanse,organizacjabiuro,promocja,ruch-przyjaciol-harcerstwa')"
+                        :active="
+                          route().current('material-tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Kadra wspierająca
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'kurs-przewodnikowski,kurs-podharcmistrzowski,kurs-harcmistrzowski')"
+                        :active="
+                          route().current('material-tag', {
+                            tag: '2-konspekt-programowy'
+                          })
+                        "
+                      >
+                        Formy kształceniowe
+                      </ResponsiveNavLink>
+                    </template>
+                  </Dropdown>
                   <NavElement>
                     <span
                       class="cursor-pointer"
