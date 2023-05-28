@@ -21,7 +21,7 @@ import 'vue3-carousel/dist/carousel.css';
       v-for="slide in $page.props.slider"
       :key="slide.id"
     >
-      <div class="carousel__item h-full w-full flex justify-center items-center">
+      <div class="carousel__item h-full w-full flex justify-center items-center pt-8">
         <a :href="slide.url">
           <figure class="relative max-w transition-all duration-300 cursor-pointer">
             <img

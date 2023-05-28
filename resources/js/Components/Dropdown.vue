@@ -9,7 +9,7 @@ const props = defineProps({
     default: '48',
   },
   contentClasses: {
-    default: () => ['py-1', 'bg-white'],
+    default: () => ['py-1', 'bg-gray-100'],
   },
 });
 
@@ -42,7 +42,7 @@ const open = ref(false);
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative pt-px-9">
     <div @click="open = !open">
       <slot name="trigger" />
     </div>

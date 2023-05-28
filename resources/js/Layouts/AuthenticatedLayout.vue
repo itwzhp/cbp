@@ -38,7 +38,7 @@ const headline = ref(null);
             <div
               class="flex items-center justify-between md:justify-center border-gray-100 py-3 md:space-x-10"
             >
-              <div class="hidden md:flex">
+              <div class="hidden md:flex mb-5">
                 <ApplicationLogo />
               </div>
               <!-- Hamburger -->
@@ -85,7 +85,7 @@ const headline = ref(null);
               block: showingNavigationDropdown,
               hidden: !showingNavigationDropdown,
             }"
-            class="sm:hidden"
+            class="md:hidden"
           >
             <div class="pt-2 pb-3 space-y-1">
               <div class="flex justify-center">
@@ -368,12 +368,12 @@ const headline = ref(null);
             </div>
           </div>
         </nav>
-        <nav class="print:hidden border-b border-gray-100 print:hidden">
-          <div class="max-w-7xl max-h-10 mx-auto px-4 sm:px-6 lg:px-8 sm:invisible md:visible">
-            <div class="flex justify-center h-12">
+        <nav class="print:hidden border-b border-gray-100 sm:hidden md:block print:hidden">
+          <div class="max-w-7xl lg:max-h-18 mx-auto px-4 sm:px-2 lg:px-8 lg:py-1 sm:invisible md:visible">
+            <div class="flex justify-center h-18">
               <div class="flex">
                 <!-- Navigation Links -->
-                <div class="max-h-10 hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="max-h-16 hidden space-x-4 sm:-my-px sm:ml-2 sm:flex">
                   <NavLink
                     :href="route('about')"
                     :active="route().current('about')"
@@ -487,20 +487,6 @@ const headline = ref(null);
                       >
                         Planowanie wychowawcze
                       </ResponsiveNavLink>
-                    </template>
-                  </Dropdown>
-                  <Dropdown width="48">
-                    <template #trigger>
-                      <NavButton
-                        :active="
-                          route().current('materials.tag', {
-                            tag: '2-konspekt-ksztalceniowy',
-                          }) ||
-                            route().current('materials.tag', {
-                              tag: '2-konspekt-programowy',
-                            })
-                        "
-                      />
                     </template>
                   </Dropdown>
                   <Dropdown width="48">
