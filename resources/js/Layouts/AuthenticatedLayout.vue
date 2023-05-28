@@ -42,7 +42,7 @@ const headline = ref(null);
                 <ApplicationLogo />
               </div>
               <!-- Hamburger -->
-              <div class="-mr-2 flex items-center sm:hidden">
+              <div class="-mr-2 flex items-center md:hidden">
                 <button
                   class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
                   @click="showingNavigationDropdown = !showingNavigationDropdown"
@@ -369,7 +369,7 @@ const headline = ref(null);
           </div>
         </nav>
         <nav class="print:hidden border-b border-gray-100 print:hidden">
-          <div class="max-w-7xl max-h-10 mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-7xl max-h-10 mx-auto px-4 sm:px-6 lg:px-8 sm:invisible md:visible">
             <div class="flex justify-center h-12">
               <div class="flex">
                 <!-- Navigation Links -->

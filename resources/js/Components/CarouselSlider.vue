@@ -28,16 +28,6 @@ import 'vue3-carousel/dist/carousel.css';
               :src="slide.image"
               :alt="slide.image"
             >
-            <figcaption
-              v-if="slide.image"
-              class="absolute px-3 text-lg text-white bottom-8 left-4"
-            >
-              <span class="bg-cbp-100 text-white text-2xl font-medium px-2 py-2 rounded">
-                {{
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae dolor mi."
-                }}
-              </span>
-            </figcaption>
           </figure>
         </a>
       </div>
