@@ -369,11 +369,11 @@ const headline = ref(null);
           </div>
         </nav>
         <nav class="print:hidden border-b border-gray-100 print:hidden">
-          <div class="max-w-7xl max-h-10 mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-center h-12">
+          <div class="max-w-7xl max-h-16 mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-center h-16">
               <div class="flex">
                 <!-- Navigation Links -->
-                <div class="max-h-10 hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="max-h-16 hidden space-x-8 sm:-my-px sm:flex">
                   <NavLink
                     :href="route('about')"
                     :active="route().current('about')"
@@ -390,8 +390,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'harcerski-system-wychowawczy,zasady-harcerskiego-wychowania,cechy-metody-harcerskiej')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '2-konspekt-ksztalceniowy',
+                          route().current('materials.tags', {
+                            tags: 'harcerski-system-wychowawczy%2Czasady-harcerskiego-wychowania%2Ccechy-metody-harcerskiej',
                           })
                         "
                       >
@@ -400,8 +400,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'praca-z-metodykami')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '2-konspekt-programowy',
+                          route().current('materials.tags', {
+                            tags: 'praca-z-metodykami',
                           })
                         "
                       >
@@ -410,8 +410,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'system-malych-grup')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '13-system-malych-grup',
+                          route().current('materials.tags', {
+                            tags: 'system-malych-grup',
                           })
                         "
                       >
@@ -420,8 +420,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'prawa-przyrzeczenie-i-obietnica')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '13-prawa-przyrzeczenie-i-obietnica',
+                          route().current('materials.tags', {
+                            tags: 'prawa-przyrzeczenie-i-obietnica',
                           })
                         "
                       >
@@ -430,8 +430,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'sluzba')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '13-sluzba',
+                          route().current('materials.tags', {
+                            tags: 'sluzba',
                           })
                         "
                       >
@@ -440,8 +440,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'system-instrumentow-metodycznych')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '13-system-instrumentow-metodycznych',
+                          route().current('materials.tags', {
+                            tags: 'system-instrumentow-metodycznych',
                           })
                         "
                       >
@@ -450,8 +450,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'uczenie-w-dzialaniu')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '13-uczenie-w-dzialaniu',
+                          route().current('materials.tags', {
+                            tags: 'uczenie-w-dzialaniu',
                           })
                         "
                       >
@@ -460,8 +460,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'osobisty-przyklad-instruktora')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '13-osobisty-przyklad-instruktora',
+                          route().current('materials.tags', {
+                            tags: 'osobisty-przyklad-instruktora',
                           })
                         "
                       >
@@ -470,8 +470,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'obrzedowosc-i-symbolika')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '13-obrzedowosc-i-symbolika',
+                          route().current('materials.tags', {
+                            tags: 'obrzedowosc-i-symbolika',
                           })
                         "
                       >
@@ -480,8 +480,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'planowanie-w-druzynie,funkcjonowanie-druzyn')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '13-obrzedowosc-i-symbolika',
+                          route().current('materials.tags', {
+                            tags: 'planowanie-w-druzynie%2Cfunkcjonowanie-druzyn',
                           })
                         "
                       >
@@ -522,8 +522,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'rozwoj-psychofizyczny-dzieci-i-mlodziezy,praca-nad-emocjami,rozwoj-fizyczny')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '2-konspekt-ksztalceniowy',
+                          route().current('materials.tags', {
+                            tags: 'rozwoj-psychofizyczny-dzieci-i-mlodziezy%2Cpraca-nad-emocjami%2Crozwoj-fizyczny',
                           })
                         "
                       >
@@ -532,8 +532,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'wyzwania-i-trudnosci-wychowawcze,pandemia,wojna,praca-nad-emocjami')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '2-konspekt-programowy',
+                          route().current('materials.tags', {
+                            tags: 'wyzwania-i-trudnosci-wychowawcze%2Cpandemia%2Cwojna%2Cpraca-nad-emocjami',
                           })
                         "
                       >
@@ -542,8 +542,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'harcerz-i-natura')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '2-konspekt-programowy',
+                          route().current('materials.tags', {
+                            tags: 'harcerz-i-natura',
                           })
                         "
                       >
@@ -552,8 +552,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'wychowanie-druchowe-i-religijne')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '2-konspekt-programowy',
+                          route().current('materials.tags', {
+                            tags: 'wychowanie-druchowe-i-religijne',
                           })
                         "
                       >
@@ -562,8 +562,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'wychowanie-ekonomiczne')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '2-konspekt-programowy',
+                          route().current('materials.tags', {
+                            tags: 'wychowanie-ekonomiczne',
                           })
                         "
                       >
@@ -572,8 +572,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'wychowanie-patriotyczne')"
                         :active="
-                          route().current('materials.tag', {
-                            tag: '2-konspekt-programowy',
+                          route().current('materials.tags', {
+                            tags: 'wychowanie-patriotyczne',
                           })
                         "
                       >
@@ -591,8 +591,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'techniki,majsterka-zuchowa')"
                         :active="
-                          route().current('material.tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'techniki%2Cmajsterka-zuchowa'
                           })
                         "
                       >
@@ -601,8 +601,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'wychowanie-wodne')"
                         :active="
-                          route().current('material.tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'wychowanie-wodne'
                           })
                         "
                       >
@@ -611,8 +611,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'pierwsza-pomoc')"
                         :active="
-                          route().current('material.tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'pierwsza-pomoc'
                           })
                         "
                       >
@@ -621,8 +621,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'zdrowie')"
                         :active="
-                          route().current('material.tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'zdrowie'
                           })
                         "
                       >
@@ -631,8 +631,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'edukacja-globalna,wiedza-o-swiecie')"
                         :active="
-                          route().current('material.tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'edukacja-globalna%2Cwiedza-o-swiecie'
                           })
                         "
                       >
@@ -641,8 +641,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'materialy-skautowe-i-zagraniczne')"
                         :active="
-                          route().current('material.tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'materialy-skautowe-i-zagraniczne'
                           })
                         "
                       >
@@ -660,8 +660,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'bezpieczenstwo')"
                         :active="
-                          route().current('material.tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'bezpieczenstwo'
                           })
                         "
                       >
@@ -670,8 +670,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'aspekty-prawne-dryzyny')"
                         :active="
-                          route().current('material.tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'aspekty-prawne-dryzyny'
                           })
                         "
                       >
@@ -680,8 +680,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'nabor-i-promocja-druzyny')"
                         :active="
-                          route().current('material.tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'nabor-i-promocja-druzyny'
                           })
                         "
                       >
@@ -690,8 +690,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'sojusznicy')"
                         :active="
-                          route().current('material.tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'sojusznicy'
                           })
                         "
                       >
@@ -700,8 +700,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'dokumentacja')"
                         :active="
-                          route().current('material.tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'dokumentacja'
                           })
                         "
                       >
@@ -719,8 +719,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'druzynowy,komendant-i-komenda-szczepu')"
                         :active="
-                          route().current('material-tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'druzynowy%2Ckomendant-i-komenda-szczepu'
                           })
                         "
                       >
@@ -729,8 +729,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'komendant-hufca,osoba-od-pracy-z-kadra-w-choragwi,metodykprogramowiec-hufca,namiestnik-hufca,ksztalceniowiec-hufca,namiestnik-hufca')"
                         :active="
-                          route().current('material-tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'komendant-hufca%2Cosoba-od-pracy-z-kadra-w-choragwi%2Cmetodykprogramowiec-hufca%2Cnamiestnik-hufca%2Cksztalceniowiec-hufca%2Cnamiestnik-hufca'
                           })
                         "
                       >
@@ -739,8 +739,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'komendant-choragwi,osoba-od-pracy-z-kadra-w-choragwi,metodykprogramowiec-choragwi,czlonek-referatu,ksztalceniowiec-choragwi,ksi-choragwi')"
                         :active="
-                          route().current('material-tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'komendant-choragwi%2Cosoba-od-pracy-z-kadra-w-choragwi%2Cmetodykprogramowiec-choragwi%2Cczlonek-referatu%2Cksztalceniowiec-choragwi%2Cksi-choragwi'
                           })
                         "
                       >
@@ -749,8 +749,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'kwatermistrzobsluga-baz,finanse,organizacjabiuro,promocja,ruch-przyjaciol-harcerstwa')"
                         :active="
-                          route().current('material-tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'kwatermistrzobsluga-baz%2Cfinanse%2Corganizacjabiuro%2Cpromocja%2Cruch-przyjaciol-harcerstwa'
                           })
                         "
                       >
@@ -759,8 +759,8 @@ const headline = ref(null);
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'kurs-przewodnikowski,kurs-podharcmistrzowski,kurs-harcmistrzowski')"
                         :active="
-                          route().current('material-tag', {
-                            tag: '2-konspekt-programowy'
+                          route().current('materials.tags', {
+                            tags: 'kurs-przewodnikowski%2Ckurs-podharcmistrzowski%2Ckurs-harcmistrzowski'
                           })
                         "
                       >
