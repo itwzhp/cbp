@@ -38,11 +38,11 @@ const headline = ref(null);
             <div
               class="flex items-center justify-between md:justify-center border-gray-100 py-3 md:space-x-10"
             >
-              <div class="hidden md:flex">
+              <div class="hidden md:flex mb-5">
                 <ApplicationLogo />
               </div>
               <!-- Hamburger -->
-              <div class="-mr-2 flex items-center sm:hidden">
+              <div class="-mr-2 flex items-center md:hidden">
                 <button
                   class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
                   @click="showingNavigationDropdown = !showingNavigationDropdown"
@@ -85,7 +85,7 @@ const headline = ref(null);
               block: showingNavigationDropdown,
               hidden: !showingNavigationDropdown,
             }"
-            class="sm:hidden"
+            class="md:hidden"
           >
             <div class="pt-2 pb-3 space-y-1">
               <div class="flex justify-center">
@@ -487,20 +487,6 @@ const headline = ref(null);
                       >
                         Planowanie wychowawcze
                       </ResponsiveNavLink>
-                    </template>
-                  </Dropdown>
-                  <Dropdown width="48">
-                    <template #trigger>
-                      <NavButton
-                        :active="
-                          route().current('materials.tag', {
-                            tag: '2-konspekt-ksztalceniowy',
-                          }) ||
-                            route().current('materials.tag', {
-                              tag: '2-konspekt-programowy',
-                            })
-                        "
-                      />
                     </template>
                   </Dropdown>
                   <Dropdown width="48">
