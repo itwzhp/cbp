@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Domains\Materials\Models;
 
 use App\Domains\Materials\Factories\TagFactory;
@@ -15,19 +16,20 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 /**
- * @property int                        id
- * @property string                     name
- * @property string|null                slug
- * @property int                        taxonomy_id
- * @property int|null                   parent_id
- * @property int|null                   wp_id
- * @property Carbon                     created_at
- * @property Carbon                     updated_at
- * @property-read Taxonomy              taxonomy
- * @property-read Tag|null              parent
+ * @property int id
+ * @property string name
+ * @property string|null slug
+ * @property int taxonomy_id
+ * @property int|null parent_id
+ * @property int|null wp_id
+ * @property Carbon created_at
+ * @property Carbon updated_at
+ * @property-read Taxonomy taxonomy
+ * @property-read Tag|null parent
  * @property-read Collection|Material[] materials
  *
  * @method static Builder findBySlugs(array $slugs)
+ * @method static Builder notHidden()
  *
  * @mixin Eloquent
  */
@@ -80,6 +82,11 @@ class Tag extends Model implements HasMedia
 
             return $builder;
         });
+    }
+
+    public function scopeNotHidden(Builder $builder): Builder
+    {
+        return $builder->whereRelation('taxonomy', 'is_hidden', false);
     }
 
     protected static function newFactory(): TagFactory

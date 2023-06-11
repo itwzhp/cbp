@@ -2,7 +2,6 @@
 namespace App\Domains\Materials\Models;
 
 use App\Domains\Materials\Factories\TaxonomyFactory;
-use App\Domains\Materials\Models\Scopes\TaxonomyNotHiddenScope;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,11 +28,6 @@ class Taxonomy extends Model
         'name',
         'slug',
     ];
-
-    protected static function booted()
-    {
-        static::addGlobalScope(TaxonomyNotHiddenScope::class);
-    }
 
     public function tags(): HasMany
     {

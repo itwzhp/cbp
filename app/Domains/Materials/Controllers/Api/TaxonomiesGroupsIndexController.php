@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Domains\Materials\Controllers\Api;
 
 use App\Domains\Materials\Models\Tag;
@@ -13,7 +14,8 @@ class TaxonomiesGroupsIndexController extends Controller
     {
         return Fractal::create()
             ->collection(
-                Tag::with('taxonomy')
+                Tag::notHidden()
+                    ->with('taxonomy')
                     ->get()
                     ->groupBy('taxonomy_id')
             )
