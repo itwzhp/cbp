@@ -13,8 +13,8 @@ class MaterialBackwardCompatibilityController extends Controller
         $material = Material::where('slug', $search)->first();
 
         if ($material === null) {
-            $search = Str::replace("-", " ", $search);
-            
+            $search = Str::replace('-', ' ', $search);
+
             return redirect(route('materials.index') . "?search={$search}");
         }
 

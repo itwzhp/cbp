@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Domains\Materials\Controllers;
 
 use App\Domains\Materials\Models\Material;
@@ -19,7 +18,7 @@ class MaterialsController extends Controller
     {
         return Inertia::render(ComponentsHelper::MATERIALS)
             ->with([
-                'search' => $request->input('search')
+                'search' => $request->input('search'),
             ]);
     }
 
