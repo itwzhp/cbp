@@ -28,22 +28,22 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        Registered::class                    => [
+        Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        SocialiteWasCalled::class            => [
+        SocialiteWasCalled::class => [
             MicrosoftExtendSocialite::class . '@handle',
         ],
         UserLoggedInViaSocialiteEvent::class => [
             AdjustUserEmailConfirmationListener::class,
         ],
-        MaterialChangedEvent::class          => [
+        MaterialChangedEvent::class => [
             ClearCachedZipListener::class,
         ],
-        StateChanged::class                  => [
+        StateChanged::class => [
             LogMaterialStateChangeListener::class,
         ],
-        ReviewStartedEvent::class            => [],
+        ReviewStartedEvent::class => [],
     ];
 
     /**

@@ -20,7 +20,7 @@ class MotifsRepository
     public function get(int $wpId): Tag
     {
         if ($wpId > 6) {
-            throw  new \InvalidArgumentException('Wrong default motif');
+            throw new \InvalidArgumentException('Wrong default motif');
         }
 
         return $this->motifTaxonomy->tags->sortBy('id')[$wpId - 1];

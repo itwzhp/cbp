@@ -21,7 +21,7 @@ class AttachmentsRepository
                 $path,
                 $file->getContent(),
                 [
-                    'CacheControl'    => 'max-age=315360000, no-transform, public',
+                    'CacheControl' => 'max-age=315360000, no-transform, public',
                 ]
             );
 

@@ -13,7 +13,7 @@ class AttachImagesToTagsCommand extends Command
     public function __invoke()
     {
         $this->attachThumbsToCategories();
-//        $this->attachThumbsToCZRs();
+        //        $this->attachThumbsToCZRs();
     }
 
     private function attachThumbsToCategories(): void

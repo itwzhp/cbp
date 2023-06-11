@@ -18,7 +18,7 @@ class MaterialUpdateController extends AbstractAdminController
     public function delete(Material $material)
     {
         if ($this->user->cannot('delete', $material)) {
-            throw  new UnauthorizedException('Nie możesz tego zrobić');
+            throw new UnauthorizedException('Nie możesz tego zrobić');
         }
 
         $material->delete();

@@ -32,7 +32,7 @@ class CopyWpFilesCommand extends Command
                 $filePath,
                 $this->local->get($filePath),
                 [
-                    'CacheControl'    => 'max-age=315360000, no-transform, public',
+                    'CacheControl' => 'max-age=315360000, no-transform, public',
                 ]
             );
         }

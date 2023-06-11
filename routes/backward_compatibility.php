@@ -3,4 +3,4 @@
 use App\Domains\Materials\Controllers\MaterialBackwardCompatibilityController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/{type}/{material:slug}', MaterialBackwardCompatibilityController::class);
+Route::get('/{type}/{material?}', MaterialBackwardCompatibilityController::class);

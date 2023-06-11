@@ -37,7 +37,7 @@ class MaterialIndexController extends Controller
                 ->transformWith(new DefaultMaterialTransformer())
                 ->serializeWith(ArraySerializer::class)
                 ->toArray(),
-            'meta'    => [
+            'meta' => [
                 'page'        => $materialsBuilder->currentPage(),
                 'size'        => static::SIZE_PER_PAGE,
                 'hasNextPage' => $materialsBuilder->hasMorePages(),

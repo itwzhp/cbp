@@ -42,10 +42,10 @@ class Zalacznik
             'print_color' => PrintColorEnum::fromWp(
                 $this->post->getPostmetas('wpcf-kolor-wydruku')?->value('meta_value')
             ),
-            'thickness'   => ThicknessEnum::fromWp(
+            'thickness' => ThicknessEnum::fromWp(
                 $this->post->getPostmetas('wpcf-grubosc')?->value('meta_value')
             ),
-            'size'        => SizeEnum::fromWp(
+            'size' => SizeEnum::fromWp(
                 $this->post->getPostmetas('wpcf-wielkosc-kartki')?->value('meta_value')
             ),
             'comment'     => $this->post->getPostmetas('wpcf-zalacznik-uwagi')?->value('meta_value'),

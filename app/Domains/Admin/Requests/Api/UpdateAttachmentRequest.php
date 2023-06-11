@@ -23,7 +23,7 @@ class UpdateAttachmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'element'     => [
+            'element' => [
                 'nullable',
                 'string',
             ],
@@ -33,17 +33,17 @@ class UpdateAttachmentRequest extends FormRequest
                 'string',
                 PrintColorEnum::rules(),
             ],
-            'thickness'   => [
+            'thickness' => [
                 'nullable',
                 'string',
                 ThicknessEnum::rules(),
             ],
-            'size'        => [
+            'size' => [
                 'nullable',
                 'string',
                 SizeEnum::rules(),
             ],
-            'comment'     => [
+            'comment' => [
                 'nullable',
                 'string',
             ],
