@@ -48,6 +48,10 @@ onMounted(() => {
       scrollContent.scrollTop = 0;
     }
   });
+
+  if(usePage().props.search){
+    store.getData(usePage().props.search,[]);
+  }
 });
 
 onUnmounted(() => {
