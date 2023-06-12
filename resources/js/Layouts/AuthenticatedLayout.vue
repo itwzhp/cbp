@@ -369,11 +369,11 @@ const headline = ref(null);
           </div>
         </nav>
         <nav class="print:hidden border-b border-gray-100 print:hidden">
-          <div class="max-w-7xl max-h-16 mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-center h-16">
+          <div class="max-w-7xl max-h-22 xl:max-h-16 mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-center max-h-22 xl:h-16">
               <div class="flex">
                 <!-- Navigation Links -->
-                <div class="max-h-16 hidden space-x-8 sm:-my-px sm:flex">
+                <div class="max-h-22 xl:max-h-16 hidden space-x-8 sm:-my-px sm:flex">
                   <NavLink
                     :href="route('about')"
                     :active="route().current('about')"
