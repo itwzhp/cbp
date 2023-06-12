@@ -1,6 +1,7 @@
 <script setup>
-  import { onMounted, ref } from 'vue';
+  import { onMounted, ref, watch } from 'vue';
   import axios from 'axios';
+  import debounce from 'lodash.debounce';
   import { Link } from '@inertiajs/vue3';
   import StateBagde from '@/Components/Admin/StateBagde.vue';
   import EmptyTableRow from '@/Components/Admin/EmptyTableRow.vue';
@@ -14,6 +15,22 @@
   const isLoading = ref(false);
   const emptyRows = [...Array(15).keys()];
   const emptyCols = [...Array(7).keys()];
+
+  const scope = ref('');
+  const state = ref('');
+  const search = ref('');
+
+  watch(
+    [search],
+    debounce(() => {
+      requestData();
+    }, 1000)
+  );
+
+  watch(
+    [scope, state],
+    () => requestData()
+  );
 
   const calculatePaginationControls = (pagination) => {
     return {
@@ -36,6 +53,11 @@
     if (next) params.page = pagination.value.links.next.split('page=')[1];
     if (prev) params.page = pagination.value.links.previous.split('page=')[1];
     if (pageNumber) params.page = pageNumber;
+
+    if (scope.value.length) params.scope = scope.value;
+    if (state.value.length) params.state = state.value;
+    if (search.value.length) params.search = search.value;
+
     isLoading.value = true;
     axios
       .get('/api/admin/materials', { params })
@@ -72,9 +94,10 @@
         <div>
           <select
             id="small"
+            v-model="scope"
             class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="all">
+            <option value="">
               Wszystkie
             </option>
             <option value="reviewed">
@@ -88,9 +111,10 @@
         <div>
           <select
             id="small"
+            v-model="state"
             class="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="all">
+            <option value="">
               Wszystkie
             </option>
             <option value="draft">
@@ -129,6 +153,7 @@
               </div>
               <input
                 id="table-search"
+                v-model="search"
                 type="text"
                 class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                 placeholder="Wyszukaj"
