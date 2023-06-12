@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Domains\Materials\Models;
 
 use App\Domains\Materials\Factories\TagFactory;

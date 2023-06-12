@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Domains\Materials\Controllers\Api;
 
 use App\Domains\Materials\Models\Tag;

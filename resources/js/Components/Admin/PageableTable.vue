@@ -100,10 +100,10 @@
             <option value="">
               Wszystkie
             </option>
-            <option value="reviewed">
+            <option value="reviewer">
               Recenzowane przeze mnie
             </option>
-            <option value="creator">
+            <option value="owner">
               Tylko moje
             </option>
           </select>

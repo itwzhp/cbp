@@ -18,8 +18,9 @@ class MaterialsIndexController extends Controller
         /** @var User $user */
         $user = Auth::user();
         /** @var LengthAwarePaginator $builder */
-        $builder = MaterialAccessBuilder::forUser($user)
+        $builder = MaterialAccessBuilder::forUser($user, $request->input('scope'))
             ->search($request->input('search'))
+            ->forState($request->state())
             ->withType()
             ->with('owner')
             ->orderBy('created_at', 'desc')

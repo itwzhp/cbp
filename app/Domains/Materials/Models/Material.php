@@ -191,6 +191,15 @@ class Material extends Model implements HasMedia
         ]);
     }
 
+    public function scopeforState(Builder $builder, ?string $state = null): Builder
+    {
+        if (empty($state)) {
+            return $builder;
+        }
+
+        return $builder->whereState('state', $state);
+    }
+
     public function getTagsGrouped(): Collection
     {
         return $this->tags->groupBy('taxonomy_id');

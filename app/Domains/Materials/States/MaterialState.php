@@ -1,11 +1,22 @@
 <?php
 namespace App\Domains\Materials\States;
 
+use Illuminate\Support\Arr;
 use Spatie\ModelStates\State;
 use Spatie\ModelStates\StateConfig;
 
 abstract class MaterialState extends State
 {
+    const NAMES = [
+        Draft::class            => 'draft',
+        InReview::class         => 'review',
+        ChangesRequested::class => 'changes',
+        Pending::class          => 'pending',
+        Published::class        => 'published',
+        Rejected::class         => 'rejected',
+        Archived::class         => 'archived',
+    ];
+
     public static function config(): StateConfig
     {
         return parent::config()
@@ -38,14 +49,11 @@ abstract class MaterialState extends State
 
     public function toSimplifiedString(): string
     {
-        return match ($this->getValue()) {
-            Draft::class            => 'draft',
-            InReview::class         => 'review',
-            ChangesRequested::class => 'changes',
-            Pending::class          => 'pending',
-            Published::class        => 'published',
-            Rejected::class         => 'rejected',
-            Archived::class         => 'archived',
-        };
+        return Arr::get(static::NAMES, $this->getValue(), '');
+    }
+
+    public static function getStatesValidationRule(): string
+    {
+        return 'in:' . implode(',', array_values(static::NAMES));
     }
 }

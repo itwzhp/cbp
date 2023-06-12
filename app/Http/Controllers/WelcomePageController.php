@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Domains\Materials\Models\Tag;
@@ -19,8 +18,8 @@ class WelcomePageController extends Controller
     {
         return Inertia::render('Welcome')
             ->with([
-                'slider' => $this->getSlider(),
-                'topics' => $this->getTopics(),
+                'slider'      => $this->getSlider(),
+                'topics'      => $this->getTopics(),
                 'suggestions' => $this->getSuggestions(),
             ]);
     }
@@ -46,51 +45,51 @@ class WelcomePageController extends Controller
             return [
                 [
                     'name' => 'Konspekty zuchowe',
-                    'url' => route('materials.tag', [$konspektTag, $zuchyTag]),
+                    'url'  => route('materials.tag', [$konspektTag, $zuchyTag]),
                 ],
                 [
                     'name' => 'Konspekty harcerskie',
-                    'url' => route('materials.tag', [$konspektTag, $harcerzeTag]),
+                    'url'  => route('materials.tag', [$konspektTag, $harcerzeTag]),
                 ],
                 [
                     'name' => 'Konspekty starszoharcerskie',
-                    'url' => route('materials.tag', [$konspektTag, $harcerzeStarsiTag]),
+                    'url'  => route('materials.tag', [$konspektTag, $harcerzeStarsiTag]),
                 ],
                 [
                     'name' => 'Konspekty wędrownicze',
-                    'url' => route('materials.tag', [$konspektTag, $wedrownicyTag]),
+                    'url'  => route('materials.tag', [$konspektTag, $wedrownicyTag]),
                 ],
                 [
                     'name' => 'Konspekty kształceniowe',
-                    'url' => route('materials.tag', [$konspektKsztalceniowyTag]),
+                    'url'  => route('materials.tag', [$konspektKsztalceniowyTag]),
                 ],
                 [
                     'name' => 'Gry programowe',
-                    'url' => route('materials.tag', [$graProgramowaTag]),
+                    'url'  => route('materials.tag', [$graProgramowaTag]),
                 ],
                 [
                     'name' => 'Gry kształceniowe',
-                    'url' => route('materials.tag', [$graKsztalceniowaTag]),
+                    'url'  => route('materials.tag', [$graKsztalceniowaTag]),
                 ],
                 [
                     'name' => 'Propozycje programowe',
-                    'url' => route('materials.tag', [$propozycjeTag]),
+                    'url'  => route('materials.tag', [$propozycjeTag]),
                 ],
                 [
                     'name' => 'Poradniki',
-                    'url' => route('materials.tag', [$poradnikiTag]),
+                    'url'  => route('materials.tag', [$poradnikiTag]),
                 ],
                 [
                     'name' => 'Czasopisma',
-                    'url' => route('materials.tag', [$czasopismaTag]),
+                    'url'  => route('materials.tag', [$czasopismaTag]),
                 ],
                 [
                     'name' => 'Artykuły',
-                    'url' => route('materials.tag', [$artykulyTag]),
+                    'url'  => route('materials.tag', [$artykulyTag]),
                 ],
                 [
                     'name' => 'Programy pracy i szkoleń',
-                    'url' => route('materials.tag', [$programTag]),
+                    'url'  => route('materials.tag', [$programTag]),
                 ],
             ];
         });
