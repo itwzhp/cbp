@@ -18,7 +18,7 @@ import 'vue3-carousel/dist/carousel.css';
               <CarouselSlider class="mb-5" />
               <div class="mt-12">
                 <h1 class="text-3xl font-semibold sm:w-1/2">
-                  Proponowane tematy
+                  Znajdź materiał
                 </h1>
                 <Topics class="my-5" />
               </div>
