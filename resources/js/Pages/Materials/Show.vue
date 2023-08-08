@@ -188,7 +188,7 @@ const filterFields = (fields, type)=>{
             >
               <div class="flex justify-between content-center items-center">
                 <h4 class="text-lg font-semibold mb-2">
-                  Załączniki do wydruku
+                  Załączniki
                 </h4>
                 <button
                   :disabled="downloadInProgress"
