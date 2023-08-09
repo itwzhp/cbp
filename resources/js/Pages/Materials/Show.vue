@@ -65,22 +65,6 @@ const filterFields = (fields, type)=>{
           </Print>
         </div>
       </div>
-      <div
-        class="p-6 print:p-1 flex justify-between align-middle border-b-2 border-gray-200"
-      >
-        <div>
-          <img
-            :src="$page.props.material.owner.avatar"
-            class="inline-block w-6 h-6 rounded-full"
-          >
-          {{ $page.props.material.owner.name }}
-        </div>
-        <p class="text-base text-gray-500 text-sm">
-          <i class="fa fa-calendar text-gray-500" />
-          {{ $filters.dateFormat($page.props.material.published_at) }}
-        </p>
-      </div>
-
       <div class="p-6">
         <h2 class="font-semibold text-3xl text-gray-800 leading-tight font-medium mb-2">
           <a :href="route('materials.show', $page.props.material.slug)">{{
@@ -188,7 +172,7 @@ const filterFields = (fields, type)=>{
             >
               <div class="flex justify-between content-center items-center">
                 <h4 class="text-lg font-semibold mb-2">
-                  Załączniki do wydruku
+                  Załączniki
                 </h4>
                 <button
                   :disabled="downloadInProgress"

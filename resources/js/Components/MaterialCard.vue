@@ -40,10 +40,6 @@ const props = defineProps({
         </div>
         <div class="mb-2">
           <div><i class="fa fa-user text-cbp-200" /> {{ props.item.author }}</div>
-          <p class="text-base text-gray-500 text-sm">
-            <i class="fa fa-calendar text-gray-500" />
-            {{ $filters.dateFormat(props.item.published_at) }}
-          </p>
         </div>
       </div>
     </div>
