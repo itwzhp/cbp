@@ -68,6 +68,18 @@ class Tag extends Model implements HasMedia
             ->saveSlugsTo('slug');
     }
 
+    public function scopeWithoutExcluded(Builder $builder): Builder
+    {
+        return $builder->whereHas('taxonomy', function (Builder $subquery) {
+            return $subquery->whereNotIn('slug', [
+                'inne',
+                'metodyka',
+                'typ-materialu',
+                'cele-zrownowazonego-rozwoju',
+            ]);
+        });
+    }
+
     public function scopeFindBySlugs(Builder $query, array $slugs = []): Builder
     {
         if (empty($slugs)) {
