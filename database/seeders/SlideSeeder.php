@@ -15,7 +15,7 @@ class SlideSeeder extends Seeder
                 'img' => public_path('/images/planowanie.jpg'),
             ],
             [
-                'url' => route('materials.tags', ['harcerrz-i-natura']),
+                'url' => route('materials.tags', ['harcerz-i-natura']),
                 'img' => public_path('/images/oboz.jpg'),
             ],
             [
