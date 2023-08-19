@@ -29,6 +29,7 @@ use Spatie\Sluggable\SlugOptions;
  *
  * @method static Builder findBySlugs(array $slugs)
  * @method static Builder notHidden()
+ * @method static Builder withoutExcluded()
  *
  * @mixin Eloquent
  */
@@ -76,6 +77,7 @@ class Tag extends Model implements HasMedia
                 'metodyka',
                 'typ-materialu',
                 'cele-zrownowazonego-rozwoju',
+                'typ',
             ]);
         });
     }

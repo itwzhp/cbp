@@ -27,28 +27,28 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
 /**
- * @property      int                     $id
- * @property      int                     $user_id
- * @property      int|null                $licence_id
- * @property      string                  $title
- * @property      string                  $slug
- * @property      string|null             $description
- * @property      int|null                $wp_id
- * @property      MaterialState           $state
- * @property      Carbon                  $created_at
- * @property      Carbon                  $updated_at
- * @property      Carbon|null             $published_at
+ * @property      int $id
+ * @property      int $user_id
+ * @property      int|null $licence_id
+ * @property      string $title
+ * @property      string $slug
+ * @property      string|null $description
+ * @property      int|null $wp_id
+ * @property      MaterialState $state
+ * @property      Carbon $created_at
+ * @property      Carbon $updated_at
+ * @property      Carbon|null $published_at
  * @property-read Collection|Attachment[] $attachments
- * @property-read User                    $owner
- * @property-read Collection|Tag[]        $tags
- * @property-read Collection|Field[]      $fields
- * @property-read Collection|Setup[]      $setups
- * @property-read Collection|Scenario[]   $scenarios
- * @property-read string|null             $author
- * @property-read int|null                $authors_count
- * @property-read Licence|null            $licence
- * @property-read Collection|Review[]     $reviews
- * @property-read string|null             $type
+ * @property-read User $owner
+ * @property-read Collection|Tag[] $tags
+ * @property-read Collection|Field[] $fields
+ * @property-read Collection|Setup[] $setups
+ * @property-read Collection|Scenario[] $scenarios
+ * @property-read string|null $author
+ * @property-read int|null $authors_count
+ * @property-read Licence|null $licence
+ * @property-read Collection|Review[] $reviews
+ * @property-read string|null $type
  *
  * @method static Builder published()
  * @method static Builder search(string $search)
@@ -203,6 +203,15 @@ class Material extends Model implements HasMedia
     public function getTagsGrouped(): Collection
     {
         return $this->tags->groupBy('taxonomy_id');
+    }
+
+    public function getTagsWithoutExcludedGrouped(): Collection
+    {
+        return $this
+            ->tags()
+            ->withoutExcluded()
+            ->get()
+            ->groupBy('taxonomy_id');
     }
 
     public function toSearchableArray(): array
