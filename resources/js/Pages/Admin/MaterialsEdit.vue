@@ -50,6 +50,15 @@ const props = usePage().props.material;
             <MaterialFields type="author" />
           </div>
           <div class="mb-3">
+            <MaterialFields type="proofreader" />
+          </div>
+          <div class="mb-3">
+            <MaterialFields type="typesetter" />
+          </div>
+          <div class="mb-3">
+            <MaterialFields type="translator" />
+          </div>
+          <div class="mb-3">
             <MaterialTags />
           </div>
           <div class="mb-3">

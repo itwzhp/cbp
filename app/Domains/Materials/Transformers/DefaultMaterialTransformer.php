@@ -6,6 +6,7 @@ use App\Domains\Materials\Models\Enums\FieldTypeEnum;
 use App\Domains\Materials\Models\Field;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Users\Transformers\OwnerTransformer;
+use Illuminate\Support\Arr;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\NullResource;
@@ -56,7 +57,7 @@ class DefaultMaterialTransformer extends TransformerAbstract
 
     public function includeTaxonomies(Material $material): Collection
     {
-        return $this->collection($material->getTagsGrouped(), new TagGroupTransformer());
+        return $this->collection($material->excludedMaterialTaxonomies(), new TagGroupTransformer());
     }
 
     public function includeFields(Material $material): Collection

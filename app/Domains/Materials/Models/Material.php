@@ -4,6 +4,7 @@ namespace App\Domains\Materials\Models;
 use App\Domains\Files\ImagesHelper;
 use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\Factories\MaterialFactory;
+use App\Domains\Materials\Helpers\TaxonomiesToNotIncludeEnum;
 use App\Domains\Materials\Models\Scopes\MaterialTypeScope;
 use App\Domains\Materials\States\MaterialState;
 use App\Domains\Materials\States\Published;
@@ -203,6 +204,11 @@ class Material extends Model implements HasMedia
     public function getTagsGrouped(): Collection
     {
         return $this->tags->groupBy('taxonomy_id');
+    }
+
+    public function excludedMaterialTaxonomies(): Collection
+    {
+        return $this->tags()->excludedTaxonomies()->get()->groupBy('taxonomy_id');
     }
 
     public function toSearchableArray(): array
