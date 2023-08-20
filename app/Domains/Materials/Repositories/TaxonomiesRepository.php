@@ -17,7 +17,7 @@ class TaxonomiesRepository
         return Taxonomy::where('slug', 'cele-zrownowazonego-rozwoju')->first();
     }
 
-    public function getMethodology(): ?Taxonomy
+    public function getMethodics(): ?Taxonomy
     {
         return Taxonomy::where('slug', 'metodyka')->first();
     }

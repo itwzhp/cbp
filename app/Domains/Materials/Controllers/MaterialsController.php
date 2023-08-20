@@ -25,27 +25,31 @@ class MaterialsController extends Controller
     public function show(Material $material, TaxonomiesRepository $taxonomiesRepository)
     {
         $czrTax = $taxonomiesRepository->getCZR();
-        $metodologyTax = $taxonomiesRepository->getMethodology();
+        $methodicsTax = $taxonomiesRepository->getMethodics();
         $material->load('tags.media');
 
         return Inertia::render(ComponentsHelper::MATERIALS_SHOW)
             ->with([
-                'material' => fractal($material)
+                'material'    => fractal($material)
                     ->transformWith(new FullMaterialTransformer())
                     ->serializeWith(new ArraySerializer())
                     ->toArray(),
-                'czr' => fractal()
+                'czr'         => fractal()
                     ->collection(
-                        $material->tags->where('taxonomy_id', $czrTax->id)
+                        $material
+                            ->tags
+                            ->where('taxonomy_id', $czrTax->id)
                             ->sortBy('name', SORT_NATURAL)
                     )
                     ->transformWith(new TagWithIconTransformer())
                     ->serializeWith(new ArraySerializer()),
-                'methodology' => fractal()
-                        ->collection(
-                            $material->tags->where('taxonomy_id', $metodologyTax->id)
-                                ->sortBy('name', SORT_NATURAL)
-                        )
+                'methodics' => fractal()
+                    ->collection(
+                        $material
+                            ->tags
+                            ->where('taxonomy_id', $methodicsTax->id)
+                            ->sortBy('name', SORT_NATURAL)
+                    )
                     ->transformWith(new TagWithIconTransformer())
                     ->serializeWith(new ArraySerializer()),
             ]);

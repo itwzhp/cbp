@@ -6,7 +6,6 @@ use App\Domains\Materials\Models\Enums\FieldTypeEnum;
 use App\Domains\Materials\Models\Field;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Users\Transformers\OwnerTransformer;
-use Illuminate\Support\Arr;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\NullResource;
