@@ -48,7 +48,7 @@ class MaterialsController extends Controller
                         $material
                             ->tags
                             ->where('taxonomy_id', $methodicsTax->id)
-                            ->sortBy('name', SORT_NATURAL)
+                            ->sortBy('id')
                     )
                     ->transformWith(new TagWithIconTransformer())
                     ->serializeWith(new ArraySerializer()),

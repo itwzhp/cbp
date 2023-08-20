@@ -31,24 +31,43 @@ import {Link} from '@inertiajs/vue3';
       </Link>
     </div>
 
-    <hr class="mt-5 mb-5">
+    <hr
+      class="mt-5 mb-5"
+    >
     <Authors :fields="$page.props.material.fields" />
+
     <hr class="mt-5 mb-5">
     <h3 class="text-lg font-bold">
-      Cele Zrównoważonego Rozwoju
+      Licencja
     </h3>
-    <div class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5">
-      <Link
-        v-for="czrTag in $page.props.czr"
-        :key="czrTag.id"
-        :href="route('materials.tag', czrTag.slug)"
-        :alt="czrTag.name"
+    <a
+      v-if="$page.props.material.licence"
+      :href="$page.props.material.licence.url"
+      target="_blank"
+    >
+      <img
+        :src="$page.props.material.licence.icon"
+        :alt="$page.props.material.licence.name"
       >
-        <Avatar
-          :img-src="czrTag.icon"
-          :tooltip="czrTag.name"
-        />
-      </Link>
+    </a>
+    <div>
+      <hr class="mt-5 mb-5">
+      <h3 class="text-lg font-bold">
+        Cele Zrównoważonego Rozwoju
+      </h3>
+      <div class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5">
+        <Link
+          v-for="czrTag in $page.props.czr"
+          :key="czrTag.id"
+          :href="route('materials.tag', czrTag.slug)"
+          :alt="czrTag.name"
+        >
+          <Avatar
+            :img-src="czrTag.icon"
+            :tooltip="czrTag.name"
+          />
+        </Link>
+      </div>
     </div>
   </div>
 </template>
