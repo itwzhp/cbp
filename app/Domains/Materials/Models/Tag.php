@@ -29,6 +29,7 @@ use Spatie\Sluggable\SlugOptions;
  *
  * @method static Builder findBySlugs(array $slugs)
  * @method static Builder notHidden()
+ * @method static Builder withoutExcluded()
  *
  * @mixin Eloquent
  */
@@ -68,13 +69,15 @@ class Tag extends Model implements HasMedia
             ->saveSlugsTo('slug');
     }
 
-    public function scopeExcludedTaxonomies(Builder $builder): Builder
+    public function scopeWithoutExcluded(Builder $builder): Builder
     {
-        return $builder->whereHas('taxonomy', function ($whereHasTaxonomies){
-            $whereHasTaxonomies->whereNotIn('slug', [
+        return $builder->whereHas('taxonomy', function (Builder $subquery) {
+            return $subquery->whereNotIn('slug', [
+                'inne',
                 'metodyka',
                 'typ-materialu',
                 'cele-zrownowazonego-rozwoju',
+                'typ',
             ]);
         });
     }
