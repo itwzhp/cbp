@@ -44,6 +44,30 @@ const types = new Map([
       addTypeLabel: 'Dodaj autora',
     },
   ],
+  [
+    'proofreader',
+    {
+      sectionRemovable: false,
+      sectionDescription: 'Korekta',
+      addTypeLabel: 'Dodaj Korektora',
+    },
+  ],
+  [
+    'typesetter',
+    {
+      sectionRemovable: false,
+      sectionDescription: 'Skład',
+      addTypeLabel: 'Dodaj członków składu',
+    },
+  ],
+  [
+    'translator',
+    {
+      sectionRemovable: false,
+      sectionDescription: 'Tłumaczenie',
+      addTypeLabel: 'Dodaj tłumaczy',
+    },
+  ],
 ]);
 
 const requestResultInfoTime = 5000;

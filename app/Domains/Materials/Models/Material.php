@@ -4,6 +4,7 @@ namespace App\Domains\Materials\Models;
 use App\Domains\Files\ImagesHelper;
 use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\Factories\MaterialFactory;
+use App\Domains\Materials\Helpers\TaxonomiesToNotIncludeEnum;
 use App\Domains\Materials\Models\Scopes\MaterialTypeScope;
 use App\Domains\Materials\States\MaterialState;
 use App\Domains\Materials\States\Published;

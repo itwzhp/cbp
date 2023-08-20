@@ -8,6 +8,9 @@ enum FieldTypeEnum: string
     use EnumCasesValidationTrait;
 
     case AUTHOR = 'author';
+    case TRANSLATOR = 'translator';
+    case TYPESETTER = 'typesetter';
+    case PROOFREADER = 'proofreader';
     case REDACTOR = 'redactor';
     case REVIEWER = 'reviewer';
     case CONTENT = 'content';
