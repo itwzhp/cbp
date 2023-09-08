@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', WelcomePageController::class)->name('welcome');
 Route::get('/o-cbp', [PagesController::class, 'about'])->name('about');
+Route::get('/cele-zrownowazonego-rozwoju', [PagesController::class, 'czrPage'])->name('czrPage');
+Route::get('/cele-zrownowazonego-rozwoju-1', [PagesController::class, 'czrPage1'])->name('czrPage1');
 
 Route::prefix('/m')
     ->as('materials.')
