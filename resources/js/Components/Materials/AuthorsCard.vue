@@ -8,42 +8,66 @@ import {Link} from '@inertiajs/vue3';
   <div
     class="max-w-sm p-3 bg-white border border-gray-200 rounded-md shadow-sm ml-1 print:hidden"
   >
-    <!--  TODO dodać v-ifa gdy metodyka jest pusta, żeby nie wyświetlał diva -->
-    <h3 class="text-lg font-bold mb-2 mt-4">
+    <h3
+      v-if="$page.props.methodics.length > 0"
+      class="text-lg font-bold mb-2 mt-4"
+    >
       Metodyka
     </h3>
-    <div class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5">
+    <div
+      v-if="$page.props.methodics.length > 0"
+      class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5"
+    >
       <Link
-        v-for="methodologyTag in $page.props.methodology"
-        :key="methodologyTag.id"
-        :href="route('materials.tag', methodologyTag.slug)"
-        :alt="methodologyTag.name"
+        v-for="methodic in $page.props.methodics"
+        :key="methodic.id"
+        :href="route('materials.tag', methodic.slug)"
+        :alt="methodic.name"
       >
         <Avatar
-          :img-src="methodologyTag.icon"
-          :tooltip="methodologyTag.name"
+          :img-src="methodic.icon"
+          :tooltip="methodic.name"
         />
       </Link>
     </div>
 
-    <hr class="mt-5 mb-5">
+    <hr
+      class="mt-5 mb-5"
+    >
     <Authors :fields="$page.props.material.fields" />
+
     <hr class="mt-5 mb-5">
     <h3 class="text-lg font-bold">
-      Cele Zrównoważonego Rozwoju
+      Licencja
     </h3>
-    <div class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5">
-      <Link
-        v-for="czrTag in $page.props.czr"
-        :key="czrTag.id"
-        :href="route('materials.tag', czrTag.slug)"
-        :alt="czrTag.name"
+    <a
+      v-if="$page.props.material.licence"
+      :href="$page.props.material.licence.url"
+      target="_blank"
+    >
+      <img
+        :src="$page.props.material.licence.icon"
+        :alt="$page.props.material.licence.name"
       >
-        <Avatar
-          :img-src="czrTag.icon"
-          :tooltip="czrTag.name"
-        />
-      </Link>
+    </a>
+    <div>
+      <hr class="mt-5 mb-5">
+      <h3 class="text-lg font-bold">
+        Cele Zrównoważonego Rozwoju
+      </h3>
+      <div class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5">
+        <Link
+          v-for="czrTag in $page.props.czr"
+          :key="czrTag.id"
+          :href="route('materials.tag', czrTag.slug)"
+          :alt="czrTag.name"
+        >
+          <Avatar
+            :img-src="czrTag.icon"
+            :tooltip="czrTag.name"
+          />
+        </Link>
+      </div>
     </div>
   </div>
 </template>

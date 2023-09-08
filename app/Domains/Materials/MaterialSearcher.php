@@ -74,7 +74,7 @@ EOL;
         $query = Material::query();
 
         if (!empty($this->search)) {
-            $query = $query->search($this->search);
+            $query = $this->recursiveSearch($query, $this->search);
         }
 
         if (count($this->tags) === 0) {
@@ -128,5 +128,18 @@ EOL;
         })->implode(" {$operator} ");
 
         return $query->whereRaw(str_replace('?', $tagsOrString, static::SQL_SUBQUERY));
+    }
+
+    protected function recursiveSearch(Builder $query, ?string $search): Builder
+    {
+        /** @var Builder $narrowedQuery */
+        $narrowedQuery = (clone $query)->search($search);
+
+        while ($narrowedQuery->count() === 0 && strlen($search) > 2) {
+            $search = substr($search, -1);
+            $narrowedQuery = (clone $query)->search($search);
+        }
+
+        return $narrowedQuery;
     }
 }

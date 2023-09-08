@@ -12,6 +12,7 @@ class LicenceTransformer extends TransformerAbstract
             'id'   => $licence->id,
             'name' => $licence->name,
             'url'  => $licence->url,
+            'icon' => $licence->icon,
         ];
     }
 }

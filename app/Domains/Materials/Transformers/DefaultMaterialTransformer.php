@@ -57,7 +57,7 @@ class DefaultMaterialTransformer extends TransformerAbstract
 
     public function includeTaxonomies(Material $material): Collection
     {
-        return $this->collection($material->excludedMaterialTaxonomies(), new TagGroupTransformer());
+        return $this->collection($material->getTagsWithoutExcludedGrouped(), new TagGroupTransformer());
     }
 
     public function includeFields(Material $material): Collection

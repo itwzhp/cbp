@@ -206,9 +206,14 @@ class Material extends Model implements HasMedia
         return $this->tags->groupBy('taxonomy_id');
     }
 
-    public function excludedMaterialTaxonomies(): Collection
+
+    public function getTagsWithoutExcludedGrouped(): Collection
     {
-        return $this->tags()->excludedTaxonomies()->get()->groupBy('taxonomy_id');
+        return $this
+            ->tags()
+            ->withoutExcluded()
+            ->get()
+            ->groupBy('taxonomy_id');
     }
 
     public function toSearchableArray(): array

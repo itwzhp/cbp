@@ -38,7 +38,7 @@ class PostsMigrationCommand extends Command
         'wpcf-zakres'                => FieldTypeEnum::SCOPE,
     ];
 
-    protected $signature = 'wp:posts';
+    protected $signature = 'wp:posts {post?}';
 
     protected UsersRepository $usersRepository;
 
@@ -54,6 +54,12 @@ class PostsMigrationCommand extends Command
 
     public function __invoke()
     {
+        if (!empty($this->argument('post'))) {
+            $this->importSinglePost($this->argument('post'));
+
+            return;
+        }
+
         $this->importPostsOfType('poradniki');
         $this->importPostsOfType('programy');
         $this->importPostsOfType('propozycje');
@@ -369,5 +375,12 @@ class PostsMigrationCommand extends Command
         }
 
         $material->tags()->attach($tag->id);
+    }
+
+    private function importSinglePost(int $postId): void
+    {
+        $post = Post::published()->where('ID', $postId)->first();
+
+        $this->importPost($post);
     }
 }

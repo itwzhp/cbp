@@ -1,26 +1,45 @@
 <?php
 namespace Database\Seeders;
 
-use App\Domains\Materials\Models\Tag;
 use App\Domains\Visuals\Models\Slide;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 
 class SlideSeeder extends Seeder
 {
     public function run()
     {
-        /** @var Collection|Tag[] $tags */
-        $tags = Tag::inRandomOrder()->take(3)->get();
+        $slides = [
+            [
+                'url' => route('materials.tags', ['planowanie-w-druzynie']),
+                'img' => public_path('/images/planowanie.jpg'),
+            ],
+            [
+                'url' => route('materials.tags', ['harcerz-i-natura']),
+                'img' => public_path('/images/oboz.jpg'),
+            ],
+            [
+                'url' => route('materials.tags', ['system-malych-grup']),
+                'img' => public_path('/images/zastep.jpg'),
+            ],
+            [
+                'url' => route('materials.tags', ['wychowanie-ekonomiczne']),
+                'img' => public_path('/images/ekonomia.jpg'),
+            ],
+        ];
 
-        foreach ($tags as $tag) {
+        Slide::truncate();
+
+        foreach ($slides as $slideData) {
             /** @var Slide $slide */
             $slide = Slide::firstOrCreate([
-                'url' => route('materials.tag', $tag),
+                'url' => $slideData['url'],
             ]);
-            $slide->addMedia(public_path('images/scout.jpg'))
+            $slide->addMedia($slideData['img'])
                 ->preservingOriginal()
                 ->toMediaCollection('slide');
         }
+
+        Cache::clear();
     }
 }

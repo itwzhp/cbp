@@ -22,7 +22,7 @@ const props = defineProps({
         >
       </div>
       <div class="p-5">
-        <p class="mb-3 font-normal text-base text-gray-700 text-left">
+        <p class="mt-1 mb-2 font-medium text-xl text-gray-700 text-left">
           {{ slide.title }}
         </p>
       </div>
