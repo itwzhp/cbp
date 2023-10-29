@@ -10,4 +10,5 @@ class ComponentsHelper
     public const ADMIN_MATERIALS_INDEX = 'Admin/MaterialsIndex';
     public const ADMIN_MATERIALS_CREATE = 'Admin/MaterialsCreate';
     public const ADMIN_MATERIALS_EDIT = 'Admin/MaterialsEdit';
+    public const ADMIN_TAXONOMIES_INDEX = 'Admin/TaxonomiesIndex';
 }

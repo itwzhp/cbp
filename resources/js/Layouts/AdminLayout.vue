@@ -13,7 +13,8 @@ const pages = ref(new Map([
   ['admin.materials.index', 'Materiały'],
   ['admin.materials.create', 'Dodaj materiał'],
   ['admin.materials.edit', 'Edytuj materiał'],
-  ['admin.settings', 'Ustawienia']
+  ['admin.settings', 'Ustawienia'],
+  ['admin.taxonomies.index', 'Tagi'],
 ]));
 
 const initDropdownMenu = () => {
@@ -167,6 +168,18 @@ const toggleMobileSidebar = () => {
             </AdminNavLink>
           </li>
         </ContentAccess>
+
+        <ContentAccess :permissions="[permissions.MANAGE_MATERIALS]">
+          <li>
+            <AdminNavLink
+              href="admin.taxonomies.index"
+              icon="fa-solid fa-tag"
+            >
+              {{ pages.get('admin.taxonomies.index') }}
+            </AdminNavLink>
+          </li>
+        </ContentAccess>
+
         <li>
           <AdminNavLink
             href="admin.settings"
