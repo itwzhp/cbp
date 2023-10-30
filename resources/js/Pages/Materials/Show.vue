@@ -126,9 +126,6 @@ const filterFields = (fields, type)=>{
               Realizowane wymagania z instrumentów metodycznych:
             </FieldsList>
 
-            <FieldsList :fields="filterFields($page.props.material.fields, 'scope')">
-              Zakres tematyczny:
-            </FieldsList>
             <AuthorsCard class="md:hidden" />
           </div>
 
