@@ -368,7 +368,7 @@ const headline = ref(null);
             </div>
           </div>
         </nav>
-        <nav class="print:hidden border-b border-gray-100 print:hidden">
+        <nav class="print:hidden">
           <div class="max-w-7xl max-h-22 xl:max-h-16 mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-center max-h-22 xl:h-16">
               <div class="flex">
