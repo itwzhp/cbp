@@ -194,7 +194,7 @@ jobs:
         run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan optimize"
 
       - name: Final
-        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan wp:tag_images"
+        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan db:seed --class=MetSeeder"
 
   deploy-azure:
     name: Deploy Azure storage

@@ -53,7 +53,7 @@ class MicrosoftLoginController extends Controller
         }
     }
 
-    protected function findUser(string $email)
+    protected function findUser(string $email): ?User
     {
         $prefix = explode('@', $email)[0];
         $domains = implode('|', config('cbp.domains'));
