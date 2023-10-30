@@ -24,7 +24,7 @@ class MicrosoftLoginController extends Controller
 
         $this->validateUser($msUser);
 
-        $user = User::where('email', $msUser->email)->first();
+        $user = $this->findUser($msUser->email);
 
         if ($user === null) {
             $user = $this->register($msUser);
@@ -51,5 +51,13 @@ class MicrosoftLoginController extends Controller
         if (!Str::endsWith($msUser->email, config('cbp.domains'))) {
             throw new UnauthorizedException('Login spoza domen ZHP');
         }
+    }
+
+    protected function findUser(string $email): ?User
+    {
+        $prefix = explode('@', $email)[0];
+        $domains = implode('|', config('cbp.domains'));
+
+        return User::where('email', 'regex', "{$prefix}@({$domains})")->first();
     }
 }
