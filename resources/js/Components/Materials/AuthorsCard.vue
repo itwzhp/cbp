@@ -16,7 +16,7 @@ import {Link} from '@inertiajs/vue3';
     </h3>
     <div
       v-if="$page.props.methodics.length > 0"
-      class="grid grid-cols-3 gap-2 place-items-center mt-5 mb-5"
+      class="grid grid-cols-4 gap-2 place-items-center mt-5 mb-5"
     >
       <Link
         v-for="methodic in $page.props.methodics"
@@ -48,6 +48,7 @@ import {Link} from '@inertiajs/vue3';
       <img
         :src="$page.props.material.licence.icon"
         :alt="$page.props.material.licence.name"
+        style="width: 50%"
       >
     </a>
     <div>
