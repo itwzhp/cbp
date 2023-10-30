@@ -43,9 +43,6 @@ class TagsSeeder extends Seeder
 
     public function run()
     {
-        $this->seedMotifs();
-        $this->seedTypes();
-        $this->seedForms();
     }
 
     private function seedMotifs()
