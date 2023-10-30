@@ -53,11 +53,11 @@ class MicrosoftLoginController extends Controller
         }
     }
 
-    protected function findUser(string $email): ?User
+    protected function findUser(string $email)
     {
         $prefix = explode('@', $email)[0];
         $domains = implode('|', config('cbp.domains'));
 
-        return User::where('email', 'regex', "{$prefix}@({$domains})")->first();
+        return User::whereRaw('email regexp ' . "'{$prefix}@({$domains})'")->first();
     }
 }
