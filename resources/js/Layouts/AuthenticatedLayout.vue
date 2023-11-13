@@ -272,7 +272,7 @@ const headline = ref(null);
                 &emsp;W otoczeniu przyrody
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                :href="route('materials.tags', 'wychowanie-druchowe-i-religijne')"
+                :href="route('materials.tags', 'wychowanie-duchowe-i-religijne')"
                 :active="route().current('materials.tag', { tag: '2-poradnik' })"
               >
                 &emsp;Wychowanie duchowe i religijne
@@ -333,7 +333,7 @@ const headline = ref(null);
               <ResponsiveNavLink
                 :block="true"
               >
-                Zorganizowane Drużyny
+                Organizacja Drużyny
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'bezpieczenstwo')"
@@ -605,14 +605,14 @@ const headline = ref(null);
                         W otoczeniu przyrody
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
-                        :href="route('materials.tags', 'wychowanie-druchowe-i-religijne')"
+                        :href="route('materials.tags', 'wychowanie-duchowe-i-religijne')"
                         :active="
                           route().current('materials.tags', {
-                            tags: 'wychowanie-druchowe-i-religijne',
+                            tags: 'wychowanie-duchowe-i-religijne',
                           })
                         "
                       >
-                        Wychowanie druchowe i religijne
+                        Wychowanie duchowe i religijne
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'wychowanie-ekonomiczne')"
@@ -632,7 +632,7 @@ const headline = ref(null);
                           })
                         "
                       >
-                        Wychowanie Patriotyczne
+                        Wychowanie patriotyczne
                       </ResponsiveNavLink>
                     </template>
                   </Dropdown>
@@ -671,7 +671,7 @@ const headline = ref(null);
                           })
                         "
                       >
-                        Pierwsza Pomoc
+                        Pierwsza pomoc
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'zdrowie')"
@@ -708,7 +708,7 @@ const headline = ref(null);
                   <Dropdown>
                     <template #trigger>
                       <NavButton>
-                        Zorganizowane Drużyny
+                        Organizacja Drużyny
                       </NavButton>
                     </template>
                     <template #content>
