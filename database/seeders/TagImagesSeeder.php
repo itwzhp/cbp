@@ -18,7 +18,7 @@ class TagImagesSeeder extends Seeder
     {
         $tag->addMedia(public_path('/images/' . $image))
             ->preservingOriginal()
-            ->toMediaCollection('icon');
+            ->toMediaCollection('thumb');
     }
 
     protected function seedHSW()
