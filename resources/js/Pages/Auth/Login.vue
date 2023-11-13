@@ -88,7 +88,7 @@ const submit = () => {
     <div class="text-center">
       <a
         :href="route('ms.login')"
-        class="inline-flex items-center px-4 py-2 bg-gray-100 border border-zhp-500 rounded-md font-semibold text-xs text-zhp-500 uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150"
+        class="inline-flex items-center px-4 py-2 bg-gray-100 border border-zhp-500 rounded-md font-semibold text-xs text-zhp-500 uppercase tracking-widest hover:bg-gray-200 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150"
       >
         <ZHPLogo class="mr-5" />
         Zaloguj za pomocą <br>konta ZHP
