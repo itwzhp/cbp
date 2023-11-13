@@ -43,7 +43,7 @@ const headline = ref(null);
                 <ApplicationLogo />
               </div>
               <div class="hidden md:block">
-                <NavElement>
+                <NavElement class="mr-5">
                   <span
                     class="cursor-pointer"
                     @click="displaySearchDialog()"
