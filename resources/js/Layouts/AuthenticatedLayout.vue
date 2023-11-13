@@ -844,7 +844,6 @@ const headline = ref(null);
       <main
         id="main-content"
         class="main-content"
-        :style="`height: calc(100vh - ${headline?.clientHeight || 0}px); overflow: auto`"
       >
         <slot />
         <Footer />
