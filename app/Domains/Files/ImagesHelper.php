@@ -26,6 +26,8 @@ class ImagesHelper
 
     protected ?Taxonomy $typeTaxonomy;
 
+    protected ?Taxonomy $hswTaxonomy;
+
     public function __construct()
     {
         $this->typeTaxonomy = Taxonomy::where('slug', static::TYPE_SLUG)->first();
