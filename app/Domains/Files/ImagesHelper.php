@@ -29,7 +29,7 @@ class ImagesHelper
     public function __construct()
     {
         $this->typeTaxonomy = Taxonomy::where('slug', static::TYPE_SLUG)->first();
-        $this->hswTaxonomy = Taxonomy::where('alug', static::HSW_TYPE)->first();
+        $this->hswTaxonomy = Taxonomy::where('slug', static::HSW_TYPE)->first();
     }
 
     public function getFallbackForMaterial(Material $material): string
