@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import {ref} from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -9,20 +9,20 @@ import NavButton from '@/Components/NavButton.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import SearchSlideOver from '@/Components/Materials/SearchSlideOver.vue';
 import Footer from '@/Layouts/Footer.vue';
-import { useSearchStore } from '@/store/search.store';
-import { Link } from '@inertiajs/vue3';
+import {useSearchStore} from '@/store/search.store';
+import {Link} from '@inertiajs/vue3';
 
 const showingNavigationDropdown = ref(false);
 const store = useSearchStore();
 const displaySearchDialog = (responsiveNavigationAction) => {
-  if (responsiveNavigationAction) {
-    showingNavigationDropdown.value = false;
-    setTimeout(() => {
-      store.displayDialog();
-    }, 300);
-  } else {
-    store.displayDialog();
-  }
+    if (responsiveNavigationAction) {
+        showingNavigationDropdown.value = false;
+        setTimeout(() => {
+            store.displayDialog();
+        }, 300);
+    } else {
+        store.displayDialog();
+    }
 };
 const headline = ref(null);
 </script>
@@ -36,10 +36,73 @@ const headline = ref(null);
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Primary Navigation Menu -->
             <div
-              class="flex items-center justify-between md:justify-center border-gray-100 py-3 md:space-x-10"
+              class="flex items-center justify-between border-gray-100 py-3 md:space-x-10"
             >
+              <div style="min-width: 100px" />
               <div class="hidden md:flex mb-5">
                 <ApplicationLogo />
+              </div>
+              <div class="hidden md:block">
+                <NavElement>
+                  <span
+                    class="cursor-pointer"
+                    @click="displaySearchDialog()"
+                  >
+                    <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+                    Wyszukaj
+                  </span>
+                </NavElement>
+                <NavElement>
+                  <Dropdown
+                    v-if="$page.props.auth.user"
+                    align="right"
+                    width="48"
+                  >
+                    <template #trigger>
+                      <span class="inline-flex rounded-md">
+                        <button
+                          type="button"
+                          class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                        >
+                          {{ $page.props.auth.user.name }}
+                          <svg
+                            class="ml-2 -mr-0.5 h-4 w-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                              clip-rule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                      </span>
+                    </template>
+                    <template #content>
+                      <DropdownLink
+                        v-if="$page.props.auth.user"
+                        :href="route('admin.dashboard')"
+                      >
+                        Panel administracyjny
+                      </DropdownLink>
+                      <DropdownLink
+                        :href="route('logout')"
+                        method="post"
+                        as="button"
+                      >
+                        Wyloguj
+                      </DropdownLink>
+                    </template>
+                  </Dropdown>
+                  <Link
+                    v-if="!$page.props.auth.user"
+                    :href="route('login')"
+                  >
+                    Zaloguj się
+                  </Link>
+                </NavElement>
               </div>
               <!-- Hamburger -->
               <div class="-mr-2 flex items-center md:hidden">
@@ -96,6 +159,12 @@ const headline = ref(null);
                 :href="route('login')"
               >
                 Zaloguj
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                class="bg-cbp-100/10"
+                :href="route('materials.index')"
+              >
+                Najnowsze
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 class="bg-cbp-100/10"
@@ -754,66 +823,14 @@ const headline = ref(null);
                       </ResponsiveNavLink>
                     </template>
                   </Dropdown>
-                  <NavElement>
-                    <span
-                      class="cursor-pointer"
-                      @click="displaySearchDialog()"
-                    >
-                      <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
-                      Wyszukaj
-                    </span>
-                  </NavElement>
-                  <NavElement>
-                    <Dropdown
-                      v-if="$page.props.auth.user"
-                      align="right"
-                      width="48"
-                    >
-                      <template #trigger>
-                        <span class="inline-flex rounded-md">
-                          <button
-                            type="button"
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                          >
-                            {{ $page.props.auth.user.name }}
-                            <svg
-                              class="ml-2 -mr-0.5 h-4 w-4"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"
-                              />
-                            </svg>
-                          </button>
-                        </span>
-                      </template>
-                      <template #content>
-                        <DropdownLink
-                          v-if="$page.props.auth.user"
-                          :href="route('admin.dashboard')"
-                        >
-                          Panel administracyjny
-                        </DropdownLink>
-                        <DropdownLink
-                          :href="route('logout')"
-                          method="post"
-                          as="button"
-                        >
-                          Wyloguj
-                        </DropdownLink>
-                      </template>
-                    </Dropdown>
-                    <Link
-                      v-if="!$page.props.auth.user"
-                      :href="route('login')"
-                    >
-                      Zaloguj się
-                    </Link>
-                  </NavElement>
+                  <NavLink
+                    :href="route('materials.index')"
+                  >
+                    <!--                    <span class="border-2 border-cbp-100 rounded-xl p-3">-->
+                    <i class="fa-brands fa-pagelines text-cbp-300 mr-2" />
+                    Najnowsze materiały
+                    <!--                    </span>-->
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -854,8 +871,8 @@ const headline = ref(null);
 </template>
 <style scoped>
 @media print {
-  .main-content {
-    height: auto !important;
-  }
+    .main-content {
+        height: auto !important;
+    }
 }
 </style>
