@@ -23,18 +23,24 @@ class ImagesHelper
         'recenzja'               => 'recenzja.png',
     ];
     const HSW_TYPE = 'harcerski-system-wychowawczy';
-    const HSW_LUT = [
-    ];
 
     protected ?Taxonomy $typeTaxonomy;
 
     public function __construct()
     {
         $this->typeTaxonomy = Taxonomy::where('slug', static::TYPE_SLUG)->first();
+        $this->hswTaxonomy = Taxonomy::where('alug', static::HSW_TYPE)->first();
     }
 
     public function getFallbackForMaterial(Material $material): string
     {
+        /** @var Tag $hswTag */
+        $hswTag = $material->tags->where('taxonomy_id', $this->hswTaxonomy->id ?? 0)->first();
+
+        if ($hswTag !== null) {
+            return $hswTag->thumb();
+        }
+
         /** @var Tag $typeTag */
         $typeTag = $material->tags->where('taxonomy_id', $this->typeTaxonomy->id ?? 0)->first();
 
