@@ -27,8 +27,12 @@ class ZipService
         return false;
     }
 
-    public function path(Material $material): string
+    public function path(Material $material): ?string
     {
+        if ($material->published_at === null) {
+            return null;
+        }
+
         return '/zip/'
             . $material->published_at->format('Y')
             . DIRECTORY_SEPARATOR
@@ -38,7 +42,13 @@ class ZipService
 
     public function deleteZipForMaterial(Material $material): void
     {
-        $this->filesystem->delete($this->path($material));
+        $path = $this->path($material);
+
+        if ($path === null) {
+            return;
+        }
+
+        $this->filesystem->delete($path);
     }
 
     protected function create(Material $material): void

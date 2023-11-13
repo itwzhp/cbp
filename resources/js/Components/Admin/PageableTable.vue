@@ -257,17 +257,27 @@
               <td class="px-6 py-4">
                 <StateBagde :state="material.state" />
               </td>
-              <ContentAccess :permissions="[permissions.CREATE_MATERIALS]">
-                <td class="px-6 py-4">
+              <td class="px-6 py-4">
+                <ContentAccess :permissions="[permissions.MANAGE_MATERIALS]">
                   <Link
                     :href="route('admin.materials.edit', material.id)"
-                    class="font-medium text-blue-600 hover:underline text-lg"
+                    class="font-medium text-blue-600 hover:underline text-lg ml-3"
                     title="Edytuj"
                   >
                     <font-awesome-icon icon="fa-solid fa-pen-to-square" />
                   </Link>
-                </td>
-              </ContentAccess>
+                </ContentAccess>
+                <ContentAccess :permissions="[permissions.MANAGE_MATERIALS]">
+                  <Link
+                    :href="route('admin.materials.destroy', material.id)"
+                    class="font-medium text-red-600 hover:underline text-lg ml-3"
+                    title="Edytuj"
+                    method="delete"
+                  >
+                    <font-awesome-icon icon="fa-solid fa-trash" />
+                  </Link>
+                </ContentAccess>
+              </td>
             </tr>
           </template>
           <template v-else>

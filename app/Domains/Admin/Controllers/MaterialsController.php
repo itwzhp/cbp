@@ -43,4 +43,11 @@ class MaterialsController extends Controller
 
         return Redirect::route('admin.materials.edit', $material);
     }
+
+    public function destroy(Material $material)
+    {
+        $material->delete();
+
+        return back();
+    }
 }

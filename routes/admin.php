@@ -15,6 +15,7 @@ Route::prefix('/materials')
         Route::get('/create', [MaterialsController::class, 'create'])->name('create');
         Route::get('/create/{preset}', [MaterialsController::class, 'new'])->name('new');
         Route::get('/{material}', [MaterialsController::class, 'edit'])->name('edit');
+        Route::delete('/{material}', [MaterialsController::class, 'destroy'])->name('destroy');
     });
 
 Route::prefix('/taxonomies')
