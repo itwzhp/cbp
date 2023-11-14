@@ -22,17 +22,13 @@ if (route().current() === 'materials.index') {
 let scrollContent;
 
 const addListener = () => {
-  scrollContent = document.getElementById('main-content');
-  scrollContent.addEventListener('scroll', handleScroll);
+  scrollContent = document.getElementsByTagName('body')[0];
+  scrollContent.onscroll = () => handleScroll();
 };
 
-const handleScroll = () => {
-  const eps = 2;
 
-  if (
-    scrollContent.scrollTop + scrollContent.clientHeight + eps >
-    scrollContent.scrollHeight
-  ) {
+const handleScroll = () => {
+  if (Math.round(window.scrollY + window.innerHeight) >= Math.round(document.body.scrollHeight)) {
     console.log('[scroll event] load next page...');
     store.getNextPage();
   }
