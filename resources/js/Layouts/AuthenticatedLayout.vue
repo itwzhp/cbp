@@ -858,10 +858,7 @@ const headline = ref(null);
       </div>
 
       <!-- Page Content -->
-      <main
-        id="main-content"
-        class="main-content"
-      >
+      <main class="main-content">
         <slot />
         <Footer />
       </main>
