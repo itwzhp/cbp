@@ -26,6 +26,13 @@ trait TagHasMedia
                 $this->addMediaConversion('thumb')
                     ->fit(Manipulations::FIT_FILL, 290, 192);
             });
+
+        $this->addMediaCollection('featured')
+            ->singleFile()
+            ->registerMediaConversions(function (Media $media) {
+                $this->addMediaConversion('featured')
+                    ->fit(Manipulations::FIT_FILL, 1333, 400);
+            });
     }
 
     public function icon(): ?string
@@ -36,5 +43,10 @@ trait TagHasMedia
     public function thumb(): ?string
     {
         return $this->getFirstMediaUrl('thumb', 'thumb');
+    }
+
+    public function featured(): ?string
+    {
+        return $this->getFirstMediaUrl('featured', 'featured');
     }
 }

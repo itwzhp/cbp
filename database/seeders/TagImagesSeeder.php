@@ -12,13 +12,14 @@ class TagImagesSeeder extends Seeder
     {
         $this->seedHSW();
         $this->seedTypes();
+        //        $this->seedTagIcons();
     }
 
-    protected function attachImg(Tag $tag, string $image): void
+    protected function attachImg(Tag $tag, string $image, string $collection = 'thumb'): void
     {
         $tag->addMedia(public_path('/images/' . $image))
             ->preservingOriginal()
-            ->toMediaCollection('thumb');
+            ->toMediaCollection($collection);
     }
 
     protected function seedHSW()
@@ -106,6 +107,7 @@ class TagImagesSeeder extends Seeder
 
             if (Str::endsWith($tag->slug, 'artykul')) {
                 $this->attachImg($tag, 'artykul.jpg');
+                $this->attachImg($tag, 'artykul_big.jpg', 'featured');
             }
 
             if (Str::endsWith($tag->slug, 'konspekt-ksztalceniowy')) {
@@ -120,5 +122,41 @@ class TagImagesSeeder extends Seeder
                 $this->attachImg($tag, 'recenzja.jpg');
             }
         }
+    }
+
+    protected function seedTagIcons(): void
+    {
+        //        $zuchyTag = Tag::where('slug', 'like', '%zuchy')->first();
+        //        $this->attachImg($zuchyTag, 'ikony/materialy_zuchowe.png', 'icon');
+        //
+        //        $harcerzeTag = Tag::where('slug', 'like', '%harcerze')->first();
+        //        $this->attachImg($harcerzeTag, 'ikony/materialy_harcerskie.png', 'icon');
+        //
+        //        $harcerzeStarsiTag = Tag::where('slug', 'like', '%harcerze-starsi')->first();
+        //        $this->attachImg($harcerzeStarsiTag, 'ikony/materialy_starszoharcerskie.png', 'icon');
+        //
+        //        $wedrownicyTag = Tag::where('slug', 'like', '%wedrownicy')->first();
+        //        $this->attachImg($wedrownicyTag, 'ikony/materialy_wedrownicze.png', 'icon');
+        //
+        //        $konspektKsztalceniowyTag = Tag::where('slug', 'like', '%konspekt-ksztalceniowy')->first();
+        //        $this->attachImg($konspektKsztalceniowyTag, 'ikony/konspekty_ksztalceniowe.png', 'icon');
+        //
+        //        $graKsztalceniowaTag = Tag::where('slug', 'like', '%gra-ksztalceniowa')->first();
+        //        $this->attachImg($graKsztalceniowaTag, 'ikony/gry_ksztalceniowe.png', 'icon');
+        //
+        //        $graProgramowaTag = Tag::where('slug', 'like', '%gra-programowa')->first();
+        //        $this->attachImg($graProgramowaTag, 'ikony/gry_programowe.png', 'icon');
+        //
+        //        $propozycjeTag = Tag::where('slug', 'like', '%propozycja-programowa')->first();
+        //        $this->attachImg($propozycjeTag, 'ikony/propozycje_programowe.png', 'icon');
+        //
+        //        $poradnikiTag = Tag::where('slug', 'like', '%poradnik')->first();
+        //        $this->attachImg($poradnikiTag, 'ikony/poradniki.png', 'icon');
+        //
+        //        $czasopismaTag = Tag::where('slug', 'like', '%czasopisma')->first();
+        //        $this->attachImg($czasopismaTag, 'ikony/czasopisma.png', 'icon');
+        //
+        //        $artykulyTag = Tag::where('slug', 'like', '%artykul')->first();
+        //        $this->attachImg($artykulyTag, 'ikony/artykuly.png', 'icon');
     }
 }

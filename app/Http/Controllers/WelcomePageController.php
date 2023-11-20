@@ -46,50 +46,57 @@ class WelcomePageController extends Controller
                 [
                     'name' => 'Konspekty zuchowe',
                     'url'  => route('materials.tag', [$konspektTag, $zuchyTag]),
+                    'icon' => url('images/ikony/materialy_zuchowe.png'),
                 ],
                 [
                     'name' => 'Konspekty harcerskie',
                     'url'  => route('materials.tag', [$konspektTag, $harcerzeTag]),
+                    'icon' => url('images/ikony/materialy_harcerskie.png'),
                 ],
                 [
                     'name' => 'Konspekty starszoharcerskie',
                     'url'  => route('materials.tag', [$konspektTag, $harcerzeStarsiTag]),
+                    'icon' => url('images/ikony/materialy_starszoharcerskie.png'),
                 ],
                 [
                     'name' => 'Konspekty wędrownicze',
                     'url'  => route('materials.tag', [$konspektTag, $wedrownicyTag]),
+                    'icon' => url('images/ikony/materialy_wedrownicze.png'),
                 ],
                 [
                     'name' => 'Konspekty kształceniowe',
                     'url'  => route('materials.tag', [$konspektKsztalceniowyTag]),
+                    'icon' => url('images/ikony/konspekty_ksztalceniowe.png'),
                 ],
                 [
                     'name' => 'Gry programowe',
                     'url'  => route('materials.tag', [$graProgramowaTag]),
+                    'icon' => url('images/ikony/gry_programowe.png'),
                 ],
                 [
                     'name' => 'Gry kształceniowe',
                     'url'  => route('materials.tag', [$graKsztalceniowaTag]),
+                    'icon' => url('images/ikony/gry_ksztalceniowe.png'),
                 ],
                 [
                     'name' => 'Propozycje programowe',
                     'url'  => route('materials.tag', [$propozycjeTag]),
+                    'icon' => url('images/ikony/propozycje_programowe.png'),
                 ],
                 [
                     'name' => 'Poradniki',
                     'url'  => route('materials.tag', [$poradnikiTag]),
+                    'icon' => url('images/ikony/poradniki.png'),
                 ],
                 [
                     'name' => 'Czasopisma',
                     'url'  => route('materials.tag', [$czasopismaTag]),
+                    'icon' => url('images/ikony/czasopisma.png'),
                 ],
                 [
                     'name' => 'Artykuły',
                     'url'  => route('materials.tag', [$artykulyTag]),
-                ],
-                [
-                    'name' => 'Programy pracy i szkoleń',
-                    'url'  => route('materials.tag', [$programTag]),
+                    'icon' => url('images/ikony/artykuly.png'),
                 ],
             ];
         });
