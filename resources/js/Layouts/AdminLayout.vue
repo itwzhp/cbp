@@ -99,6 +99,7 @@ const toggleMobileSidebar = () => {
                   :width="10"
                   :height="10"
                   class="rounded-full"
+                  :img-src="$page.props.auth.photo? 'data:image/jpeg;base64,'+$page.props.auth.photo : ''"
                 />
               </button>
             </div>
