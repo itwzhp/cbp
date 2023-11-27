@@ -24,7 +24,7 @@ import 'vue3-carousel/dist/carousel.css';
               </div>
               <div class="mt-12">
                 <h1 class="text-3xl font-semibold sm:w-1/2">
-                  Aktualne propozycje programowe
+                  Zajrzyj do...
                 </h1>
                 <h1 class="text-lg sm:w-1/2">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
