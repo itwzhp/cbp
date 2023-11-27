@@ -9,6 +9,7 @@ import SearchInputBadge from '@/Components/Materials/SearchInputBadge.vue';
 import { watchEffect } from 'vue';
 import Spinner from '@/Components/Spinner.vue';
 import { usePage } from '@inertiajs/vue3';
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 
 const tags = usePage().props.tags;
 const store = useSearchStore();
@@ -35,6 +36,7 @@ const handleScroll = () => {
 };
 
 const displayDialog = () => store.displayDialog();
+const clearFilters = () => store.clearTags();
 
 onMounted(() => {
   addListener();
@@ -62,7 +64,7 @@ onUnmounted(() => {
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 md:py-3 md:px-0 border-b border-gray-200">
-            <div class="pb-2">
+            <div class="pb-2 flex justify-between">
               <button
                 type="button"
                 class="font-bold border border-2 border-cbp-100 hover:border-cbp-300 px-3 py-2 text-xs font-medium text-center rounded focus:ring-1 focus:outline-none focus:cbp-300"
@@ -70,6 +72,15 @@ onUnmounted(() => {
               >
                 <font-awesome-icon icon="fa-solid fa-sliders" />
                 Wszystkie filtry
+              </button>
+              <button
+                v-if="store.tagIds.length > 0"
+                type="button"
+                class="font-bold border border-2 border-cbp-100 hover:border-cbp-300 px-3 py-2 text-xs font-medium text-center rounded focus:ring-1 focus:outline-none focus:cbp-300"
+                @click="clearFilters()"
+              >
+                <font-awesome-icon icon="fa-solid fa-broom" />
+                Wyczyść filtry
               </button>
             </div>
             <div v-if="store.getSearchInput?.length || store.getTagIds?.length">

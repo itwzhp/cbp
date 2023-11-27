@@ -144,6 +144,10 @@ export const useSearchStore = defineStore('search', {
     async clearInput() {
       this.input = null;
       return this.getData();
+    },
+    async clearTags(){
+        this.tagIds = [];
+        return this.getData();
     }
   },
 });
