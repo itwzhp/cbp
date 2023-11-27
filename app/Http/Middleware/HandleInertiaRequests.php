@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 use App\Domains\Users\Models\User;
 use App\Domains\Users\Roles\FrontendPermissionsAccessor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 
@@ -25,6 +26,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user'        => $user,
                 'permissions' => $this->getUserPermissions($user),
+                'photo'       => Cache::get('photo#' . $user->id),
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
