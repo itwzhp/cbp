@@ -49,6 +49,13 @@ const addTax = () => {
         refreshData();
     })
 }
+
+const deleteTag = (id) => {
+    axios.delete('/admin/tags/'+id).
+    then(() => {
+        refreshData();
+    })
+}
 </script>
 
 <template>
@@ -77,7 +84,28 @@ const addTax = () => {
             />
           </button>
         </div>
-        <div />
+        <div class="flex flex-wrap">
+          <div
+            v-for="tag in taxonomy.tags"
+            :key="tag.id"
+            class="border border-1 border-cbp-300 hover:border-cbp-300 px-2 py-1 m-0.5 text-xs font-medium text-center rounded focus:ring-1 focus:outline-none focus:cbp-300 text-white bg-cbp-100"
+          >
+            {{ tag.name }}
+            <button
+              class="border-white border rounded px-1"
+              @click="deleteTag(tag.id)"
+            >
+              <font-awesome-icon icon="fa-solid fa-times" />
+            </button>
+          </div>
+          <div>
+            <h3>Dodaj nowy tag:</h3>
+            <input type="text">
+            <button>
+              Dodaj
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <div>

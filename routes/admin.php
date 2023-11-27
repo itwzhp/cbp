@@ -2,6 +2,7 @@
 
 use App\Domains\Admin\Controllers\AdminController;
 use App\Domains\Admin\Controllers\MaterialsController;
+use App\Domains\Admin\Controllers\TagsController;
 use App\Domains\Admin\Controllers\TaxonomiesController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,10 @@ Route::prefix('/taxonomies')
         Route::post('/', [TaxonomiesController::class, 'store'])->name('store');
         Route::delete('/{taxonomy}', [TaxonomiesController::class, 'destroy'])->name('delete');
         Route::post('/{taxonomy}', [TaxonomiesController::class, 'update'])->name('update');
+    });
+
+Route::prefix('/tags')
+    ->as('tags.')
+    ->group(function () {
+        Route::delete('/{tag}', [TagsController::class, 'destroy'])->name('delete');
     });

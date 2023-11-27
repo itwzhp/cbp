@@ -5,6 +5,7 @@ import {Head} from '@inertiajs/vue3';
 
 <template>
   <Head title="Ustawienia" />
-
-  <AdminLayout />
+  <AdminLayout>
+    <img :src="'data:image/jpeg;base64,'+$page.props.auth.photo">
+  </AdminLayout>
 </template>
