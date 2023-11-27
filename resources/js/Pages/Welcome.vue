@@ -26,10 +26,6 @@ import 'vue3-carousel/dist/carousel.css';
                 <h1 class="text-3xl font-semibold sm:w-1/2">
                   Zajrzyj do...
                 </h1>
-                <h1 class="text-lg sm:w-1/2">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                  turpis arcu, consequat sit amet auctor sed, interdum nec metus.
-                </h1>
                 <Carousel class="my-5" />
               </div>
             </div>
