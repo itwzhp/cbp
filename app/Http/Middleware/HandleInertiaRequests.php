@@ -26,7 +26,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user'        => $user,
                 'permissions' => $this->getUserPermissions($user),
-                'photo'       => Cache::get('photo#' . $user?->id),
+                'photo'       => Cache::get('image#' . $user?->id),
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
