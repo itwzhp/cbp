@@ -1,27 +1,30 @@
 <?php
 namespace App\Domains\Users\Models;
 
+use App\Domains\Materials\Models\Material;
 use App\Domains\Users\Factories\UserFactory;
 use BackedEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
- * @property int         id
- * @property int         wp_id
- * @property string      name
- * @property string|null first_name
- * @property string|null last_name
- * @property string      email
- * @property Carbon|null email_verified_at
- * @property string      password
- * @property Carbon      created_at
- * @property Carbon      updated_at
+ * @property int             id
+ * @property int             wp_id
+ * @property string          name
+ * @property string|null     first_name
+ * @property string|null     last_name
+ * @property string          email
+ * @property Carbon|null     email_verified_at
+ * @property string          password
+ * @property Carbon          created_at
+ * @property Carbon          updated_at
+ * @property-read Material[] $materials
  */
 class User extends Authenticatable
 {
@@ -108,5 +111,10 @@ class User extends Authenticatable
         }
 
         return $this->parentHasRole($roles);
+    }
+
+    public function materials(): HasMany
+    {
+        return $this->hasMany(Material::class, 'user_id');
     }
 }
