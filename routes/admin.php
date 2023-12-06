@@ -32,5 +32,7 @@ Route::prefix('/taxonomies')
 Route::prefix('/tags')
     ->as('tags.')
     ->group(function () {
+        Route::post('/', [TagsController::class, 'store'])->name('store');
         Route::delete('/{tag}', [TagsController::class, 'destroy'])->name('delete');
+        Route::post('/{tag}', [TagsController::class, 'update'])->name('update');
     });
