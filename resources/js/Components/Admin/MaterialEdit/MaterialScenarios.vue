@@ -112,7 +112,7 @@ const sortScenarios = (scenarios) => {
 </script>
 <template>
   <div class="flex justify-between text-sm font-semibold pb-2">
-    <div>Scenariusze</div>
+    <div>Elementy konspektu</div>
     <div class="cursor-pointer">
       <span
         v-if="savedChanges"
@@ -135,7 +135,7 @@ const sortScenarios = (scenarios) => {
       :disabled="createScenarioInProgress"
       @click.prevent="createScenario($page.props.material)"
     >
-      Dodaj scenariusz
+      Dodaj element
     </button>
     <ul
       class="space-y-3"

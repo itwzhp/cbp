@@ -34,7 +34,9 @@ class MaterialsController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render(ComponentsHelper::ADMIN_MATERIALS_CREATE);
+        return Inertia::render(ComponentsHelper::ADMIN_MATERIALS_CREATE)->with([
+            'presets' => PresetEnum::options(),
+        ]);
     }
 
     public function new(PresetEnum $preset, MaterialsRepository $repository): RedirectResponse

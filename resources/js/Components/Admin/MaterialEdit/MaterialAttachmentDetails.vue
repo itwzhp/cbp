@@ -82,18 +82,6 @@ const updateAttachment = () => {
     <div>
       <ContentAccess :permissions="[permissions.UPDATE]">
         <label
-          for="element"
-          class="block mb-1 text-sm font-medium text-gray-900"
-        >Element</label>
-        <input
-          id="element"
-          v-model="element"
-          type="text"
-          :class="inputClasses"
-          placeholder="Element"
-          required
-        >
-        <label
           for="copies"
           class="block mb-1 text-sm font-medium text-gray-900"
         >Liczba kopii</label>
