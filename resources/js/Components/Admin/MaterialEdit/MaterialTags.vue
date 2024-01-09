@@ -7,6 +7,8 @@ import { useSearchStore } from '../../../store/search.store';
 import Taxonomy from '@/Components/Materials/Taxonomy.vue';
 
 const store = useSearchStore();
+store.getTaxonomiesAdmin();
+
 const materialId = usePage().props.material.id;
 
 const collapsed = ref(true);
@@ -123,7 +125,7 @@ const getMaterialTagIds = (materialTags) => {
     class="w-full bg-gray-50/50 bg-white border border-gray-200 rounded-lg p-3"
   >
     <template
-      v-for="(item, index) in store.getTaxonomiesData"
+      v-for="(item, index) in store.getTaxonomiesAdminData"
       :key="index"
     >
       <Taxonomy

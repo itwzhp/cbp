@@ -8,6 +8,7 @@ const defaultValues = {
   showDialog: false,
   data: [],
   taxonomies: [],
+  taxonomiesAdmin: [],
   page: null,
   refreshedAt: null,
   hasNextPage: false,
@@ -16,6 +17,7 @@ const defaultValues = {
 
 const searchUrl = route('api.materials.index');
 const taxonomiesUrl = route('api.taxonomies.index');
+const taxonomiesAdminUrl = route('admin.taxonomies.list');
 
 export const useSearchStore = defineStore('search', {
   state: () => defaultValues,
@@ -30,7 +32,8 @@ export const useSearchStore = defineStore('search', {
     getRefreshedAt: (state) => state.refreshedAt,
     getLoading: (state) => state.loading,
     getTagIds: (state) => state.tagIds,
-    getTaxonomiesData: (state) => state.taxonomies,
+      getTaxonomiesData: (state) => state.taxonomies,
+      getTaxonomiesAdminData: (state) => state.taxonomiesAdmin,
     getTagMode: (state) => state.tagMode,
     getTagDetails: (state) => {
       let flatTaxonomies = [];
@@ -124,6 +127,16 @@ export const useSearchStore = defineStore('search', {
         }
       } catch (error) {
         console.error('taxonimes get error');
+      }
+    },
+    async getTaxonomiesAdmin() {
+      try {
+              if (!this.taxonomiesAdmin?.length) {
+                  const request = await axios.get(taxonomiesAdminUrl);
+                  this.taxonomiesAdmin = [...request.data];
+              }
+          } catch (error) {
+              console.error('taxonimes get error');
       }
     },
     async pushTags(tagIds) {
