@@ -12,7 +12,7 @@ const showFooter = (currentRoute) =>
     class="flex flex-col bg-cbp-100 pt-4 pb-2.5 text-white print:hidden"
   >
     <div class="bg-cbp-300">
-      <div class="md:flex md:flex-row h-72 md:h-36 items-center max-w-7xl mx-auto pt-2 md:pt-0">
+      <div class="md:flex md:flex-row h-72 sm:h-80 md:h-36 items-center max-w-7xl mx-auto pt-2 md:pt-0">
         <div class="flex basis-1/6 pt-4 md:p-4 justify-center md:justify-start">
           <a
             href="https://zhp.pl/"
