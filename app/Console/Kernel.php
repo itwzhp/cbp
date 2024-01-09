@@ -11,6 +11,7 @@ use App\Domains\Migration\Commands\FixLinksInDescription;
 use App\Domains\Migration\Commands\MaterialsMergerCommand;
 use App\Domains\Migration\Commands\MergeAccountDuplicatesCommand;
 use App\Domains\Migration\Commands\PostsMigrationCommand;
+use App\Domains\Migration\Commands\ReattachAttachmentsCommand;
 use App\Domains\Migration\Commands\RefreshCommand;
 use App\Domains\Migration\Commands\RemoveDuplicateAttachmentsCommand;
 use App\Domains\Migration\Commands\SanitizeFieldsValuesCommand;
@@ -41,6 +42,7 @@ class Kernel extends ConsoleKernel
         PintCommand::class,
         MaterialsMergerCommand::class,
         MergeAccountDuplicatesCommand::class,
+        ReattachAttachmentsCommand::class,
     ];
 
     protected function schedule(Schedule $schedule): void
