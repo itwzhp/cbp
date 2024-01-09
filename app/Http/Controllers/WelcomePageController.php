@@ -28,7 +28,6 @@ class WelcomePageController extends Controller
     {
         return Cache::remember('topics', static::TTL, function () {
             $randomTag = Tag::first();
-            $konspektTag = Tag::where('slug', 'like', '%konspekt-programowy')->first() ?? $randomTag;
             $zuchyTag = Tag::where('slug', 'like', '%zuchy')->first() ?? $randomTag;
             $harcerzeTag = Tag::where('slug', 'like', '%harcerze')->first() ?? $randomTag;
             $harcerzeStarsiTag = Tag::where('slug', 'like', '%harcerze-starsi')->first() ?? $randomTag;
@@ -40,27 +39,26 @@ class WelcomePageController extends Controller
             $poradnikiTag = Tag::where('slug', 'like', '%poradnik')->first() ?? $randomTag;
             $czasopismaTag = Tag::where('slug', 'like', '%czasopisma')->first() ?? $randomTag;
             $artykulyTag = Tag::where('slug', 'like', '%artykul')->first() ?? $randomTag;
-            $programTag = Tag::where('slug', 'like', '%program')->first() ?? $randomTag;
 
             return [
                 [
-                    'name' => 'Konspekty zuchowe',
-                    'url'  => route('materials.tag', [$konspektTag, $zuchyTag]),
+                    'name' => 'Materiały zuchowe',
+                    'url'  => route('materials.tag', [$zuchyTag]),
                     'icon' => url('images/ikony/materialy_zuchowe.png'),
                 ],
                 [
-                    'name' => 'Konspekty harcerskie',
-                    'url'  => route('materials.tag', [$konspektTag, $harcerzeTag]),
+                    'name' => 'Materiały harcerskie',
+                    'url'  => route('materials.tag', [$harcerzeTag]),
                     'icon' => url('images/ikony/materialy_harcerskie.png'),
                 ],
                 [
-                    'name' => 'Konspekty starszoharcerskie',
-                    'url'  => route('materials.tag', [$konspektTag, $harcerzeStarsiTag]),
+                    'name' => 'Materiały starszoharcerskie',
+                    'url'  => route('materials.tag', [$harcerzeStarsiTag]),
                     'icon' => url('images/ikony/materialy_starszoharcerskie.png'),
                 ],
                 [
-                    'name' => 'Konspekty wędrownicze',
-                    'url'  => route('materials.tag', [$konspektTag, $wedrownicyTag]),
+                    'name' => 'Materiały wędrownicze',
+                    'url'  => route('materials.tag', [$wedrownicyTag]),
                     'icon' => url('images/ikony/materialy_wedrownicze.png'),
                 ],
                 [
