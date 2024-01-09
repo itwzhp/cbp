@@ -25,6 +25,11 @@ const displaySearchDialog = (responsiveNavigationAction) => {
     }
 };
 const headline = ref(null);
+
+const clearTaxonomies = () => {
+    store.clearTags();
+}
+
 </script>
 
 <template>
@@ -825,11 +830,10 @@ const headline = ref(null);
                   </Dropdown>
                   <NavLink
                     :href="route('materials.index')"
+                    @click="clearTaxonomies()"
                   >
-                    <!--                    <span class="border-2 border-cbp-100 rounded-xl p-3">-->
                     <i class="fa-brands fa-pagelines text-cbp-300 mr-2" />
                     Najnowsze materiały
-                    <!--                    </span>-->
                   </NavLink>
                 </div>
               </div>
