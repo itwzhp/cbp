@@ -1,43 +1,44 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import {ref, onMounted} from 'vue';
+import {Link} from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import AdminNavLink from '@/Components/Admin/AdminNavLink.vue';
 import Avatar from '@/Components/Avatar.vue';
 import ContentAccess from '@/Components/Admin/ContentAccess.vue';
-import { permissions } from '@/Components/Admin/permissions.js';
-import { Dropdown } from 'flowbite';
+import {permissions} from '@/Components/Admin/permissions.js';
+import {Dropdown} from 'flowbite';
 
 const pages = ref(new Map([
-  ['admin.dashboard', 'Dashboard'],
-  ['admin.materials.index', 'Materiały'],
-  ['admin.materials.create', 'Dodaj materiał'],
-  ['admin.materials.edit', 'Edytuj materiał'],
-  ['admin.settings', 'Ustawienia'],
-  ['admin.taxonomies.index', 'Tagi'],
+    ['admin.dashboard', 'Dashboard'],
+    ['admin.materials.index', 'Materiały'],
+    ['admin.materials.create', 'Dodaj materiał'],
+    ['admin.materials.edit', 'Edytuj materiał'],
+    ['admin.settings', 'Ustawienia'],
+    ['admin.taxonomies.index', 'Tagi'],
+    ['admin.users.index', 'Użytkownicy'],
 ]));
 
 const initDropdownMenu = () => {
-  const $targetEl = document.getElementById('dropdownMenu');
-  const $triggerEl = document.getElementById('dropdownButton');
-  const options = {
-    placement: 'bottom',
-    offsetSkidding: 0,
-    offsetDistance: 25,
-  };
-  if ($targetEl) {
-    const dropdown = new Dropdown($targetEl, $triggerEl, options);
-    dropdown.hide();
-  }
+    const $targetEl = document.getElementById('dropdownMenu');
+    const $triggerEl = document.getElementById('dropdownButton');
+    const options = {
+        placement: 'bottom',
+        offsetSkidding: 0,
+        offsetDistance: 25,
+    };
+    if ($targetEl) {
+        const dropdown = new Dropdown($targetEl, $triggerEl, options);
+        dropdown.hide();
+    }
 };
 
 onMounted(() => {
-  initDropdownMenu();
+    initDropdownMenu();
 });
 
 const mobileSidebarHidden = ref(true);
 const toggleMobileSidebar = () => {
-  mobileSidebarHidden.value = !mobileSidebarHidden.value;
+    mobileSidebarHidden.value = !mobileSidebarHidden.value;
 };
 </script>
 
@@ -187,6 +188,15 @@ const toggleMobileSidebar = () => {
             icon="fa-solid fa-gear"
           >
             {{ pages.get('admin.settings') }}
+          </AdminNavLink>
+        </li>
+
+        <li>
+          <AdminNavLink
+            href="admin.users.index"
+            icon="fa-solid fa-users"
+          >
+            {{ pages.get('admin.users.index') }}
           </AdminNavLink>
         </li>
       </ul>

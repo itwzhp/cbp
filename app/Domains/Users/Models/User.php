@@ -5,12 +5,14 @@ use App\Domains\Materials\Models\Material;
 use App\Domains\Users\Factories\UserFactory;
 use BackedEnum;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -25,6 +27,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property Carbon          created_at
  * @property Carbon          updated_at
  * @property-read Material[] $materials
+ * @property-read Role[]     $roles
  */
 class User extends Authenticatable
 {
@@ -116,5 +119,19 @@ class User extends Authenticatable
     public function materials(): HasMany
     {
         return $this->hasMany(Material::class, 'user_id');
+    }
+
+    public function scopeSearch(Builder $builder, string $search = null): Builder
+    {
+        if (empty($search)) {
+            return $builder;
+        }
+
+        return $builder->where(function (Builder $query) use ($search) {
+            $query
+                ->where('name', 'like', "%$search%")
+                ->orWhere('email', 'like', "%$search%");
+
+        });
     }
 }

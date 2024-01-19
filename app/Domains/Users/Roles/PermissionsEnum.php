@@ -12,5 +12,6 @@ enum PermissionsEnum: string
     case REVIEW_SET = 'review set';
     case MATERIAL_PUBLISH = 'publish materials';
     case MATERIAL_MANAGE = 'manage materials';
+    case USERS_MANAGE = 'manage users';
     case TAGS_MANAGE = 'manage tags';
 }

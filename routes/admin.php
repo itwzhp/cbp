@@ -4,6 +4,7 @@ use App\Domains\Admin\Controllers\AdminController;
 use App\Domains\Admin\Controllers\MaterialsController;
 use App\Domains\Admin\Controllers\TagsController;
 use App\Domains\Admin\Controllers\TaxonomiesController;
+use App\Domains\Admin\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -35,4 +36,12 @@ Route::prefix('/tags')
         Route::post('/', [TagsController::class, 'store'])->name('store');
         Route::delete('/{tag}', [TagsController::class, 'destroy'])->name('delete');
         Route::post('/{tag}', [TagsController::class, 'update'])->name('update');
+    });
+
+Route::prefix('/users')
+    ->as('users.')
+    ->group(function () {
+        Route::get('/', [UsersController::class, 'index'])->name('index');
+        Route::get('/{user}', [UsersController::class, 'edit'])->name('edit');
+        Route::delete('/{user}', [UsersController::class, 'destroy'])->name('destroy');
     });

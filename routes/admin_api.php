@@ -10,6 +10,7 @@ use App\Domains\Admin\Controllers\Api\MaterialUpdateController;
 use App\Domains\Admin\Controllers\Api\ScenariosController;
 use App\Domains\Admin\Controllers\Api\SetupsController;
 use App\Domains\Admin\Controllers\Api\TagsController;
+use App\Domains\Admin\Controllers\Api\UsersController;
 use App\Domains\Files\Controllers\Admin\Api\UploadMaterialAttachmentsController;
 use App\Domains\Users\Middlewares\UserCanEditMaterialMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -65,4 +66,12 @@ Route::name('materials.')
                         Route::delete('/{scenario}', [ScenariosController::class, 'destroy'])->name('destroy');
                     });
             });
+    });
+
+Route::name('users.')
+    ->prefix('users')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', [UsersController::class, 'index'])->name('index');
+        Route::post('/{user}/roles', [UsersController::class, 'roles'])->name('roles');
     });
