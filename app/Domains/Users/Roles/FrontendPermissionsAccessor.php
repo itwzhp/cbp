@@ -13,6 +13,7 @@ class FrontendPermissionsAccessor implements Arrayable
         PermissionsEnum::MATERIAL_PUBLISH,
         PermissionsEnum::MATERIAL_REVIEW,
         PermissionsEnum::MATERIAL_MANAGE,
+        PermissionsEnum::USERS_MANAGE,
     ];
 
     protected User $user;
