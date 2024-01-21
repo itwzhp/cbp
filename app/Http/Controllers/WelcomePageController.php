@@ -39,6 +39,7 @@ class WelcomePageController extends Controller
             $poradnikiTag = Tag::where('slug', 'like', '%poradnik')->first() ?? $randomTag;
             $czasopismaTag = Tag::where('slug', 'like', '%czasopisma')->first() ?? $randomTag;
             $artykulyTag = Tag::where('slug', 'like', '%artykul')->first() ?? $randomTag;
+            $recenzjeTag = Tag::where('slug', 'like', '%recenzja')->first() ?? $randomTag;
 
             return [
                 [
@@ -62,9 +63,9 @@ class WelcomePageController extends Controller
                     'icon' => url('images/ikony/materialy_wedrownicze.png'),
                 ],
                 [
-                    'name' => 'Konspekty kształceniowe',
-                    'url'  => route('materials.tag', [$konspektKsztalceniowyTag]),
-                    'icon' => url('images/ikony/konspekty_ksztalceniowe.png'),
+                    'name' => 'Propozycje programowe',
+                    'url'  => route('materials.tag', [$propozycjeTag]),
+                    'icon' => url('images/ikony/propozycje_programowe.png'),
                 ],
                 [
                     'name' => 'Gry programowe',
@@ -77,9 +78,9 @@ class WelcomePageController extends Controller
                     'icon' => url('images/ikony/gry_ksztalceniowe.png'),
                 ],
                 [
-                    'name' => 'Propozycje programowe',
-                    'url'  => route('materials.tag', [$propozycjeTag]),
-                    'icon' => url('images/ikony/propozycje_programowe.png'),
+                    'name' => 'Konspekty kształceniowe',
+                    'url'  => route('materials.tag', [$konspektKsztalceniowyTag]),
+                    'icon' => url('images/ikony/konspekty_ksztalceniowe.png'),
                 ],
                 [
                     'name' => 'Poradniki',
@@ -94,6 +95,11 @@ class WelcomePageController extends Controller
                 [
                     'name' => 'Artykuły',
                     'url'  => route('materials.tag', [$artykulyTag]),
+                    'icon' => url('images/ikony/artykuly.png'),
+                ],
+                [
+                    'name' => 'Recenzje',
+                    'url'  => route('materials.tag', [$recenzjeTag]),
                     'icon' => url('images/ikony/artykuly.png'),
                 ],
             ];

@@ -3,6 +3,7 @@ namespace App\Domains\Admin\Controllers;
 
 use App\Helpers\ComponentsHelper;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -30,5 +31,12 @@ class AdminController extends Controller
         return [
             'test sanctum',
         ];
+    }
+
+    public function clearCache()
+    {
+        Cache::clear();
+
+        return back();
     }
 }

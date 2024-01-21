@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
+Route::get('/settings/cache', [AdminController::class, 'clearCache'])->name('settings.cache');
 
 Route::prefix('/materials')
     ->as('materials.')
