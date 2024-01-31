@@ -13,6 +13,7 @@ use App\Domains\Admin\Controllers\Api\TagsController;
 use App\Domains\Admin\Controllers\Api\UsersController;
 use App\Domains\Files\Controllers\Admin\Api\UploadMaterialAttachmentsController;
 use App\Domains\Users\Middlewares\UserCanEditMaterialMiddleware;
+use App\Domains\Users\Roles\PermissionsEnum;
 use Illuminate\Support\Facades\Route;
 
 Route::name('materials.')
@@ -70,7 +71,7 @@ Route::name('materials.')
 
 Route::name('users.')
     ->prefix('users')
-    ->middleware('auth')
+    ->middleware('auth', 'can:' . PermissionsEnum::USERS_MANAGE->value)
     ->group(function () {
         Route::get('/', [UsersController::class, 'index'])->name('index');
         Route::post('/{user}/roles', [UsersController::class, 'roles'])->name('roles');
