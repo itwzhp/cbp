@@ -10,5 +10,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesSeeder::class);
         $this->call(TagsSeeder::class);
         $this->call(LicensesSeeder::class);
+        $this->call(RemoveContributorSeeder::class);
     }
 }
