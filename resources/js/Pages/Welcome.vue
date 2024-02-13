@@ -61,17 +61,6 @@ import 'vue3-carousel/dist/carousel.css';
                   które warto upowszechniać lokalnie i dopiero na podstawie zbiorów tworzyć materiały
                   szersze.
                 </p>
-                <div class="pt-4 flex">
-                  <div class="w-1/2 text-center" />
-                  <div class="text-center">
-                    hm. Małgorzata Szwed kierowniczka Wydziału Inspiracji i Poradnictwa Głównej Kwatery
-                    ZHP
-                    <img
-                      src="/images/gosia.png"
-                      class="w-48 mx-auto"
-                    >
-                  </div>
-                </div>
               </div>
 
               <div class="mt-12">
