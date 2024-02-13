@@ -182,23 +182,27 @@ const toggleMobileSidebar = () => {
           </li>
         </ContentAccess>
 
-        <li>
-          <AdminNavLink
-            href="admin.settings"
-            icon="fa-solid fa-gear"
-          >
-            {{ pages.get('admin.settings') }}
-          </AdminNavLink>
-        </li>
+        <ContentAccess :permissions="[permissions.MANAGE_USERS]">
+          <li>
+            <AdminNavLink
+              href="admin.settings"
+              icon="fa-solid fa-gear"
+            >
+              {{ pages.get('admin.settings') }}
+            </AdminNavLink>
+          </li>
+        </ContentAccess>
 
-        <li>
-          <AdminNavLink
-            href="admin.users.index"
-            icon="fa-solid fa-users"
-          >
-            {{ pages.get('admin.users.index') }}
-          </AdminNavLink>
-        </li>
+        <ContentAccess :permissions="[permissions.MANAGE_USERS]">
+          <li>
+            <AdminNavLink
+              href="admin.users.index"
+              icon="fa-solid fa-users"
+            >
+              {{ pages.get('admin.users.index') }}
+            </AdminNavLink>
+          </li>
+        </ContentAccess>
       </ul>
     </div>
   </aside>
