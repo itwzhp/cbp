@@ -7,6 +7,7 @@ use App\Domains\Materials\Commands\RegenerateSlugsCommand;
 use App\Domains\Migration\Commands\AttachImagesCommand;
 use App\Domains\Migration\Commands\AttachImagesToTagsCommand;
 use App\Domains\Migration\Commands\CopyWpFilesCommand;
+use App\Domains\Migration\Commands\FixFilesCommand;
 use App\Domains\Migration\Commands\FixLinksInDescription;
 use App\Domains\Migration\Commands\MaterialsMergerCommand;
 use App\Domains\Migration\Commands\MergeAccountDuplicatesCommand;
@@ -43,6 +44,7 @@ class Kernel extends ConsoleKernel
         MaterialsMergerCommand::class,
         MergeAccountDuplicatesCommand::class,
         ReattachAttachmentsCommand::class,
+        FixFilesCommand::class,
     ];
 
     protected function schedule(Schedule $schedule): void
