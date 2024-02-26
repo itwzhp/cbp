@@ -7,6 +7,7 @@ use App\Domains\Materials\Factories\MaterialFactory;
 use App\Domains\Materials\Models\Scopes\MaterialTypeScope;
 use App\Domains\Materials\States\MaterialState;
 use App\Domains\Materials\States\Published;
+use App\Domains\Migration\Models\Post;
 use App\Domains\Reviews\Models\Review;
 use App\Domains\Users\Models\User;
 use Barryvdh\LaravelIdeHelper\Eloquent;
@@ -49,6 +50,7 @@ use Spatie\Sluggable\SlugOptions;
  * @property-read Licence|null            $licence
  * @property-read Collection|Review[]     $reviews
  * @property-read string|null             $type
+ * @property-read Post|null               $post
  *
  * @method static Builder published()
  * @method static Builder search(string $search)
@@ -114,6 +116,11 @@ class Material extends Model implements HasMedia
         return $this
             ->hasMany(Scenario::class)
             ->orderBy('order');
+    }
+
+    public function post(): BelongsTo
+    {
+        return $this->belongsTo(Post::class, 'wp_id', 'ID');
     }
 
     public function reviews(): HasMany

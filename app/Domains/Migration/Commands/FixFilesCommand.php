@@ -13,15 +13,10 @@ class FixFilesCommand extends PostsMigrationCommand
 
     public function handle()
     {
-        /** @var Post $post */
-        $post = Post::find($this->argument('wpid'));
-
-        $material = Material::where('wp_id', $post->ID)->first();
-        $this->attachFiles($post, $material);
-
-        //        /** @var Attachment $attachment */
-        //        foreach ($post->attachments as $attachment) {
-        //        }
+        /** @var Material $material */
+        foreach (Material::with('post')->get() as $material) {
+            $this->attachFiles($material->post, $material);
+        }
     }
 
     protected function generateName(Post $post, Attachment $attachment): string
