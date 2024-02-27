@@ -9,8 +9,6 @@ class FixFilesCommand extends PostsMigrationCommand
 {
     protected $signature = 'wp:fix_files {wpid}';
 
-    protected FileFixerService $service;
-
     public function handle()
     {
         /** @var Material $material */
