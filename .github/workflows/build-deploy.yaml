@@ -32,15 +32,15 @@ jobs:
     steps:
 
 ###### Prepare environment
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: '18.x'
 
       - name: Login to Azure
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -51,7 +51,7 @@ jobs:
 
 ########### Restore caches
       - name: Cache node_modules directory
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: node_modules-cache
         with:
           path: node_modules
@@ -63,7 +63,7 @@ jobs:
           echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache PHP composer cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -71,7 +71,7 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: Cache PHP dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: vendor-cache
         with:
           path: vendor
@@ -79,7 +79,7 @@ jobs:
 
 ###### Validate bicep
       - name: Validate Bicep
-        uses: azure/arm-deploy@v1
+        uses: azure/arm-deploy@v2
         with:
           scope: resourcegroup
           subscriptionId: ${{ vars.AZURE_SUBSCRIPTION_ID }}
@@ -139,13 +139,13 @@ jobs:
         run: tar --exclude="./tests"  --exclude="./node_modules" --exclude="./vendor" --exclude=".git" --exclude="./.env" --exclude=".github" --exclude="${{ env.PACKAGE_NAME }}" --exclude="./storage/logs" --exclude="./storage/debugbar" -cvf ${{ env.PACKAGE_NAME }} .
 
       - name: Publish build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ env.PACKAGE_NAME }}
           path: ${{ env.PACKAGE_NAME }}
 
       - name: Publish bicep artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cbp.bicep
           path: ./infrastructure/cbp.bicep
@@ -166,7 +166,7 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
       - name: Download artifact
-        uses: actions/download-artifact@v4.1.4
+        uses: actions/download-artifact@v4
         with:
           name: ${{ env.PACKAGE_NAME }}
 
@@ -218,7 +218,7 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
       - name: Download artifact
-        uses: actions/download-artifact@v4.1.4
+        uses: actions/download-artifact@v4
         with:
           name: ${{ env.PACKAGE_NAME }}
 
@@ -258,7 +258,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Azure
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -268,7 +268,7 @@ jobs:
           name: cbp.bicep
 
       - name: Deploy Bicep
-        uses: azure/arm-deploy@v1
+        uses: azure/arm-deploy@v2
         with:
           scope: resourcegroup
           subscriptionId: ${{ vars.AZURE_SUBSCRIPTION_ID }}
