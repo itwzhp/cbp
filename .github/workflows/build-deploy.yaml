@@ -203,9 +203,9 @@ jobs:
 #        run: ssh zhp-pl "cd $DEPLOY_PATH && $PHP_PATH artisan db:seed --class=TagImagesSeeder"
 
   deploy-prod:
-    name: Deploy to the DEV site
+    name: Deploy to the PROD site
     runs-on: ubuntu-latest
-    environment: dev
+    environment: prod
     needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/production'
     env:
