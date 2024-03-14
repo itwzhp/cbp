@@ -157,7 +157,7 @@ jobs:
     needs: build
     if: github.event_name == 'push' && github.ref != 'refs/heads/production'
     env:
-      SSH_COMMAND: ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }} -p ${{ secrets.SERVER_PORT }}
+      SSH_COMMAND: 'ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }} -p ${{ secrets.SERVER_PORT }}'
 
     steps:
       - name: Setup SSH
@@ -209,7 +209,7 @@ jobs:
     needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/production'
     env:
-      SSH_COMMAND: ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }} -p ${{ secrets.SERVER_PORT }}
+      SSH_COMMAND: 'ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }} -p ${{ secrets.SERVER_PORT }}'
 
     steps:
       - name: Setup SSH
