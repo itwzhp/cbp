@@ -25,7 +25,9 @@ class MaterialsController extends Controller
     public function show(Material $material, TaxonomiesRepository $taxonomiesRepository)
     {
         $czrTax = $taxonomiesRepository->getCZR();
+
         $methodicsTax = $taxonomiesRepository->getMethodics();
+
         $material->load('tags.media');
 
         return Inertia::render(ComponentsHelper::MATERIALS_SHOW)
