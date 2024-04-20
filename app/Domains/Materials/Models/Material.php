@@ -255,6 +255,7 @@ class Material extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
+        /** @var ImagesHelper $imagesHelper */
         $imagesHelper = app(ImagesHelper::class);
 
         $this->addMediaCollection('cover')
