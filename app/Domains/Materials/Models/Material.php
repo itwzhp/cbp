@@ -244,11 +244,11 @@ class Material extends Model implements HasMedia
 
     public function registerMediaConversions(Media $media = null): void
     {
-        $this->addMediaConversion('thumb')
+        $this->addMediaConversion(ImagesHelper::SIZE_THUMB)
             ->fit(Manipulations::FIT_FILL, 290, 192)
             ->nonQueued();
 
-        $this->addMediaConversion('cover')
+        $this->addMediaConversion(ImagesHelper::SIZE_COVER)
             ->fit(Manipulations::FIT_CROP, 1000, 300)
             ->nonQueued();
     }
@@ -258,21 +258,21 @@ class Material extends Model implements HasMedia
         /** @var ImagesHelper $imagesHelper */
         $imagesHelper = app(ImagesHelper::class);
 
-        $this->addMediaCollection('cover')
+        $this->addMediaCollection(ImagesHelper::SIZE_COVER)
             ->useFallbackUrl(url('/images/scout.jpg'))
-            ->useFallbackUrl($imagesHelper->getFallbackForMaterial($this), 'thumb')
-            ->useFallbackUrl(url('/images/scout_cover.jpg'), 'cover')
+            ->useFallbackUrl($imagesHelper->getFallbackForMaterial($this, ImagesHelper::SIZE_THUMB), ImagesHelper::SIZE_THUMB)
+            ->useFallbackUrl($imagesHelper->getFallbackForMaterial($this, ImagesHelper::SIZE_COVER), ImagesHelper::SIZE_COVER)
             ->singleFile();
     }
 
     public function thumb(): string
     {
-        return $this->getFirstMediaUrl('cover', 'thumb');
+        return $this->getFirstMediaUrl(ImagesHelper::SIZE_COVER, ImagesHelper::SIZE_THUMB);
     }
 
     public function cover(): string
     {
-        return $this->getFirstMediaUrl('cover', 'cover');
+        return $this->getFirstMediaUrl(ImagesHelper::SIZE_COVER, ImagesHelper::SIZE_COVER);
     }
 
     public function hasEditableState(): bool
