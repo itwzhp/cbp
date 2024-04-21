@@ -12,19 +12,19 @@ class SlideSeeder extends Seeder
         $slides = [
             [
                 'url' => route('materials.tags', ['planowanie-w-druzynie']),
-                'img' => public_path('/images/slider1a.png'),
+                'img' => public_path('/images/materialy/slider1a.png'),
             ],
             [
                 'url' => route('materials.tags', ['harcerz-i-natura']),
-                'img' => public_path('/images/slider2a.png'),
+                'img' => public_path('/images/materialy/slider2a.png'),
             ],
             [
                 'url' => route('materials.tags', ['system-malych-grup']),
-                'img' => public_path('/images/slider3a.png'),
+                'img' => public_path('/images/materialy/slider3a.png'),
             ],
             [
                 'url' => route('materials.tags', ['wychowanie-ekonomiczne']),
-                'img' => public_path('/images/slider4a.png'),
+                'img' => public_path('/images/materialy/slider4a.png'),
             ],
         ];
 
