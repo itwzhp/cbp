@@ -7,14 +7,16 @@
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+        <!-- museo-sans from fonts.adobe.com -->
+        <link rel="stylesheet" href="https://use.typekit.net/lqw5sjc.css">
+        <link rel="icon" type="image/png" href="/ico.png">
 
         <!-- Scripts -->
         @routes
         @vite('resources/js/app.js')
         @inertiaHead
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased" style="margin-bottom: 0px !important">
         @inertia
     </body>
 </html>

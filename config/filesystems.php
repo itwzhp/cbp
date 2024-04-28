@@ -1,18 +1,8 @@
 <?php
 
+use App\Helpers\FilesystemsHelper;
+
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Default Filesystem Disk
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify the default filesystem disk that should be used
-    | by the framework. The "local" disk, as well as a variety of cloud
-    | based disks are available to your application. Just store away!
-    |
-    */
-
     'default' => env('FILESYSTEM_DISK', 'local'),
 
     /*
@@ -29,7 +19,6 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root'   => storage_path('app'),
@@ -56,21 +45,50 @@ return [
             'throw'                   => false,
         ],
 
-    ],
+        FilesystemsHelper::LOCAL => [
+            'driver'     => 'local',
+            'root'       => storage_path('wp'),
+            'url'        => env('APP_URL') . '/wp',
+            'visibility' => 'public',
+            'throw'      => false,
+        ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Symbolic Links
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the symbolic links that will be created when the
-    | `storage:link` Artisan command is executed. The array keys should be
-    | the locations of the links and the values should be their targets.
-    |
-    */
+        FilesystemsHelper::PUBLIC => [
+            'driver'            => 'azure',
+            'name'              => env('AZURE_STORAGE_NAME'),
+            'key'               => env('AZURE_STORAGE_KEY'),
+            'container'         => env('AZURE_STORAGE_CONTAINER_PUBLIC', 'public'),
+            'url'               => env('AZURE_STORAGE_URL'),
+            'prefix'            => null,
+            'connection_string' => env('AZURE_STORAGE_CONNECTION_STRING'),
+            'options'           => [
+                'CacheControl'    => 'max-age=315360000, no-transform, public',
+                'ContentEncoding' => 'gzip',
+            ],
+        ],
+
+        FilesystemsHelper::IMAGES => [
+            'driver'            => 'azure',
+            'name'              => env('AZURE_STORAGE_NAME'),
+            'key'               => env('AZURE_STORAGE_KEY'),
+            'container'         => env('AZURE_STORAGE_CONTAINER_IMAGES', 'images'),
+            'url'               => env('AZURE_STORAGE_URL'),
+            'prefix'            => null,
+            'connection_string' => env('AZURE_STORAGE_CONNECTION_STRING'),
+        ],
+
+        FilesystemsHelper::PRIVATE => [
+            'driver'            => 'azure',
+            'name'              => env('AZURE_STORAGE_NAME'),
+            'key'               => env('AZURE_STORAGE_KEY'),
+            'container'         => env('AZURE_STORAGE_CONTAINER_PRIVATE', 'private'),
+            'url'               => env('AZURE_STORAGE_URL'),
+            'prefix'            => null,
+            'connection_string' => env('AZURE_STORAGE_CONNECTION_STRING'),
+        ],
+    ],
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],
-
 ];

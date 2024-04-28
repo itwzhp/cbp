@@ -1,0 +1,274 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [production, main]
+  pull_request:
+    branches: [main]
+
+env:
+  ENVIRONMENT_NAME: "${{ github.event_name == 'push' && github.ref_name == 'production' && 'prod' || 'dev' }}"
+  PACKAGE_NAME: cbp-app-package.tar.gz
+  DEPLOY_PATH: /var/www/vhosts/cbp-dev.zhp.pl/${{ github.ref_name == 'production' && 'cbp.zhp.pl' || 'cbp-dev.zhp.pl' }} # until relase; then change to cbp.zhp.pl for sake of clarity
+  PHP_PATH: /opt/plesk/php/8.2/bin/php
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE:  cbp_test
+        ports:
+          - 33306:3306  # external:internal
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+    steps:
+
+###### Prepare environment
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Install PHP versions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+########### Restore caches
+      - name: Cache node_modules directory
+        uses: actions/cache@v4
+        id: node_modules-cache
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache PHP composer cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Cache PHP dependencies
+        uses: actions/cache@v4
+        id: vendor-cache
+        with:
+          path: vendor
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/composer.lock') }}
+
+###### Validate bicep
+      - name: Validate Bicep
+        uses: azure/arm-deploy@v2
+        with:
+          scope: resourcegroup
+          subscriptionId: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: zhp-cbp-${{ env.ENVIRONMENT_NAME }}
+          template: ./infrastructure/cbp.bicep
+          deploymentMode: Validate
+          parameters: environment=${{ env.ENVIRONMENT_NAME }}
+
+###### Install dependencies
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: Install Composer Dependencies
+        if: steps.vendor-cache.outputs.cache-hit != 'true'
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Install NPM Dependencies
+        if: steps.node_modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+###### Build
+      - name: Build frontend
+        run: npm run build
+
+#      - name: Generate key
+#        run: php artisan key:generate
+
+##### Tests
+
+#      - name: Run Migrations
+#        env:
+#          DB_CONNECTION: mysql
+#          DB_DATABASE: cbp_test
+#          DB_PORT: 33306
+#          DB_USER: root
+#        run: |
+#          chmod -R 777 storage bootstrap/cache
+#          php artisan migrate
+#          php artisan db:seed
+#
+#      - name: Check code style
+#        run: vendor/bin/pint --config vendor/apsg/coding-standards/pint.json --test
+#      - name: Execute tests (Unit and Feature tests) via PestPHP
+#        env:
+#          DB_CONNECTION: mysql
+#          DB_DATABASE: cbp_test
+#          DB_PORT: 33306
+#          DB_USER: root
+#        run: vendor/bin/pest --parallel
+
+##### Prepare & Publish artifact
+
+      - name: Clear package cache/sessions after testing
+        run: rm -rf ./storage/framework/sessions/* ./storage/framework/views/*
+
+      - name: Compress package
+        run: tar --exclude="./tests"  --exclude="./node_modules" --exclude="./vendor" --exclude=".git" --exclude="./.env" --exclude=".github" --exclude="${{ env.PACKAGE_NAME }}" --exclude="./storage/logs" --exclude="./storage/debugbar" -cvf ${{ env.PACKAGE_NAME }} .
+
+      - name: Publish build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PACKAGE_NAME }}
+          path: ${{ env.PACKAGE_NAME }}
+
+      - name: Publish bicep artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cbp.bicep
+          path: ./infrastructure/cbp.bicep
+
+  deploy-dev:
+    name: Deploy to the DEV site
+    runs-on: ubuntu-latest
+    environment: dev
+    needs: build
+    if: github.event_name == 'push' && github.ref != 'refs/heads/production'
+    env:
+      SSH_COMMAND: 'ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }} -p ${{ secrets.SERVER_PORT }}'
+
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.PACKAGE_NAME }}
+
+      - name: Copy new version into server
+        run: scp -o "StrictHostKeyChecking=no" -P ${{ secrets.SERVER_PORT }} -r ./$PACKAGE_NAME ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }}:/tmp
+
+      - name: Ensure deploy folder presence
+        run: ${{ env.SSH_COMMAND }} "mkdir --parents ${{ env.DEPLOY_PATH }}"
+
+      - name: Extract package to tmp
+        run: |
+          ${{ env.SSH_COMMAND }} "mkdir -p /tmp/new_cbp_${ENVIRONMENT_NAME}"
+          ${{ env.SSH_COMMAND }} "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C /tmp/new_cbp_${ENVIRONMENT_NAME}"
+
+      - name: Remove old and move new package
+        run: ${{ env.SSH_COMMAND }} "rm -rf $DEPLOY_PATH/* && rsync -arv /tmp/new_cbp_${ENVIRONMENT_NAME}/ $DEPLOY_PATH/"
+
+      - name: Install composer
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH composer.phar install"
+
+      - name: Decrypt env
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
+
+      - name: Run db migrations
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force --seed"
+
+      - name: Clear cache
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan cache:clear"
+
+      - name: Optimize
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan optimize"
+
+  deploy-prod:
+    name: Deploy to the PROD site
+    runs-on: ubuntu-latest
+    environment: prod
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/production'
+    env:
+      SSH_COMMAND: 'ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }} -p ${{ secrets.SERVER_PORT }}'
+
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.PACKAGE_NAME }}
+
+      - name: Copy new version into server
+        run: scp -o "StrictHostKeyChecking=no" -P ${{ secrets.SERVER_PORT }} -r ./$PACKAGE_NAME ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }}:/tmp
+
+      - name: Ensure deploy folder presence
+        run: ${{ env.SSH_COMMAND }} "mkdir --parents ${{ env.DEPLOY_PATH }}"
+
+      - name: Extract package to tmp
+        run: |
+          ${{ env.SSH_COMMAND }} "mkdir -p /tmp/new_cbp_${ENVIRONMENT_NAME}"
+          ${{ env.SSH_COMMAND }} "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C /tmp/new_cbp_${ENVIRONMENT_NAME}"
+
+      - name: Remove old and move new package
+        run: ${{ env.SSH_COMMAND }} "rm -rf $DEPLOY_PATH/* && rsync -arv /tmp/new_cbp_${ENVIRONMENT_NAME}/ $DEPLOY_PATH/"
+
+      - name: Install composer
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH composer.phar install"
+
+      - name: Decrypt env
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
+
+      - name: Run db migrations
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force --seed"
+
+      - name: Clear cache
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan cache:clear"
+
+      - name: Optimize
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan optimize"
+
+  deploy-azure:
+    name: Deploy Azure storage
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Download bicep artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: cbp.bicep
+
+      - name: Deploy Bicep
+        uses: azure/arm-deploy@v2
+        with:
+          scope: resourcegroup
+          subscriptionId: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: zhp-cbp-${{ env.ENVIRONMENT_NAME }}
+          template: cbp.bicep
+          parameters: environment=${{ env.ENVIRONMENT_NAME }}

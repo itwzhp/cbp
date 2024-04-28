@@ -1,19 +1,19 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Domains\Materials\Controllers\Api\MaterialIndexController;
+use App\Domains\Materials\Controllers\Api\MaterialShowController;
+use App\Domains\Materials\Controllers\Api\TaxonomiesGroupsIndexController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::name('materials.')
+    ->prefix('materials/')
+    ->group(function () {
+        Route::get('/', MaterialIndexController::class)->name('index');
+        Route::get('/{material}', MaterialShowController::class)->name('show');
+    });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::name('taxonomies.')
+    ->prefix('taxonomies/')
+    ->group(function () {
+        Route::get('/', TaxonomiesGroupsIndexController::class)->name('index');
+    });

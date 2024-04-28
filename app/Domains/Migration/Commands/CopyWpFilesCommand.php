@@ -1,0 +1,49 @@
+<?php
+namespace App\Domains\Migration\Commands;
+
+use App\Helpers\FilesystemsHelper;
+use Illuminate\Console\Command;
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
+
+class CopyWpFilesCommand extends Command
+{
+    protected $signature = 'wp:files {dir?}';
+
+    protected Filesystem $local;
+
+    protected Filesystem $azure;
+
+    public function __invoke()
+    {
+        $this->local = Storage::disk(FilesystemsHelper::LOCAL);
+        $this->azure = Storage::disk(FilesystemsHelper::PUBLIC);
+
+        $dir = $this->argument('dir') ?? $this->selectDir();
+
+        foreach ($this->local->allFiles($dir) as $filePath) {
+            if ($this->azure->exists($filePath)) {
+                continue;
+            }
+
+            $this->info("Uploading: {$filePath}");
+            $file = $this->azure->put(
+                $filePath,
+                $this->local->get($filePath),
+                [
+                    'CacheControl' => 'max-age=315360000, no-transform, public',
+                ]
+            );
+        }
+
+        $this->info('Finished');
+    }
+
+    protected function selectDir(): string
+    {
+        $dirs = array_values(Arr::sort($this->local->directories('/', false)));
+
+        return $this->choice('Which directory?', $dirs);
+    }
+}

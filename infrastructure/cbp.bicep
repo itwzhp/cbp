@@ -1,7 +1,9 @@
-param environment string = 'prod'
+@allowed([ 'dev', 'prod' ])
+param environment string
 
 param location string = resourceGroup().location
 
+// TODO zabezpieczyć bloby przed przypadkowym usunięciem
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-08-01' = {
     name: 'zhpcbp${environment}store'
     location: location
@@ -19,6 +21,13 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-08-01' = {
 
         resource publicContainer 'containers' = {
             name: 'public'
+            properties:{
+                publicAccess: 'Blob'
+            }
+        }
+
+        resource imagesContainer 'containers' = {
+            name: 'images'
             properties:{
                 publicAccess: 'Blob'
             }
@@ -50,6 +59,30 @@ resource cdn 'Microsoft.Cdn/profiles@2021-06-01' = {
             isHttpAllowed: true
             isHttpsAllowed: true
             originPath: '/${storageAccount::blobService::publicContainer.name}'
+            origins: [
+                {
+                    name: replace(blobEndpointHost, '.', '-')
+                    properties: {
+                        hostName: blobEndpointHost
+                    }
+                }
+            ]
+
+            deliveryPolicy: httpRedirectPolicy
+
+            isCompressionEnabled: true
+            contentTypesToCompress: contentTypesToCompress
+        }
+    }
+
+    resource cdnImagesEndpoint 'endpoints' = {
+        location: location
+        name: 'zhp-cbp-${environment}-images'
+        properties: {
+            originHostHeader: blobEndpointHost
+            isHttpAllowed: true
+            isHttpsAllowed: true
+            originPath: '/${storageAccount::blobService::imagesContainer.name}'
             origins: [
                 {
                     name: replace(blobEndpointHost, '.', '-')
