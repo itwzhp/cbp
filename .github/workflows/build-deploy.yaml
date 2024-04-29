@@ -199,9 +199,10 @@ jobs:
       - name: Optimize
         run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan optimize"
 
-      - name: Remove old tar.gz
+      - name: Remove old tar.gz and unpacked files after installation
         run: |
           ${{ env.SSH_COMMAND }} "rm -f /tmp/$PACKAGE_NAME"
+          ${{ env.SSH_COMMAND }} "rm -rf /tmp/new_cbp_${ENVIRONMENT_NAME}"
 
   deploy-prod:
     name: Deploy to the PROD site
@@ -252,9 +253,10 @@ jobs:
       - name: Optimize
         run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan optimize"
 
-      - name: Remove old tar.gz
+      - name: Remove old tar.gz and unpacked files after installation
         run: |
           ${{ env.SSH_COMMAND }} "rm -f /tmp/$PACKAGE_NAME"
+          ${{ env.SSH_COMMAND }} "rm -rf /tmp/new_cbp_${ENVIRONMENT_NAME}"
 
   deploy-azure:
     name: Deploy Azure storage
