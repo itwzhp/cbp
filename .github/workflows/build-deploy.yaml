@@ -201,10 +201,6 @@ jobs:
 
       - name: Remove old tar.gz and unpacked files after installation
         run: |
-          ${{ env.SSH_COMMAND }} "echo ${{ secrets.DECRYPT_KEY }} > $DEPLOY_PATH/decrypt_key"
-
-      - name: Remove old tar.gz and unpacked files after installation
-        run: |
           ${{ env.SSH_COMMAND }} "rm -f /tmp/$PACKAGE_NAME"
           ${{ env.SSH_COMMAND }} "rm -rf /tmp/new_cbp_${ENVIRONMENT_NAME}"
 
