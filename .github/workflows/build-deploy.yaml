@@ -9,7 +9,7 @@ on:
 env:
   ENVIRONMENT_NAME: "${{ github.event_name == 'push' && github.ref_name == 'production' && 'prod' || 'dev' }}"
   PACKAGE_NAME: cbp-app-package.tar.gz
-  DEPLOY_PATH: /var/www/vhosts/cbp-dev.zhp.pl/${{ github.ref_name == 'production' && 'cbp.zhp.pl' || 'cbp-dev.zhp.pl' }} # until relase; then change to cbp.zhp.pl for sake of clarity
+  DEPLOY_PATH: /var/www/vhosts/${{ github.ref_name == 'production' && 'cbp.zhp.pl/cbp.zhp.pl' || 'cbp-dev.zhp.pl/cbp-dev.zhp.pl' }} # until relase; then change to cbp.zhp.pl for sake of clarity
   PHP_PATH: /opt/plesk/php/8.2/bin/php
 
 jobs:
