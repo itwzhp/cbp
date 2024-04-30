@@ -17,15 +17,11 @@ yarn-error.log
 /storage/wp
 /storage/tmp
 /storage/media-library/temp
-
-.env.production
+storage/.~lock.CBP_materialy.csv#
 
 .key
 
-storage/.~lock.CBP_materialy.csv#
-
 *.xmp
 
-.env.dev
-
-.env.local
+.env.*
+!.env.*.encrypted
