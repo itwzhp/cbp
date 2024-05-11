@@ -18,6 +18,7 @@ Route::prefix('/materials')
         Route::get('/create', [MaterialsController::class, 'create'])->name('create');
         Route::get('/create/{preset}', [MaterialsController::class, 'new'])->name('new');
         Route::get('/{material}', [MaterialsController::class, 'edit'])->name('edit');
+        Route::get('/{material}/publish', [MaterialsController::class, 'publish'])->name('publish');
         Route::delete('/{material}', [MaterialsController::class, 'destroy'])->name('destroy');
     });
 

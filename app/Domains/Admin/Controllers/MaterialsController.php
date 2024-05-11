@@ -4,6 +4,7 @@ namespace App\Domains\Admin\Controllers;
 use App\Domains\Materials\Models\Enums\PresetEnum;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Repositories\MaterialsRepository;
+use App\Domains\Materials\States\Published;
 use App\Domains\Users\Roles\FrontendPermissionsAccessor;
 use App\Helpers\ComponentsHelper;
 use App\Http\Controllers\Controller;
@@ -49,6 +50,19 @@ class MaterialsController extends Controller
     public function destroy(Material $material)
     {
         $material->delete();
+
+        return back();
+    }
+
+    public function publish(Material $material)
+    {
+        if (Auth::user()->cannot('publish', $material)) {
+            abort(403);
+        }
+
+        if (!$material->isPublished()) {
+            $material->state->transitionTo(Published::class);
+        }
 
         return back();
     }

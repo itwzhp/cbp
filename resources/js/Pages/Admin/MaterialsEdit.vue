@@ -1,5 +1,5 @@
 <script setup>
-import { usePage, Link, Head } from '@inertiajs/vue3';
+import {usePage, Link, Head} from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import MaterialTextInput from '@/Components/Admin/MaterialEdit/MaterialTextInput.vue';
 import MaterialSections from '@/Components/Admin/MaterialEdit/MaterialSections.vue';
@@ -9,6 +9,7 @@ import MaterialLicence from '@/Components/Admin/MaterialEdit/MaterialLicence.vue
 import MaterialAttachments from '@/Components/Admin/MaterialEdit/MaterialAttachments.vue';
 import MaterialSetups from '@/Components/Admin/MaterialEdit/MaterialSetups.vue';
 import MaterialScenarios from '@/Components/Admin/MaterialEdit/MaterialScenarios.vue';
+import MaterialPublish from '@/Components/Admin/MaterialEdit/MaterialPublish.vue';
 
 const props = usePage().props.material;
 </script>
@@ -86,6 +87,7 @@ const props = usePage().props.material;
       </div>
       <div class="basis-1/4 md:px-4">
         <MaterialSections />
+        <MaterialPublish />
       </div>
     </div>
   </AdminLayout>
