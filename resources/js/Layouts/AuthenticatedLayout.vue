@@ -29,7 +29,6 @@ const headline = ref(null);
 const clearTaxonomies = () => {
     store.clearTags();
 }
-
 </script>
 
 <template>
@@ -245,6 +244,12 @@ const clearTaxonomies = () => {
                 :active="route().current('materials.tag', { tag: '2-poradnik' })"
               >
                 &emsp;Obrzędowość i Symbolika
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'oboz')"
+                :active="route().current('materials.tags', { tags: 'oboz' })"
+              >
+                &emsp;Obóz
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'planowanie-w-druzynie,funkcjonowanie-druzyn')"
@@ -550,6 +555,11 @@ const clearTaxonomies = () => {
                         "
                       >
                         Obrzędowość i Symbolika
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'oboz')"
+                        :active="route().current('materials.tags', {tags: 'oboz'})" >
+                        Obóz
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'planowanie-w-druzynie,funkcjonowanie-druzyn')"
