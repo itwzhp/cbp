@@ -49,8 +49,10 @@ class MicrosoftLoginController extends Controller
     protected function register(MicrosoftUser $msUser)
     {
         return User::factory()->create([
-            'name'  => $msUser->name,
-            'email' => $msUser->email,
+            'name'       => $msUser->name,
+            'email'      => $msUser->email,
+            'first_name' => null,
+            'last_name'  => null,
         ]);
     }
 
