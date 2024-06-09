@@ -31,7 +31,7 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens;
+//    use HasApiTokens;
     use HasFactory;
     use Notifiable;
     use HasRoles {

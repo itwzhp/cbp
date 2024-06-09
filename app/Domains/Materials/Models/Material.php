@@ -5,6 +5,8 @@ use App\Domains\Files\ImagesHelper;
 use App\Domains\Files\Models\Attachment;
 use App\Domains\Materials\Factories\MaterialFactory;
 use App\Domains\Materials\Models\Scopes\MaterialTypeScope;
+use App\Domains\Materials\States\Archived;
+use App\Domains\Materials\States\Draft;
 use App\Domains\Materials\States\MaterialState;
 use App\Domains\Materials\States\Published;
 use App\Domains\Migration\Models\Post;
@@ -283,5 +285,15 @@ class Material extends Model implements HasMedia
     public function isPublished(): bool
     {
         return $this->state->getValue() === Published::class;
+    }
+
+    public function isArchived(): bool
+    {
+        return $this->state->getValue() === Archived::class;
+    }
+
+    public function isDraft(): bool
+    {
+        return $this->state->getValue() === Draft::class;
     }
 }

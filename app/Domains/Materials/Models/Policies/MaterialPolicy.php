@@ -108,4 +108,9 @@ class MaterialPolicy
 
         return $user->hasPermissionTo(PermissionsEnum::MATERIAL_REVIEW);
     }
+
+    public function manageMaterial(User $user, Material $material): bool
+    {
+        return $user->hasPermissionTo(PermissionsEnum::MATERIAL_MANAGE);
+    }
 }

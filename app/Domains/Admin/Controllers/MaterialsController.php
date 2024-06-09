@@ -4,7 +4,11 @@ namespace App\Domains\Admin\Controllers;
 use App\Domains\Materials\Models\Enums\PresetEnum;
 use App\Domains\Materials\Models\Material;
 use App\Domains\Materials\Repositories\MaterialsRepository;
+use App\Domains\Materials\States\Archived;
+use App\Domains\Materials\States\Draft;
+use App\Domains\Materials\States\MaterialState;
 use App\Domains\Materials\States\Published;
+use App\Domains\Reviews\Models\Review;
 use App\Domains\Users\Roles\FrontendPermissionsAccessor;
 use App\Helpers\ComponentsHelper;
 use App\Http\Controllers\Controller;
@@ -54,15 +58,18 @@ class MaterialsController extends Controller
         return back();
     }
 
-    public function publish(Material $material)
+    public function changeStatus(Material $material, string $status)
     {
-        if (Auth::user()->cannot('publish', $material)) {
+        if (Auth::user()->cannot('manageMaterial', $material)) {
             abort(403);
         }
 
-        if (!$material->isPublished()) {
-            $material->state->transitionTo(Published::class);
-        }
+        match ($status) {
+            default => null,
+            'draft'  =>  $material->isDraft() ? null : $material->state->transitionTo(Draft::class),
+            'published' =>  $material->isPublished() ? null : $material->state->transitionTo(Published::class),
+            'archived' =>  $material->isArchived() ? null : $material->state->transitionTo(Archived::class),
+        };
 
         return back();
     }

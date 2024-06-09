@@ -27,6 +27,7 @@ class AuthenticatedSessionController extends Controller
     public function store(LocalLoginRequest $request): RedirectResponse
     {
         Auth::login(User::find($request->input('userid')));
+
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
