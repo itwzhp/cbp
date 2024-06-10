@@ -11,6 +11,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TagsSeeder::class);
         $this->call(LicensesSeeder::class);
         $this->call(RemoveContributorSeeder::class);
-//        $this->call(SlideSeeder::class);
+        $this->call(SlideSeeder::class);
     }
 }

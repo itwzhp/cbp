@@ -8,7 +8,6 @@ import MaterialLicence from '@/Components/Admin/MaterialEdit/MaterialLicence.vue
 import MaterialAttachments from '@/Components/Admin/MaterialEdit/MaterialAttachments.vue';
 import MaterialSetups from '@/Components/Admin/MaterialEdit/MaterialSetups.vue';
 import MaterialScenarios from '@/Components/Admin/MaterialEdit/MaterialScenarios.vue';
-// import MaterialPublish from '@/Components/Admin/MaterialEdit/MaterialPublish.vue';
 import MaterialChangeStatus from '@/Components/Admin/MaterialEdit/MaterialChangeStatus.vue';
 
 const props = usePage().props.material;

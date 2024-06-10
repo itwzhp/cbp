@@ -111,6 +111,10 @@ class MaterialPolicy
 
     public function manageMaterial(User $user, Material $material): bool
     {
+        if (!$material->hasEditableState()) {
+            return false;
+        }
+
         return $user->hasPermissionTo(PermissionsEnum::MATERIAL_MANAGE);
     }
 }
