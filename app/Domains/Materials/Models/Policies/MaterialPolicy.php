@@ -109,7 +109,7 @@ class MaterialPolicy
         return $user->hasPermissionTo(PermissionsEnum::MATERIAL_REVIEW);
     }
 
-    public function manageMaterial(User $user, Material $material): bool
+    public function manage(User $user, Material $material): bool
     {
         if (!$material->hasEditableState()) {
             return false;

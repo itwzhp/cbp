@@ -60,7 +60,7 @@ class MaterialsController extends Controller
 
     public function changeStatus(Material $material, string $status)
     {
-        if (Auth::user()->cannot('manageMaterial', $material)) {
+        if (Auth::user()->cannot('manage', $material)) {
             abort(403);
         }
 
