@@ -558,7 +558,8 @@ const clearTaxonomies = () => {
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'oboz')"
-                        :active="route().current('materials.tags', {tags: 'oboz'})" >
+                        :active="route().current('materials.tags', {tags: 'oboz'})"
+                      >
                         Obóz
                       </ResponsiveNavLink>
                       <ResponsiveNavLink

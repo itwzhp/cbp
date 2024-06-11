@@ -1,6 +1,5 @@
 <script setup>
 import { computed } from 'vue';
-import Avatar from '@/Components/Avatar.vue';
 
 const props = defineProps({
   fields: {
@@ -32,12 +31,9 @@ const translators = computed(() => findFields('translator'));
       <div
         v-for="(author, key) in authors"
         :key="key"
-        class="grid grid-cols-4 gap-1 place-items-center mt-5 mb-5"
+        class="gap-1 mt-5 mb-5"
       >
-        <div class="col-span-1">
-          <Avatar />
-        </div>
-        <div class="col-span-3 w-full">
+        <div class="w-full">
           <h3 class="text-md leading-4">
             {{ author.value }}
           </h3>
@@ -51,12 +47,9 @@ const translators = computed(() => findFields('translator'));
       <div
         v-for="(redactor, key) in redactors"
         :key="key"
-        class="grid grid-cols-4 gap-1 place-items-center mt-5 mb-5"
+        class="gap-1 mt-5 mb-5"
       >
-        <div class="col-span-1">
-          <Avatar />
-        </div>
-        <div class="col-span-3 w-full">
+        <div class="w-full">
           <h3 class="text-md leading-4">
             {{ redactor.value }}
           </h3>
@@ -70,12 +63,9 @@ const translators = computed(() => findFields('translator'));
       <div
         v-for="(reviewer, key) in reviewers"
         :key="key"
-        class="grid grid-cols-4 gap-1 place-items-center mt-5 mb-5"
+        class="gap-1 mt-5 mb-5"
       >
-        <div class="col-span-1">
-          <Avatar />
-        </div>
-        <div class="col-span-3 w-full">
+        <div class="w-full">
           <h3 class="text-md leading-4">
             {{ reviewer.value }}
           </h3>
@@ -89,12 +79,9 @@ const translators = computed(() => findFields('translator'));
       <div
         v-for="(proofreader, key) in proofreaders"
         :key="key"
-        class="grid grid-cols-4 gap-1 place-items-center mt-5 mb-5"
+        class="gap-1 mt-5 mb-5"
       >
-        <div class="col-span-1">
-          <Avatar />
-        </div>
-        <div class="col-span-3 w-full">
+        <div class="w-full">
           <h3 class="text-md leading-4">
             {{ proofreader.value }}
           </h3>
@@ -108,12 +95,9 @@ const translators = computed(() => findFields('translator'));
       <div
         v-for="(typesetter, key) in typesetters"
         :key="key"
-        class="grid grid-cols-4 gap-1 place-items-center mt-5 mb-5"
+        class="gap-1 mt-5 mb-5"
       >
-        <div class="col-span-1">
-          <Avatar />
-        </div>
-        <div class="col-span-3 w-full">
+        <div class="w-full">
           <h3 class="text-md leading-4">
             {{ typesetter.value }}
           </h3>
@@ -127,12 +111,9 @@ const translators = computed(() => findFields('translator'));
       <div
         v-for="(translator, key) in translators"
         :key="key"
-        class="grid grid-cols-4 gap-1 place-items-center mt-5 mb-5"
+        class="gap-1 mt-5 mb-5"
       >
-        <div class="col-span-1">
-          <Avatar />
-        </div>
-        <div class="col-span-3 w-full">
+        <div class="w-full">
           <h3 class="text-md leading-4">
             {{ translator.value }}
           </h3>
