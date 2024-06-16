@@ -71,6 +71,9 @@ const statuses = {
             <MaterialFields type="translator" />
           </div>
           <div class="mb-3">
+            <MaterialFields type="reviewer" />
+          </div>
+          <div class="mb-3">
             <MaterialTags />
           </div>
           <div class="mb-3">

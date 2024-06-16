@@ -68,6 +68,14 @@ const types = new Map([
       addTypeLabel: 'Dodaj tłumaczy',
     },
   ],
+  [
+    'reviewer',
+    {
+      sectionRemovable: false,
+      sectionDescription: 'Recenzent',
+      addTypeLabel: 'Dodaj recenzenta',
+    },
+  ],
 ]);
 
 const requestResultInfoTime = 5000;
