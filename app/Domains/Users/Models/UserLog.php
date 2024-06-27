@@ -38,6 +38,6 @@ class UserLog extends Model
 
     public function model(): MorphTo
     {
-        $this->morphTo();
+        return $this->morphTo();
     }
 }

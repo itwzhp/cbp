@@ -28,7 +28,7 @@ class MicrosoftHelper
         curl_close($curl);
 
         if ($err) {
-            echo 'cURL Error #:' . $err;
+            return 'cURL Error #:' . $err;
         } else {
             return base64_encode($response);
         }
