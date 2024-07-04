@@ -30,8 +30,7 @@ const showFooter = (currentRoute) =>
               CZY WIESZ, ŻE...
             </p>
             <p class="text-xs">
-              Ponad 500 harcerzy z Polski w wakacje tego roku weźmie udział w USA w
-              Światowym Jamboree Skautowe.
+              Test test
             </p>
           </div>
         </div>
