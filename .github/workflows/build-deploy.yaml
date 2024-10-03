@@ -175,7 +175,6 @@ jobs:
           template: cbp.bicep
           parameters: environment=${{ env.ENVIRONMENT_NAME }}
 
-
   deploy-dev:
     name: Deploy to the DEV site
     runs-on: ubuntu-latest
