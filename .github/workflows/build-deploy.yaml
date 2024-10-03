@@ -150,11 +150,37 @@ jobs:
           name: cbp.bicep
           path: ./infrastructure/cbp.bicep
 
+  deploy-azure:
+    name: Deploy Azure storage
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Download bicep artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: cbp.bicep
+
+      - name: Deploy Bicep
+        uses: azure/arm-deploy@v2
+        with:
+          scope: resourcegroup
+          subscriptionId: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: zhp-cbp-${{ env.ENVIRONMENT_NAME }}
+          template: cbp.bicep
+          parameters: environment=${{ env.ENVIRONMENT_NAME }}
+
+
   deploy-dev:
     name: Deploy to the DEV site
     runs-on: ubuntu-latest
     environment: dev
-    needs: build
+    needs: [build , deploy-azure]
     if: github.event_name == 'push' && github.ref != 'refs/heads/main'
     env:
       SSH_COMMAND: 'ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }} -p ${{ secrets.SERVER_PORT }}'
@@ -208,7 +234,7 @@ jobs:
     name: Deploy to the PROD site
     runs-on: ubuntu-latest
     environment: prod
-    needs: build
+    needs: [build , deploy-azure]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     env:
       SSH_COMMAND: 'ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }} -p ${{ secrets.SERVER_PORT }}'
@@ -257,28 +283,3 @@ jobs:
         run: |
           ${{ env.SSH_COMMAND }} "rm -f /tmp/$PACKAGE_NAME"
           ${{ env.SSH_COMMAND }} "rm -rf /tmp/new_cbp_${ENVIRONMENT_NAME}"
-
-  deploy-azure:
-    name: Deploy Azure storage
-    if: github.event_name == 'push'
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Download bicep artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: cbp.bicep
-
-      - name: Deploy Bicep
-        uses: azure/arm-deploy@v2
-        with:
-          scope: resourcegroup
-          subscriptionId: ${{ vars.AZURE_SUBSCRIPTION_ID }}
-          resourceGroupName: zhp-cbp-${{ env.ENVIRONMENT_NAME }}
-          template: cbp.bicep
-          parameters: environment=${{ env.ENVIRONMENT_NAME }}
