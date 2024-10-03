@@ -188,7 +188,7 @@ jobs:
         run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH composer.phar install"
 
       - name: Decrypt env
-        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=${ENVIRONMENT_NAME} --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
 
       - name: Run db migrations
         run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force --seed"
@@ -242,7 +242,7 @@ jobs:
         run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH composer.phar install"
 
       - name: Decrypt env
-        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=${ENVIRONMENT_NAME} --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
 
       - name: Run db migrations
         run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force --seed"
