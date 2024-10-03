@@ -2,14 +2,14 @@ name: Build and deploy
 
 on:
   push:
-    branches: [production, main]
+    branches: [dev, main]
   pull_request:
     branches: [main]
 
 env:
-  ENVIRONMENT_NAME: "${{ github.event_name == 'push' && github.ref_name == 'production' && 'prod' || 'dev' }}"
+  ENVIRONMENT_NAME: "${{ github.event_name == 'push' && github.ref_name == 'main' && 'prod' || 'dev' }}"
   PACKAGE_NAME: cbp-app-package.tar.gz
-  DEPLOY_PATH: /var/www/vhosts/${{ github.ref_name == 'production' && 'cbp.zhp.pl/cbp.zhp.pl' || 'cbp-dev.zhp.pl/cbp-dev.zhp.pl' }} # until relase; then change to cbp.zhp.pl for sake of clarity
+  DEPLOY_PATH: /var/www/vhosts/${{ github.ref_name == 'main' && 'cbp.zhp.pl/cbp.zhp.pl' || 'cbp-dev.zhp.pl/cbp-dev.zhp.pl' }} # until relase; then change to cbp.zhp.pl for sake of clarity
   PHP_PATH: /opt/plesk/php/8.2/bin/php
 
 jobs:
@@ -150,114 +150,6 @@ jobs:
           name: cbp.bicep
           path: ./infrastructure/cbp.bicep
 
-  deploy-dev:
-    name: Deploy to the DEV site
-    runs-on: ubuntu-latest
-    environment: dev
-    needs: build
-    if: github.event_name == 'push' && github.ref != 'refs/heads/production'
-    env:
-      SSH_COMMAND: 'ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }} -p ${{ secrets.SERVER_PORT }}'
-
-    steps:
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ env.PACKAGE_NAME }}
-
-      - name: Copy new version into server
-        run: scp -o "StrictHostKeyChecking=no" -P ${{ secrets.SERVER_PORT }} -r ./$PACKAGE_NAME ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }}:/tmp
-
-      - name: Ensure deploy folder presence
-        run: ${{ env.SSH_COMMAND }} "mkdir --parents ${{ env.DEPLOY_PATH }}"
-
-      - name: Extract package to tmp
-        run: |
-          ${{ env.SSH_COMMAND }} "mkdir -p /tmp/new_cbp_${ENVIRONMENT_NAME}"
-          ${{ env.SSH_COMMAND }} "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C /tmp/new_cbp_${ENVIRONMENT_NAME}"
-
-      - name: Remove old and move new package
-        run: ${{ env.SSH_COMMAND }} "rm -rf $DEPLOY_PATH/* && rsync -arv /tmp/new_cbp_${ENVIRONMENT_NAME}/ $DEPLOY_PATH/"
-
-      - name: Install composer
-        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH composer.phar install"
-
-      - name: Decrypt env
-        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
-
-      - name: Run db migrations
-        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force --seed"
-
-      - name: Clear cache
-        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan cache:clear"
-
-      - name: Optimize
-        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan optimize"
-
-      - name: Remove old tar.gz and unpacked files after installation
-        run: |
-          ${{ env.SSH_COMMAND }} "rm -f /tmp/$PACKAGE_NAME"
-          ${{ env.SSH_COMMAND }} "rm -rf /tmp/new_cbp_${ENVIRONMENT_NAME}"
-
-  deploy-prod:
-    name: Deploy to the PROD site
-    runs-on: ubuntu-latest
-    environment: prod
-    needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/production'
-    env:
-      SSH_COMMAND: 'ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }} -p ${{ secrets.SERVER_PORT }}'
-
-    steps:
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ env.PACKAGE_NAME }}
-
-      - name: Copy new version into server
-        run: scp -o "StrictHostKeyChecking=no" -P ${{ secrets.SERVER_PORT }} -r ./$PACKAGE_NAME ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }}:/tmp
-
-      - name: Ensure deploy folder presence
-        run: ${{ env.SSH_COMMAND }} "mkdir --parents ${{ env.DEPLOY_PATH }}"
-
-      - name: Extract package to tmp
-        run: |
-          ${{ env.SSH_COMMAND }} "mkdir -p /tmp/new_cbp_${ENVIRONMENT_NAME}"
-          ${{ env.SSH_COMMAND }} "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C /tmp/new_cbp_${ENVIRONMENT_NAME}"
-
-      - name: Remove old and move new package
-        run: ${{ env.SSH_COMMAND }} "rm -rf $DEPLOY_PATH/* && rsync -arv /tmp/new_cbp_${ENVIRONMENT_NAME}/ $DEPLOY_PATH/"
-
-      - name: Install composer
-        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH composer.phar install"
-
-      - name: Decrypt env
-        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=$ENVIRONMENT_NAME --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
-
-      - name: Run db migrations
-        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force --seed"
-
-      - name: Clear cache
-        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan cache:clear"
-
-      - name: Optimize
-        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan optimize"
-
-      - name: Remove old tar.gz and unpacked files after installation
-        run: |
-          ${{ env.SSH_COMMAND }} "rm -f /tmp/$PACKAGE_NAME"
-          ${{ env.SSH_COMMAND }} "rm -rf /tmp/new_cbp_${ENVIRONMENT_NAME}"
-
   deploy-azure:
     name: Deploy Azure storage
     if: github.event_name == 'push'
@@ -282,3 +174,111 @@ jobs:
           resourceGroupName: zhp-cbp-${{ env.ENVIRONMENT_NAME }}
           template: cbp.bicep
           parameters: environment=${{ env.ENVIRONMENT_NAME }}
+
+  deploy-dev:
+    name: Deploy to the DEV site
+    runs-on: ubuntu-latest
+    environment: dev
+    needs: [build , deploy-azure]
+    if: github.event_name == 'push' && github.ref != 'refs/heads/main'
+    env:
+      SSH_COMMAND: 'ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }} -p ${{ secrets.SERVER_PORT }}'
+
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.PACKAGE_NAME }}
+
+      - name: Copy new version into server
+        run: scp -o "StrictHostKeyChecking=no" -P ${{ secrets.SERVER_PORT }} -r ./$PACKAGE_NAME ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }}:/tmp
+
+      - name: Ensure deploy folder presence
+        run: ${{ env.SSH_COMMAND }} "mkdir --parents ${{ env.DEPLOY_PATH }}"
+
+      - name: Extract package to tmp
+        run: |
+          ${{ env.SSH_COMMAND }} "mkdir -p /tmp/new_cbp_${ENVIRONMENT_NAME}"
+          ${{ env.SSH_COMMAND }} "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C /tmp/new_cbp_${ENVIRONMENT_NAME}"
+
+      - name: Remove old and move new package
+        run: ${{ env.SSH_COMMAND }} "rm -rf $DEPLOY_PATH/* && rsync -arv /tmp/new_cbp_${ENVIRONMENT_NAME}/ $DEPLOY_PATH/"
+
+      - name: Install composer
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH composer.phar install"
+
+      - name: Decrypt env
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=${ENVIRONMENT_NAME} --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
+
+      - name: Run db migrations
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force --seed"
+
+      - name: Clear cache
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan cache:clear"
+
+      - name: Optimize
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan optimize"
+
+      - name: Remove old tar.gz and unpacked files after installation
+        run: |
+          ${{ env.SSH_COMMAND }} "rm -f /tmp/$PACKAGE_NAME"
+          ${{ env.SSH_COMMAND }} "rm -rf /tmp/new_cbp_${ENVIRONMENT_NAME}"
+
+  deploy-prod:
+    name: Deploy to the PROD site
+    runs-on: ubuntu-latest
+    environment: prod
+    needs: [build , deploy-azure]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    env:
+      SSH_COMMAND: 'ssh -o "StrictHostKeyChecking=no" ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }} -p ${{ secrets.SERVER_PORT }}'
+
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ env.PACKAGE_NAME }}
+
+      - name: Copy new version into server
+        run: scp -o "StrictHostKeyChecking=no" -P ${{ secrets.SERVER_PORT }} -r ./$PACKAGE_NAME ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER }}:/tmp
+
+      - name: Ensure deploy folder presence
+        run: ${{ env.SSH_COMMAND }} "mkdir --parents ${{ env.DEPLOY_PATH }}"
+
+      - name: Extract package to tmp
+        run: |
+          ${{ env.SSH_COMMAND }} "mkdir -p /tmp/new_cbp_${ENVIRONMENT_NAME}"
+          ${{ env.SSH_COMMAND }} "tar --no-overwrite-dir -m -xvf /tmp/$PACKAGE_NAME -C /tmp/new_cbp_${ENVIRONMENT_NAME}"
+
+      - name: Remove old and move new package
+        run: ${{ env.SSH_COMMAND }} "rm -rf $DEPLOY_PATH/* && rsync -arv /tmp/new_cbp_${ENVIRONMENT_NAME}/ $DEPLOY_PATH/"
+
+      - name: Install composer
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH composer.phar install"
+
+      - name: Decrypt env
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan env:decrypt --env=${ENVIRONMENT_NAME} --key=${{ secrets.DECRYPT_KEY }} --force --filename=.env"
+
+      - name: Run db migrations
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan migrate --force --seed"
+
+      - name: Clear cache
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan cache:clear"
+
+      - name: Optimize
+        run: ${{ env.SSH_COMMAND }} "cd $DEPLOY_PATH && $PHP_PATH artisan optimize"
+
+      - name: Remove old tar.gz and unpacked files after installation
+        run: |
+          ${{ env.SSH_COMMAND }} "rm -f /tmp/$PACKAGE_NAME"
+          ${{ env.SSH_COMMAND }} "rm -rf /tmp/new_cbp_${ENVIRONMENT_NAME}"
