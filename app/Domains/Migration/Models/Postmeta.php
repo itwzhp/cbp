@@ -19,6 +19,7 @@ class Postmeta extends Model
 
     public function deserialize()
     {
+        // @phpstan-ignore-next-line
         return unserialize($this->meta_value);
     }
 }
