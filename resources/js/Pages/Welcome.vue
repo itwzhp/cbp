@@ -39,27 +39,24 @@ import 'vue3-carousel/dist/carousel.css';
                   </a>
                 </p>
                 <p class="text-justify">
-                  Materiały tutaj dostępne przeglądać może każdy, jednak aby dodać materiał musisz być
-                  członkiem Związku Harcerstwa Polskiego. Zanim jednak ostatecznie udostępnimy
-                  możliwość dodawania materiałów samodzielnie, chcemy skończyć testy systemu dodawania
-                  materiałów i stworzyć poradnik, by zminimalizować liczbę możliwych błędów w tym
-                  procesie. Taka możliwość będzie dostępna nie później niż w czerwcu 2024. Przez
-                  najbliższe kilka miesięcy, materiały możecie wciąż wysyłać do recenzji pisząc na
-                  adres
-                  <a
+                  Materiały udostępnione w naszym banku może przeglądać każdy. Aby dodać nowy
+                  materiał, musisz być członkiem Związku Harcerstwa Polskiego. Obecnie pracujemy nad
+                  systemem umożliwiającym samodzielne dodawanie materiałów poprzez tą stronę. Do czasu
+                  wdrożenia tej funkcjonalności, aby opublikować nowy materiał w CBP 2.0, należy go
+                  przesłać na adres: <a
                     href="mailto:inspiracje@zhp.pl"
                     target="_blank"
                   >
                     inspiracje@zhp.pl
-                  </a>.
-                  Dodatkowo, jeśli jest to materiał do próby
-                  harcmistrzowskiej, wspomnij o tym w wiadomości.
+                  </a>. Otrzymane materiały zostaną przez nas
+                  skierowane do recenzji, a po przekazaniu ich wyników autorowi (i wprowadzeniu przez
+                  niego ewentualnych poprawek), opublikujemy je w banku. Jeśli materiał stanowi część
+                  Twojej próby harcmistrzowskiej, prosimy o dodaniu tej informacji podczas przesyłania
+                  materiałów do nas.
                 </p>
                 <p class="pt-2 text-justify">
-                  Jednocześnie chcemy Wam przekazać, że dbając o jakość i kompleksowość materiałów,
-                  nie będziemy publikować konspektów pojedynczych zbiórek, ponieważ są to materiały,
-                  które warto upowszechniać lokalnie i dopiero na podstawie zbiorów tworzyć materiały
-                  szersze.
+                  Dodatkowo, jeśli jest to materiał do próby
+                  harcmistrzowskiej, wspomnij o tym w wiadomości.
                 </p>
               </div>
 
