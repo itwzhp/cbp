@@ -2,6 +2,7 @@
 namespace App\Domains\Materials\Models\Observers;
 
 use App\Domains\Files\ZipService;
+use App\Domains\Materials\Events\MaterialChangedEvent;
 use App\Domains\Materials\Models\Material;
 
 class MaterialObserver
@@ -13,7 +14,7 @@ class MaterialObserver
 
     public function updated(Material $material)
     {
-        //
+        app(ZipService::class)->deleteZipForMaterial($material);
     }
 
     public function deleted(Material $material)
