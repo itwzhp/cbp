@@ -3,6 +3,7 @@ namespace App\Domains\Files\Controllers\Admin\Api;
 
 use App\Domains\Files\AttachmentsRepository;
 use App\Domains\Files\Requests\Admin\Api\UploadFileRequest;
+use App\Domains\Materials\Events\MaterialChangedEvent;
 use App\Domains\Materials\Models\Material;
 use App\Http\Controllers\AbstractAdminController;
 
@@ -13,6 +14,7 @@ class UploadMaterialAttachmentsController extends AbstractAdminController
         $file = $request->file('attachments');
 
         $attachment = $repository->fromFileUpload($material, $file);
+        event(new MaterialChangedEvent($material));
 
         return [
             'ext'        => $file->getClientOriginalExtension(),
