@@ -46,7 +46,7 @@ class DefaultMaterialTransformer extends TransformerAbstract
     public function includeAttachments(Material $material): Collection
     {
         return $this
-            ->collection($material->attachments, new AttachmentTransformer());
+            ->collection($material->attachments->sortBy('name'), new AttachmentTransformer());
     }
 
     public function includeOwner(Material $material): Item
