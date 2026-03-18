@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body{
-    background-image: url('/images/bg.png');
+    background-image: url('/images/zhp-bg.png');
     background-repeat: repeat-y;
     background-size: cover;
 }

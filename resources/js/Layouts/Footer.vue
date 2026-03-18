@@ -26,12 +26,8 @@ const showFooter = (currentRoute) =>
         </div>
         <div class="flex basis-2/6 p-4">
           <div>
-            <p class="text-sm font-bold pb-2">
-              CZY WIESZ, ŻE...
-            </p>
-            <p class="text-xs">
-              Test test
-            </p>
+            <p class="text-sm font-bold pb-2" />
+            <p class="text-xs" />
           </div>
         </div>
         <div class="flex basis-3/6 justify-center md:justify-end">
