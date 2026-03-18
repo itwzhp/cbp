@@ -66,7 +66,8 @@ class Tag extends Model implements HasMedia
     {
         return SlugOptions::create()
             ->generateSlugsFrom(['taxonomy_id', 'name'])
-            ->saveSlugsTo('slug');
+            ->saveSlugsTo('slug')
+            ->doNotGenerateSlugsOnUpdate();
     }
 
     public function scopeWithoutExcluded(Builder $builder): Builder

@@ -4,15 +4,14 @@ use App\Domains\Materials\Models\Tag;
 use App\Domains\Materials\Models\Taxonomy;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         $tax = Taxonomy::where('slug', 'zorganizowanie-programu-harcerskiego')->first();
-        if ($tax!== null) {
+        if ($tax !== null) {
             $tax->update(['slug' => 'plan-pracy']);
         }
 
