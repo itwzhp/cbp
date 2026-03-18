@@ -22,7 +22,7 @@ import 'vue3-carousel/dist/carousel.css';
                   Centralny Bank Pomysłów (CBP 2.0) to przestrzeń pełna propozycji programowych,
                   pomysłów
                   na zbiórki, poradników, gier, artykułów czy inspiracji, których możesz użyć zarówno
-                  w
+                  w 
                   pracy wychowawczej, jak i pracy z kadrą. Nowa odsłona CBP 2.0 powstawała kilka lat i
                   wiemy, że nie jest wolna od błędów. Dlatego przygotowaliśmy formularz, który pozwala
                   je
