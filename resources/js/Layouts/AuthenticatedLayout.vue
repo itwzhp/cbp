@@ -11,6 +11,7 @@ import SearchSlideOver from '@/Components/Materials/SearchSlideOver.vue';
 import Footer from '@/Layouts/Footer.vue';
 import {useSearchStore} from '@/store/search.store';
 import {Link} from '@inertiajs/vue3';
+import Divider from '@/Components/Divider.vue';
 
 const showingNavigationDropdown = ref(false);
 const store = useSearchStore();
@@ -189,157 +190,260 @@ const clearTaxonomies = () => {
                 Harcerski System Wychowawczy
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                :href="route('materials.tags', 'harcerski-system-wychowawczy,zasady-harcerskiego-wychowania,cechy-metody-harcerskiej')"
-              >
-                &emsp;O HSW
-              </ResponsiveNavLink>
-              <ResponsiveNavLink
                 :href="route('materials.tags', 'praca-z-metodykami')"
-                :active="route().current('materials.index')"
-              >
-                &emsp;Grupy Wiekowe
-              </ResponsiveNavLink>
-              <ResponsiveNavLink
-                :href="route('materials.tags', 'system-malych-grup')"
                 :active="
-                  route().current('materials.tag', { tag: '2-konspekt-ksztalceniowy' })
+                  route().current('materials.tags', {
+                    tags: 'praca-z-metodykami',
+                  })
                 "
               >
-                &emsp;System Małych Grup
+                &emsp; Grupy wiekowe
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'zasady-harcerskiego-wychowania')"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'zasady-harcerskiego-wychowania',
+                  })
+                "
+              >
+                &emsp; Harcerskie zasady
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'cechy-metody-harcerskiej')"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'cechy-metody-harcerskiej',
+                  })
+                "
+              >
+                &emsp; Metoda harcerska
+              </ResponsiveNavLink>
+              <Divider :class="'bg-gray-100' ">
+                &emsp;Program harcerski:
+              </Divider>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'uczenie-w-dzialaniu')"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'uczenie-w-dzialaniu',
+                  })
+                "
+              >
+                &emsp; Uczenie w działaniu
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'prawa-przyrzeczenie-i-obietnica')"
-                :active="route().current('materials.tag', { tag: '2-program' })"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'prawa-przyrzeczenie-i-obietnica',
+                  })
+                "
               >
-                &emsp;Prawa, Przyrzeczenie i Obietnica
+                &emsp; Praca z Prawami, Przyrzeczeniem i Obietnicą
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'sluzba')"
                 :active="
-                  route().current('materials.tag', { tag: '2-propozycja-programowa' })
+                  route().current('materials.tags', {
+                    tags: 'sluzba',
+                  })
                 "
               >
-                &emsp;Służba
+                &emsp; Pożyteczne działania
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                :href="route('materials.tags', 'system-instrumentow-metodycznych')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+                :href="route('materials.tags', 'harcerz-i-natura')"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'harcerz-i-natura',
+                  })
+                "
               >
-                &emsp;System Instrumentów Metodycznych
-              </ResponsiveNavLink>
-              <ResponsiveNavLink
-                :href="route('materials.tags', 'uczenie-w-dzialaniu')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
-              >
-                &emsp;Uczenie w działaniu
+                &emsp; Kontakt z przyrodą
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'osobisty-przyklad-instruktora')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'osobisty-przyklad-instruktora',
+                  })
+                "
               >
-                &emsp;Osobisty Przykład Instruktora
+                &emsp; Rola drużynowego
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'obrzedowosc-i-symbolika')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'obrzedowosc-i-symbolika',
+                  })
+                "
               >
-                &emsp;Obrzędowość i Symbolika
+                &emsp; Obrzędowość i symbolika
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                :href="route('materials.tags', 'oboz')"
-                :active="route().current('materials.tags', { tags: 'oboz' })"
+                :href="route('materials.tags', 'system-instrumentow-metodycznych')"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'system-instrumentow-metodycznych',
+                  })
+                "
               >
-                &emsp;Obóz
+                &emsp; Instrumenty metodyczne
               </ResponsiveNavLink>
+
+              <ResponsiveNavLink
+                :block="true"
+              >
+                Zorganizowanie programu harcerskiego
+              </ResponsiveNavLink>
+
               <ResponsiveNavLink
                 :href="route('materials.tags', 'planowanie-w-druzynie,funkcjonowanie-druzyn')"
                 :active="route().current('materials.tag', { tag: '2-poradnik' })"
               >
-                &emsp;Planowanie wychowawcze
+                &emsp;Planowanie
               </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'oboz')"
+                :active="route().current('materials.tags', {tags: 'oboz'})"
+              >
+                &emsp;Obóz
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'zbiorki')"
+                :active="route().current('materials.tags', {tags: 'zbiorki'})"
+              >
+                &emsp;Zbiórki
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'ciag-wychowawczy')"
+                :active="route().current('materials.tags', {tags: 'ciag-wychowawczy'})"
+              >
+                &emsp;Ciąg wychowawczy
+              </ResponsiveNavLink>
+
               <ResponsiveNavLink
                 :block="true"
                 :active="route().current('materials.tag', { tag: '2-poradnik' })"
               >
-                Wyzwania Wychowawcze
+                Wyzwania współczesnego świata
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'rozwoj-psychofizyczny-dzieci-i-mlodziezy,praca-nad-emocjami,rozwoj-fizyczny')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'rozwoj-psychofizyczny-dzieci-i-mlodziezy%2Cpraca-nad-emocjami%2Crozwoj-fizyczny',
+                  })
+                "
               >
                 &emsp;Rozwój psychofizyczny
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'wyzwania-i-trudnosci-wychowawcze,pandemia,wojna,praca-nad-emocjami')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'wyzwania-i-trudnosci-wychowawcze%2Cpandemia%2Cwojna%2Cpraca-nad-emocjami',
+                  })
+                "
               >
                 &emsp;Społeczne sytuacje kryzysowe
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                :href="route('materials.tags', 'harcerz-i-natura')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
-              >
-                &emsp;W otoczeniu przyrody
-              </ResponsiveNavLink>
-              <ResponsiveNavLink
                 :href="route('materials.tags', 'wychowanie-duchowe-i-religijne')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'wychowanie-duchowe-i-religijne',
+                  })
+                "
               >
                 &emsp;Wychowanie duchowe i religijne
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'wychowanie-ekonomiczne')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'wychowanie-ekonomiczne',
+                  })
+                "
               >
                 &emsp;Wychowanie ekonomiczne
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'wychowanie-patriotyczne')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'wychowanie-patriotyczne',
+                  })
+                "
               >
                 &emsp;Wychowanie patriotyczne
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                :block="true"
-              >
-                Szerokie Horyzonty
-              </ResponsiveNavLink>
-              <ResponsiveNavLink
-                :href="route('materials.tags', 'techniki,majsterka-zuchowa')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
-              >
-                &emsp;Specjalności
-              </ResponsiveNavLink>
-              <ResponsiveNavLink
-                :href="route('materials.tags', 'wychowanie-wodne')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
-              >
-                &emsp;Aktywności wodne
-              </ResponsiveNavLink>
-              <ResponsiveNavLink
-                :href="route('materials.tags', 'pierwsza-pomoc')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
-              >
-                &emsp;Pierwsza pomoc
-              </ResponsiveNavLink>
-              <ResponsiveNavLink
                 :href="route('materials.tags', 'zdrowie')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'zdrowie'
+                  })
+                "
               >
                 &emsp;Zdrowie
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'edukacja-globalna,wiedza-o-swiecie')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'edukacja-globalna%2Cwiedza-o-swiecie'
+                  })
+                "
               >
                 &emsp;Edukacja globalna
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'materialy-skautowe-i-zagraniczne')"
-                :active="route().current('materials.tag', { tag: '2-poradnik' })"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'materialy-skautowe-i-zagraniczne'
+                  })
+                "
               >
                 &emsp;Skauting
               </ResponsiveNavLink>
+              <Divider>
+                &emsp;Program specjalnościowy:
+              </Divider>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'techniki,majsterka-zuchowa')"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'techniki%2Cmajsterka-zuchowa'
+                  })
+                "
+              >
+                &emsp;Specjalności
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'wychowanie-wodne')"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'wychowanie-wodne'
+                  })
+                "
+              >
+                &emsp;Aktywności wodne
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'pierwsza-pomoc')"
+                :active="
+                  route().current('materials.tags', {
+                    tags: 'pierwsza-pomoc'
+                  })
+                "
+              >
+                &emsp;Pierwsza pomoc
+              </ResponsiveNavLink>
+
               <ResponsiveNavLink
                 :block="true"
               >
@@ -467,16 +571,6 @@ const clearTaxonomies = () => {
                     </template>
                     <template #content>
                       <ResponsiveNavLink
-                        :href="route('materials.tags', 'harcerski-system-wychowawczy,zasady-harcerskiego-wychowania,cechy-metody-harcerskiej')"
-                        :active="
-                          route().current('materials.tags', {
-                            tags: 'harcerski-system-wychowawczy%2Czasady-harcerskiego-wychowania%2Ccechy-metody-harcerskiej',
-                          })
-                        "
-                      >
-                        O HSW
-                      </ResponsiveNavLink>
-                      <ResponsiveNavLink
                         :href="route('materials.tags', 'praca-z-metodykami')"
                         :active="
                           route().current('materials.tags', {
@@ -484,48 +578,31 @@ const clearTaxonomies = () => {
                           })
                         "
                       >
-                        Grupy Wiekowe
+                        Grupy wiekowe
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
-                        :href="route('materials.tags', 'system-malych-grup')"
+                        :href="route('materials.tags', 'zasady-harcerskiego-wychowania')"
                         :active="
                           route().current('materials.tags', {
-                            tags: 'system-malych-grup',
+                            tags: 'zasady-harcerskiego-wychowania',
                           })
                         "
                       >
-                        System Małych Grup
+                        Harcerskie zasady
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
-                        :href="route('materials.tags', 'prawa-przyrzeczenie-i-obietnica')"
+                        :href="route('materials.tags', 'cechy-metody-harcerskiej')"
                         :active="
                           route().current('materials.tags', {
-                            tags: 'prawa-przyrzeczenie-i-obietnica',
+                            tags: 'cechy-metody-harcerskiej',
                           })
                         "
                       >
-                        Prawa, Przyrzeczenie i Obietnica
+                        Metoda harcerska
                       </ResponsiveNavLink>
-                      <ResponsiveNavLink
-                        :href="route('materials.tags', 'sluzba')"
-                        :active="
-                          route().current('materials.tags', {
-                            tags: 'sluzba',
-                          })
-                        "
-                      >
-                        Służba
-                      </ResponsiveNavLink>
-                      <ResponsiveNavLink
-                        :href="route('materials.tags', 'system-instrumentow-metodycznych')"
-                        :active="
-                          route().current('materials.tags', {
-                            tags: 'system-instrumentow-metodycznych',
-                          })
-                        "
-                      >
-                        System Instrumentów Metodycznych
-                      </ResponsiveNavLink>
+                      <Divider :classes="'bg-gray-200'">
+                        Program harcerski:
+                      </Divider>
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'uczenie-w-dzialaniu')"
                         :active="
@@ -537,6 +614,36 @@ const clearTaxonomies = () => {
                         Uczenie w działaniu
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
+                        :href="route('materials.tags', 'prawa-przyrzeczenie-i-obietnica')"
+                        :active="
+                          route().current('materials.tags', {
+                            tags: 'prawa-przyrzeczenie-i-obietnica',
+                          })
+                        "
+                      >
+                        Praca z Prawami, Przyrzeczeniem i Obietnicą
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'sluzba')"
+                        :active="
+                          route().current('materials.tags', {
+                            tags: 'sluzba',
+                          })
+                        "
+                      >
+                        Pożyteczne działania
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'harcerz-i-natura')"
+                        :active="
+                          route().current('materials.tags', {
+                            tags: 'harcerz-i-natura',
+                          })
+                        "
+                      >
+                        Kontakt z przyrodą
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
                         :href="route('materials.tags', 'osobisty-przyklad-instruktora')"
                         :active="
                           route().current('materials.tags', {
@@ -544,7 +651,7 @@ const clearTaxonomies = () => {
                           })
                         "
                       >
-                        Osobisty Przykład Instruktora
+                        Rola drużynowego
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'obrzedowosc-i-symbolika')"
@@ -554,7 +661,32 @@ const clearTaxonomies = () => {
                           })
                         "
                       >
-                        Obrzędowość i Symbolika
+                        Obrzędowość i symbolika
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'system-instrumentow-metodycznych')"
+                        :active="
+                          route().current('materials.tags', {
+                            tags: 'system-instrumentow-metodycznych',
+                          })
+                        "
+                      >
+                        Instrumenty metodyczne
+                      </ResponsiveNavLink>
+                    </template>
+                  </Dropdown>
+                  <Dropdown width="48">
+                    <template #trigger>
+                      <NavButton>
+                        Plan pracy
+                      </NavButton>
+                    </template>
+                    <template #content>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'planowanie-w-druzynie,funkcjonowanie-druzyn')"
+                        :active="route().current('materials.tag', { tag: '2-poradnik' })"
+                      >
+                        Planowanie
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'oboz')"
@@ -563,14 +695,16 @@ const clearTaxonomies = () => {
                         Obóz
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
-                        :href="route('materials.tags', 'planowanie-w-druzynie,funkcjonowanie-druzyn')"
-                        :active="
-                          route().current('materials.tags', {
-                            tags: 'planowanie-w-druzynie%2Cfunkcjonowanie-druzyn',
-                          })
-                        "
+                        :href="route('materials.tags', 'zbiorki')"
+                        :active="route().current('materials.tags', {tags: 'zbiorki'})"
                       >
-                        Planowanie wychowawcze
+                        Zbiórki
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'ciag-wychowawczy')"
+                        :active="route().current('materials.tags', {tags: 'ciag-wychowawczy'})"
+                      >
+                        Ciąg wychowawczy
                       </ResponsiveNavLink>
                     </template>
                   </Dropdown>
@@ -586,7 +720,7 @@ const clearTaxonomies = () => {
                             })
                         "
                       >
-                        Wyzwania wychowawcze
+                        Wyzwania współczesnego świata
                       </NavButton>
                     </template>
                     <template #content>
@@ -609,16 +743,6 @@ const clearTaxonomies = () => {
                         "
                       >
                         Społeczne sytuacje kryzysowe
-                      </ResponsiveNavLink>
-                      <ResponsiveNavLink
-                        :href="route('materials.tags', 'harcerz-i-natura')"
-                        :active="
-                          route().current('materials.tags', {
-                            tags: 'harcerz-i-natura',
-                          })
-                        "
-                      >
-                        W otoczeniu przyrody
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'wychowanie-duchowe-i-religijne')"
@@ -650,45 +774,6 @@ const clearTaxonomies = () => {
                       >
                         Wychowanie patriotyczne
                       </ResponsiveNavLink>
-                    </template>
-                  </Dropdown>
-                  <Dropdown>
-                    <template #trigger>
-                      <NavButton>
-                        Szerokie horyzonty
-                      </NavButton>
-                    </template>
-                    <template #content>
-                      <ResponsiveNavLink
-                        :href="route('materials.tags', 'techniki,majsterka-zuchowa')"
-                        :active="
-                          route().current('materials.tags', {
-                            tags: 'techniki%2Cmajsterka-zuchowa'
-                          })
-                        "
-                      >
-                        Specjalności
-                      </ResponsiveNavLink>
-                      <ResponsiveNavLink
-                        :href="route('materials.tags', 'wychowanie-wodne')"
-                        :active="
-                          route().current('materials.tags', {
-                            tags: 'wychowanie-wodne'
-                          })
-                        "
-                      >
-                        Aktywności wodne
-                      </ResponsiveNavLink>
-                      <ResponsiveNavLink
-                        :href="route('materials.tags', 'pierwsza-pomoc')"
-                        :active="
-                          route().current('materials.tags', {
-                            tags: 'pierwsza-pomoc'
-                          })
-                        "
-                      >
-                        Pierwsza pomoc
-                      </ResponsiveNavLink>
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'zdrowie')"
                         :active="
@@ -718,6 +803,39 @@ const clearTaxonomies = () => {
                         "
                       >
                         Skauting
+                      </ResponsiveNavLink>
+                      <Divider :classes="'bg-gray-200'">
+                        Program specjalnościowy:
+                      </Divider>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'techniki,majsterka-zuchowa')"
+                        :active="
+                          route().current('materials.tags', {
+                            tags: 'techniki%2Cmajsterka-zuchowa'
+                          })
+                        "
+                      >
+                        Specjalności
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'wychowanie-wodne')"
+                        :active="
+                          route().current('materials.tags', {
+                            tags: 'wychowanie-wodne'
+                          })
+                        "
+                      >
+                        Aktywności wodne
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'pierwsza-pomoc')"
+                        :active="
+                          route().current('materials.tags', {
+                            tags: 'pierwsza-pomoc'
+                          })
+                        "
+                      >
+                        Pierwsza pomoc
                       </ResponsiveNavLink>
                     </template>
                   </Dropdown>

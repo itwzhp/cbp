@@ -104,7 +104,7 @@ const hideDialog = () => store.hideDialog();
                       hidden
                       class="mt-5 mb-5"
                     >
-                    <div hidden>
+                    <div>
                       <h3 class="mb-2 font-semibold text-gray-900 text-xl">
                         Tryb tagów
                       </h3>

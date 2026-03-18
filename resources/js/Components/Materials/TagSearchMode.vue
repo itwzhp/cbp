@@ -48,7 +48,10 @@ watch(mode, (newValue) => {
         >Oraz</label>
       </div>
     </li>
-    <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
+    <li
+      class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r"
+      hidden
+    >
       <div class="flex items-center pl-3 cursor-pointer">
         <input
           id="horizontal-list-radio-millitary"
