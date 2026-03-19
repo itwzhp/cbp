@@ -136,9 +136,9 @@ class ImagesHelper
 
         if (Str::endsWith($tag->slug, 'praca-z-metodykami')) {
             if ($size === static::SIZE_COVER) {
-                return url('/images/materialy/praca-z-metodykami_big.jpg');
+                return url('/images/materialy/grupy_big.webp');
             } else {
-                return url('/images/materialy/praca-z-metodykami.jpg');
+                return url('/images/materialy/grupy.webp');
             }
         }
 
@@ -171,7 +171,6 @@ class ImagesHelper
 
     protected function typeTagToImage(Tag $tag, string $size): string
     {
-
         if (Str::endsWith($tag->slug, 'gra-ksztalceniowa')) {
             if ($size === static::SIZE_COVER) {
                 return url('/images/materialy/graksztalceniowa_big.jpg');
