@@ -2,6 +2,7 @@
 import {usePage, Link, Head} from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import MaterialTextInput from '@/Components/Admin/MaterialEdit/MaterialTextInput.vue';
+import MaterialTextarea from '@/Components/Admin/MaterialEdit/MaterialTextarea.vue';
 import MaterialFields from '@/Components/Admin/MaterialEdit/MaterialFields.vue';
 import MaterialTags from '@/Components/Admin/MaterialEdit/MaterialTags.vue';
 import MaterialLicence from '@/Components/Admin/MaterialEdit/MaterialLicence.vue';
@@ -47,7 +48,7 @@ const statuses = {
             />
           </div>
           <div class="mb-3">
-            <MaterialTextInput
+            <MaterialTextarea
               field-name="description"
               field-label="Opis"
             />
