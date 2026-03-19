@@ -26,9 +26,7 @@ class AnyToPublishedTransition extends Transition
             throw new UnauthorizedException('You cannot do this');
         }
 
-        if ($this->material->published_at === null) {
-            $this->material->published_at = Carbon::now();
-        }
+        $this->material->published_at = Carbon::now();
         $this->material->state = Published::class;
         $this->material->save();
 
