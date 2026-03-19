@@ -296,7 +296,7 @@ const clearTaxonomies = () => {
               <ResponsiveNavLink
                 :block="true"
               >
-                Zorganizowanie programu harcerskiego
+                Plan pracy
               </ResponsiveNavLink>
 
               <ResponsiveNavLink
