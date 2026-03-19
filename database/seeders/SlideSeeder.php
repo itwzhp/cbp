@@ -12,19 +12,27 @@ class SlideSeeder extends Seeder
         $slides = [
             [
                 'url' => route('materials.tags', ['planowanie-w-druzynie']),
-                'img' => public_path('/images/materialy/slider1a.png'),
+                'img' => public_path('/images/materialy/slider1a.webp'),
             ],
             [
-                'url' => route('materials.tags', ['harcerz-i-natura', 'oboz']),
-                'img' => public_path('/images/materialy/slider2a.png'),
+                'url' => route('materials.tags', ['harcerz-i-natura,oboz']),
+                'img' => public_path('/images/materialy/slider2a.webp'),
             ],
             [
                 'url' => route('materials.tags', ['wychowanie-ekonomiczne']),
-                'img' => public_path('/images/materialy/slider3a.png'),
+                'img' => public_path('/images/materialy/slider3a.webp'),
             ],
             [
                 'url' => route('materials.tags', ['system-malych-grup']),
-                'img' => public_path('/images/materialy/slider4a.png'),
+                'img' => public_path('/images/materialy/slider4a.webp'),
+            ],
+            [
+                'url' => route('materials.tags', ['bezpieczenstwo']),
+                'img' => public_path('/images/materialy/slider_bezp.webp'),
+            ],
+            [
+                'url' => route('materials.tags', ['zasady-harcerskiego-wychowania']),
+                'img' => public_path('/images/materialy/slider1a_brat.webp'),
             ],
         ];
 

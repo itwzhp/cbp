@@ -16,18 +16,42 @@ import 'vue3-carousel/dist/carousel.css';
           <div class="p-6 md:py-3 md:px-0 border-b border-gray-200">
             <div>
               <CarouselSlider class="mb-5" />
-
               <div class="mt-12">
                 <p class="text-justify">
-                  Centralny Bank Pomysłów (CBP 2.0) to przestrzeń pełna propozycji programowych,
-                  pomysłów
-                  na zbiórki, poradników, gier, artykułów czy inspiracji, których możesz użyć zarówno
-                  w
-                  pracy wychowawczej, jak i pracy z kadrą. Nowa odsłona CBP 2.0 powstawała kilka lat i
-                  wiemy, że nie jest wolna od błędów. Dlatego przygotowaliśmy formularz, który pozwala
-                  je
-                  na bieżąco zgłaszać. Chcemy, by była to nasza wspólna przestrzeń, którą wspólnie
-                  będziemy udoskonalać.
+                  Centralny Bank Pomysłów (CBP 2.0) to rozwijana przez Związek
+                  Harcerstwa Polskiego przestrzeń gromadząca wartościowe materiały programowe i
+                  kształceniowe z całej organizacji. Znajdziesz tu propozycje zbiórek, konspekty, gry,
+                  artykuły i inspiracje wspierające pracę wychowawczą oraz rozwój kadry. Jednocześnie
+                  CBP obejmuje także wybrane materiały z minionych lat, które mogą nie zawsze
+                  odpowiadać współczesnym realiom, ale mogą być cenną inspiracją do tworzenia nowych
+                  propozycji.
+                  Nasze obecne działania skupiamy na dostosowaniu układu treści dostępnych w CBP do
+                  zmodyfikowanego w 2026r. Harcerskiego Systemu Wychowawczego. Tak, aby jeszcze lepiej
+                  wspierały one realizację jego założeń w drużynach i zespołach instruktorskich.
+                </p>
+                <br>
+                <p>
+                  Materiały udostępnione w naszym banku może przeglądać każdy. Aby dodać nowy
+                  materiał, musisz być członkiem Związku Harcerstwa Polskiego. Do czasu wdrożenia
+                  nowego systemu dodawania i recenzji materiałów, aby opublikować nowy materiał w CBP
+                  2.0, należy go przesłać na adres: inspiracje@zhp.pl . Otrzymane materiały zostają
+                  przez nas skierowane do recenzji, a po przekazaniu ich wyników autorowi (i
+                  wprowadzeniu przez niego ewentualnych poprawek), publikujemy je w banku.
+                </p>
+                <br>
+                <p>
+                  Zachęcamy do dzielenia się materiałami powstałymi w ramach prób instruktorskich,
+                  które stanowią istotną część dorobku organizacji. Jeśli przesyłany materiał jest
+                  elementem próby harcmistrzowskiej, prosimy o uwzględnienie tej informacji w
+                  wiadomości.
+                </p>
+                <br>
+                <p>
+                  CBP 2.0 jest wspólną przestrzenią nas wszystkich, którą stale rozwijamy i
+                  udoskonalamy. Wiemy, że mimo wielu usprawnień mogą pojawiać się w niej błędy. Dzięki
+                  Twoim uwagom możemy na bieżąco poprawiać działanie platformy i podnosić jakość
+                  publikowanych treści. Dlatego przygotowaliśmy formularz, który pozwala je na bieżąco
+                  zgłaszać:
                 </p>
                 <p class="text-center py-6">
                   <a
@@ -37,26 +61,6 @@ import 'vue3-carousel/dist/carousel.css';
                   >
                     ZGŁOŚ BŁĄD Z CBP 2.0
                   </a>
-                </p>
-                <p class="text-justify">
-                  Materiały udostępnione w naszym banku może przeglądać każdy. Aby dodać nowy
-                  materiał, musisz być członkiem Związku Harcerstwa Polskiego. Obecnie pracujemy nad
-                  systemem umożliwiającym samodzielne dodawanie materiałów poprzez tą stronę. Do czasu
-                  wdrożenia tej funkcjonalności, aby opublikować nowy materiał w CBP 2.0, należy go
-                  przesłać na adres: <a
-                    href="mailto:inspiracje@zhp.pl"
-                    target="_blank"
-                  >
-                    inspiracje@zhp.pl
-                  </a>. Otrzymane materiały zostaną przez nas
-                  skierowane do recenzji, a po przekazaniu ich wyników autorowi (i wprowadzeniu przez
-                  niego ewentualnych poprawek), opublikujemy je w banku. Jeśli materiał stanowi część
-                  Twojej próby harcmistrzowskiej, prosimy o dodaniu tej informacji podczas przesyłania
-                  materiałów do nas.
-                </p>
-                <p class="pt-2 text-justify">
-                  Dodatkowo, jeśli jest to materiał do próby
-                  harcmistrzowskiej, wspomnij o tym w wiadomości.
                 </p>
               </div>
 
