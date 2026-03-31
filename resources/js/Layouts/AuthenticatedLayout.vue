@@ -306,16 +306,22 @@ const clearTaxonomies = () => {
                 &emsp;Planowanie
               </ResponsiveNavLink>
               <ResponsiveNavLink
-                :href="route('materials.tags', 'oboz')"
-                :active="route().current('materials.tags', {tags: 'oboz'})"
+                :href="route('materials.tags', 'formy-pracy')"
+                :active="route().current('materials.tags', {tags: 'formy-pracy'})"
               >
-                &emsp;Obóz
+                &emsp;Formy pracy
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'zbiorki')"
                 :active="route().current('materials.tags', {tags: 'zbiorki'})"
               >
                 &emsp;Zbiórki
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                :href="route('materials.tags', 'oboz')"
+                :active="route().current('materials.tags', {tags: 'oboz'})"
+              >
+                &emsp;Obóz
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 :href="route('materials.tags', 'ciag-wychowawczy')"
@@ -689,16 +695,22 @@ const clearTaxonomies = () => {
                         Planowanie
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
-                        :href="route('materials.tags', 'oboz')"
-                        :active="route().current('materials.tags', {tags: 'oboz'})"
+                        :href="route('materials.tags', 'formy-pracy')"
+                        :active="route().current('materials.tags', {tags: 'formy-pracy'})"
                       >
-                        Obóz
+                        Formy pracy
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'zbiorki')"
                         :active="route().current('materials.tags', {tags: 'zbiorki'})"
                       >
                         Zbiórki
+                      </ResponsiveNavLink>
+                      <ResponsiveNavLink
+                        :href="route('materials.tags', 'oboz')"
+                        :active="route().current('materials.tags', {tags: 'oboz'})"
+                      >
+                        Obóz
                       </ResponsiveNavLink>
                       <ResponsiveNavLink
                         :href="route('materials.tags', 'ciag-wychowawczy')"
