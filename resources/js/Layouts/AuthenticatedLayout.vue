@@ -296,7 +296,7 @@ const clearTaxonomies = () => {
               <ResponsiveNavLink
                 :block="true"
               >
-                Plan pracy
+                Zorganizowanie programu harcerskiego
               </ResponsiveNavLink>
 
               <ResponsiveNavLink
@@ -678,7 +678,7 @@ const clearTaxonomies = () => {
                   <Dropdown width="48">
                     <template #trigger>
                       <NavButton>
-                        Plan pracy
+                        Zorganizowanie programu harcerskiego
                       </NavButton>
                     </template>
                     <template #content>
