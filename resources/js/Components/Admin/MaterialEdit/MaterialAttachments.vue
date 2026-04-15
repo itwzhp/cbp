@@ -132,6 +132,7 @@ const deleteAttachment = (attachment, index) => {
             </p>
           </div>
           <div class="md:flex items-center">
+            <span>Pobrań: {{ attachment.downloads }}</span>
             <a
               title="Pobierz załącznik"
               class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded text-xs mx-2"

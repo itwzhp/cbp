@@ -15,7 +15,7 @@ const requestResultInfoTime = 5000;
 let succesTimeout = null;
 let errorTimeout = null;
 
-const licence = ref(usePage().props.material.licence.id);
+const licence = ref(usePage().props.material.licence.id ?? 2);
 let lastSavedValue = licence.value;
 
 const unSavedChanges = ref(false);
@@ -82,7 +82,7 @@ watch(licence, () => {
     >
       <option
         v-for="(hardcodedLicence, key) in hardcodedLicences"
-      
+
         :key="key"
         :value="hardcodedLicence.id"
         :selected="material.licence.id === hardcodedLicence.id"
